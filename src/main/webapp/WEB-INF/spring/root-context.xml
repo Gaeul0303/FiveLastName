@@ -12,12 +12,12 @@
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/scott?" />	<!-- scott으로 연결. -->
+			value="jdbc:mysql://localhost:3306/erp?" />	<!-- erp로 연결. -->
 		<property name="username" value="root" />
 		<property name="password" value="12345" />
 	</bean>
 	
-	      <!-- db Log추가 -->
+	<!-- db Log추가 -->
     <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
         <constructor-arg ref="dataSourceSpied" /> 
         <property name="logFormatter"> 

@@ -1,4 +1,4 @@
-package kr.co.FiveLastName;
+package kr.co.FiveLastName.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
