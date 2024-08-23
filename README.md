@@ -5,11 +5,11 @@
 ERP사이트.
 
 ## 팀 구성원
-- 팀장 : 윤가을
-- 부팀장 : 이제은
-- 팀원 : 김형모
-- 팀원 : 어한
-- 팀원 : 장현세
+- 팀장 : 
+- 부팀장 : 
+- 팀원 : 
+- 팀원 : 
+- 팀원 : 
 
 ### 개발 환경
 <img src="https://img.shields.io/badge/Java-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white">
