@@ -1,4 +1,4 @@
-package kr.co.gaeul;
+package kr.co.FiveLastName;
 
 import javax.inject.Inject;
 
