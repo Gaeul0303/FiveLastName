@@ -4,7 +4,35 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.FiveLastName.mapper">
 
-	<!-- 매퍼작성하기. -->
+<select id="inventoryList" resultType="kr.co.FiveLastName.domain.inventoryDTO">
+	SELECT
+    prod.pr_name,
+    prod.pr_size,
+    prod.pr_type,
+    inv.in_safetyStock,
+    inv.in_availableInventory,
+    inv.in_physicalInventory 
+FROM
+    erp.inventory inv
+JOIN
+    erp.incomingDeadline id ON inv.id_code = id.id_code
+JOIN
+    erp.receivingInspection ri ON id.ri_id = ri.ri_id
+JOIN
+    erp.progressInspection pi ON ri.pi_id = pi.pi_id
+JOIN
+    erp.shippingStatus ss ON pi.ss_id = ss.ss_id
+JOIN
+    erp.purchaseOrder po ON ss.po_id = po.po_id
+JOIN
+    erp.procurementplanregistration ppr ON po.ppr_id = ppr.ppr_id
+JOIN
+    erp.contract co ON ppr.co_id = co.co_id
+JOIN
+    erp.estimate es ON co.es_id = es.es_id
+JOIN
+    erp.product prod ON prod.pr_id = prod.pr_id;
+</select>
 
 
 </mapper>
