@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="kr.co.FiveLastName.staffMapper">
+
+	<!-- 담당자 등록 -->
+	<insert id="st_insert"
+		parameterType="kr.co.FiveLastName.StaffDTO">
+		INSERT INTO `FiveLastName`.`staff`
+		(`st_id`,
+		`st_name`,
+		`st_tel`,
+		`st_email`,
+		`st_hireDate`,
+		`st_job`)
+		VALUES
+		(#{st_id},
+		#{st_name},
+		#{st_tel},
+		#{st_email},
+		#{st_hireDate},
+		#{st_job});
+	</insert>
+
+	<!-- 담당자 수정 -->
+	<update id="st_update"
+		parameterType="kr.co.FiveLastName.staffDTO">
+		UPDATE `FiveLastName`.`staff`
+		SET
+		`st_id` = #{st_id},
+		`st_name` = #{st_name},
+		`st_tel` = #{st_tel},
+		`st_email` = #{st_email},
+		`st_hireDate` = #{st_hireDate},
+		`st_job` = #{st_job}
+		WHERE `st_id` =
+		#{st_id};
+	</update>
+
+	<!-- 담당자 전체 조회 -->
+	<select id="st_selectAll" resultType="int"
+		parameterType="kr.co.FivelastName.staffDTO">
+		select count(*) from staff
+	</select>
+
+	<!-- 담당자 상세 조회 -->
+	<select id="st_selectOne" resultType="int"
+		parameterType="kr.co.FivelastName.staffDTO">
+		select * from staff
+		where st_id = #{st_id}
+	</select>
+
+</mapper>
