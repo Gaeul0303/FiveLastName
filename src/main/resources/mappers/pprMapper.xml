@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="kr.co.FiveLastName.pprMapper">
+
+	<!-- 조달 계획 등록 -->
+	<insert id="ppr_insert"
+		parmeterType="kr.co.FiveLastName.procurementPlanRegistrationDTO">
+		INSERT INTO `FiveLastName`.`ppr`
+		(`ppr_id`,
+		`ppr_dueDate`,
+		`ppr_quantity`)
+		VALUES
+		({ppr_id},
+		{ppr_dueDate},
+		{ppr_quantity});
+	</insert>
+
+	<!-- 조달 계획 조회 -->
+	<select id="ppr_selectOne" parmeterType="int"
+		resultType="kr.co.FivelastName.procurementPlanRegistrationDTO">
+		select * from product where ppr_id = #{ppr_id}
+	</select>
+
+	<!-- 조달 계획 수정 -->
+	<update id="ppr_update"
+		parmeterType="kr.co.FiveLastName.procurementPlanRegistrationDTO">
+		UPDATE `FiveLastName`.`ppr`
+		SET
+		`ppr_id` = #{ppr_id},
+		`ppr_dueDate` = #{ppr_dueDate},
+		`ppr_quantity` = #{ppr_quantity}
+		WHERE `ppr_id` = #{ppr_id};
+	</update>
+
+</mapper>

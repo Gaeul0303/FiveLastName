@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="kr.co.FiveLastName.eatimateMapper">
+
+	<!-- 견적서 등록 -->
+	<insert id="es_insert"
+		parameterType="kr.co.FiveLastName.EstimateDTO">
+		INSERT INTO `FiveLastName`.`estimate`
+		(`es_id`,
+		`es_publicationDate`,
+		`es_supplyPrice`,
+		`es_requireDays`)
+		VALUES
+		(#{es_id},
+		#{es_publicationDate},
+		#{es_supplyPrice},
+		#{es_requireDays});
+	</insert>
+
+	<!-- 견적서 전체 조회 -->
+
+	<select id="es_id" resultType="int">
+		select count(*) from estimate
+	</select>
+
+	<!-- 견적서 상세 조회 -->
+
+	<select id="es_id" resultType="int"
+		parameterType="kr.co.FiveLastName.EstimateDTO">
+		select * from product where es_id = #{es_id}
+	</select>
+
+	<!-- 견적서 수정 -->
+
+	<update id="es_update" parameterType="kr.co.FiveLastName.EstimateDTO">
+		UPDATE `FiveLastName`.`estimate`
+		SET
+		`es_id` = #{es_id: },
+		`es_publicationDate` = #{es_publicationDate: },
+		`es_supplyPrice` = #{es_supplyPrice: },
+		`es_requireDays` = #{es_requireDays: }
+		WHERE `es_id` = #{es_id};
+	</update>
+	
+</mapper>
