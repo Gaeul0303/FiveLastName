@@ -22,14 +22,13 @@
 	</insert>
 		
 	<!-- 계약 전체 조회 -->
-	<select id="co_selectAll" resultType="int"
-		parameterType="kr.co.FiveLastName.domain.ContractDTO">
+	<select id="co_selectAll">
 		select * from contract
 	</select>
 	
 	<!-- 계약 상세 조회 -->
-	<select id="co_selectOne" resultType="int"
-		parameterType="kr.co.FiveLastName.domain.ContractDTO">
+	<select id="co_selectOne" resultType="kr.co.FiveLastName.domain.ContractDTO" 
+		parameterType="int">
 		select * from contract
 		where co_id = #{co_id}
 	</select>
