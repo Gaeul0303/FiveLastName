@@ -22,25 +22,16 @@
 
 	<!-- 견적서 전체 조회 -->
 
-<<<<<<< HEAD
 	<select id="es_selectAll">
-=======
-	<select id="es_selectAll" resultType="int">
->>>>>>> 41c19d7fd8f882bf1e333511f5a8452903fa3d74
 		select * from estimate
 	</select>
 
 	<!-- 견적서 상세 조회 -->
 
-<<<<<<< HEAD
-	<select id="es_selectOne" resultType="kr.co.FiveLastName.EstimateDTO"
+
+	<select id="es_selectOne" resultType="kr.co.FiveLastName.domain.EstimateDTO"
 		parameterType="int">
 		select * from product where es_id = #{es_id}
-=======
-	<select id="es_selectOne" resultType="int"
-		parameterType="kr.co.FiveLastName.domain.EstimateDTO">
-		select * from estimate where es_id = #{es_id}
->>>>>>> 41c19d7fd8f882bf1e333511f5a8452903fa3d74
 	</select>
 
 	<!-- 견적서 수정 -->

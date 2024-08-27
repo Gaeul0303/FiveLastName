@@ -22,23 +22,13 @@
 	</insert>
 		
 	<!-- 계약 전체 조회 -->
-<<<<<<< HEAD
 	<select id="co_selectAll">
-=======
-	<select id="co_selectAll" resultType="int"
-		parameterType="kr.co.FiveLastName.domain.ContractDTO">
->>>>>>> 41c19d7fd8f882bf1e333511f5a8452903fa3d74
 		select * from contract
 	</select>
 	
 	<!-- 계약 상세 조회 -->
-<<<<<<< HEAD
-	<select id="co_selectOne" resultType="kr.co.FiveLastName.ContractDTO" 
+	<select id="co_selectOne" resultType="kr.co.FiveLastName.domain.ContractDTO" 
 		parameterType="int">
-=======
-	<select id="co_selectOne" resultType="int"
-		parameterType="kr.co.FiveLastName.domain.ContractDTO">
->>>>>>> 41c19d7fd8f882bf1e333511f5a8452903fa3d74
 		select * from contract
 		where co_id = #{co_id}
 	</select>
