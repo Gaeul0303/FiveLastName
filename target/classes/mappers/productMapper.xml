@@ -24,14 +24,13 @@
 	</insert>
 
 	<!-- 제품 전체 조회 -->
-	<select id="pr_selectAll" resultType="int"
-		parameterType="kr.co.FivelastName.ProductDTO">
-		select count(*) from product
+	<select id="pr_selectAll">
+		select * from product
 	</select>
 
 	<!-- 제품 상세 조회 -->
-	<select id="pr_selectOne" resultType="int"
-		parameterType="kr.co.FivelastName.ProductDTO">
+	<select id="pr_selectOne" resultType="kr.co.FivelastName.ProductDTO"
+		parameterType="int">
 		select * from product
 		where pr_id = #{pr_id}
 	</select>

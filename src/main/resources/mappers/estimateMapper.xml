@@ -19,14 +19,14 @@
 
 	<!-- 견적서 전체 조회 -->
 
-	<select id="es_id" resultType="int">
-		select count(*) from estimate
+	<select id="es_selectAll">
+		select * from estimate
 	</select>
 
 	<!-- 견적서 상세 조회 -->
 
-	<select id="es_id" resultType="int"
-		parameterType="kr.co.FiveLastName.EstimateDTO">
+	<select id="es_selectOne" resultType="kr.co.FiveLastName.EstimateDTO"
+		parameterType="int">
 		select * from product where es_id = #{es_id}
 	</select>
 
