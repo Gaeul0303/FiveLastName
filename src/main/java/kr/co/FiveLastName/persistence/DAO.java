@@ -1,5 +1,14 @@
 package kr.co.FiveLastName.persistence;
 
-public interface DAO {
+import java.util.List;
 
+import kr.co.FiveLastName.domain.ShippingStatementDTO;
+
+public interface DAO {
+//	출하명세서 조회
+	public List<ShippingStatementDTO> shList();
+	
+
+	
+	
 }
