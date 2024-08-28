@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.FiveLastName.ppMapper">
+
+	<!-- 조달 계획 등록 -->
+	<insert id="pp_insert" parameterType="kr.co.FiveLastName.domain.ProcurementPlanDTO">
+	INSERT INTO `erp`.`procurmentplan`
+	(`pp_id`,
+	`pr_id`,
+	`pp_materialRequiredProcessStage`,
+	`pp_makeTime`,
+	`pp_spendAmount`,
+	`pp_regDate`,
+	`pp_deliveryDate`)
+	VALUES
+	(#{pp_id},
+	#{pr_id},
+	#{pp_materialRequiredProcessStage},
+	#{pp_makeTime},
+	#{pp_spendAmount},
+	#{pp_regDate},
+	#{pp_deliveryDate});
+	</insert>
+	
+		<!-- 조달 계획 조회 -->
+	<select id="ppr_selectOne" resultType="int"
+		parameterType="kr.co.FiveLastName.domain.ProcurementPlanDTO">
+		select * from product where pp_id = #{pp_id}
+	</select>
+	
+	<!-- 조달 계획 수정 -->
+	<update id="ppr_update"
+		parameterType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">
+		UPDATE procurementplan
+		SET
+		ppr_id = #{ppr_id},
+		ppr_dueDate = #{pp_dueDate},
+		ppr_quantity = #{pp_quantity}
+		WHERE ppr_id = #{pp_id};
+	</update>
+	
+</mapper>
