@@ -11,15 +11,9 @@ public interface DeliveryService {
 	
 	InventoryDTO inventorySelectList(int in_id);
 	
-	int inventoryInsert(InventoryDTO inven);
+	int inventoryUpdate(InventoryDTO inven);
 	
-	int idmUpdate(InventoryDeliveryManagementDTO idm);
-	
-	InventoryDeliveryManagementDTO idmSelectList(int in_id);
-	
-	List<InventoryDeliveryManagementDTO> idmPriceList();
-	
-	InventoryDeliveryManagementDTO idmReportSelectList(int in_id);
+	int idmInsert(InventoryDeliveryManagementDTO idm);
 	
 	List<InventoryDeliveryManagementDTO> idmReportList();
 }
