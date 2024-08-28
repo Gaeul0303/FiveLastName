@@ -7,19 +7,13 @@ import kr.co.FiveLastName.domain.InventoryDeliveryManagementDTO;
 
 public interface DeliveryDAO {
 
-List<InventoryDeliveryManagementDTO> idmList();
-	
-	InventoryDeliveryManagementDTO idmSelectList(int in_id);
-	
-	int idmInsert(InventoryDeliveryManagementDTO idm);
-	
-	int inventoryUpdate(InventoryDTO inven);
+	List<InventoryDTO> inventoryList();
 	
 	InventoryDTO inventorySelectList(int in_id);
 	
-	List<InventoryDTO> inventoryPriceList();
+	int inventoryUpdate(InventoryDTO inven);
 	
-	InventoryDeliveryManagementDTO idmReportSelectList(int in_id);
+	int idmInsert(InventoryDeliveryManagementDTO idm);
 	
 	List<InventoryDeliveryManagementDTO> idmReportList();
 }
