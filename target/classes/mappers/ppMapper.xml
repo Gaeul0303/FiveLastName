@@ -5,15 +5,15 @@
 <mapper namespace="kr.co.FiveLastName.ppMapper">
 
 	<!-- 조달 계획 등록 -->
-	<insert id="pp_insert" parameterType="kr.co.FiveLastName.domain.ProcurementPlanDTO">
-	INSERT INTO `erp`.`procurmentplan`
-	(`pp_id`,
-	`pr_id`,
-	`pp_materialRequiredProcessStage`,
-	`pp_makeTime`,
-	`pp_spendAmount`,
-	`pp_regDate`,
-	`pp_deliveryDate`)
+	<insert id="pp_insert" parameterType="kr.co.FiveLastName.domain.ProcurmentPlanDTO">
+	INSERT INTO procurmentplan
+	(pp_id,
+	pr_id,
+	pp_materialRequiredProcessStage,
+	pp_makeTime,
+	pp_spendAmount,
+	pp_regDate,
+	pp_deliveryDate)
 	VALUES
 	(#{pp_id},
 	#{pr_id},
@@ -24,9 +24,9 @@
 	#{pp_deliveryDate});
 	</insert>
 	
-		<!-- 조달 계획 조회 -->
+	<!-- 조달 계획 조회 -->
 	<select id="ppr_selectOne" resultType="int"
-		parameterType="kr.co.FiveLastName.domain.ProcurementPlanDTO">
+		parameterType="kr.co.FiveLastName.domain.ProcurmentPlanDTO">
 		select * from product where pp_id = #{pp_id}
 	</select>
 	
