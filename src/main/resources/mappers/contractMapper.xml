@@ -1,48 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.FiveLastName.contractMapper">
 
 	<!-- 계약 등록 -->
 	<insert id="co_insert"
-		parameterType="kr.co.FiveLastName.ContractDTO">
-		INSERT INTO `FiveLastName`.`contract`
-		(`co_id`,
-		`co_contractDate`,
-		`co_tradeTerms`,
-		`co_contractStatus`,
-		`co_supplyPrice`)
+		parameterType="kr.co.FiveLastName.domain.ContractDTO">
+		INSERT INTO contract
+		(co_id,
+		co_contractDate,
+		co_tradeTerms,
+		co_contractStatus,
+		co_supplyPrice)
 		VALUES
-		({co_id},
-		{co_contractDate},
-		{co_tradeTerms},
-		{co_contractStatus},
-		{co_supplyPrice});
+		(#{co_id},
+		#{co_contractDate},
+		#{co_tradeTerms},
+		#{co_contractStatus},
+		#{co_supplyPrice});
 	</insert>
-
+		
 	<!-- 계약 전체 조회 -->
-	<select id="co_selectAll" resultType="int"
-		parameterType="kr.co.FiveLastName.ContractDTO">
-		select count(*) from contract
+	<select id="co_selectAll">
+		select * from contract
 	</select>
-
+	
 	<!-- 계약 상세 조회 -->
-	<select id="co_selectOne" resultType="int"
-		parameterType="kr.co.FiveLastName.ContractDTO">
+	<select id="co_selectOne" resultType="kr.co.FiveLastName.domain.ContractDTO" 
+		parameterType="int">
 		select * from contract
 		where co_id = #{co_id}
 	</select>
-
-	<!-- 계약 수정 -->
+	
+		<!-- 계약 수정 -->
 	<update id="co_update"
-		parameterType="kr.co.FiveLastName.ContractDTO">
-		UPDATE `FiveLastName`.`contract`
+		parameterType="kr.co.FiveLastName.domain.ContractDTO">
+		UPDATE contract
 		SET
-		`co_id` = #{co_id},
-		`co_contractDate` = #{co_contractDate},
-		`co_tradeTerms` = #{co_tradeTerms},
-		`co_contractStatus` = #{co_contractStatus},
-		`co_supplyPrice` = #{co_supplyPrice}
-		WHERE `co_id` = #{co_id};
+		co_id = #{co_id},
+		co_contractDate = #{co_contractDate},
+		co_tradeTerms = #{co_tradeTerms},
+		co_contractStatus = #{co_contractStatus},
+		co_supplyPrice = #{co_supplyPrice}
+		WHERE co_id = #{co_id};
 	</update>
 
 </mapper>

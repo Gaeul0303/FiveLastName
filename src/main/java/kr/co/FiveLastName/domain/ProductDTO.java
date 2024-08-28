@@ -1,6 +1,6 @@
 package kr.co.FiveLastName.domain;
 
-public class ProuductDTO {
+public class ProductDTO {
 	int pr_id;
 	String pr_name;
 	String pr_size;
@@ -9,11 +9,11 @@ public class ProuductDTO {
 	String pr_image;
 	String pr_category;
 	
-	public ProuductDTO() {
+	public ProductDTO() {
 		super();
 	}
 	
-	public ProuductDTO(int pr_id, String pr_name, String pr_size, String pr_type, String pr_quality, String pr_image,
+	public ProductDTO(int pr_id, String pr_name, String pr_size, String pr_type, String pr_quality, String pr_image,
 			String pr_category) {
 		super();
 		this.pr_id = pr_id;
