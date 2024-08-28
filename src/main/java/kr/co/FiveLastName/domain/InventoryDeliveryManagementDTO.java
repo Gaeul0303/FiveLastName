@@ -10,6 +10,8 @@ public class InventoryDeliveryManagementDTO {
 	int idm_quantity;
 	String idm_status;
 	
+	
+	
 	public InventoryDeliveryManagementDTO() {
 		super();
 	}
