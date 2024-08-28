@@ -33,7 +33,32 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "index";
+	}
+	@RequestMapping(value = "chart", method = RequestMethod.GET)
+	public String chart(Locale locale, Model model) {
+		
+		
+		return "chart";
+	}
+	@RequestMapping(value = "dataTables", method = RequestMethod.GET)
+	public String dataTables(Locale locale, Model model) {
+		
+		
+		return "dataTables";
+	}
+	
+	@RequestMapping(value = "form", method = RequestMethod.GET)
+	public String form(Locale locale, Model model) {
+		
+		
+		return "form";
+	}
+	@RequestMapping(value = "calendar", method = RequestMethod.GET)
+	public String calendar(Locale locale, Model model) {
+		
+		
+		return "calendar";
 	}
 	
 }

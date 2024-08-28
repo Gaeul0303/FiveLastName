@@ -5,11 +5,11 @@
 ERP사이트.
 
 ## 팀 구성원
-- 팀장 : 
-- 부팀장 : 
-- 팀원 : 
-- 팀원 : 
-- 팀원 : 
+- 팀장 : 윤댕
+- 부팀장 : 이댕
+- 팀원 : 김댕
+- 팀원 : 장댕
+- 팀원 : 어댕
 
 ### 개발 환경
 <img src="https://img.shields.io/badge/Java-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white">

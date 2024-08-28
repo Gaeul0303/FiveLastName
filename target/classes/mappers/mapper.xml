@@ -2,7 +2,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 <mapper namespace="kr.co.FiveLastName.ShippingStatementmapper">
+=======
+<mapper namespace="kr.co.FiveLastName.mapper">
+
+	<!-- 여기에 작업하세요 -->
+>>>>>>> 5c07796cd139c24b6d89599b6191027495ecaad6
 
 	<!-- 출하명세서 전체 조회 -->
 	<select id="shList" resultType="kr.co.FiveLastName.domain.ShippingStatementDTO">

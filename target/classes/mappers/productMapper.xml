@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.FiveLastName.productMapper">
+
+	<!-- 제품 등록 -->
+	<insert id="pr_insert"
+		parameterType="kr.co.FiveLastName.domain.ProductDTO">
+		INSERT INTO product
+		(pr_id,
+		pr_name,
+		pr_size,
+		pr_type,
+		pr_quality,
+		pr_image,
+		pr_category)
+		VALUES
+		(#{pr_id},
+		#{pr_name},
+		#{pr_size},
+		#{pr_type},
+		#{pr_quality},
+		#{pr_image},
+		#{pr_category});
+	</insert>
+
+	<!-- 제품 전체 조회 -->
+	<select id="pr_selectAll">
+		select * from product
+	</select>
+
+	<!-- 제품 상세 조회 -->
+	<select id="pr_selectOne" resultType="kr.co.FiveLastName.domain.ProductDTO"
+		parameterType="int">
+		select * from product
+		where pr_id = #{pr_id}
+	</select>
+
+	<!-- 제품 수정 -->
+	<update id="pr_update" parameterType="kr.co.FiveLastName.domain.ProductDTO">
+		UPDATE product
+		SET
+		pr_id = #{pr_id},
+		pr_name = #{pr_name},
+		pr_size = #{pr_size},
+		pr_type = #{pr_type},
+		pr_quality = #{pr_quality},
+		pr_image = #{pr_image},
+		pr_category = #{pr_category}
+		WHERE pr_id = #{pr_id};
+	</update>
+
+
+</mapper>
