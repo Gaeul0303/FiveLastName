@@ -13,5 +13,8 @@ public interface ShippingStatementDAO {
 
 //	출하명세서 상세 조회
 	public ShippingStatementDTO sh_selectOne(int sh_id);
+	
+//	출하명세서 수정
+	public int sh_update(ShippingStatementDTO shDTO);
 
 }

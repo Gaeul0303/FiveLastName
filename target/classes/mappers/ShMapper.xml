@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.FiveLastName.ShMapper">
+	
+	<!-- 출하명세서 전체 조회 -->
+	<!-- 일자  품목명  수량  단가  공급가액  거래처명 -->
+	<select id="sh_list" resultType="kr.co.FiveLastName.domain.ShippingStatementDTO">
+		select 
+		pr.pr_name, ss.quantity, co.co_supplyPrice, pa.pa_name
+		
+		from shippingstatement sh
+		
+		inner join shippingstatus ss on sh.ss_id = ss.ss_id
+		inner join purchaseorder po on ss.po_id = po.po_id
+		inner join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
+		inner join contract co on ppr.co_id = co.co_id
+		inner join estimate es on co.es_id = es.es_id
+		inner join product pr on es.pr_id = pr.pr_id
+		inner join partner pa on es.pa_id = pa.pa_id
+		
+		where ss_status = "제작완료" and ss_deliverySchedule = "일정준수";
+	</select>
+		 
+</mapper>
