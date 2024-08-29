@@ -1,30 +1,18 @@
 package kr.co.FiveLastName.domain;
 
 public class ProductDTO {
-	int pr_id;
-	String pr_name;
-	String pr_size;
-	String pr_type;
-	String pr_quality;
-	String pr_image;
-	String pr_category;
+	private int pr_id;
+	private String pr_name;
+	private String pr_size;
+	private String pr_type;
+	private String pr_quality;
+	private String pr_image;
+	private String pr_category;
+	private String pr_status;
 	
 	public ProductDTO() {
 		super();
 	}
-	
-	public ProductDTO(int pr_id, String pr_name, String pr_size, String pr_type, String pr_quality, String pr_image,
-			String pr_category) {
-		super();
-		this.pr_id = pr_id;
-		this.pr_name = pr_name;
-		this.pr_size = pr_size;
-		this.pr_type = pr_type;
-		this.pr_quality = pr_quality;
-		this.pr_image = pr_image;
-		this.pr_category = pr_category;
-	}
-	
 	public int getPr_id() {
 		return pr_id;
 	}
@@ -67,12 +55,23 @@ public class ProductDTO {
 	public void setPr_category(String pr_category) {
 		this.pr_category = pr_category;
 	}
-	
+	public String getPr_status() {
+		return pr_status;
+	}
+
+	public void setPr_status(String pr_status) {
+		this.pr_status = pr_status;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "ProuductDTO [pr_id=" + pr_id + ", pr_name=" + pr_name + ", pr_size=" + pr_size + ", pr_type=" + pr_type
-				+ ", pr_quality=" + pr_quality + ", pr_image=" + pr_image + ", pr_category=" + pr_category + "]";
+		return "ProductDTO [pr_id=" + pr_id + ", pr_name=" + pr_name + ", pr_size=" + pr_size + ", pr_type=" + pr_type
+				+ ", pr_quality=" + pr_quality + ", pr_image=" + pr_image + ", pr_category=" + pr_category
+				+ ", pr_status=" + pr_status + "]";
 	}
+	
 
 
 	
