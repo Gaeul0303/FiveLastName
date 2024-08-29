@@ -184,6 +184,16 @@ public class DeliveryDTO {
 	public void setIn_status(String in_status) {
 		this.in_status = in_status;
 	}
+
+	@Override
+	public String toString() {
+		return "DeliveryDTO [idm_id=" + idm_id + ", in_id=" + in_id + ", idm_date=" + idm_date + ", idm_quantity="
+				+ idm_quantity + ", idm_status=" + idm_status + ", pr_id=" + pr_id + ", pr_name=" + pr_name
+				+ ", pr_size=" + pr_size + ", pr_type=" + pr_type + ", pr_quality=" + pr_quality + ", pr_image="
+				+ pr_image + ", pr_category=" + pr_category + ", id_code=" + id_code + ", st_id=" + st_id
+				+ ", in_safetyStock=" + in_safetyStock + ", in_availableInventory=" + in_availableInventory
+				+ ", in_physicalInventory=" + in_physicalInventory + ", in_status=" + in_status + "]";
+	}
 	
 	
 	

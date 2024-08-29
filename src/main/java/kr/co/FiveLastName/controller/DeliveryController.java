@@ -22,30 +22,35 @@ public class DeliveryController {
 	@Autowired
 	DeliveryService service;
 	
-	@GetMapping(value = "#")
+	@GetMapping(value = "/inventoryList")
 	public ModelAndView inventoryList() {
 		ModelAndView mav = new ModelAndView();
 		
 		List<InventoryDTO> inventoryList = service.inventoryList();
 		
 		mav.addObject("inventoryList", inventoryList);
-		mav.setViewName("#");
+		
+		for(int i = 0; i<inventoryList.size(); i++) {
+			System.out.println(inventoryList.get(i));
+		}
+		
+		mav.setViewName("/delivery/inventoryList");
 		return mav;
 	}
 	
-	@GetMapping(value = "#")
+	@GetMapping(value = "#22")
 	public ModelAndView inventorySelectList(int in_id) {
 		ModelAndView mav = new ModelAndView();
 		
 		InventoryDTO inventorySelectList = service.inventorySelectList(in_id);
 		
 		mav.addObject("inventorySelectList", inventorySelectList);
-		mav.setViewName("#");
+		mav.setViewName("#22");
 		
 		return mav;
 		
 	}
 	
-	PostMapping(value = "#")
+//	PostMapping(value = "#")
 	
 }
