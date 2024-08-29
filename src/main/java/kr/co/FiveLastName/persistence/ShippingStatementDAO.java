@@ -5,15 +5,13 @@ import java.util.List;
 import kr.co.FiveLastName.domain.ShippingStatementDTO;
 
 public interface ShippingStatementDAO {
+//	출하명세서 등록
+	public int sh_insert(ShippingStatementDTO shDTO);
+
 //	출하명세서 전체 조회
-	public List<ShippingStatementDTO> shList();
-	
-//	출하명세서 선택 조회
-	public ShippingStatementDTO shSelectOne(int sh_id);
-	
-// 출하명세서 추가
-	int shInsert(ShippingStatementDTO shDTO);
-	
-// 출하명세서 삭제
-	int shDelete(int sh_id);
+	public List<ShippingStatementDTO> sh_List();
+
+//	출하명세서 상세 조회
+	public ShippingStatementDTO sh_selectOne(int sh_id);
+
 }

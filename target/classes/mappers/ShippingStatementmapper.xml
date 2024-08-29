@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.FiveLastName.ShippingStatementmapper">
+	
+	<!-- 출하명세서 전체 조회 -->
+	<select id="sh_list" resultType="kr.co.FiveLastName.domain.ShippingStatementDTO">
+		select * 
+		
+		from shippingstatement a
+		
+		inner join shippingstatus b on a.ss_id = b.ss_id
+		inner join purchaseorder c on b.po_id = c.po_id
+		inner join procurementplanregistration d on c.ppr_id = d.ppr_id
+		inner join contract e on d.co_id = e.co_id
+		inner join estimate f on e.es_id = f.es_id
+		inner join 
+			
+	</select>
+
+	<!-- 출하명세서 등록 -->
+	<insert id="sh_insert" parameterType="kr.co.FiveLastName.domain.ShippingStatementDTO">
+		selecta
+	</insert>
+	
+	<!-- 출하아이디로 상세 조회 -->
+	<select id="sh_selectOne" parameterType="int" resultType="kr.co.FiveLastName.domain.ShippingStatementDTO">
+		select * from shippingstatement
+		where sh_id = #{sh_id} 
+	</select>
+	
+	
+	
+</mapper>
