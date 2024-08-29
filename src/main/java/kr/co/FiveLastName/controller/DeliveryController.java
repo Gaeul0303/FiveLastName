@@ -33,19 +33,19 @@ public class DeliveryController {
 		return mav;
 	}
 	
-//	@GetMapping(value = "#")
-//	public ModelAndView inventorySelectList(int in_id) {
-//		ModelAndView mav = new ModelAndView();
-//		
-//		InventoryDTO inventorySelectList = service.inventorySelectList(in_id);
-//		
-//		mav.addObject("inventorySelectList", inventorySelectList);
-//		mav.setViewName("#");
-//		
-//		return mav;
-//		
-//	}
-//	
-//	PostMapping(value = "#")
+	@GetMapping(value = "#")
+	public ModelAndView inventorySelectList(int in_id) {
+		ModelAndView mav = new ModelAndView();
+		
+		InventoryDTO inventorySelectList = service.inventorySelectList(in_id);
+		
+		mav.addObject("inventorySelectList", inventorySelectList);
+		mav.setViewName("#");
+		
+		return mav;
+		
+	}
+	
+	PostMapping(value = "#")
 	
 }
