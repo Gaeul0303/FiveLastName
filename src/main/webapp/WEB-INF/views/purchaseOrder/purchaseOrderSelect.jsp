@@ -8,6 +8,7 @@
 <head>
 
 <%@include file="../include/head.jsp"%>
+
 </head>
 <body>
 	<div class="wrapper">
@@ -26,7 +27,7 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">구매발주서 상세조회
-										<div class = "print"><button onclick="printPage(this)">인쇄</button></div>
+										<div class = "print" align="right"><button id = "po_id" value = ${po.po_id} onclick="printPage(this)">인쇄</button></div>
 									</div>
 								</div>
 								<div class="card-body">
@@ -101,10 +102,10 @@
 											<td width="163" align="center" style="font-weight: bold">E-mail</td>
 										</tr>
 										<tr>
-											<td height="25" align="center"><div tms_edit id="cn1">공급업체쓰는곳</div></td>
-											<td align="center"><div tms_edit id="cn2">담당자쓰는곳</div></td>
-											<td align="center"><div tms_edit id="cn3">담당자연락처쓰는곳</div></td>
-											<td align="center"><div tms_edit id="cn4">E-mail쓰는곳</div></td>
+											<td height="25" align="center"><div tms_edit id="cn1">${po.pa_name}</div></td>
+											<td align="center"><div tms_edit id="cn2">세션.name</div></td>
+											<td align="center"><div tms_edit id="cn3">세션.phone</div></td>
+											<td align="center"><div tms_edit id="cn4">세션.E-mail</div></td>
 										</tr>
 									</table>
 									<table width="650" border="0" cellspacing="0" cellpadding="0" bordercolor="#ffffff"
@@ -127,23 +128,23 @@
 											<td width="41" align="center" bgcolor="#E2EFDA"
 												style="font-weight: bold">단위</td>
 											<td width="61" align="center" bgcolor="#E2EFDA"
-												style="font-weight: bold">단 가</td>
+												style="font-weight: bold">단 가(원)</td>
 											<td width="107" align="center" bgcolor="#E2EFDA"
 												style="font-weight: bold">금액(VAT별도)</td>
 											<td width="56" align="center" bgcolor="#E2EFDA"
 												style="font-weight: bold">납기</td>
 											<td width="62" align="center" bgcolor="#E2EFDA"
 												style="font-weight: bold">비고</td>
-										</tr>
+										</tr>			                          	
 										<tr>
-											<td height="30" align="center">1</td>
-											<td align="center"><div tms_edit id="aa1" style="padding: 3px;"></div></td>
-											<td align="center"><div tms_edit id="bb1" style="padding: 3px;"></div></td>
-											<td align="right"><div tms_edit id="ee1" style="padding: 3px;"></div></td>
-											<td align="center"><div tms_edit id="cc1" style="padding: 3px;"></div></td>
-											<td align="right"><div tms_edit id="dd1" style="padding: 3px;"></div></td>
-											<td align="right" bgcolor="#F8F8F8"><div id="ff1" style="padding: 3px;"></div></td>
-											<td align="center"><div tms_edit id="gg1" style="padding: 3px;"></div></td>
+											<td align="center"><div tms_edit id="aa1" style="padding: 3px;">${status.index+1}</div></td>
+											<td align="center"><div tms_edit id="bb1" style="padding: 3px;">${po.pr_name}</div></td>
+											<td align="right"><div tms_edit id="ee1" style="padding: 3px;">${po.pr_size}</div></td>
+											<td align="center"><div tms_edit id="cc1" style="padding: 3px;">${po.ppr_quantity}</div></td>
+											<td align="center"><div tms_edit id="dd1" style="padding: 3px;"></div>개</td>
+											<td align="center"><div tms_edit id="gg1" style="padding: 3px;"></div>${po.co_supplyPrice}</td>
+											<td align="right" bgcolor="#F8F8F8"><div id="ff1" style="padding: 3px;">${po.co_supplyPrice*po.ppr_quantity}원</div></td>
+											<td align="center"><div tms_edit id="gg16" style="padding: 3px;"></div>${po.ppr_dueDate}까지</td>
 											<td align="center"><div tms_edit id="gg16" style="padding: 3px;"></div></td>
 										</tr>
 										<tr>
@@ -302,7 +303,7 @@
 										</tr>
 										<tr>
 											<td height="30" colspan="6" align="center" bgcolor="#E2EFDA" style="font-weight: bold">합 계</td>
-											<td align="right" bgcolor="#F8F8F8" style="font-weight: bold"><div id="sum_ff" style="padding: 3px;">합계 금액 쓰는 곳</div></td>
+											<td align="right" bgcolor="#F8F8F8" style="font-weight: bold"><div id="sum_ff" style="padding: 3px;">${po.co_supplyPrice*po.ppr_quantity}원</div></td>
 											<td align="right" style="font-weight: bold">&nbsp;</td>
 											<td align="right" style="font-weight: bold">&nbsp;</td>
 										</tr>
@@ -310,8 +311,8 @@
 											<td height="30" colspan="9" align="left" style="font-weight: bold">
 												<div tms_edit id="gg31" style="padding: 3px; line-height: 25px">
 													1. 납품주소 : 인천 미추홀구 경인로 229 인천IT타워<br>
-													2. 납 기 일 : <br>
-													3. 요청사항 : <br>
+													2. 납 기 일 : ${po.ppr_dueDate}<br>
+													3. 요청사항 : ${po.co_tradeTerms}<br>
 												</div></td>
 										</tr>
 
@@ -344,17 +345,39 @@
 	<%@include file="../include/script.jsp"%>
 	<script>
 	
-		function printPage() {
+		function printPage(button) {
 			
-			var po_id = button.getAttribute('po_id');
+			var po_id = button.getAttribute("value");
 			
-			console.log(po_id);
+			console.log("po_id = " + po_id);
 			
-			 var popupURL = "purchaseOrderPrint";
+			  var popupURL = "purchaseOrderPrint?po_id="+po_id;
 			  // 팝업 창 매핑.
-			  var popupProperties = "width=400,height=800,popup=yes,scrollbars=yes";
+			  var popupProperties = "width=800,height=1200,popup=yes,scrollbars=yes";
 			  // 팝업 열때 속성.
-			  window.open(popupURL, "인쇄창", popupProperties);
+			  
+			  // 새 폼 요소 생성
+			  var form = document.createElement('form');
+			  form.method = 'GET';
+			  form.action = popupURL;
+			  form.target = '구매발주서인쇄하기'; // 새 창의 이름
+			    
+			  // 숨겨진 input 요소 생성
+			  var input = document.createElement('input');
+			  input.type = 'hidden';
+			  input.name = 'po_id';
+			  input.value = po_id;
+
+			  // 폼에 input 추가
+			  form.appendChild(input);
+			    
+			  // 새 창 열기
+			  var popup = window.open(popupURL, '구매발주', popupProperties);
+
+			  // 폼을 문서에 추가하고 제출
+			  document.body.appendChild(form);
+			  form.submit();
+
 			  
 			  
 			  
