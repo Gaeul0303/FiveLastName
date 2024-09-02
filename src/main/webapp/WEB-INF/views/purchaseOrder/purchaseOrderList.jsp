@@ -49,7 +49,7 @@ prefix="c" %> <%@ page session="true" %>
                               <th>공급가</th>			<!-- po.ppr_id.co_id.co_supplyPrice -->
                               <th>소요일</th>			<!-- po.ppr_id.co_id.es_id.es_requiredDays -->
                               <th>거래조건</th>		<!-- po.ppr_id.co_id.co_tradeTerms -->
-                              <th>계약일</th>			<!-- po.ppr_id.co_id.co_contractStatus -->
+                              <th>계약일</th>			<!-- po.ppr_id.co_id.co_contractDate -->
                               <th>거래회사이름</th>		<!-- po.ppr_id.co_id.es_id.pa_id.pa_name -->
                               <th>납기예정일</th>		<!-- po.ppr_id.ppr_dueDate -->
                               <th>발행일</th>			<!-- po.po_regDate -->
@@ -74,13 +74,13 @@ prefix="c" %> <%@ page session="true" %>
                           	<c:forEach var = "po" items="${poList}">
                           		<tr>
                           			<td><a href="purchaseOrderSelect?po_id=${po.po_id}">${po.po_id}</a></td>
-                          			<td>${po.po_id}</td>
-                          			<td>${po.po_id}</td>
-                          			<td>${po.po_id}</td>
-                          			<td>${po.po_id}</td>
-                          			<td>${po.po_id}</td>
-                          			<td>${po.po_id}</td>
-                          			<td>${po.po_id}</td>
+                          			<td>${po.pr_name}</td>
+                          			<td>${po.co_supplyPrice}</td>
+                          			<td>${po.es_requiredDays}</td>
+                          			<td>${po.co_tradeTerms}</td>
+                          			<td>${po.co_contractDate}</td>
+                          			<td>${po.pa_name}</td>
+                          			<td>${po.ppr_dueDate}</td>
                           			<td>${po.po_regDate}</td>
                           		</tr>
                           	</c:forEach>

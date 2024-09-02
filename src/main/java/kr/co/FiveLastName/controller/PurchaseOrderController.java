@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.FiveLastName.domain.PrintPODTO;
 import kr.co.FiveLastName.domain.PurchaseOrderDTO;
 import kr.co.FiveLastName.persistence.PurchaseOrderDAO;
 import kr.co.FiveLastName.service.PurchaseOrderService;
@@ -34,7 +35,7 @@ public class PurchaseOrderController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<PurchaseOrderDTO> poList = service.poAllSelect();
+		List<PrintPODTO> poList = service.poAllSelect();
 		
 		mav.setViewName("/purchaseOrder/purchaseOrderList");
 		
@@ -48,7 +49,7 @@ public class PurchaseOrderController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		PurchaseOrderDTO po = service.poSelect(po_id);
+		PrintPODTO po = service.poSelect(po_id);
 		
 		mav.setViewName("/purchaseOrder/purchaseOrderSelect");
 		
@@ -60,12 +61,14 @@ public class PurchaseOrderController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/purchaseOrderPrint", method = RequestMethod.GET)
+	@RequestMapping(value = "purchaseOrderPrint", method = RequestMethod.GET)
 	public ModelAndView poPrint(int po_id) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		PurchaseOrderDTO po = service.poSelect(po_id);
+		PrintPODTO po = service.poSelect(po_id);
+		
+		System.out.println("po = " + po);
 		
 		mav.setViewName("/purchaseOrder/purchaseOrder");
 		

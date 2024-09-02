@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.co.FiveLastName.domain.PrintPODTO;
 import kr.co.FiveLastName.domain.PurchaseOrderDTO;
 import kr.co.FiveLastName.persistence.PurchaseOrderDAO;
 
@@ -16,13 +17,15 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 	PurchaseOrderDAO dao;
 
 	@Override
-	public List<PurchaseOrderDTO> poAllSelect() {
+	public List<PrintPODTO> poAllSelect() {
 		return dao.poAllSelect();
 	}
-
+	
 	@Override
-	public PurchaseOrderDTO poSelect(int po_id) {
+	public PrintPODTO poSelect(int po_id) {
 		return dao.poSelect(po_id);
 	}
-	
+
+
+
 }

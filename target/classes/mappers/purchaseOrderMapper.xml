@@ -4,15 +4,31 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.FiveLastName.mapper">
 
-	<select id="poSelect" resultType="kr.co.FiveLastName.domain.PurchaseOrderDTO" parameterType="int">
-		select * from purchaseOrder where po_id = #{po_id}
+	
+	<select id="poAllSelect" resultType="kr.co.FiveLastName.domain.PrintPODTO">
+		select po.po_id, pr.pr_name, co.co_supplyPrice, es.es_requiredDays, co.co_tradeTerms,
+		pa.pa_name, ppr.ppr_dueDate, po.po_regDate, pa.pa_name, pr.pr_size, co_contractDate, ppr.ppr_quantity
+		from purchaseorder po 
+		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id
 	</select>
 	
-	<select id="poAllSelect" resultType="kr.co.FiveLastName.domain.PurchaseOrderDTO">
-		select * from purchaseOrder
+	<select id="poSelect" resultType = "kr.co.FiveLastName.domain.PrintPODTO">
+		select po.po_id, pr.pr_name, co.co_supplyPrice, es.es_requiredDays, co.co_tradeTerms,
+		pa.pa_name, ppr.ppr_dueDate, po.po_regDate, pa.pa_name, pr.pr_size, co_contractDate, ppr.ppr_quantity
+		from purchaseorder po 
+		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id
+		where po.po_id = #{po_id}
 	</select>
-
-	<insert id="poInsert">
+	
+		<insert id="poInsert">
 		insert into purchaseOrder(po_id,ppr_id,po_regDate)
 		values
 		(#{po_id},#{ppr_id},#{po_regDate})
@@ -23,4 +39,5 @@
 		set
 		po_regDate = now()
 	</update>
+	
 </mapper>
