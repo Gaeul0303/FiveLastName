@@ -14,5 +14,5 @@ public interface ProductService {
 	
 	ProductDTO productOne(int pr_id);
 	
-	void modify(int pr_id);
+	void modify(ProductDTO dto);
 }

@@ -16,5 +16,5 @@ public interface ProductDAO {
 	
 	ProductDTO productOne(int pr_id);
 	
-	void update(int pr_id);
+	void update(ProductDTO dto);
 }

@@ -36,10 +36,12 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
-	public void update(int pr_id) {
+	public void update(ProductDTO dto) {
 		// TODO Auto-generated method stub
-		sqlsession.update(namespace+".pr_update",pr_id);
+		sqlsession.update(namespace+".pr_update",dto);
 	}
+
+	
 
 	
 }
