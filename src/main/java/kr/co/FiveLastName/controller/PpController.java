@@ -33,9 +33,11 @@ public class PpController {
 		return mav;			
 	}
 	
-	@PostMapping(value="procurmentPlan/insertForm")
-	public String insertPOST(ProcurmentPlanDTO dto, RedirectAttributesMethodArgumentResolver rttr) {
-		return null;
+	@PostMapping(value="procurmentPlan/insert")
+	public String insert(ProcurmentPlanDTO dto) {
+		ppService.pp_insert(dto);
+		
+		return "redirect:/";
 		
 	}
 	
