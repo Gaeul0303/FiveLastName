@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +26,24 @@ public class PpController {
 	private ProductService pService;
 	
 	@GetMapping(value="procurmentPlan/insertForm")
-	public ModelAndView pp_insert() {
+	public ModelAndView pp_insert(Model model) {
 		logger.info("insert get");
 		
+		pService.list();
+		
+		
 		ModelAndView mav = new ModelAndView();
+		
+		model.addAttribute("list",pService.list());
 		mav.setViewName("procurmentPlan/insertForm");	
 		return mav;			
 	}
 	
-	@PostMapping(value="procurmentPlan/insertForm")
-	public String insertPOST(ProcurmentPlanDTO dto, RedirectAttributesMethodArgumentResolver rttr) {
-		return null;
+	@PostMapping(value="procurmentPlan/insert")
+	public String insert(ProcurmentPlanDTO dto) {
+		ppService.pp_insert(dto);
+		
+		return "redirect:/";
 		
 	}
 	

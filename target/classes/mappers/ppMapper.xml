@@ -50,5 +50,12 @@
 		ppr_quantity = #{pp_quantity}
 		WHERE ppr_id = #{pp_id};
 	</update>
+	
+	<!-- product list 불러오기 -->
+	<select id="productModal"
+	resultType="kr.co.FiveLastName.domain.ProductDTO"
+	parameterType="int">
+	select distinct * from product
+	</select>
 
 </mapper>
