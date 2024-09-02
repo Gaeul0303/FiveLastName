@@ -32,7 +32,7 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">불출자재</a>
+                    <a href="#">현황관리 리포트</a>
                   </li>
                 </ul>
               </div>
@@ -40,7 +40,7 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">불출자재</h4>
+                      <h4 class="card-title">현황관리 리포트</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
@@ -69,14 +69,11 @@ prefix="c" %> <%@ page session="true" %>
                             </tr>
                           </tfoot>
                           <tbody>
-                           <c:forEach var="inv" items="${inventoryList}"> 
+                           <c:forEach var="idm" items="${idmReportList}"> 
                             <tr>
-                              <td>${inv.in_id }</td>
-                              <td><button onclick="openPopup()?in_id="${inv.in_id}></button>${inv.pr_name }</td>
-                              <td>${inv.pr_category }</td>
-                              <td>${inv.in_physicalInventory}</td>
-                              <td>${inv.pr_image }</td>
-                              <td>${inv.ri_date }</td>
+                              <td>${idm.in_id }</td>
+                              <td>${idm.pr_name}</td>
+                              <td>${idm.co_supplyPrice}</td>
                             </tr>
                            </c:forEach>
                             
@@ -135,15 +132,6 @@ prefix="c" %> <%@ page session="true" %>
   
           
         });
-        
-        function openPopup() {
-        	  // 팝업을 띄울 페이지 URL
-        	  var popupURL = "/selectList?in_id="+in_id;
-        	  // 팝업 창의 속성
-        	  var popupProperties = "width=600,height=400,scrollbars=yes";
-        	  // 팝업 열기
-        	  window.open(popupURL, "Popup", popupProperties);
-        	}
       </script>
   </body>
 </html>

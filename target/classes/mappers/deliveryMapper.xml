@@ -6,15 +6,9 @@
 <mapper namespace="kr.co.FiveLastName.deliveryMapper">
 
 <select id="inventoryList" resultType="kr.co.FiveLastName.domain.DeliveryDTO">
-	SELECT DISTINCT
-    prod.*,
-    inv.in_status,
-    inv.in_physicalInventory,
-    inv.in_id
-FROM
-    erp.inventorydeliverymanagement idm
-JOIN
-	erp.inventory inv ON idm.in_id = inv.in_id
+	SELECT 
+    inv.in_id, pr.pr_name , pr.pr_size , pr.pr_quality , pr.pr_image , pr.pr_category , inv.in_physicalInventory , ri.ri_date
+    from erp.inventory inv
 JOIN
     erp.incomingDeadline id ON inv.id_code = id.id_code
 JOIN
@@ -32,11 +26,9 @@ JOIN
 JOIN
     erp.estimate es ON co.es_id = es.es_id
 JOIN
-    erp.product prod ON prod.pr_id = prod.pr_id
-where    
-    (prod.pr_name = #{pr_name} OR #{pr_name} IS NULL)
-    AND (idm.idm_date = #{idm_date} OR #{idm_date} IS NULL)
-    AND inv.in_status = '불출준비';
+    erp.product pr ON pr.pr_id = es.pr_id
+where 
+	inv.in_status = '불출준비';
     
 </select>
 
@@ -64,7 +56,7 @@ JOIN
 JOIN
     erp.estimate es ON co.es_id = es.es_id
 JOIN
-    erp.product pr ON pr.pr_id = pr.pr_id
+    erp.product pr ON pr.pr_id = es.pr_id
     where 
     in_id = #{in_id};
 </select>
@@ -84,9 +76,9 @@ JOIN
 <select id="idmReportList" parameterType="int" resultType="kr.co.FiveLastName.domain.DeliveryDTO">
 	SELECT
 	inv.in_id,
-    prod.pr_name,
-    prod.pr_quantity,
-    co.co_supplyProce
+    pr.pr_name,
+    pr.pr_quality,
+    co.co_supplyPrice
 FROM
     erp.inventorydeliverymanagement idm
 JOIN
@@ -108,11 +100,8 @@ JOIN
 JOIN
     erp.estimate es ON co.es_id = es.es_id
 JOIN
-    erp.product pr ON pr.pr_id = pr.pr_id
-where    
-    (pr.pr_name = #{pr_name} OR #{pr_name} IS NULL)
-    AND (idm.idm_date = #{idm_date} OR #{idm_date} IS NULL)
-    AND inv.in_status = '불출';
+    erp.product pr ON pr.pr_id = es.pr_id
+    where idm.idm_status = '출고처리';
 </select>
 
 </mapper>
