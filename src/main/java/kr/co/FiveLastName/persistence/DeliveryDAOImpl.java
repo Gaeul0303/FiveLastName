@@ -32,19 +32,19 @@ public class DeliveryDAOImpl implements DeliveryDAO{
 	@Override
 	public int inventoryUpdate(InventoryDTO inven) {
 		// TODO Auto-generated method stub
-		return sqlSession.update(nameSpace+"inventoryUpdate", inven);
+		return sqlSession.update(nameSpace+".inventoryUpdate", inven);
 	}
 
 	@Override
 	public int idmInsert(InventoryDeliveryManagementDTO idm) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(nameSpace+"idmInsert", idm);
+		return sqlSession.insert(nameSpace+".idmInsert", idm);
 	}
 
 	@Override
 	public List<InventoryDeliveryManagementDTO> idmReportList() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(nameSpace+"idmReportList");
+		return sqlSession.selectList(nameSpace+".idmReportList");
 	}
 	
 	

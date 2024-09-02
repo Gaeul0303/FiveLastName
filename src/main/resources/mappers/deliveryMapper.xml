@@ -6,16 +6,9 @@
 <mapper namespace="kr.co.FiveLastName.deliveryMapper">
 
 <select id="inventoryList" resultType="kr.co.FiveLastName.domain.DeliveryDTO">
-	SELECT
-	inv.in_id,
-    idm.idm_date,
-	pr.pr_name,
-	idm.idm_quantity,
-	inv.in_physicalInventory
-FROM
-    erp.inventorydeliverymanagement idm
-JOIN
-	erp.inventory inv ON idm.in_id = inv.in_id
+	SELECT 
+    inv.in_id, pr.pr_name , pr.pr_size , pr.pr_quality , pr.pr_image , pr.pr_category , inv.in_physicalInventory , ri.ri_date
+    from erp.inventory inv
 JOIN
     erp.incomingDeadline id ON inv.id_code = id.id_code
 JOIN
@@ -33,28 +26,19 @@ JOIN
 JOIN
     erp.estimate es ON co.es_id = es.es_id
 JOIN
-    erp.product pr ON pr.pr_id = pr.pr_id;
-where    
-    (pr.pr_name = #{pr_name} OR #{pr_name} IS NULL)
-    AND (idm.idm_date = #{idm_date} OR #{idm_date} IS NULL)
-    AND inv.in_status = '불출';
+    erp.product pr ON pr.pr_id = es.pr_id
+where 
+	inv.in_status = '불출준비';
+    
 </select>
 
 <select id="inventorySelectList" parameterType="int" resultType="kr.co.FiveLastName.domain.DeliveryDTO">
-	SELECT
-	inv.in_id,
-    prod.pr_name,
-    prod.pr_size,
-    prod.pr_type,
-    prod.pr_quality,
-    prod.pr_image,
+	SELECT DISTINCT
     inv.in_safetyStock,
     inv.in_availableInventory,
     inv.in_physicalInventory
 FROM
-    erp.inventorydeliverymanagement idm
-JOIN
-	erp.inventory inv ON idm.in_id = inv.in_id
+	erp.inventory inv 
 JOIN
     erp.incomingDeadline id ON inv.id_code = id.id_code
 JOIN
@@ -72,28 +56,29 @@ JOIN
 JOIN
     erp.estimate es ON co.es_id = es.es_id
 JOIN
-    erp.product pr ON pr.pr_id = pr.pr_id;
+    erp.product pr ON pr.pr_id = es.pr_id
+    where 
+    in_id = #{in_id};
 </select>
 
 <insert id="idmInsert" parameterType="kr.co.FiveLastName.domain.DeliveryDTO">
-	insert into inventorydeliverymanagement(idm_quantity)
-	value(#{idm_quantity})
+	insert into inventorydeliverymanagement(idm_quantity,idm_date,in_id,idm_status)
+	value(#{idm_quantity},now(),#{in_id},"출고처리")	
 </insert>
 
 <update id="inventoryUpdate" parameterType="int">
 	update inventory 
-		set in_safetyStock = (in_safetyStock - #{idm_quantity}),
-		in_availableInventory = (in_availableInventory - #{idm_quantity}),
-		in_physicalInventory = (in_physicalInventory - #{idm_quantity})
-	where in_id = in_id;
+		set in_availableInventory = (in_availableInventory - #{idm_quantity}),
+		    in_physicalInventory = (in_physicalInventory - #{idm_quantity})
+	where in_id = #{in_id};
 </update>
 
 <select id="idmReportList" parameterType="int" resultType="kr.co.FiveLastName.domain.DeliveryDTO">
 	SELECT
 	inv.in_id,
-    prod.pr_name,
-    prod.pr_quantity,
-    co.co_supplyProce
+    pr.pr_name,
+    pr.pr_quality,
+    co.co_supplyPrice
 FROM
     erp.inventorydeliverymanagement idm
 JOIN
@@ -115,11 +100,8 @@ JOIN
 JOIN
     erp.estimate es ON co.es_id = es.es_id
 JOIN
-    erp.product pr ON pr.pr_id = pr.pr_id
-where    
-    (pr.pr_name = #{pr_name} OR #{pr_name} IS NULL)
-    AND (idm.idm_date = #{idm_date} OR #{idm_date} IS NULL)
-    AND inv.in_status = '불출';
+    erp.product pr ON pr.pr_id = es.pr_id
+    where idm.idm_status = '출고처리';
 </select>
 
 </mapper>
