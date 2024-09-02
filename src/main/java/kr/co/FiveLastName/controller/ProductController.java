@@ -71,6 +71,31 @@ public class ProductController {
 	}
 	
 
+	
+	
+	@RequestMapping(value = "/modify",method = RequestMethod.GET)
+	public void modifyGET(@RequestParam("pr_id") int pr_id,Model model,RedirectAttributes rttr) {
+		model.addAttribute(service.productOne(pr_id));
+
+		
+	}
+	
+	@RequestMapping(value = "/modify",method = RequestMethod.POST)
+	public String modifyPOST(ProductDTO dto,RedirectAttributes rttr, @RequestParam("file") MultipartFile file) throws IOException {
+		
+		 // 파일 업로드 처리
+	    String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
+	    dto.setPr_image(savedName);
+
+		
+		service.modify(dto);
+		
+		rttr.addFlashAttribute("msg", "success");
+		return "redirect:/product/list";
+		
+		
+	}
+	
 	private String uploadFile(String originalName, byte[] fileData) throws IOException {
 		UUID uid = UUID.randomUUID();
 		String savedName = uid.toString() + "_" + originalName;
@@ -81,10 +106,5 @@ public class ProductController {
 
 		return savedName;
 
-	}
-	
-	@RequestMapping(value = "/modify",method = RequestMethod.GET)
-	public void modifyGET(@RequestParam("pr_id") int pr_id,Model model) {
-		model.addAttribute(service.productOne(pr_id));
 	}
 }
