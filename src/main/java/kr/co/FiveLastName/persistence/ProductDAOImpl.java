@@ -29,5 +29,17 @@ public class ProductDAOImpl implements ProductDAO{
 		sqlsession.insert(namespace+".pr_insert",dto);
 	}
 
+	@Override
+	public ProductDTO productOne(int pr_id) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(namespace+".pr_selectOne",pr_id);
+	}
+
+	@Override
+	public void update(int pr_id) {
+		// TODO Auto-generated method stub
+		sqlsession.update(namespace+".pr_update",pr_id);
+	}
+
 	
 }
