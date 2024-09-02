@@ -9,4 +9,11 @@
 		select * from receivingInspection
 	</select>
 
+	<!-- 상세 조회 -->
+	<select id="ri_selectOne" resultType="kr.co.FiveLastName.domain.ReceivingInspectionDTO"
+	parameterType="int">
+		select * from receivingInspection where ri_id = #{ri_id}
+	</select>
+
+	<!--  -->
 </mapper>

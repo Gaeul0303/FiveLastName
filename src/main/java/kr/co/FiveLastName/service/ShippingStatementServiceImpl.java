@@ -28,8 +28,8 @@ public class ShippingStatementServiceImpl implements ShippingStatementService{
 
 	@Override
 	public ShippingStatementDTO sh_selectOne(int sh_id) {
-		// TODO Auto-generated method stub
-		return null;
+		// 출하명세서 상세 조회
+		return shDAO.sh_selectOne(sh_id);
 	}
 
 	@Override

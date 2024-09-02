@@ -30,8 +30,8 @@ public class ShippingStatementDAOImpl implements ShippingStatementDAO{
 
 	@Override
 	public ShippingStatementDTO sh_selectOne(int sh_id) {
-		// TODO Auto-generated method stub
-		return null;
+		// 출하명세서 상세 조회
+		return sqlSession.selectOne(nameSpace+".sh_selectotn");
 	}
 
 	@Override

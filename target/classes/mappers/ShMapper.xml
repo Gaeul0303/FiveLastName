@@ -22,5 +22,10 @@
 		
 		where ss_status = "제작완료" and ss_deliverySchedule = "일정준수";
 	</select>
-		 
+	
+	<!-- 출하명세서 상세조회 -->
+	<select id="sh_selectOne" parameterType="int" resultType="kr.co.FiveLastName.domain.ShippingStatementDTO">
+		select * from shippingstatement where sh_id = #{sh_id}
+	</select>
+			 
 </mapper>
