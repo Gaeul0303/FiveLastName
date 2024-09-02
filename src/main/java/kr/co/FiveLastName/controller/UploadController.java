@@ -96,7 +96,7 @@ public class UploadController {
 
 			HttpHeaders headers = new HttpHeaders();
 
-			in = new FileInputStream(uploadPath+"/" + fileName);
+			in = new FileInputStream(uploadPath + "/" + fileName);
 
 			if (mType != null) {
 				headers.setContentType(mType);
@@ -120,32 +120,35 @@ public class UploadController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/deleteAllFiles", method = RequestMethod.POST)
-	public ResponseEntity<String> deleteFile(@RequestParam("files[]") String[] files) throws Exception {
+	@RequestMapping(value = "/product/deleteAllFiles", method = RequestMethod.POST)
+	public ResponseEntity<String> deleteFile(@RequestParam String fileName) throws Exception {
 
-		
-		
-		logger.info("delete" + files);
+		logger.info("delete" + fileName);
 
-		
-		if(files == null || files.length ==0) {
-			return new ResponseEntity<String>("deleted",HttpStatus.OK);
+		if (fileName == null) {
+			return new ResponseEntity<String>("deleted", HttpStatus.OK);
 		}
-		for (String fileName : files) {
+		try {
 			String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
-			
+
 			MediaType mType = MediaUtils.getMediaType(formatName);
-			
+
 			if (mType != null) {
 				String front = fileName.substring(0, 12);
 				String end = fileName.substring(14);
+				
 				new File(uploadPath + (front + end).replace('/', File.separatorChar)).delete();
+
+				System.out.println("파일삭제 성공");
+
 			}
 			
 			new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+
+		} catch (Exception e) {
+			 logger.error("Error deleting file", e);
 		}
-		
-		
-		return new ResponseEntity<String>("deleted",HttpStatus.OK);
+
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 }

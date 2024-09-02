@@ -34,11 +34,11 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void modify(int pr_id) {
+	public void modify(ProductDTO dto) {
 		// TODO Auto-generated method stub
-		dao.update(pr_id);
+		dao.update(dto);
 	}
-	
-	
+
+
 	
 }
