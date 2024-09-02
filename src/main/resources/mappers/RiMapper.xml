@@ -5,6 +5,8 @@
 <mapper namespace="kr.co.FiveLastName.RiMapper">
 
 	<!-- 조회 -->
-	<select id=""></select>
+	<select id="ri_list" resultType="kr.co.FiveLastName.domain.ReceivingInspectionDTO">
+		select * from receivingInspection
+	</select>
 
 </mapper>
