@@ -10,6 +10,7 @@ import kr.co.FiveLastName.domain.InventoryDeliveryManagementDTO;
 import kr.co.FiveLastName.persistence.DeliveryDAO;
 
 @Service
+
 public class DeliveryServiceImpl implements DeliveryService{
 
 	@Autowired
@@ -45,6 +46,6 @@ public class DeliveryServiceImpl implements DeliveryService{
 		return dao.idmReportList();
 	}
 
-	
+
 
 }
