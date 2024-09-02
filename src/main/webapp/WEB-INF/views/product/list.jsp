@@ -70,8 +70,6 @@ prefix="c" %>
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
                               </tr>
                             </tfoot>
                             <thead>
@@ -79,10 +77,9 @@ prefix="c" %>
                                 <th>카테고리</th>
                                 <th>품목ID</th>
                                 <th>품목명</th>
-                                <th>규격</th>
-                                <th>재질</th>
-                                <th>제작사양</th>
                                 <th>이미지</th>
+                                <th>재고상태</th>
+                                <th>자세히보기</th>
                               </tr>
                             </thead>
                            
@@ -90,12 +87,11 @@ prefix="c" %>
                              <c:forEach items="${list }" var="product">
 								<tr>
 	                                <td>${product.pr_category }</td>
-									 <td>${product.pr_id }</td>
+									                <td>${product.pr_id }</td>
 	                                <td>${product.pr_name }</td>
-	                                <td>${product.pr_size }</td>
-	                                <td>${product.pr_type }</td>
-	                                <td>${product.pr_quality }</td>
 	                                <td class="imgBox"><img src="${product.pr_image }" alt="${product.pr_name }" class="img"> </td>
+	                                <td>${product.pr_status }</td>
+	                                <td><a href="/product/read?pr_id=${ product.pr_id}">자세히보기</a></td>
 								</tr>
 								</c:forEach>
                             </tbody>
@@ -160,6 +156,13 @@ prefix="c" %>
         	$(this).attr('src',fileInfo);
     	});
 
+		</script>
+		
+		<script type="text/javascript">
+			let result = '${msg}';
+			if(result == 'success'){
+				alert("처리가 완료되었습니다.");
+			}
 		</script>
   </body>
 </html>
