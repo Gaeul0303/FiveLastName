@@ -137,13 +137,13 @@ public class UploadController {
 				String front = fileName.substring(0, 12);
 				String end = fileName.substring(14);
 				
-				new File(uploadPath + (front + end).replace('/', File.separatorChar)).delete();
+				new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
 
-				System.out.println("파일삭제 성공");
+				System.out.println(uploadPath +"\\"+ fileName.replace('/', File.separatorChar));
 
 			}
 			
-			new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+			new File(uploadPath +"\\"+ fileName.replace('/', File.separatorChar)).delete();
 
 		} catch (Exception e) {
 			 logger.error("Error deleting file", e);
