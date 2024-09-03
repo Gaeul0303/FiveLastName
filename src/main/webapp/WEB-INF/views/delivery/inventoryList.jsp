@@ -72,7 +72,7 @@ prefix="c" %> <%@ page session="true" %>
                            <c:forEach var="inv" items="${inventoryList}"> 
                             <tr>
                               <td>${inv.in_id }</td>
-                              <td><button onclick="openPopup()?in_id="${inv.in_id}></button>${inv.pr_name }</td>
+                              <td><button onclick="openPopup('${inv.in_id}')"></button>${inv.pr_name }</td>
                               <td>${inv.pr_category }</td>
                               <td>${inv.in_physicalInventory}</td>
                               <td>${inv.pr_image }</td>
@@ -83,7 +83,7 @@ prefix="c" %> <%@ page session="true" %>
                           </tbody>
                         </table>
                       </div>
-                    </div>
+                    </div>	
                   </div>
                 </div>
   
@@ -136,9 +136,9 @@ prefix="c" %> <%@ page session="true" %>
           
         });
         
-        function openPopup() {
+        function openPopup(in_id) {
         	  // 팝업을 띄울 페이지 URL
-        	  var popupURL = "/selectList?in_id="+in_id;
+        	  var popupURL = "/selectInventory?in_id="+in_id;
         	  // 팝업 창의 속성
         	  var popupProperties = "width=600,height=400,scrollbars=yes";
         	  // 팝업 열기
