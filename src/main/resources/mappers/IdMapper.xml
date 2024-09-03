@@ -4,6 +4,62 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.FiveLastName.IdMapper">
 
-	<!--  -->
+	<!-- 입고 마감 조회 -->
+	<!-- 입고일 품목명 정품수량 공급가액 합계 -->
+	<select id="id_list" resultType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
+		SELECT
+		ri.ri_date, pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice
+		
+		FROM incomingDeadline id
+		
+		INNER JOIN receivingInspection ri on id.ri_id = ri.ri_id
+		INNER JOIN progressInspection pi on ri.pi_id = pi.pi_id
+		INNER JOIN staff st on pi.st_id = st.st_id
+		INNER JOIN shippingStatus ss on pi.ss_id = ss.ss_id
+		INNER JOIN purchaseOrder po on ss.po_id = po.po_id
+		INNER JOIN procurementPlanRegistration ppr on po.ppr_id = ppr.ppr_id
+		INNER JOIN contract co on ppr.co_id = co.co_id
+		INNER JOIN estimate es on co.es_id = es.es_id
+		INNER JOIN product pr es.pr_id = pr.pr_id
+		
+		WHERE ri.ri_availability = "입고완료"
+	</select>
+	
+	<!-- 입고마감 상세 조회 -->
+	<select id="id_selectOne" parameterType="int" resultType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
+		SELECT
+		ri.ri_date, pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice
+		
+		FROM incomingDeadline id
+		
+		INNER JOIN receivingInspection ri on id.ri_id = ri.ri_id
+		INNER JOIN progressInspection pi on ri.pi_id = pi.pi_id
+		INNER JOIN staff st on pi.st_id = st.st_id
+		INNER JOIN shippingStatus ss on pi.ss_id = ss.ss_id
+		INNER JOIN purchaseOrder po on ss.po_id = po.po_id
+		INNER JOIN procurementPlanRegistration ppr on po.ppr_id = ppr.ppr_id
+		INNER JOIN contract co on ppr.co_id = co.co_id
+		INNER JOIN estimate es on co.es_id = es.es_id
+		INNER JOIN product pr es.pr_id = pr.pr_id
+		
+		WHERE id.id_code = #{id.id_code}
+	</select>
+	
+	<!-- 입고마감 등록 -->
+	<insert id="id_insert" parameterType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
+		INSERT INTO incomingDeadline(id_code, ri_id, id_genuineNum, id_totalPrice)
+		VALUES
+		(#{id_code}, #{ri_id}, #{id_genuineNum}, #{id_totalPrice})
+	</insert>
+	
+	<!-- 입고마감 수정 -->
+	<update id="id-update">
+		UPDATE incomingDeadline
+		SET
+		id_genuineNum = #{id_genuineNum},
+		id_totalPrice = #{id_totalPrice}
+		WHERE
+		id_code = #{id_code};
+	</update>
 
 </mapper>
