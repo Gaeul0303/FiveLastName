@@ -1,24 +1,21 @@
 package kr.co.FiveLastName.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import kr.co.FiveLastName.domain.PrintPODTO;
-import kr.co.FiveLastName.domain.PurchaseOrderDTO;
-import kr.co.FiveLastName.persistence.PurchaseOrderDAO;
+import kr.co.FiveLastName.domain.StaffDTO;
 import kr.co.FiveLastName.service.PurchaseOrderService;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -45,37 +42,33 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping(value = "/purchaseOrderSelect", method = RequestMethod.GET)
-	public ModelAndView poSelect(int po_id) {
+	public ModelAndView poSelect(int po_id /* , HttpSession session */) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		PrintPODTO po = service.poSelect(po_id);
+
+		//StaffDTO staff = (StaffDTO)session.getAttribute("staff");// staff를 세션값주는걸로변경 
 		
 		mav.setViewName("/purchaseOrder/purchaseOrderSelect");
 		
 		mav.addObject("po", po);
 		
-		System.out.println(po);
-
-		
 		return mav;
 	}
 	
 	@RequestMapping(value = "purchaseOrderPrint", method = RequestMethod.GET)
-	public ModelAndView poPrint(int po_id) {
+	public ModelAndView poPrint(int po_id /* , HttpSession session */) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		PrintPODTO po = service.poSelect(po_id);
 		
-		System.out.println("po = " + po);
+		//StaffDTO staff = (StaffDTO)session.getAttribute("staff");// staff를 세션값주는걸로변경 
 		
 		mav.setViewName("/purchaseOrder/purchaseOrder");
 		
 		mav.addObject("po", po);
-		
-		System.out.println(po);
-
 		
 		return mav;
 	}
