@@ -2,18 +2,17 @@ package kr.co.FiveLastName.service;
 
 import java.util.List;
 
-import kr.co.FiveLastName.domain.InventoryDTO;
-import kr.co.FiveLastName.domain.InventoryDeliveryManagementDTO;
+import kr.co.FiveLastName.domain.DeliveryDTO;
 
 public interface DeliveryService {
 	
-	List<InventoryDTO> inventoryList();
+	List<DeliveryDTO> inventoryList();
 	
-	InventoryDTO inventorySelectList(int in_id);
+	DeliveryDTO inventorySelectList(int in_id);
 	
-	int inventoryUpdate(InventoryDTO inven);
+	int inventoryUpdate(DeliveryDTO inven);
 	
-	int idmInsert(InventoryDeliveryManagementDTO idm);
+	int idmInsert(DeliveryDTO idm);
 	
-	List<InventoryDeliveryManagementDTO> idmReportList();
+	List<DeliveryDTO> idmReportList();
 }

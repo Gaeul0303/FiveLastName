@@ -7,10 +7,8 @@ prefix="c" %> <%@ page session="true" %>
   </head>
   <body>
     <div class="wrapper">
-      <%@include file="../include/sideBar.jsp" %>
       
       <div class="main-panel">
-          <%@include file="../include/header.jsp" %>
 
           <div class="container">
             <div class="page-inner">
@@ -32,7 +30,7 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">현황관리 리포트</a>
+                    <a href="#">재고정보</a>
                   </li>
                 </ul>
               </div>
@@ -40,7 +38,7 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">현황관리 리포트</h4>
+                      <h4 class="card-title">재고정보</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
@@ -51,42 +49,30 @@ prefix="c" %> <%@ page session="true" %>
                           <thead>
                             <tr>
                               <th>품목 코드</th>
-                              <th>품목명</th>
-                              <th>공급가</th>
-                              <th>출고수량</th>
+                              <th>안전재고량</th>
                               <th>가용재고량</th>
-                              <th>출고일</th>
-                              <th>상태</th>
+                              <th>실물재고량</th>
                             </tr>
                           </thead>
                           <tfoot>
                             <tr>
                               <th>품목 코드</th>
-                              <th>품목명</th>
-                              <th>공급가</th>
-                              <th>출고수량</th>
+                              <th>안전재고량</th>
                               <th>가용재고량</th>
-                              <th>출고일</th>
-                              <th>상태</th>
+                              <th>실물재고량</th>
                             </tr>
                           </tfoot>
                           <tbody>
-                           <c:forEach var="idm" items="${idmReportList}"> 
                             <tr>
-                              <td>${idm.in_id }</td>
-                              <td>${idm.pr_name}</td>
-                              <td>${idm.co_supplyPrice}</td>
-                              <td>${idm.idm_quantity }</td>
-                              <td>${idm.in_availableInventory }
-                              <td>${idm.idm_date }</td>
-                              <td>${idm.idm_status }</td>
+                              <td>${inv.pr_name }</td>
+                              <td>${inv.in_safetyStock }</td>
+                              <td>${inv.in_availableInventory}</td>
+                              <td>${inv.in_physicalInventory}</td>
                             </tr>
-                           </c:forEach>
-                            
                           </tbody>
                         </table>
                       </div>
-                    </div>
+                    </div>	
                   </div>
                 </div>
   
@@ -96,7 +82,6 @@ prefix="c" %> <%@ page session="true" %>
           </div>
       </div>
 
-      <%@include file="../include/footer.jsp" %>
     </div>
 
     <%@include file="../include/script.jsp" %>
@@ -138,6 +123,15 @@ prefix="c" %> <%@ page session="true" %>
   
           
         });
+        
+        function openPopup(in_id) {
+        	  // 팝업을 띄울 페이지 URL
+        	  var popupURL = "/selectList?in_id="+in_id;
+        	  // 팝업 창의 속성
+        	  var popupProperties = "width=600,height=400,scrollbars=yes";
+        	  // 팝업 열기
+        	  window.open(popupURL, "Popup", popupProperties);
+        	}
       </script>
   </body>
 </html>
