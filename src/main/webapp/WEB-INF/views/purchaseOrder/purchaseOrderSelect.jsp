@@ -303,7 +303,9 @@
 										</tr>
 										<tr>
 											<td height="30" colspan="6" align="center" bgcolor="#E2EFDA" style="font-weight: bold">합 계</td>
-											<td align="right" bgcolor="#F8F8F8" style="font-weight: bold"><div id="sum_ff" style="padding: 3px;">${po.co_supplyPrice*po.ppr_quantity}원</div></td>
+											<td align="right" bgcolor="#F8F8F8" style="font-weight: bold">
+												<div id="sum_ff" style="padding: 3px;">${po.co_supplyPrice*po.ppr_quantity}원</div>
+											</td>
 											<td align="right" style="font-weight: bold">&nbsp;</td>
 											<td align="right" style="font-weight: bold">&nbsp;</td>
 										</tr>

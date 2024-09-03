@@ -286,15 +286,14 @@ p {
 				style="font-weight: bold">비고</td>
 		</tr>
 		<tr>
-			<td height="30" align="center">1</td>
-			<td align="center"><div tms_edit id="aa1" style="padding: 3px;"></div></td>
-			<td align="center"><div tms_edit id="bb1" style="padding: 3px;"></div></td>
-			<td align="right"><div tms_edit id="ee1" style="padding: 3px;"></div></td>
-			<td align="center"><div tms_edit id="cc1" style="padding: 3px;"></div></td>
-			<td align="right"><div tms_edit id="dd1" style="padding: 3px;"></div></td>
-			<td align="right" bgcolor="#F8F8F8"><div id="ff1"
-					style="padding: 3px;"></div></td>
-			<td align="center"><div tms_edit id="gg1" style="padding: 3px;"></div></td>
+			<td align="center"><div tms_edit id="aa1" style="padding: 3px;">${status.index+1}</div></td>
+			<td align="center"><div tms_edit id="bb1" style="padding: 3px;">${po.pr_name}</div></td>
+			<td align="right"><div tms_edit id="ee1" style="padding: 3px;">${po.pr_size}</div></td>
+			<td align="center"><div tms_edit id="cc1" style="padding: 3px;">${po.ppr_quantity}</div></td>
+			<td align="center"><div tms_edit id="dd1" style="padding: 3px;"></div>개</td>
+			<td align="center"><div tms_edit id="gg1" style="padding: 3px;"></div>${po.co_supplyPrice}</td>
+			<td align="right" bgcolor="#F8F8F8"><div id="ff1" style="padding: 3px;">${po.co_supplyPrice*po.ppr_quantity}원</div></td>
+			<td align="center"><div tms_edit id="gg16" style="padding: 3px;"></div>${po.ppr_dueDate}까지</td>
 			<td align="center"><div tms_edit id="gg16" style="padding: 3px;"></div></td>
 		</tr>
 		<tr>
@@ -469,15 +468,16 @@ p {
 			<td height="30" colspan="6" align="center" bgcolor="#E2EFDA"
 				style="font-weight: bold">합 계</td>
 			<td align="right" bgcolor="#F8F8F8" style="font-weight: bold"><div
-					id="sum_ff" style="padding: 3px;">합계 금액 쓰는 곳</div></td>
+					id="sum_ff" style="padding: 3px;">${po.co_supplyPrice*po.ppr_quantity}원</div></td>
 			<td align="right" style="font-weight: bold">&nbsp;</td>
 			<td align="right" style="font-weight: bold">&nbsp;</td>
 		</tr>
 		<tr>
 			<td height="30" colspan="9" align="left" style="font-weight: bold">
 				<div tms_edit id="gg31" style="padding: 3px; line-height: 25px">
-					1. 납품주소 : 인천 미추홀구 경인로 229 인천IT타워<br> 2. 납 기 일 : <br> 3.
-					요청사항 : <br>
+					1. 납품주소 : 인천 미추홀구 경인로 229 인천IT타워<br>
+					2. 납 기 일 : ${po.ppr_dueDate}<br>
+					3. 요청사항 : ${po.co_tradeTerms}<br>
 				</div>
 			</td>
 		</tr>
@@ -508,6 +508,7 @@ p {
 			       document.body.innerHTML = initBody;
 			   }
 			   window.print();
+			   self.close();
 			   }
 			</script>
 </BODY>
