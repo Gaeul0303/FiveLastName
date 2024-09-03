@@ -25,6 +25,7 @@ public class PpController {
 	@Inject
 	private ProductService pService;
 	
+	//계획 둥록 화면 페이지
 	@GetMapping(value="procurmentPlan/insertForm")
 	public ModelAndView pp_insert(Model model) {
 		logger.info("insert get");
@@ -39,14 +40,32 @@ public class PpController {
 		return mav;			
 	}
 	
-	@PostMapping(value="procurmentPlan/insert")
+	//계획 등록
+	@PostMapping(value="procurmentPlan/insertForm")
 	public String insert(ProcurmentPlanDTO dto) {
+		logger.info("insert : " + dto);
+		
 		ppService.pp_insert(dto);
 		
-		return "redirect:/";
+		return "redirect:/procurmentPlan/list";
 		
 	}
 	
+	//계획 등록 모델엔뷰버전
+//	@PostMapping(value="procurmentPlan/insertForm")
+//	public ModelAndView insertForm() {
+//		logger.info("insert : " + insertForm());
+//		ModelAndView mav = new ModelAndView();
+//		
+//		mav.setViewName("procurmentPlan/insertForm");
+//		mav.addObject("insertForm", ppService.pp_insert(null))
+//		
+//		
+//		return "redirect:/procurmentPlan/list";
+//		
+//	}
+	
+	//등록된 계획 목차
 	@RequestMapping(value="procurmentPlan/list")
 	public ModelAndView pp_selectAll() {
 		ModelAndView mav = new ModelAndView();

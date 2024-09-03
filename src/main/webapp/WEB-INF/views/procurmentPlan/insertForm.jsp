@@ -34,63 +34,72 @@
 									<div class="card-title">조달 계획 수립</div>
 								</div>
 								<div class="card-body">
-									<div class="row">
-										<div class="col-md-6 col-lg-4">
-											<div class="form-group">
-												<label for="exampleFormControlSelect1">품목 선택</label> <select
-													class="form-select" id="exampleFormControlSelect1">
-													<c:forEach items="${list }" var="product">
+									<form id="insertForm" enctype="procurmentPlan/insertForm"
+										method="post">
+
+										<div class="row">
+											<div class="col-md-6 col-lg-4">
+												<div class="form-group">
+														<input type="hidden" id="pp_id" name="pp_id" value="${procurmentPlanDTO.pp_id}" />
+													</div>
+												<div class="form-group">
+													<label for="exampleFormControlSelect1">품목 선택</label> <select
+														class="form-select" id="exampleFormControlSelect1">
+														<c:forEach items="${list}" var="product">
 															<tr>
-																<option><td>${product.pr_name }</td></option>
+																<option><td>${product.pr_name }</td>
+																</option>
 															</tr>
-														</c:forEach>													
-												</select>
-											</div>										
-											<div class="form-group">
-												<label for="makeTime">소요 일정</label> <input type="number"
-													class="form-control" id="makeTiem" placeholder="Enter Time" />
-											</div>
-											<div class="form-group">
-												<label for="spendAmount">소요량</label> <input type="number"
-													class="form-control" id="spendAmount"
-													placeholder="Enter Amount" />
-											</div>
-											<div class="form-group">
-												<label for="deliveryDate">조달납기</label> <input type="number"
-													class="form-control" id="delivaerDate"
-													placeholder="Enter Date" />
-											</div>
-											<div class="form-group">
-												<label for="exampleFormControlSelect1">소요일정</label> <select
-													class="form-select" id="exampleFormControlSelect1">
-													<option>3일미만</option>
-													<option>3~7일</option>
-													<option>10일이내</option>
-													<option>2주이내</option>
-													<option>1달이내</option>
-													<option>1달이상</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<label for="comment">자재 소요 공정</label>
-												<textarea class="form-control" id="comment" rows="5">
+														</c:forEach>
+													</select>
+													<div class="form-group">
+														<c:forEach items="${list}" var="product">
+														<% %><input type="hidden" id="pr_id" name="pr_id" value="${product.pr_id }" />
+														</c:forEach>
+													</div>
+													<div class="form-group">
+														<label for="makeTime">소요 일정</label> <input type="number" class="form-control" id="pp_makeTime" name="pp_makeTime"
+															placeholder="Enter Time" />
+													</div>
+													<div class="form-group">
+														<label for="spendAmount">소요량</label> <input type="number"	class="form-control" id="spendAmount" name="pp_spendAmount"
+															placeholder="Enter Amount" />
+													</div>
+													<div class="form-group">
+														<label for="deliveryDate">조달납기</label> <input
+															type="number" class="form-control" id="pp_deliveryDate" name="pp_deliveryDate" placeholder="Enter Date" />
+													</div>
+													<div class="form-group">
+														<label for="exampleFormControlSelect1">소요일정</label> 
+														<select	class="form-select" id="exampleFormControlSelect1">
+															<option>3일미만</option>
+															<option>3~7일</option>
+															<option>10일이내</option>
+															<option>2주이내</option>
+															<option>1달이내</option>
+															<option>1달이상</option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label for="comment">자재 소요 공정</label>
+														<textarea class="form-control" id="comment" rows="5">
                             </textarea>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" value=""
+															id="flexCheckDefault" /> <label class="form-check-label"
+															for="flexCheckDefault"> 상기 내용을 확인후 진행합니다. </label>
+													</div>
+												</div>
 											</div>
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" value=""
-													id="flexCheckDefault" /> <label class="form-check-label"
-													for="flexCheckDefault"> 상기 내용에 동의합니다. </label>
+											<div class="card-action">
+												<button class="btn btn-success" id="insertBtn">등록</button>
+												<button class="btn btn-danger">취소</button>
 											</div>
-										</div>
-
-
-
-									</div>
+									</form>
 								</div>
-								<div class="card-action">
-									<button class="btn btn-success" id="insertBtn">등록</button>
-									<button class="btn btn-danger">취소</button>
-								</div>
+
+
 							</div>
 						</div>
 					</div>
