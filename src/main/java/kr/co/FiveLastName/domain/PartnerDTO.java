@@ -1,13 +1,13 @@
 package kr.co.FiveLastName.domain;
 
 public class PartnerDTO {
-	int pa_id;
-	int pr_id; 
-	String pa_name;
-	String pa_manager;
-	String pa_tel;
-	String pa_email;
-	String pa_address;
+	private int pa_id;
+	private int pr_id; 
+	private String pa_name;
+	private String pa_manager;
+	private String pa_tel;
+	private String pa_email;
+	private String pa_address;
 	
 	public PartnerDTO() {
 		super();
