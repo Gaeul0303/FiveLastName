@@ -5,40 +5,57 @@
 <mapper namespace="kr.co.FiveLastName.ppMapper">
 
 	<!-- 조달 계획 등록 -->
-	<insert id="pp_insert" parameterType="kr.co.FiveLastName.domain.ProcurmentPlanDTO">
-	INSERT INTO procurmentplan
-	(pp_id,
-	pr_id,
-	pp_materialRequiredProcessStage,
-	pp_makeTime,
-	pp_spendAmount,
-	pp_regDate,
-	pp_deliveryDate)
-	VALUES
-	(#{pp_id},
-	#{pr_id},
-	#{pp_materialRequiredProcessStage},
-	#{pp_makeTime},
-	#{pp_spendAmount},
-	#{pp_regDate},
-	#{pp_deliveryDate});
-	</insert>
-	
-	<!-- 조달 계획 조회 -->
-	<select id="ppr_selectOne" resultType="int"
+	<insert id="pp_insert"
 		parameterType="kr.co.FiveLastName.domain.ProcurmentPlanDTO">
+		INSERT INTO procurmentPlan
+		(pp_id,
+		pr_id,
+		pp_materialRequiredProcessStage,
+		pp_makeTime,
+		pp_spendAmount,
+		pp_regDate,
+		pp_deliveryDate)
+		VALUES
+		(#{pp_id},
+		#{pr_id},
+		#{pp_materialRequiredProcessStage},
+		#{pp_makeTime},
+		#{pp_spendAmount},
+		#{pp_regDate},
+		#{pp_deliveryDate});
+	</insert>
+
+	<!-- 조달 계획 전체 조회 -->
+	<select id="pp_selectAll"
+		resultType="kr.co.FiveLastName.domain.ProcurmentPlanDTO"
+		parameterType="int">
+		select * from procurmentPlan
+	</select>
+
+	<!-- 조달 계획 상세 조회 -->
+	<select id="pp_selectOne"
+		resultType="kr.co.FiveLastName.domain.ProcurmentPlanDTO"
+		parameterType="int">
 		select * from product where pp_id = #{pp_id}
 	</select>
-	
+
 	<!-- 조달 계획 수정 -->
-	<update id="ppr_update"
-		parameterType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">
-		UPDATE procurementplan
+	<update id="pp_update"
+		parameterType="kr.co.FiveLastName.domain.ProcurmentPlanDTO">
+		UPDATE procurmentPlan
 		SET
 		ppr_id = #{ppr_id},
-		ppr_dueDate = #{pp_dueDate},
+		ppr_dueDate
+		= #{pp_dueDate},
 		ppr_quantity = #{pp_quantity}
 		WHERE ppr_id = #{pp_id};
 	</update>
 	
+	<!-- product list 불러오기 -->
+	<select id="productModal"
+	resultType="kr.co.FiveLastName.domain.ProductDTO"
+	parameterType="int">
+	select distinct * from product
+	</select>
+
 </mapper>

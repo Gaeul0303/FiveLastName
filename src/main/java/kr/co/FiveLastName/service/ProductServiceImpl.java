@@ -26,7 +26,19 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		dao.register(dto);
 	}
-	
-	
+
+	@Override
+	public ProductDTO productOne(int pr_id) {
+		// TODO Auto-generated method stub
+		return dao.productOne(pr_id);
+	}
+
+	@Override
+	public void modify(ProductDTO dto) {
+		// TODO Auto-generated method stub
+		dao.update(dto);
+	}
+
+
 	
 }

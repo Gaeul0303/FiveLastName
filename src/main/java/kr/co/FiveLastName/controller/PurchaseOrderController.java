@@ -2,7 +2,10 @@ package kr.co.FiveLastName.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,30 +13,71 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-/**
- * Handles requests for the application home page.
- */
+import kr.co.FiveLastName.domain.PrintPODTO;
+import kr.co.FiveLastName.domain.PurchaseOrderDTO;
+import kr.co.FiveLastName.persistence.PurchaseOrderDAO;
+import kr.co.FiveLastName.service.PurchaseOrderService;
+
+
 @Controller
 public class PurchaseOrderController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PurchaseOrderController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "purchaseOrder", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	
+	@Inject
+	PurchaseOrderService service;
+	
+	@RequestMapping(value = "/purchaseOrderList", method = RequestMethod.GET)
+	public ModelAndView poAllSelect() {
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		ModelAndView mav = new ModelAndView();
 		
-		String formattedDate = dateFormat.format(date);
+		List<PrintPODTO> poList = service.poAllSelect();
 		
-		model.addAttribute("serverTime", formattedDate );
+		mav.setViewName("/purchaseOrder/purchaseOrderList");
 		
-		return "purchaseOrder";
+		mav.addObject("poList", poList);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/purchaseOrderSelect", method = RequestMethod.GET)
+	public ModelAndView poSelect(int po_id) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		PrintPODTO po = service.poSelect(po_id);
+		
+		mav.setViewName("/purchaseOrder/purchaseOrderSelect");
+		
+		mav.addObject("po", po);
+		
+		System.out.println(po);
+
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "purchaseOrderPrint", method = RequestMethod.GET)
+	public ModelAndView poPrint(int po_id) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		PrintPODTO po = service.poSelect(po_id);
+		
+		System.out.println("po = " + po);
+		
+		mav.setViewName("/purchaseOrder/purchaseOrder");
+		
+		mav.addObject("po", po);
+		
+		System.out.println(po);
+
+		
+		return mav;
 	}
 	
 }

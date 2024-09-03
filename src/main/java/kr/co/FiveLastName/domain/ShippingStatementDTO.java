@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 
 public class ShippingStatementDTO {
 	
-	int sh_id;
-	int ss_id;
-	Timestamp sh_date;
+	int sh_id;			// 출하명세서 ID(PK)
+	int ss_id;			// 출하현황 ID(FK)
+	Timestamp sh_date;	// 출하명세서 발급날짜
 	
 	public ShippingStatementDTO() {
 		super();

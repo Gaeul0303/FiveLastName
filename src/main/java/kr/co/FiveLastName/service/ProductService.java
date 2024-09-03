@@ -12,4 +12,7 @@ public interface ProductService {
 	
 	List<ProductDTO> list();
 	
+	ProductDTO productOne(int pr_id);
+	
+	void modify(ProductDTO dto);
 }

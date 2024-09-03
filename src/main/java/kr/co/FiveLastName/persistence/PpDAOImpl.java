@@ -1,7 +1,6 @@
 package kr.co.FiveLastName.persistence;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,7 +16,7 @@ public class PpDAOImpl implements PpDAO{
 	@Inject
 	private SqlSession sqlsession;
 	
-	private static final String namespace = "kr.co.FiveLastName.pprMapper";
+	private static final String namespace = "kr.co.FiveLastName.ppMapper";
 	
 	//조달 계획 등록
 	@Override

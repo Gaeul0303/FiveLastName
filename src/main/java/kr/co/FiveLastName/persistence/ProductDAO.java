@@ -14,4 +14,7 @@ public interface ProductDAO {
 	
 	List<ProductDTO> list();
 	
+	ProductDTO productOne(int pr_id);
+	
+	void update(ProductDTO dto);
 }

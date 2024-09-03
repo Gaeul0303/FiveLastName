@@ -6,17 +6,17 @@ public class PurchaseOrderDTO {
 	
 	int po_id;
 	int ppr_id;
-	Timestamp po_modificationDate;
+	Timestamp po_regDate;
 	
 	public PurchaseOrderDTO() {
 		super();
 	}
 
-	public PurchaseOrderDTO(int po_id, int ppr_id, Timestamp po_modificationDate) {
+	public PurchaseOrderDTO(int po_id, int ppr_id, Timestamp po_regDate) {
 		super();
 		this.po_id = po_id;
 		this.ppr_id = ppr_id;
-		this.po_modificationDate = po_modificationDate;
+		this.po_regDate = po_regDate;
 	}
 
 	public int getPo_id() {
@@ -35,18 +35,18 @@ public class PurchaseOrderDTO {
 		this.ppr_id = ppr_id;
 	}
 
-	public Timestamp getPo_modificationDate() {
-		return po_modificationDate;
+	public Timestamp getpo_regDate() {
+		return po_regDate;
 	}
 
-	public void setPo_modificationDate(Timestamp po_modificationDate) {
-		this.po_modificationDate = po_modificationDate;
+	public void setpo_regDate(Timestamp po_regDate) {
+		this.po_regDate = po_regDate;
 	}
 
 	@Override
 	public String toString() {
-		return "PurchaseOrderDTO [po_id=" + po_id + ", ppr_id=" + ppr_id + ", po_modificationDate="
-				+ po_modificationDate + "]";
+		return "PurchaseOrderDTO [po_id=" + po_id + ", ppr_id=" + ppr_id + ", po_regDate="
+				+ po_regDate + "]";
 	}
 	
 }
