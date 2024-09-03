@@ -8,18 +8,25 @@ public class ProcurementPlanRegistrationDTO {
 	int co_id;
 	Timestamp ppr_dueDate;
 	int ppr_quantity;
+	String ppr_status;
 	
 	public ProcurementPlanRegistrationDTO() {
 		super();
 	}
-
-	public ProcurementPlanRegistrationDTO(int ppr_id, int co_id, Timestamp ppr_dueDate, int ppr_quantity) {
+	
+	
+	
+	public ProcurementPlanRegistrationDTO(int ppr_id, int co_id, Timestamp ppr_dueDate, int ppr_quantity,
+			String ppr_status) {
 		super();
 		this.ppr_id = ppr_id;
 		this.co_id = co_id;
 		this.ppr_dueDate = ppr_dueDate;
 		this.ppr_quantity = ppr_quantity;
+		this.ppr_status = ppr_status;
 	}
+
+
 
 	public int getPpr_id() {
 		return ppr_id;
@@ -53,12 +60,22 @@ public class ProcurementPlanRegistrationDTO {
 		this.ppr_quantity = ppr_quantity;
 	}
 
+	public String getPpr_status() {
+		return ppr_status;
+	}
+
+	public void setPpr_status(String ppr_status) {
+		this.ppr_status = ppr_status;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "ProcurementPlanRegistrationDTO [ppr_id=" + ppr_id + ", co_id=" + co_id + ", ppr_dueDate=" + ppr_dueDate
-				+ ", ppr_quantity=" + ppr_quantity + "]";
+				+ ", ppr_quantity=" + ppr_quantity + ", ppr_status=" + ppr_status + "]";
 	}
-	
+
 	
 	
 }

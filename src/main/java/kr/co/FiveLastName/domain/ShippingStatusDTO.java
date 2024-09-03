@@ -9,13 +9,18 @@ public class ShippingStatusDTO {
 	String ss_status;
 	String ss_deliverySchedule;
 	Timestamp ss_shippingDate;
+	String ss_shippingStatus;
+	int pr_id;
+	String pr_name;
+	int pa_id;
+	String pa_name;
 	
 	public ShippingStatusDTO() {
 		super();
 	}
-	
+
 	public ShippingStatusDTO(int ss_id, int po_id, int ss_quantity, String ss_status, String ss_deliverySchedule,
-			Timestamp ss_shippingDate) {
+			Timestamp ss_shippingDate, String ss_shippingStatus, int pr_id, String pr_name, int pa_id, String pa_name) {
 		super();
 		this.ss_id = ss_id;
 		this.po_id = po_id;
@@ -23,6 +28,11 @@ public class ShippingStatusDTO {
 		this.ss_status = ss_status;
 		this.ss_deliverySchedule = ss_deliverySchedule;
 		this.ss_shippingDate = ss_shippingDate;
+		this.ss_shippingStatus = ss_shippingStatus;
+		this.pr_id = pr_id;
+		this.pr_name = pr_name;
+		this.pa_id = pa_id;
+		this.pa_name = pa_name;
 	}
 
 	public int getSs_id() {
@@ -73,12 +83,54 @@ public class ShippingStatusDTO {
 		this.ss_shippingDate = ss_shippingDate;
 	}
 
+	public String getSs_shippingStatus() {
+		return ss_shippingStatus;
+	}
+
+	public void setSs_shippingStatus(String ss_shippingStatus) {
+		this.ss_shippingStatus = ss_shippingStatus;
+	}
+
+	public int getPr_id() {
+		return pr_id;
+	}
+
+	public void setPr_id(int pr_id) {
+		this.pr_id = pr_id;
+	}
+
+	public String getPr_name() {
+		return pr_name;
+	}
+
+	public void setPr_name(String pr_name) {
+		this.pr_name = pr_name;
+	}
+
+	public int getPa_id() {
+		return pa_id;
+	}
+
+	public void setPa_id(int pa_id) {
+		this.pa_id = pa_id;
+	}
+
+	public String getPa_name() {
+		return pa_name;
+	}
+
+	public void setPa_name(String pa_name) {
+		this.pa_name = pa_name;
+	}
+
 	@Override
 	public String toString() {
 		return "ShippingStatusDTO [ss_id=" + ss_id + ", po_id=" + po_id + ", ss_quantity=" + ss_quantity
 				+ ", ss_status=" + ss_status + ", ss_deliverySchedule=" + ss_deliverySchedule + ", ss_shippingDate="
-				+ ss_shippingDate + "]";
+				+ ss_shippingDate + ", ss_shippingStatus=" + ss_shippingStatus + ", pr_id=" + pr_id + ", pr_name="
+				+ pr_name + ", pa_id=" + pa_id + ", pa_name=" + pa_name + "]";
 	}
+
 	
 	
 }

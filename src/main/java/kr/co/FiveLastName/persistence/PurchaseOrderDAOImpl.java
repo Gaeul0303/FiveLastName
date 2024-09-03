@@ -15,7 +15,7 @@ public class PurchaseOrderDAOImpl implements PurchaseOrderDAO{
 	
 	@Inject
 	SqlSession SqlSession;
-	private static String namespace = "kr.co.FiveLastName.mapper";
+	private static String namespace = "kr.co.FiveLastName.purchaseOrderMapper";
 	
 
 	@Override
