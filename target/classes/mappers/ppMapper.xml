@@ -8,16 +8,14 @@
 	<insert id="pp_insert"
 		parameterType="kr.co.FiveLastName.domain.ProcurmentPlanDTO">
 		INSERT INTO procurmentPlan
-		(pp_id,
-		pr_id,
+		(pr_id,
 		pp_materialRequiredProcessStage,
 		pp_makeTime,
 		pp_spendAmount,
 		pp_regDate,
 		pp_deliveryDate)
 		VALUES
-		(#{pp_id},
-		#{pr_id},
+		(#{pr_id},
 		#{pp_materialRequiredProcessStage},
 		#{pp_makeTime},
 		#{pp_spendAmount},
