@@ -1,12 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <div style="width: 810px; margin: 0 auto; padding: 23px 0;">
+	
 	<div
 		style="display: table; table-layout: fixed; width: 100%; margin-bottom: 15px;">
 		<div
-			style="display: table-cell; vertical-align: middle; text-align: center; width: 350px; font-size: 24px; color: #343434;">견적서</div>
-		<span
-			style="display: table-cell; vertical-align: middle; text-align: right;"><img
+			style="width:90%;display: table-cell; vertical-align: middle; text-align: left; font-size: 24px; color: #343434;">견적서</div>
+		<div
+			style="width:10%;display: table-cell; vertical-align: middle; text-align: center; font-size: 24px; color: #343434;"><span style="vertical-align: middle; text-align: right;"><img
 			src="/resources/assets/img/kaiadmin/logo.png"
-			style="vertical-align: middle; max-height: 50px;" /></span>
+			style="vertical-align: middle; max-height: 50px;" /></div>
+
 	</div>
 	<div>
 		<div style="margin-bottom: 18px;">
@@ -19,8 +23,7 @@
 					</colgroup>
 					<tr>
 						<th colspan="2"
-							style="padding: 8px 5px; font-size: 15px; font-weight: 500; color: #000; border-bottom: 1px solid #edeeef; text-align: left;">공급
-							받으시는 분</th>
+							style="padding: 8px 5px; font-size: 15px; font-weight: 500; color: #000; border-bottom: 1px solid #edeeef; text-align: left;">TO</th>
 					</tr>
 					<tr>
 						<td class="dt"
@@ -57,74 +60,66 @@
 						<col width="50px" />
 						<col width="140px" />
 					</colgroup>
+					<c:forEach items="${pa }" var="partner" varStatus="status">
+						<c:if test="${estimateDTO.pa_id == partner.pa_id }">
+							<tr>
+								<th colspan='4'
+									style="padding: 8px 5px; font-size: 15px; font-weight: 500; color: #000; border-bottom: 1px solid #edeeef; text-align: left;">공급자</th>
+							</tr>
+							<tr>
+								<td class='dt'
+									style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">공급사이름</td>
+								<td colspan='3' class='company'
+									style="position: relative; padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">${partner.pa_name }</td>
+							</tr>
+							<tr>
+								<td class='dt'
+									style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">담당자</td>
 
-					<tr>
-						<th colspan='4'
-							style="padding: 8px 5px; font-size: 15px; font-weight: 500; color: #000; border-bottom: 1px solid #edeeef; text-align: left;">공급자</th>
-					</tr>
-					<tr>
-						<td class='dt'
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">사업자번호</td>
-						<td colspan='3' class='company'
-							style="position: relative; padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">106-81-91069</td>
-					</tr>
-					<tr>
-						<td class='dt'
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">상호</td>
-						<td
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">(주)모다넷</td>
-						<td class='dt'
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">대표</td>
-						<td
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">모기순,김기정<span
-							class='sign'><img
-								src='http://bb2b.co.kr/data/sign_106-81-91069.jpg'
-								onError='this.style.display="none"'
-								style="width: 50px; vertical-align: middle;" /></span></td>
-					</tr>
-					<tr>
-						<td class='dt'
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">주소</td>
-						<td colspan='3'
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">서울특별시
-							용산구 새창로 45길 6-4 (신계동, 다안빌딩4층)</td>
-					</tr>
-					<tr>
-						<td class='dt'
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">업태</td>
-						<td
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">도,소매</td>
-						<td class='dt'
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">종목</td>
-						<td
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">컴퓨터
-							및 주변기기</td>
-					</tr>
-					<tr>
-						<td class='dt'
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">대표전화</td>
-						<td
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">070-7458-3300</td>
-						<td class='dt'
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">FAX</td>
-						<td
-							style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">02-719-3680</td>
-					</tr>
+
+
+								<td colspan='3'
+									style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">${partner.pa_manager }</td>
+
+							</tr>
+							<tr>
+								<td class='dt'
+									style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">주소</td>
+								<td colspan='3'
+									style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">${partner.pa_address }</td>
+							</tr>
+
+							<tr>
+								<td class='dt'
+									style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">대표전화</td>
+								<td colspan='3'
+									style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">${partner.pa_tel }</td>
+
+							</tr>
+							<tr>
+								<td class='dt'
+									style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef; background: url('http://bb2b.co.kr/skin/shop/basic/images/icon/bar.png') no-repeat center right;">이메일</td>
+								<td colspan='3'
+									style="padding: 5px 10px; color: #737373; font-size: 13px; text-align: left; border-bottom: 1px solid #edeeef;">${partner.pa_email }</td>
+							</tr>
+
+						</c:if>
+					</c:forEach>
 				</table>
 			</div>
 			<div style="clear: both;"></div>
 		</div>
 		<div style="clear: both;">
-			<div>
+			<div style="width: 100%">
 				<table
-					style="border-collapse: collapse; border-spacing: 0; text-align: left; border-top: 2px solid #474747;">
+					style="width: 100%; border-collapse: collapse; border-spacing: 0; text-align: left; border-top: 2px solid #474747;">
 					<colgroup>
-						<col width="50px" />
-						<col width="100px" />
-						<col width="" />
-						<col width="130px" />
-						<col width="50px" />
-						<col width="130px" />
+						<col width="5%" />
+						<col width="20%" />
+						<col width="55%" />
+						<col width="10%" />
+						<col width="5%" />
+						<col width="5%" />
 					</colgroup>
 					<tr>
 						<th
@@ -141,6 +136,23 @@
 						<th
 							style="color: #6b6b6b; text-align: center; font-size: 14px; font-weight: 500; padding: 15px 0; border-bottom: 1px solid #bebebe;">합계</th>
 					</tr>
+					<tr>
+						<td
+							style="color: #6b6b6b; text-align: center; font-size: 14px; font-weight: 500; padding: 15px 0; border-bottom: 1px solid #bebebe;">번호</td>
+						<td
+							style="color: #6b6b6b; text-align: center; font-size: 14px; font-weight: 500; padding: 15px 0; border-bottom: 1px solid #bebebe;">분류</td>
+						<td
+							style="color: #6b6b6b; text-align: center; font-size: 14px; font-weight: 500; padding: 15px 0; border-bottom: 1px solid #bebebe;">제품명</td>
+						<td
+							style="color: #6b6b6b; text-align: center; font-size: 14px; font-weight: 500; padding: 15px 0; border-bottom: 1px solid #bebebe;"
+							id="priceType">판매가</td>
+						<td
+							style="color: #6b6b6b; text-align: center; font-size: 14px; font-weight: 500; padding: 15px 0; border-bottom: 1px solid #bebebe;">수량</td>
+						<td
+							style="color: #6b6b6b; text-align: center; font-size: 14px; font-weight: 500; padding: 15px 0; border-bottom: 1px solid #bebebe;">합계</td>
+					</tr>
+
+
 					<tr id="settingRow" style="display: none;">
 						<td class='center'
 							style="padding: 12px 10px; font-size: 13px; border-bottom: 1px solid #edeeef; text-align: center;">1</td>
@@ -151,7 +163,7 @@
 							0원</td>
 					</tr>
 				</table>
-				<div style="text-align: right; margin: 18px 0; color: #222;">
+				<div style="text-align: left; margin: 18px 0; color: #222;">
 					<span class="basic_price"> <span class="txt"
 						style="margin-right: 34px; font-size: 14px; font-weight: 500;">총
 							주문 금액</span> <span
@@ -160,12 +172,7 @@
 					</span>
 
 				</div>
-				<div style="text-align: center; margin: 20px 0;">
-					<a
-						href="http://bb2b.co.kr/shop/estimate_copy.php?eid=6179123146-2013773445"
-						style="text-decoration: none; display: inline-block; padding: 5px 25px; text-align: center; border-radius: 4px; font-size: 14px; border: 1px solid #3B7AD5; background: #598FDB; color: #fff;"
-						target="_blank">구매하기</a>
-				</div>
+
 				<ul style="padding: 0; margin: 0; list-style: none;">
 					<li>* 상기 견적서는 부가가치세 포함이며, 운송료 <span id="delivery_msg">별도</span>입니다.
 					</li>
