@@ -31,7 +31,7 @@ public class ShippingStatementDAOImpl implements ShippingStatementDAO{
 	@Override
 	public ShippingStatementDTO sh_selectOne(int sh_id) {
 		// 출하명세서 상세 조회
-		return sqlSession.selectOne(nameSpace+".sh_selectotn");
+		return sqlSession.selectOne(nameSpace+".sh_selectotn", sh_id);
 	}
 
 	@Override
