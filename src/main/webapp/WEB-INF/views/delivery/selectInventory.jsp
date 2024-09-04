@@ -41,27 +41,23 @@ prefix="c" %> <%@ page session="true" %>
                       <h4 class="card-title">재고정보</h4>
                     </div>
                     <div class="card-body">
+                  		<form action="selectInventory" method="post">
+                  			<input type="hidden" name="in_id" value="2" /> <!-- 여기 in_id 값 받아와야 됨 -->
+		    				<input id="idm_quantity" name="idm_quantity" type="number" placeholder="출고 수량을 입력하세요."/>
+		   				    <input type="submit" value="확인">
+				   		</form>
                       <div class="table-responsive">
                         <table
                           id="basic-datatables"
-                          class="display table table-striped table-hover"
-                        >
+                          class="display table table-striped table-hover">
                           <thead>
                             <tr>
-                              <th>품목 코드</th>
+                              <th>품목명</th>
                               <th>안전재고량</th>
                               <th>가용재고량</th>
                               <th>실물재고량</th>
                             </tr>
                           </thead>
-                          <tfoot>
-                            <tr>
-                              <th>품목 코드</th>
-                              <th>안전재고량</th>
-                              <th>가용재고량</th>
-                              <th>실물재고량</th>
-                            </tr>
-                          </tfoot>
                           <tbody>
                             <tr>
                               <td>${inv.pr_name }</td>
@@ -86,52 +82,5 @@ prefix="c" %> <%@ page session="true" %>
 
     <%@include file="../include/script.jsp" %>
 
-    <script>
-        $(document).ready(function () {
-        
-          $("#basic-datatables").DataTable({
-            pageLength: 5,
-            initComplete: function () {
-              this.api()
-                .columns()
-                .every(function () {
-                  var column = this;
-                  var select = $(
-                    '<select class="form-select"><option value=""></option></select>'
-                  )
-                    .appendTo($(column.footer()).empty())
-                    .on("change", function () {
-                      var val = $.fn.dataTable.util.escapeRegex($(this).val());
-  
-                      column
-                        .search(val ? "^" + val + "$" : "", true, false)
-                        .draw();
-                    });
-  
-                  column
-                    .data()
-                    .unique()
-                    .sort()
-                    .each(function (d, j) {
-                      select.append(
-                        '<option value="' + d + '">' + d + "</option>"
-                      );
-                    });
-                });
-            },
-          });
-  
-          
-        });
-        
-        function openPopup(in_id) {
-        	  // 팝업을 띄울 페이지 URL
-        	  var popupURL = "/selectList?in_id="+in_id;
-        	  // 팝업 창의 속성
-        	  var popupProperties = "width=600,height=400,scrollbars=yes";
-        	  // 팝업 열기
-        	  window.open(popupURL, "Popup", popupProperties);
-        	}
-      </script>
   </body>
 </html>

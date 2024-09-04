@@ -67,7 +67,7 @@ JOIN
 	value(#{in_id},#{idm_quantity},now(),"출고완료")	
 </insert>
 
-<update id="inventoryUpdate" parameterType="int">
+<update id="inventoryUpdate" parameterType="kr.co.FiveLastName.domain.DeliveryDTO">
 	update inventory 
 		set in_availableInventory = (in_availableInventory - #{idm_quantity}),
 		    in_physicalInventory = (in_physicalInventory - #{idm_quantity})
