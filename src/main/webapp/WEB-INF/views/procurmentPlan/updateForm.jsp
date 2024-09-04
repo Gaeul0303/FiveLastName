@@ -31,7 +31,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">조달 계획 수립</div>
+									<div class="card-title">조달 계획 수정</div>
 								</div>
 								<div class="card-body">
 									<form id="insertForm" enctype="procurmentPlan/insertForm"

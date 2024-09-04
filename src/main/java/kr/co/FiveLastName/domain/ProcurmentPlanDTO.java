@@ -12,6 +12,20 @@ public class ProcurmentPlanDTO {
 	String pp_regDate;
 	String pp_deliveryDate;
 	
+	public ProcurmentPlanDTO() {}
+	
+	public ProcurmentPlanDTO(int pr_id, String pp_materialRequiredProcessStage, int pp_makeTime,
+			int pp_spendAmount, String pp_regDate, String pp_deliveryDate) {
+		super();
+		
+		this.pr_id = pr_id;
+		this.pp_materialRequiredProcessStage = pp_materialRequiredProcessStage;
+		this.pp_makeTime = pp_makeTime;
+		this.pp_spendAmount = pp_spendAmount;
+		this.pp_regDate = pp_regDate;
+		this.pp_deliveryDate = pp_deliveryDate;
+	}
+	
 	public ProcurmentPlanDTO(int pp_id, int pr_id, String pp_materialRequiredProcessStage, int pp_makeTime,
 			int pp_spendAmount, String pp_regDate, String pp_deliveryDate) {
 		super();

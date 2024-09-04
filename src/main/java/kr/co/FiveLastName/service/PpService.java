@@ -14,4 +14,10 @@ public interface PpService {
 	
 	//조달 계획 등록
 	public void pp_insert(ProcurmentPlanDTO dto);
+	
+	//조달 상세 조회
+	ProcurmentPlanDTO pp_selectOne(int pp_id);
+	
+	//조달 계획 수정
+	public int pp_update(ProcurmentPlanDTO dto);
 }
