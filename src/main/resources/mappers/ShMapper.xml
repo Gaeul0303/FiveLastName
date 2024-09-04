@@ -12,13 +12,13 @@
 		
 		FROM shippingstatement sh
 		
-		INNER JOIN shippingstatus ss on sh.ss_id = ss.ss_id
-		INNER JOIN purchaseorder po on ss.po_id = po.po_id
-		INNER JOIN procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
-		INNER JOIN contract co on ppr.co_id = co.co_id
-		INNER JOIN estimate es on co.es_id = es.es_id
-		INNER JOIN product pr on es.pr_id = pr.pr_id
-		INNER JOIN partner pa on es.pa_id = pa.pa_id
+		INNER JOIN shippingstatus ss ON sh.ss_id = ss.ss_id
+		INNER JOIN purchaseorder po ON ss.po_id = po.po_id
+		INNER JOIN procurementplanregistration ppr ON po.ppr_id = ppr.ppr_id
+		INNER JOIN contract co ON ppr.co_id = co.co_id
+		INNER JOIN estimate es ON co.es_id = es.es_id
+		INNER JOIN product pr ON es.pr_id = pr.pr_id
+		INNER JOIN partner pa ON es.pa_id = pa.pa_id
 		
 		WHERE ss.ss_status = "제작완료" and ss.ss_deliverySchedule = "일정준수";
 	</select>
@@ -30,13 +30,13 @@
 		
 		FROM shippingstatement sh
 		
-		INNER JOIN shippingstatus ss on sh.ss_id = ss.ss_id
-		INNER JOIN purchaseorder po on ss.po_id = po.po_id
+		INNER JOIN shippingstatus ss ON sh.ss_id = ss.ss_id
+		INNER JOIN purchaseorder po ON ss.po_id = po.po_id
 		INNER JOIN procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
-		INNER JOIN contract co on ppr.co_id = co.co_id
-		INNER JOIN estimate es on co.es_id = es.es_id
-		INNER JOIN product pr on es.pr_id = pr.pr_id
-		INNER JOIN partner pa on es.pa_id = pa.pa_id
+		INNER JOIN contract co ON ppr.co_id = co.co_id
+		INNER JOIN estimate es ON co.es_id = es.es_id
+		INNER JOIN product pr ON es.pr_id = pr.pr_id
+		INNER JOIN partner pa ON es.pa_id = pa.pa_id
 		
 		WHERE sh.sh_id = #{sh.sh_ip};
 	</select>

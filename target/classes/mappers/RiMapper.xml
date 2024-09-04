@@ -8,18 +8,18 @@
 	<!-- 입고일 품목명 수량 공급가액 합계 입고여부 -->
 	<select id="ri_list" resultType="kr.co.FiveLastName.domain.ReceivingInspectionDTO">
 		SELECT
-		ri.ri_date, pr.pr_name, pi.pi_inspectedQuantity. co.co_supplyPrice, ri.ri_totalPrice, ri.ri_availability
+		ri.ri_date, pr.pr_name, pi.pi_inspectedQuantity, co.co_supplyPrice, ri.ri_totalPrice, ri.ri_availability
 		
 		FROM receivingInspection ri
 		
-		INNER JOIN progressInspection pi on ri.pi_id = pi.pi_id
-		INNER JOIN staff st on pi.st_id = st.st_id
-		INNER JOIN shippingStatus ss on pi.ss_id = ss.ss_id
-		INNER JOIN purchaseOrder po on ss.po_id = po.po_id
-		INNER JOIN procurementPlanRegistration ppr on po.ppr_id = ppr.ppr_id
-		INNER JOIN contract co on ppr.co_id = co.co_id
-		INNER JOIN estimate es on co.es_id = es.es_id
-		INNER JOIN product pr on es.pr_id = pr.pr_id
+		INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id
+		INNER JOIN staff st ON pi.st_id = st.st_id
+		INNER JOIN shippingStatus ss ON pi.ss_id = ss.ss_id
+		INNER JOIN purchaseOrder po ON ss.po_id = po.po_id
+		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
+		INNER JOIN contract co ON ppr.co_id = co.co_id
+		INNER JOIN estimate es ON co.es_id = es.es_id
+		INNER JOIN product pr ON es.pr_id = pr.pr_id
 		
 		WHERE pi.pi_status = "검수완료";
 	</select>
@@ -33,30 +33,33 @@
 		
 		FROM receivingInspection ri
 		
-		INNER JOIN progressInspection pi on ri.pi_id = pi.pi_id
-		INNER JOIN staff st on pi.st_id = st.st_id
-		INNER JOIN shippingStatus ss on pi.ss_id = ss.ss_id
-		INNER JOIN purchaseOrder po on ss.po_id = po.po_id
-		INNER JOIN procurementPlanRegistration ppr on po.ppr_id = ppr.ppr_id
-		INNER JOIN contract co on ppr.co_id = co.co_id
-		INNER JOIN estimate es on co.es_id = es.es_id
-		INNER JOIN product pr on es.pr_id = pr.pr_id
+		INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id
+		INNER JOIN staff st ON pi.st_id = st.st_id
+		INNER JOIN shippingStatus ss ON pi.ss_id = ss.ss_id
+		INNER JOIN purchaseOrder po ON ss.po_id = po.po_id
+		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
+		INNER JOIN contract co ON ppr.co_id = co.co_id
+		INNER JOIN estimate es ON co.es_id = es.es_id
+		INNER JOIN product pr ON es.pr_id = pr.pr_id
 		
 		WHERE ri_id = #{ri_id}
 	</select>
 
 	<!-- 입고 등록 -->
-	<insert id="ri_insert">
+	<insert id="ri_insert" parameterType="kr.co.FiveLastName.domain.ReceivingInspectionDTO">
 		INSERT INTO receivingInspection(ri_id, ri_pi, ri_date, ri_availability, ri_totalPrice)
 		VALUES
 		(#{ri_id}, #{ri_pi}, #{ri_date}, #{ri_availability}, #{ri_totalPrice})
 	</insert>
 	
 	<!-- 입고 수정 -->
-	<update id="ri_update">
+	<update id="ri_update" parameterType="kr.co.FiveLastName.domain.ReceivingInspectionDTO">
 		UPDATE receivingInspection
-		SET ri_date = #{ri_date}
-		WHERE ri_id = #{ri_id}
+		SET
+		ri_date = #{ri_date},
+		ri_availability = #{ri_availability},
+		ri_totalPrice =#{ri_totalPrice}
+		WHERE ri_id = #{ri_id};
 	</update>
 	
 	

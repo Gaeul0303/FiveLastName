@@ -2,7 +2,7 @@ package kr.co.FiveLastName.domain;
 
 import java.sql.Timestamp;
 
-public class ReturnDTO {
+public class TakeBackDTO {
 	
 	String re_code; 
 	int ri_id;
@@ -12,11 +12,11 @@ public class ReturnDTO {
 	int re_errorNum; 
 	String re_notes;
 	
-	public ReturnDTO() {
+	public TakeBackDTO() {
 		super();
 	}
 
-	public ReturnDTO(String re_code, int ri_id, Timestamp re_returnApplicationDate, String re_status,
+	public TakeBackDTO(String re_code, int ri_id, Timestamp re_returnApplicationDate, String re_status,
 			Timestamp re_returnCompletionDate, int re_errorNum, String re_notes) {
 		super();
 		this.re_code = re_code;
