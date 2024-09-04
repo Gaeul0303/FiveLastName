@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+ @page { size: A4 landscape; margin:0; }
+@media print {
+	
+	.wrapper{
+		display:none !important;
+	}
+	.modal{ 
+		page-break-after: always;
+	}
+	.modal *{
+	 	-webkit-print-color-adjust: exact !important;   /* Chrome, Safari 6 – 15.3, Edge */
+			color-adjust: exact !important;                 /* Firefox 48 – 96 */
+			print-color-adjust: exact !important;           /* Firefox 97+, Safari 15.4+ */
+	}
+	.modal-footer{
+		display:none !important;
+	}
+	img{
+		display:block !important;
+	}
+}

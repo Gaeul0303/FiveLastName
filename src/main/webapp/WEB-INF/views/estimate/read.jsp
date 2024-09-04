@@ -10,6 +10,19 @@
 <head>
 
 <%@include file="/WEB-INF/views/include/head.jsp"%>
+
+<style type="text/css">
+	.modal{
+		--bs-modal-width:100%;
+		width: 100%;
+		max-width: 900px;
+		left:50%;
+		transform: translateX(-50%);
+	}
+	.modal-dialog{
+		width:100%
+	}
+</style>
 </head>
 <body>
 	<div class="wrapper">
@@ -86,9 +99,12 @@
 												</tbody>
 											</table>
 											<div class="card-action">
-												<button class="btn btn-success" id="modifyBtn">인쇄하기</button>
+											
+												
+												<button class="btn btn-success" id="printBtn"
+													data-bs-toggle="modal" data-bs-target="#exampleModal">인쇄하기</button>
 												<button type="submit" class="btn btn-success" id="modifyBtn">수정하기</button>
-												<a href="/estimates/list" class="btn btn-danger">목록으로</a>
+												<a href="/estimate/list" class="btn btn-danger">목록으로</a>
 											</div>
 										</form>
 									</div>
@@ -105,8 +121,33 @@
 
 
 		<%@include file="/WEB-INF/views/include/footer.jsp"%>
-	</div>
 
+
+
+		
+
+	</div>
+<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">견적서 인쇄</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="printForm">
+						<%@include file="/WEB-INF/views/estimate/print.jsp"%>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="print">인쇄하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	<%@include file="/WEB-INF/views/include/script.jsp"%>
 	<script type="text/javascript" src="/resources/assets/js/upload.js"></script>
 	<script type="text/javascript">
@@ -118,6 +159,15 @@
 				formObj.attr("action", "/product/modify");
 				formObj.attr("method", "get");
 				formObj.submit();
+			})
+			
+			
+			$("#printBtn").on("click",function(e){
+				e.preventDefault();
+				
+			})
+			$("#print").on("click",function(e){
+				window.print();
 			})
 
 		})
