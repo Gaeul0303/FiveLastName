@@ -97,15 +97,15 @@
 										<tr>
 											<td width="162" height="25" align="center"
 												style="font-weight: bold">공급업체명</td>
-											<td width="162" align="center" style="font-weight: bold">담당자</td>
+											<td width="162" align="center" style="font-weight: bold">업체 대표명</td>
 											<td width="163" align="center" style="font-weight: bold">Phone</td>
 											<td width="163" align="center" style="font-weight: bold">E-mail</td>
 										</tr>
 										<tr>
 											<td height="25" align="center"><div tms_edit id="cn1">${po.pa_name}</div></td>
-											<td align="center"><div tms_edit id="cn2">세션.name</div></td>
-											<td align="center"><div tms_edit id="cn3">세션.phone</div></td>
-											<td align="center"><div tms_edit id="cn4">세션.E-mail</div></td>
+											<td align="center"><div tms_edit id="cn2">${po.pa_manager}</div></td>
+											<td align="center"><div tms_edit id="cn3">${po.pa_tel}</div></td>
+											<td align="center"><div tms_edit id="cn4">${po.pa_email}</div></td>
 										</tr>
 									</table>
 									<table width="650" border="0" cellspacing="0" cellpadding="0" bordercolor="#ffffff"
@@ -353,7 +353,7 @@
 			
 			console.log("po_id = " + po_id);
 			
-			  var popupURL = "purchaseOrderPrint?po_id="+po_id;
+			  var popupURL = "/purchaseOrder/print?po_id="+po_id;
 			  // 팝업 창 매핑.
 			  var popupProperties = "width=800,height=1200,popup=yes,scrollbars=yes";
 			  // 팝업 열때 속성.

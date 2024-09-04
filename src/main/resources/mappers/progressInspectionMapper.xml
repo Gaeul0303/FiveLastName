@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.FiveLastName.progressInspectionMapper">
+	
+	<select id="piAllSelect" resultType="kr.co.FiveLastName.domain.ProgressInspectionDTO">
+		select pi.*, pr.pr_name, pr.pr_id, pa.pa_id, pa.pa_name, st.st_name, ss.ss_quantity
+        from staff st
+		join progressInspection pi on pi.st_id = st.st_id
+		join shippingStatus ss on pi.ss_id = ss.ss_id
+		join purchaseorder po on po.po_id = ss.po_id
+		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id;
+	</select>
+	
+	<select id="piSelect" resultType="kr.co.FiveLastName.domain.ProgressInspectionDTO">
+		select pi.*, pr.pr_name, pr.pr_id, pa.pa_id, pa.pa_name, st.st_name, ss.ss_quantity
+        from staff st
+		join progressInspection pi on pi.st_id = st.st_id
+		join shippingStatus ss on pi.ss_id = ss.ss_id
+		join purchaseorder po on po.po_id = ss.po_id
+		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id
+		where pi.pi_id = #{pi_id}
+	</select>
+	
+	<select id="piSearch" resultType="kr.co.FiveLastName.domain.ProgressInspectionDTO">
+		select pi.*, pr.pr_name, pr.pr_id, pa.pa_id, pa.pa_name, st.st_name, ss.ss_quantity
+        from staff st
+		join progressInspection pi on pi.st_id = st.st_id
+		join shippingStatus ss on pi.ss_id = ss.ss_id
+		join purchaseorder po on po.po_id = ss.po_id
+		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id
+		where pi.ss_id = #{ss_id}
+	</select>
+	
+	<update id="piComplete">
+		update progressInspection 
+		set
+		pi_order = #{pi_order}+1,
+		pi_inspectedDate = now(), 
+		pi_content = #{pi_content},
+		pi_uninspectedQuantity = #{ss_quantity} - #{pi_inspectedQuantity},
+		pi_inspectedQuantity = #{pi_inspectedQuantity}
+		where pi_id = #{pi_id}
+	</update>
+
+</mapper>
