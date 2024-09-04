@@ -31,15 +31,15 @@ public class DeliveryDAOImpl implements DeliveryDAO{
 	}
 
 	@Override
-	public int inventoryUpdate(DeliveryDTO inven) {
+	public int inventoryUpdate(DeliveryDTO dto) {
 		// TODO Auto-generated method stub
-		return sqlSession.update(nameSpace+".inventoryUpdate", inven);
+		return sqlSession.update(nameSpace+".inventoryUpdate", dto);
 	}
 
 	@Override
-	public int idmInsert(DeliveryDTO idm) {
+	public int idmInsert(DeliveryDTO dto) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(nameSpace+".idmInsert", idm);
+		return sqlSession.insert(nameSpace+".idmInsert", dto);
 	}
 
 	@Override

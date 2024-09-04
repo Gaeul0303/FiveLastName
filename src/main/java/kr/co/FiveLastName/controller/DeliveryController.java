@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.FiveLastName.domain.DeliveryDTO;
@@ -33,7 +36,7 @@ public class DeliveryController {
 	}
 	
 	@GetMapping(value = "/selectInventory")
-	public ModelAndView inventorySelectList(int in_id) {
+	public ModelAndView inventorySelectList(@RequestParam("in_id") int in_id) {
 		      ModelAndView mav = new ModelAndView();
 		      
 		      DeliveryDTO inventorySelectList = service.inventorySelectList(in_id);
@@ -44,6 +47,25 @@ public class DeliveryController {
 		      return mav;
 		      
 		   }
+	
+	@PostMapping(value = "/selectInventory")
+	public ModelAndView idmInsert(@ModelAttribute("dto") DeliveryDTO dto) {
+	    ModelAndView mav = new ModelAndView();
+	    
+	    System.out.println("in_id: " + dto.getIn_id()); // 디버깅
+	    System.out.println("idm_quantity: " + dto.getIdm_quantity());
+	    
+	    service.idmInsert(dto);
+	    service.inventoryUpdate(dto);
+	    
+	    		// in_id 이용해서 delivery DTO 객체찾기.
+	    		// select * from inventory where in_id = #{in_id}
+	    		// idm_quantity 값을 이용해서 출고수량 계산하기 update이용해서 inv에 있는 재고수량 변경.
+	    		// idm 생성하기.
+	    		
+	    mav.setViewName("redirect:/inventoryList"); 
+	    return mav;
+	}
 		   
     @GetMapping(value = "/idmReportList")
     public ModelAndView   idmReportList() {

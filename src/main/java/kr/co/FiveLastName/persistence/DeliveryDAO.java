@@ -10,9 +10,9 @@ public interface DeliveryDAO {
 	
 	DeliveryDTO inventorySelectList(int in_id);
 	
-	int inventoryUpdate(DeliveryDTO inven);
+	int inventoryUpdate(DeliveryDTO dto);
 	
-	int idmInsert(DeliveryDTO idm);
+	int idmInsert(DeliveryDTO dto);
 	
 	List<DeliveryDTO> idmReportList();
 }

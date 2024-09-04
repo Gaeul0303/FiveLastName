@@ -30,15 +30,15 @@ public class DeliveryServiceImpl implements DeliveryService{
 	}
 
 	@Override
-	public int inventoryUpdate(DeliveryDTO inven) {
+	public int inventoryUpdate(DeliveryDTO dto) {
 		// TODO Auto-generated method stub
-		return dao.inventoryUpdate(inven);
+		return dao.inventoryUpdate(dto);
 	}
 
 	@Override
-	public int idmInsert(DeliveryDTO idm) {
+	public int idmInsert(DeliveryDTO dto) {
 		// TODO Auto-generated method stub
-		return dao.idmInsert(idm);
+		return dao.idmInsert(dto);
 	}
 
 	@Override
