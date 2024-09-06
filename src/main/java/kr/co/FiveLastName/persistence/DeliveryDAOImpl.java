@@ -25,9 +25,9 @@ public class DeliveryDAOImpl implements DeliveryDAO{
 	}
 
 	@Override
-	public DeliveryDTO inventorySelectList(int in_id) {
+	public DeliveryDTO inventorySelect(int in_id) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(nameSpace+".inventorySelectList", in_id);
+		return sqlSession.selectOne(nameSpace+".inventorySelect", in_id);
 	}
 
 	@Override

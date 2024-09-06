@@ -56,6 +56,7 @@ prefix="c" %> <%@ page session="true" %>
                               <th>실물재고량</th>
                               <th>이미지</th>
                               <th>입고일</th>
+                              <th>총 금액</th>
                             </tr>
                           </thead>
                           <tfoot>
@@ -66,6 +67,7 @@ prefix="c" %> <%@ page session="true" %>
                               <th>실물재고량</th>
                               <th>이미지</th>
                               <th>입고일</th>
+                              <th>총 금액</th>
                             </tr>
                           </tfoot>
                           <tbody>
@@ -77,6 +79,7 @@ prefix="c" %> <%@ page session="true" %>
                               <td>${inv.in_physicalInventory}</td>
                               <td>${inv.pr_image }</td>
                               <td>${inv.ri_date }</td>
+                              <td>${inv.co_supplyPrice*inv.in_physicalInventory}</td>
                             </tr>
                            </c:forEach>
                             
@@ -140,10 +143,10 @@ prefix="c" %> <%@ page session="true" %>
         	  // 팝업을 띄울 페이지 URL
         	  var popupURL = "/selectInventory?in_id="+in_id;
         	  // 팝업 창의 속성
-        	  var popupProperties = "width=600,height=400,scrollbars=yes";
+        	  var popupProperties = "width=850,height=530,scrollbars=yes";
         	  // 팝업 열기
         	  window.open(popupURL, "Popup", popupProperties);
-        	}
+        }
       </script>
   </body>
 </html>

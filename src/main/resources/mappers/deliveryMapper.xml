@@ -7,7 +7,7 @@
 
 <select id="inventoryList" resultType="kr.co.FiveLastName.domain.DeliveryDTO">
 	SELECT 
-    inv.in_id, pr.pr_name , pr.pr_size , pr.pr_quality , pr.pr_image , pr.pr_category , inv.in_physicalInventory , ri.ri_date
+    inv.in_id, pr.pr_name , pr.pr_size , pr.pr_quality , pr.pr_image , pr.pr_category , inv.in_physicalInventory , ri.ri_date , co.co_supplyPrice
     from erp.inventory inv
 JOIN
     erp.incomingDeadline id ON inv.id_code = id.id_code
@@ -32,12 +32,13 @@ where
     
 </select>
 
-<select id="inventorySelectList" parameterType="int" resultType="kr.co.FiveLastName.domain.DeliveryDTO">
+<select id="inventorySelect" parameterType="int" resultType="kr.co.FiveLastName.domain.DeliveryDTO">
 	SELECT DISTINCT
 	pr.pr_name,
     inv.in_safetyStock,
     inv.in_availableInventory,
-    inv.in_physicalInventory
+    inv.in_physicalInventory,
+    co.co_supplyPrice
 FROM
 	erp.inventory inv 
 JOIN
@@ -104,7 +105,8 @@ JOIN
 JOIN
     erp.estimate es ON co.es_id = es.es_id
 JOIN
-    erp.product pr ON pr.pr_id = es.pr_id;
+    erp.product pr ON pr.pr_id = es.pr_id
+    order by idm.idm_date desc;
 </select>
 
 </mapper>

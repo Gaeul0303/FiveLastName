@@ -36,12 +36,14 @@ public class DeliveryController {
 	}
 	
 	@GetMapping(value = "/selectInventory")
-	public ModelAndView inventorySelectList(@RequestParam("in_id") int in_id) {
+	public ModelAndView inventorySelect(@RequestParam("in_id") int in_id) {
+		
 		      ModelAndView mav = new ModelAndView();
 		      
-		      DeliveryDTO inventorySelectList = service.inventorySelectList(in_id);
+		      DeliveryDTO inventorySelect = service.inventorySelect(in_id);
 		      
-		      mav.addObject("inv", inventorySelectList);
+		      mav.addObject("inv", inventorySelect);
+		      mav.addObject("in_id", in_id);
 		      mav.setViewName("/delivery/selectInventory");
 		      
 		      return mav;
@@ -49,21 +51,13 @@ public class DeliveryController {
 		   }
 	
 	@PostMapping(value = "/selectInventory")
-	public ModelAndView idmInsert(@ModelAttribute("dto") DeliveryDTO dto) {
+	public ModelAndView idmInsert(@ModelAttribute("dto") DeliveryDTO dto ) {
 	    ModelAndView mav = new ModelAndView();
-	    
-	    System.out.println("in_id: " + dto.getIn_id()); // 디버깅
-	    System.out.println("idm_quantity: " + dto.getIdm_quantity());
 	    
 	    service.idmInsert(dto);
 	    service.inventoryUpdate(dto);
-	    
-	    		// in_id 이용해서 delivery DTO 객체찾기.
-	    		// select * from inventory where in_id = #{in_id}
-	    		// idm_quantity 값을 이용해서 출고수량 계산하기 update이용해서 inv에 있는 재고수량 변경.
-	    		// idm 생성하기.
 	    		
-	    mav.setViewName("redirect:/inventoryList"); 
+	    mav.setViewName("redirect:/selectInventory?in_id=" + dto.getIn_id()); 
 	    return mav;
 	}
 		   
@@ -77,6 +71,20 @@ public class DeliveryController {
 		      
 		      mav.setViewName("/delivery/idmReportList");
 		      return mav;
+		   }
+    
+    @GetMapping(value = "/selectIdm")
+	public ModelAndView selectIdm(@RequestParam("in_id") int in_id) {
+		
+		      ModelAndView mav = new ModelAndView();
+		      
+		      DeliveryDTO inventorySelect = service.inventorySelect(in_id);
+		      
+		      mav.addObject("inv", inventorySelect);
+		      mav.setViewName("/delivery/selectIdm");
+		      
+		      return mav;
+		      
 		   }
 	
 }
