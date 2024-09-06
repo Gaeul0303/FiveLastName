@@ -22,7 +22,12 @@ public class PartnerDAOImpl implements PartnerDAO{
 		// TODO Auto-generated method stub
 		return sqlsession.selectList(namespace+".pa_selectAll");
 	}
-
+	@Override
+	public PartnerDTO paOne(int pr_id) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(namespace+".pa_selectone",pr_id);
+	}
+	
 	
 	
 

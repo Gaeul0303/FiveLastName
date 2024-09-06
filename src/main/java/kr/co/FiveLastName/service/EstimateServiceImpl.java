@@ -27,7 +27,8 @@ public class EstimateServiceImpl implements EsimateService{
 	@Override
 	public void register(EstimateDTO dto) {
 		// TODO Auto-generated method stub
-		
+		dao.register(dto);
+			
 	}
 
 

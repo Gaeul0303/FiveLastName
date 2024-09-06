@@ -10,4 +10,7 @@ import kr.co.FiveLastName.domain.PartnerDTO;
 @Service
 public interface PartnerService {
 	List<PartnerDTO> list();
+	
+	PartnerDTO paOne(int pr_id);
+	
 }

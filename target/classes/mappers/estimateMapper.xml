@@ -2,48 +2,56 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="kr.co.FiveLastName.estimateMapper">
 
 	<!-- 견적서 등록 -->
 	<insert id="es_insert"
 		parameterType="kr.co.FiveLastName.domain.EstimateDTO">
+
 		INSERT INTO estimate
-		(es_id,
+		(
+		pa_id,
+		pp_id,
 		es_publicationDate,
 		es_supplyPrice,
 		es_requireDays)
 		VALUES
-		(#{es_id},
-		#{es_publicationDate},
+		(
+		#{pa_id},
+		#{pp_id},
+		now(),
 		#{es_supplyPrice},
 		#{es_requireDays});
 	</insert>
 
 	<!-- 견적서 전체 조회 -->
 
-	<select id="es_selectAll" resultType="kr.co.FiveLastName.domain.EstimateDTO">
+	<select id="es_selectAll"
+		resultType="kr.co.FiveLastName.domain.EstimateDTO">
 		select * from estimate order by es_id desc;
 	</select>
 
 	<!-- 견적서 상세 조회 -->
 
 
-	<select id="es_selectOne" resultType="kr.co.FiveLastName.domain.EstimateDTO"
-		parameterType="int">
+	<select id="es_selectOne"
+		resultType="kr.co.FiveLastName.domain.EstimateDTO" parameterType="int">
 		select * from estimate where es_id = #{es_id}
 	</select>
 
 	<!-- 견적서 수정 -->
 
-	<update id="es_update" parameterType="kr.co.FiveLastName.domain.EstimateDTO">
+	<update id="es_update"
+		parameterType="kr.co.FiveLastName.domain.EstimateDTO">
 		UPDATE estimate
 		SET
 		es_id = #{es_id},
-		es_publicationDate = #{es_publicationDate},
+		es_publicationDate =
+		#{es_publicationDate},
 		es_supplyPrice = #{es_supplyPrice},
 		es_requireDays = #{es_requireDays}
 		WHERE es_id = #{es_id};
 	</update>
-	
+
 </mapper>
