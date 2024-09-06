@@ -1,6 +1,7 @@
 package kr.co.FiveLastName.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.FiveLastName.domain.PrintPODTO;
 import kr.co.FiveLastName.domain.ProgressInspectionDTO;
+import kr.co.FiveLastName.domain.ProgressInspectionRecordDTO;
 import kr.co.FiveLastName.service.ProgressInspectionService;
 import kr.co.FiveLastName.service.PurchaseOrderService;
 import kr.co.FiveLastName.service.ShippingStatusService;
@@ -67,6 +69,38 @@ public class ProgressInspectionController {
 		
 		mav.setViewName("/progressInspection/progressInspectionSelect");
 		mav.addObject("pi", pi);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/record", method = RequestMethod.GET)
+	public ModelAndView piRecord(int ss_id) {
+		
+		System.out.println("controller 입니다.");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		int result = service.pirSearch(ss_id);
+
+		System.out.println("result = " + result);
+		  
+		if(result>1) {
+			List<ProgressInspectionRecordDTO> pir =service.piRecord(ss_id);
+			for(int i = 0; i<pir.size(); i++) {
+			System.out.println("pir = " + pir);
+			}
+			mav.setViewName("/progressInspection/progressInspectionRecord");
+			mav.addObject("pir", pir);
+		}else {
+			System.out.println("pir = " + service.piRecordOne(ss_id));
+			
+			ProgressInspectionRecordDTO pirOne = service.piRecordOne(ss_id);
+			List<ProgressInspectionRecordDTO> pir = new ArrayList<ProgressInspectionRecordDTO>();
+			pir.add(pirOne);
+			System.out.println("pir = " + pir.get(0));
+			mav.setViewName("/progressInspection/progressInspectionRecord");
+			mav.addObject("pir", pir);
+		}
 		
 		return mav;
 	}

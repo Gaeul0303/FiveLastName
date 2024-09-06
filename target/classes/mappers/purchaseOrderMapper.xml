@@ -30,18 +30,42 @@
 		where po.po_id = #{po_id}
 	</select>
 	
-		<insert id="poInsert">
-		insert into purchaseOrder(po_id,ppr_id,po_regDate,po_status)
+	<select id="poPrev" resultType = "kr.co.FiveLastName.domain.PrintPODTO">
+		select ppr.ppr_id, pr.pr_name, co.co_supplyPrice, es.es_requiredDays, co.co_tradeTerms,
+		pa.pa_name, ppr.ppr_dueDate, now() as po_regDate, pa.pa_name, pr.pr_size, co_contractDate,
+		ppr.ppr_quantity, ppr.ppr_status, pa.pa_manager,pa.pa_tel,pa.pa_email
+		from procurementplanregistration ppr 
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id
+		where ppr.ppr_id = #{ppr_id}
+	</select>
+	
+	<insert id="poInsert">
+		insert into purchaseOrder(ppr_id,po_regDate,po_status)
 		values
-		(#{po_id},#{ppr_id},#{po_regDate},"미발행")
+		(#{ppr_id},now(),"미발행")
 	</insert>
 	
 	<update id="poComplete">
-		update purchaseOrder
+		update procurementPlanRegistration
 		set
-		po_regDate = now(),
-		po_status = "발행완료"
-		where po_id = #{po_id}
+		ppr_status = "발행완료"
+		where ppr_id = #{ppr_id}
 	</update>
+	
+	<select id="poSearch" resultType="kr.co.FiveLastName.domain.PrintPODTO">
+		select po.po_id, pr.pr_name, co.co_supplyPrice, es.es_requiredDays, co.co_tradeTerms,
+		pa.pa_name, ppr.ppr_dueDate, po.po_regDate, pa.pa_name, pr.pr_size, co_contractDate,
+		ppr.ppr_quantity, po.po_status,pa.pa_manager,pa.pa_tel,pa.pa_email
+		from purchaseorder po 
+		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id
+		where ppr.ppr_id = ${ppr_id}
+	</select>
 	
 </mapper>

@@ -44,7 +44,7 @@ prefix="c" %> <%@ page session="true" %>
                         >
                           <thead>
                             <tr>
-                              <th>검수현황코드</th>			
+                              <th>검수기록확인</th>			
                               <th>검수계획차수</th>	
                               <th>거래회사이름</th>
                               <th>검수상태</th>
@@ -67,10 +67,10 @@ prefix="c" %> <%@ page session="true" %>
                           <tfoot>
                             <tr>
                               <th></th>
-                              <th>검수계획차수</th>	
-                              <th>거래회사이름</th>	
-                              <th>검수상태</th>
-                              <th>담당자이름</th>
+                              <th></th>	
+                              <th></th>	
+                              <th></th>
+                              <th></th>
                               <th></th>
 							  <th></th>
                               <th></th>		
@@ -81,8 +81,8 @@ prefix="c" %> <%@ page session="true" %>
                           
                           <tbody>
                             		<tr>
-                          			<td><a href="/progressInspection/select?pi_id=${pi.pi_id}">${pi.pi_id}</a></td>
-                          			<td>${pi.pi_order}</td>
+                          			<td><a href="/progressInspection/record?ss_id=${pi.ss_id}">조회하기</a></td>
+                          			<td>${pi.pi_order}차</td>
                           			<td>${pi.pa_name}</td>
                           			<td>${pi.pi_status}</td>
                           			<td>${pi.st_name}</td>
@@ -96,8 +96,8 @@ prefix="c" %> <%@ page session="true" %>
 										</c:otherwise>
 								 	</c:choose>
                           			<td>${pi.pi_content}</td>
-                          			<td>${pi.pi_uninspectedQuantity}</td>
-                          			<td>${pi.pi_inspectedQuantity}</td>
+                          			<td>${pi.pi_uninspectedQuantity}개</td>
+                          			<td>${pi.pi_inspectedQuantity}개</td>
                           		</tr>                      
                           </tbody>
                         </table>
@@ -125,7 +125,7 @@ prefix="c" %> <%@ page session="true" %>
 	        });
 	
 	        // 필터를 적용할 열 인덱스 배열
-	        var categoryColumns = [1,2, 3, 4];
+	        var categoryColumns = [];
 	
 	        // 필터를 적용할 열에 대해서만 처리
 	        categoryColumns.forEach(function (index) {

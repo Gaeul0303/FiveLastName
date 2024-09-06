@@ -18,16 +18,15 @@ public class PrintPODTO {
 	private String pa_manager;
 	private String pa_tel;
 	private String pa_email;
+	private int ppr_id;
 	
 	public PrintPODTO() {
 		super();
 	}
 
-	
-
 	public PrintPODTO(int po_id, String pr_name, int co_supplyPrice, int es_requiredDays, String co_tradeTerms,
 			String pa_name, Timestamp ppr_dueDate, Timestamp po_regDate, String pr_size, Timestamp co_contractDate,
-			int ppr_quantity, String po_status, String pa_manager, String pa_tel, String pa_email) {
+			int ppr_quantity, String po_status, String pa_manager, String pa_tel, String pa_email, int ppr_id) {
 		super();
 		this.po_id = po_id;
 		this.pr_name = pr_name;
@@ -44,9 +43,8 @@ public class PrintPODTO {
 		this.pa_manager = pa_manager;
 		this.pa_tel = pa_tel;
 		this.pa_email = pa_email;
+		this.ppr_id = ppr_id;
 	}
-
-
 
 	public int getPo_id() {
 		return po_id;
@@ -180,7 +178,15 @@ public class PrintPODTO {
 		this.pa_email = pa_email;
 	}
 
+	
 
+	public int getPpr_id() {
+		return ppr_id;
+	}
+
+	public void setPpr_id(int ppr_id) {
+		this.ppr_id = ppr_id;
+	}
 
 	@Override
 	public String toString() {
@@ -188,9 +194,8 @@ public class PrintPODTO {
 				+ ", es_requiredDays=" + es_requiredDays + ", co_tradeTerms=" + co_tradeTerms + ", pa_name=" + pa_name
 				+ ", ppr_dueDate=" + ppr_dueDate + ", po_regDate=" + po_regDate + ", pr_size=" + pr_size
 				+ ", co_contractDate=" + co_contractDate + ", ppr_quantity=" + ppr_quantity + ", po_status=" + po_status
-				+ ", pa_manager=" + pa_manager + ", pa_tel=" + pa_tel + ", pa_email=" + pa_email + "]";
+				+ ", pa_manager=" + pa_manager + ", pa_tel=" + pa_tel + ", pa_email=" + pa_email + ", ppr_id=" + ppr_id
+				+ "]";
 	}
-
-	
 
 }

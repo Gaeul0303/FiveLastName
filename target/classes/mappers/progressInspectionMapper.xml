@@ -45,6 +45,32 @@
 		where pi.ss_id = #{ss_id}
 	</select>
 	
+	<select id="piRecord" resultType="kr.co.FiveLastName.domain.ProgressInspectionRecordDTO">
+		select pir.*, pr.pr_name, pr.pr_id, pa.pa_id, pa.pa_name, st.st_name, ss.ss_quantity
+        from staff st
+		join progressInspection pi on pi.st_id = st.st_id
+        join progressinspectionrecord pir on pi.ss_id = pir.ss_id
+		join shippingStatus ss on pi.ss_id = ss.ss_id
+		join purchaseorder po on po.po_id = ss.po_id
+		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id
+		where pir.ss_id = #{ss_id};
+	</select>
+	
+	<select id="pirSearch" resultType="int">
+		select count(*) from progressInspectionRecord where ss_id = #{ss_id}
+	</select>
+	
+	<insert id="piInsert">
+		insert into progressInspectio` (ss_id, st_id, pi_order, pi_date, pi_inspectedDate, pi_status, pi_content, pi_uninspectedQuantity, pi_inspectedQuantity)
+		VALUES
+		(#{ss_id},#{pi_order})
+	</insert>
+	
+	
 	<update id="piComplete">
 		update progressInspection 
 		set

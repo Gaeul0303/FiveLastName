@@ -15,7 +15,7 @@ prefix="c" %> <%@ page session="true" %>
           <div class="container">
             <div class="page-inner">
               <div class="page-header">
-                <h3 class="fw-bold mb-3">검수계획</h3>
+                <h3 class="fw-bold mb-3">검수기록</h3>
                 <ul class="breadcrumbs mb-3">
                   <li class="nav-home">
                     <a href="#">
@@ -26,7 +26,7 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">검수계획 전체조회</a>
+                    <a href="#">검수기록 조회</a>
                   </li>
                 </ul>
               </div>
@@ -34,7 +34,7 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">검수계획 전체조회</h4>
+                      <h4 class="card-title">검수기록 조회</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
@@ -44,6 +44,7 @@ prefix="c" %> <%@ page session="true" %>
                         >
                           <thead>
                             <tr>
+                              <th>검수계획차수</th>	
                               <th>거래회사이름</th>	
                               <th>검수상태</th>
                               <th>출하수량</th>
@@ -52,20 +53,17 @@ prefix="c" %> <%@ page session="true" %>
                               <th>보완내용</th>
                               <th>미검수수량</th>
                               <th>검수완료수량</th>	
-                              <th>검수계획</th>	
-                              <th>검수하기</th>	
                             </tr>
                           </thead>
                           
                           <tfoot>
                             <tr>
-                              <th>검수계획차수</th>	
-                              <th>거래회사이름</th>	
-                              <th>검수상태</th>	
-                              <th>출하현황</th>	
-                              <th>담당자이름</th>	
+                              <th><th>	
+                              <th></th>	
+                              <th></th>	
+                              <th></th>	
+                              <th></th>	
 							  <th></th>
-                              <th></th>
                               <th></th>
                               <th></th>
                               <th></th>
@@ -73,25 +71,24 @@ prefix="c" %> <%@ page session="true" %>
                           </tfoot>
                           
                           <tbody>
-                          	<c:forEach var = "pi" items="${pi}">
+                          	<c:forEach var = "pir" items="${pir}">
                           		<tr>
-                          			<td>${pi.pa_name}</td>
-                          			<td>${pi.pi_status}</td>
-                          			<td>${pi.ss_quantity}</td>
-                          			<td>${pi.st_name}</td>
+                          			<td>${pir.pir_order}</td>
+                          			<td>${pir.pa_name}</td>
+                          			<td>${pir.pir_status}</td>
+                          			<td>${pir.ss_quantity}</td>
+                          			<td>${pir.st_name}</td>
                           			<c:choose>   
-										<c:when test="${pi.pi_status == '미검수'}">
-											<th>${pi.pi_date}</th>
+										<c:when test="${pir.pir_status == '미검수'}">
+											<th>${pir.pir_date}</th>
 										</c:when>
 										<c:otherwise>
-											<th>${pi.pi_inspectedDate}</th>
+											<th>${pir.pir_inspectedDate}</th>
 										</c:otherwise>
 								 	</c:choose>
-                          			<td>${pi.pi_content}</td>
-                          			<td>${pi.pi_uninspectedQuantity}</td>
-                          			<td>${pi.pi_inspectedQuantity}</td>
-                          			<td><a href="/progressInspection/select?pi_id=${pi.pi_id}">조회하기</a></td>
-                          			<td><a href="/progressInspection/insert?">계획등록</a></td>
+                          			<td>${pir.pir_content}</td>
+                          			<td>${pir.pir_uninspectedQuantity}</td>
+                          			<td>${pir.pir_inspectedQuantity}</td>
                           		</tr>
                           	</c:forEach>
                           
@@ -121,7 +118,7 @@ prefix="c" %> <%@ page session="true" %>
 	        });
 	
 	        // 필터를 적용할 열 인덱스 배열
-	        var categoryColumns = [0,1,2,3,4];
+	        var categoryColumns = [];
 	
 	        // 필터를 적용할 열에 대해서만 처리
 	        categoryColumns.forEach(function (index) {

@@ -44,7 +44,6 @@ prefix="c" %> <%@ page session="true" %>
                         >
                           <thead>
                             <tr>
-                              <th>구매발주서 번호</th>	<!-- po_id -->
                               <th>품목명</th>			<!-- po.ppr_id.co_id.es_id.pr_id.pr_name 발주서의 조달계획등록의 거래계약의 품목의 이름.-->
                               <th>거래회사이름</th>		<!-- po.ppr_id.co_id.es_id.pa_id.pa_name -->
                               <th>공급가</th>			<!-- po.ppr_id.co_id.co_supplyPrice -->
@@ -53,13 +52,13 @@ prefix="c" %> <%@ page session="true" %>
                               <th>계약일</th>			<!-- po.ppr_id.co_id.co_contractDate -->
                               <th>납기예정일</th>		<!-- po.ppr_id.ppr_dueDate -->
                               <th>발행일</th>			<!-- po.po_regDate -->
+                              <th>구매발주서</th>	<!-- po_id -->
                               <th>출하현황</th>			<!-- po.po_regDate -->
                             </tr>
                           </thead>
                           
                           <tfoot>
                             <tr>
-                              <th>상세이동</th>	<!-- po_id -->
                               <th>품목명</th>			<!-- po.ppr_id.co_id.es_id.pr_id.pr_name 발주서의 조달계획등록의 거래계약의 품목의 이름.-->
                               <th>거래회사이름</th>		<!-- po.ppr_id.co_id.es_id.pa_id.pa_name -->
                               <th></th>			<!-- po.ppr_id.co_id.co_supplyPrice -->
@@ -68,6 +67,7 @@ prefix="c" %> <%@ page session="true" %>
                               <th></th>			<!-- po.ppr_id.co_id.co_contractStatus -->
                               <th></th>		<!-- po.ppr_id.ppr_dueDate -->
                               <th></th>			<!-- po.po_regDate -->
+                              <th></th>	<!-- po_id -->
                               <th></th>			<!-- po.po_regDate -->
                             </tr>
                           </tfoot>
@@ -75,7 +75,6 @@ prefix="c" %> <%@ page session="true" %>
                           <tbody>
                           	<c:forEach var = "po" items="${poList}">
                           		<tr>
-                          			<td><a href="/purchaseOrder/select?po_id=${po.po_id}">${po.po_id}</a></td>
                           			<td>${po.pr_name}</td>
                           			<td>${po.pa_name}</td>
                           			<td>${po.co_supplyPrice}</td>
@@ -84,7 +83,15 @@ prefix="c" %> <%@ page session="true" %>
                           			<td>${po.co_contractDate}</td>
                           			<td>${po.ppr_dueDate}</td>
                           			<td>${po.po_regDate}</td>
-                          			<td><a href = "/shippingStatus/search?po_id=${po.po_id}">${po.po_status}</a></td>
+                          			<td><a href="/purchaseOrder/select?po_id=${po.po_id}">조회하기</a></td>
+                          			<c:choose>   
+									   <c:when test="${po.po_status == '발행완료'}">
+									      <td><a href = "/shippingStatus/search?po_id=${po.po_id}">조회하기</a></td>
+									   </c:when>
+									   <c:otherwise>
+									      <td><a href = "/progressInspection/insert">발행하기</a></td>>
+									   </c:otherwise>
+									 </c:choose>
                           		</tr>
                           	</c:forEach>
                           
@@ -114,7 +121,7 @@ prefix="c" %> <%@ page session="true" %>
 	        });
 	
 	        // 필터를 적용할 열 인덱스 배열
-	        var categoryColumns = [1,2];
+	        var categoryColumns = [0, 1];
 	
 	        // 필터를 적용할 열에 대해서만 처리
 	        categoryColumns.forEach(function (index) {

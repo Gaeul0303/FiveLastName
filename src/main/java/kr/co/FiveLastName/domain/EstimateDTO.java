@@ -6,7 +6,7 @@ public class EstimateDTO {
 	
 	private int es_id;
 	private int pa_id; 
-	private int pr_id; 
+	private int pp_id; 
 	private Timestamp es_publicationDate;
 	private int es_supplyPrice; 
 	private int es_requiredDays;
@@ -32,13 +32,13 @@ public class EstimateDTO {
 	}
 
 
-	public int getPr_id() {
-		return pr_id;
+	public int getpp_id() {
+		return pp_id;
 	}
 
 
-	public void setPr_id(int pr_id) {
-		this.pr_id = pr_id;
+	public void setpp_id(int pp_id) {
+		this.pp_id = pp_id;
 	}
 
 
@@ -74,7 +74,7 @@ public class EstimateDTO {
 
 	@Override
 	public String toString() {
-		return "EstimateDTO [es_id=" + es_id + ", pa_id=" + pa_id + ", pr_id=" + pr_id + ", es_publicationDate="
+		return "EstimateDTO [es_id=" + es_id + ", pa_id=" + pa_id + ", pp_id=" + pp_id + ", es_publicationDate="
 				+ es_publicationDate + ", es_supplyPrice=" + es_supplyPrice + ", es_requiredDays=" + es_requiredDays
 				+ "]";
 	}
