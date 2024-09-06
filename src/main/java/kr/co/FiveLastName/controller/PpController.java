@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.RedirectAttributesMethodArgumentResolver;
 
 import kr.co.FiveLastName.domain.ProcurmentPlanDTO;
 import kr.co.FiveLastName.service.PpService;
@@ -43,27 +43,14 @@ public class PpController {
 	//계획 등록
 	@PostMapping(value="procurmentPlan/insertForm")
 	public String insert(ProcurmentPlanDTO dto) {
-		logger.info("insert : " + dto);
+		logger.info("insert : " + dto);	
 		
-		ppService.pp_insert(dto);
+		ppService.pp_selectAll();
 		
 		return "redirect:/procurmentPlan/list";
 		
 	}
 	
-	//계획 등록 모델엔뷰버전
-//	@PostMapping(value="procurmentPlan/insertForm")
-//	public ModelAndView insertForm() {
-//		logger.info("insert : " + insertForm());
-//		ModelAndView mav = new ModelAndView();
-//		
-//		mav.setViewName("procurmentPlan/insertForm");
-//		mav.addObject("insertForm", ppService.pp_insert(null))
-//		
-//		
-//		return "redirect:/procurmentPlan/list";
-//		
-//	}
 	
 	//등록된 계획 목차
 	@RequestMapping(value="procurmentPlan/list")
@@ -75,4 +62,29 @@ public class PpController {
 		return mav;
 	}
 
+	//등록된 계획 상세보기
+	@GetMapping(value="procurmentPlan/information")
+	public ModelAndView pp_detail(Model model,@RequestParam("pp_id") int pp_id) {
+		logger.info("information get");
+		
+		ProcurmentPlanDTO procurmentPlan = ppService.pp_selectOne(pp_id);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		model.addAttribute("procurmentPlan",procurmentPlan);
+		mav.setViewName("procurmentPlan/information");	
+		return mav;			
+	}
+	
+	//등록된 계획 수정하는 페이지
+	@GetMapping(value="procurmentPlan/updateForm")
+	public ModelAndView updateForm(@RequestParam("pp_id") int pp_id, Model Model) {
+		ModelAndView mav = new ModelAndView();
+		
+		Model.addAttribute("emp", ppService.pp_selectOne(pp_id));
+		mav.setViewName("procurmentPlan/updateForm");
+		
+		return mav;
+	}
+	
 }

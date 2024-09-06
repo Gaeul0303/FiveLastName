@@ -51,12 +51,13 @@ prefix="c" %> <%@ page session="true" %>
                           <thead>
                             <tr>
                               <th>조달계획ID</th>
-                              <th>품목ID</th>
-                              <th>소요일정</th>
+                              <th>품목ID</th>                              
+                              <th>자재소요공정</th>
                               <th>소요일</th>
                               <th>소요량</th>
                               <th>등록일</th>
-                              <th>조달납기</th>                             
+                              <th>조달납기</th> 
+                              <th>자세히보기</th>                            
                             </tr>
                           </thead>
                           <tfoot>
@@ -65,19 +66,20 @@ prefix="c" %> <%@ page session="true" %>
                               <th>Position</th>
                               <th>Office</th>
                               <th>Age</th>
-                              <th>Start date</th>                              
+                              <th>Start date</th>       
                             </tr>
                           </tfoot>
                           <tbody>
                           	<c:forEach items="${list}" var="procurmentPlan">                           
                             <tr>
                               <td>${procurmentPlan.pp_id}</td>
-                              <td>${procurmentPlan.pr_id }</td>
+                              <td>${procurmentPlan.pr_id }</td>                              
                               <td>${procurmentPlan.pp_materialRequiredProcessStage }</td>
                               <td>${procurmentPlan.pp_makeTime }</td>
                               <td>${procurmentPlan.pp_spendAmount }</td>
                               <td>${procurmentPlan.pp_regDate}</td>
-                              <td>${procurmentPlan.pp_deliveryDate }                              
+                              <td>${procurmentPlan.pp_deliveryDate }</td>
+                              <td><a href="/procurmentPlan/information?pp_id=${procurmentPlan.pp_id}">자세히보기</a></td>                              
                             </tr>
                          	</c:forEach>
                           </tbody>

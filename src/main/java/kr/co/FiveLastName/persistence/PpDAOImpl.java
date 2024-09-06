@@ -32,5 +32,21 @@ public class PpDAOImpl implements PpDAO{
 		return sqlsession.selectList(namespace + ".pp_selectAll");
 	}
 
+	//조달 상세 조회
+	@Override
+	public ProcurmentPlanDTO pp_selectOne(int pp_id) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(namespace + ".pp_selectOne", pp_id);
+	}
+
+	@Override
+	public int pp_update(ProcurmentPlanDTO dto) {
+		return sqlsession.insert(namespace + ".pp_update", dto);
+	}
+
+	
+
+	
+
 
 }

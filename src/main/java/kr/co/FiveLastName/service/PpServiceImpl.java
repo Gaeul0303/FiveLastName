@@ -27,6 +27,17 @@ public class PpServiceImpl implements PpService{
 		// TODO Auto-generated method stub
 		return dao.pp_selectAll();
 	}
+
+	@Override
+	public ProcurmentPlanDTO pp_selectOne(int pp_id) {
+		// TODO Auto-generated method stub
+		return dao.pp_selectOne(pp_id);
+	}
+
+	@Override
+	public int pp_update(ProcurmentPlanDTO dto) {
+		return dao.pp_update(dto);
+	}
 	
 	
 }

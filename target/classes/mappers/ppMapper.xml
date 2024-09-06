@@ -19,7 +19,7 @@
 		#{pp_materialRequiredProcessStage},
 		#{pp_makeTime},
 		#{pp_spendAmount},
-		#{pp_regDate},
+		now(),
 		#{pp_deliveryDate});
 	</insert>
 
@@ -34,7 +34,7 @@
 	<select id="pp_selectOne"
 		resultType="kr.co.FiveLastName.domain.ProcurmentPlanDTO"
 		parameterType="int">
-		select * from product where pp_id = #{pp_id}
+		select * from procurmentPlan where pp_id = #{pp_id}
 	</select>
 
 	<!-- 조달 계획 수정 -->
@@ -53,7 +53,7 @@
 	<select id="productModal"
 	resultType="kr.co.FiveLastName.domain.ProductDTO"
 	parameterType="int">
-	select distinct * from product
+		select distinct * from product
 	</select>
 
 </mapper>
