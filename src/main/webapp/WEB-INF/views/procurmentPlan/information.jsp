@@ -5,6 +5,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html lang="ko">
 <head>
 <style type="text/css">
@@ -73,8 +75,10 @@
                               							<td>${procurmentPlan.pp_materialRequiredProcessStage }</td>
                               							<td>${procurmentPlan.pp_makeTime }</td>
                               							<td>${procurmentPlan.pp_spendAmount }</td>
-                              							<td>${procurmentPlan.pp_regDate}</td>
-                              							<td>${procurmentPlan.pp_deliveryDate }</td>
+                              							<td><fmt:formatDate pattern="yyyy-MM-dd"
+																value="${procurmentPlan.pp_regDate }" /></td>
+                              							<td><fmt:formatDate pattern="yyyy-MM-dd"
+																value="${procurmentPlan.pp_deliveryDate }" /></td>     
 													</tr>
 
 												</tbody>

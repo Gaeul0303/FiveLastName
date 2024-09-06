@@ -9,13 +9,13 @@ public class ProcurmentPlanDTO {
 	String pp_materialRequiredProcessStage;
 	int pp_makeTime;
 	int pp_spendAmount;
-	String pp_regDate;
-	String pp_deliveryDate;
+	Timestamp pp_regDate;
+	Timestamp pp_deliveryDate;
 	
 	public ProcurmentPlanDTO() {}
 	
 	public ProcurmentPlanDTO(int pr_id, String pp_materialRequiredProcessStage, int pp_makeTime,
-			int pp_spendAmount, String pp_regDate, String pp_deliveryDate) {
+			int pp_spendAmount, Timestamp pp_regDate, Timestamp pp_deliveryDate) {
 		super();
 		
 		this.pr_id = pr_id;
@@ -27,7 +27,7 @@ public class ProcurmentPlanDTO {
 	}
 	
 	public ProcurmentPlanDTO(int pp_id, int pr_id, String pp_materialRequiredProcessStage, int pp_makeTime,
-			int pp_spendAmount, String pp_regDate, String pp_deliveryDate) {
+			int pp_spendAmount, Timestamp pp_regDate, Timestamp pp_deliveryDate) {
 		super();
 		this.pp_id = pp_id;
 		this.pr_id = pr_id;
@@ -78,19 +78,19 @@ public class ProcurmentPlanDTO {
 		this.pp_spendAmount = pp_spendAmount;
 	}
 
-	public String getPp_regDate() {
+	public Timestamp getPp_regDate() {
 		return pp_regDate;
 	}
 
-	public void setPp_regDate(String pp_regDate) {
+	public void setPp_regDate(Timestamp pp_regDate) {
 		this.pp_regDate = pp_regDate;
 	}
 
-	public String getPp_deliveryDate() {
+	public Timestamp getPp_deliveryDate() {
 		return pp_deliveryDate;
 	}
 
-	public void setPp_deliveryDate(String pp_deliveryDate) {
+	public void setPp_deliveryDate(Timestamp pp_deliveryDate) {
 		this.pp_deliveryDate = pp_deliveryDate;
 	}
 	
