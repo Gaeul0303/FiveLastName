@@ -8,7 +8,8 @@
 	<!-- 입고일 품목명 수량 공급가액 합계 입고여부 -->
 	<select id="ri_list" resultType="kr.co.FiveLastName.domain.ReceivingInspectionDTO">
 		SELECT
-		ri.ri_date, pr.pr_name, pi.pi_inspectedQuantity, co.co_supplyPrice, ri.ri_totalPrice, ri.ri_availability
+		*
+		<!-- ri.ri_date, pr.pr_name, pi.pi_inspectedQuantity, co.co_supplyPrice, ri.ri_totalPrice, ri.ri_availability -->
 		
 		FROM receivingInspection ri
 		
@@ -29,7 +30,7 @@
 	<select id="ri_selectOne" resultType="kr.co.FiveLastName.domain.ReceivingInspectionDTO"
 	parameterType="int">
 		SELECT
-		ri.ri_date, pr.pr_name, pi.pi_inspectedQuantity. co.co_supplyPrice, ri.ri_totalPrice, ri.ri_availability
+		<!-- ri.ri_date, pr.pr_name, pi.pi_inspectedQuantity. co.co_supplyPrice, ri.ri_totalPrice, ri.ri_availability -->
 		
 		FROM receivingInspection ri
 		
