@@ -5,26 +5,29 @@
 <html lang="ko">
 <head>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
+<style type="text/css">
+.scrollTable {
+	height: 300px;
+	overflow: scroll;
+}
+</style>
 </head>
 <body>
 	<div class="wrapper">
 		<%@include file="/WEB-INF/views/include/sideBar.jsp"%>
-
 		<div class="main-panel">
 			<%@include file="/WEB-INF/views/include/header.jsp"%>
-
-
 			<div class="container">
 				<div class="page-inner">
 					<div class="page-header">
-						<h3 class="fw-bold mb-3">Forms</h3>
+						<h3 class="fw-bold mb-3">견적등록</h3>
 						<ul class="breadcrumbs mb-3">
 							<li class="nav-home"><a href="#"> <i class="icon-home"></i>
 							</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
-							<li class="nav-item"><a href="#">Forms</a></li>
+							<li class="nav-item"><a href="#">견적</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
-							<li class="nav-item"><a href="#">Basic Form</a></li>
+							<li class="nav-item"><a href="#">견적등록</a></li>
 						</ul>
 					</div>
 					<div class="row">
@@ -34,79 +37,63 @@
 									<div class="card-title">Form Elements</div>
 								</div>
 								<div class="card-body">
-									<form id="registerForm" enctype="multipart/form-data"
-										method="POST">
-
+									<form id="registerForm" method="POST">
 										<div class="row">
-											<div class="col-md-6">
-
+											<div class="col-md-12">
 												<div class="form-group">
-													<label for="nameinput">품목명</label> <input type="text"
-														class="form-control" id="nameinput" name="pr_name"
-														placeholder="품목명" required="required" />
+													<label for="nameinput">조달계획</label>
+													<div class="table-responsive scrollTable">
+														<table id="basic-datatables"
+															class="display table table-striped table-hover">
+															<thead>
+																<tr>
+																	<th>선택</th>
+																	<th>품목ID</th>
+																	<th>자재소요공정</th>
+																	<th>소요일</th>
+																	<th>소요량</th>
+																	<th>등록일</th>
+																	<th>조달납기</th>
+																</tr>
+															</thead>
+															<tbody>
+																<c:forEach items="${pp}" var="plan">
+																	<tr>
+																		<td><input type="radio" id="sel${plan.pp_id}"
+																			name="pp_id" value="${plan.pp_id}" required="required"></td>
+																		<td class="pr">${plan.pr_id}</td>
+																		<td><label for="sel${plan.pp_id}">${plan.pp_materialRequiredProcessStage}
+																		</label></td>
+																		<td>${plan.pp_makeTime}</td>
+																		<td>${plan.pp_spendAmount}</td>
+																		<td>${plan.pp_regDate}</td>
+																		<td>${plan.pp_deliveryDate}</td>
+																	</tr>
+																</c:forEach>
+															</tbody>
+														</table>
+													</div>
 												</div>
-												<div class="form-group">
-													<label for="sizeinput">규격</label> <input type="text"
-														class="form-control" id="sizeinput" name="pr_size"
-														placeholder="규격" required="required" />
+												<div class="col-md-6">
+													
+													<div class="form-group">
+														<label for="priceinput">공급가</label><input type="number"
+															class="form-control" id="priceinput"
+															name="es_supplyPrice" placeholder="공급가"
+															required="required" />
+													</div>
+													<div class="form-group">
+														<label for="requireinput">소요일</label><input
+															class="form-control" id="requireinput" placeholder="소요일"
+															name="es_requireDays" required="required" />
+													</div>
 												</div>
-												<div class="form-group">
-													<label for="typeinput">재질</label> <input type="text"
-														class="form-control" id="typeinput" name="pr_type"
-														placeholder="재질" required="required" />
-												</div>
-
-												<div class="form-group">
-													<label for="typeinput">제작사양</label>
-													<textarea class="form-control" id="typeinput" rows="5"
-														placeholder="제작사양" name="pr_quality" required="required"></textarea>
-												</div>
-
-												<div class="form-group">
-													<label for="imginput">제품이미지</label>
-													<input type="file" class="form-control-file"
-														name="file" id="imginput" required="required" />
-												</div>
-
-												<div class="form-group">
-													<label for="cateinput">카테고리</label>
-													<select class="form-select" id="cateinput"
-														name="pr_category">
-														<option value="컴퓨터">컴퓨터</option>
-														<option value="CPU">CPU</option>
-														<option value="메인보드">메인보드</option>
-														<option value="메모리">메모리</option>
-														<option value="그래픽카드">그래픽카드</option>
-														<option value="케이스">케이스</option>
-														<option value="파워">파워</option>
-														<option value="SSD">SSD</option>
-														<option value="HDD">HDD</option>
-														<option value="CPU쿨러">CPU쿨러</option>
-														<option value="주변기기">주변기기</option>
-
-													</select>
-												</div>
-												<div class="form-group">
-													<label for="statusinput">재고상태</label>
-													<select class="form-select" id="statusinput" name="pr_status">
-														<option value="재고">재고</option>
-														<option value="새품목">새품목</option>
-
-													</select>
-												</div>
-
-
 											</div>
-
-
-
 										</div>
 										<div class="card-action">
 											<button class="btn btn-success" id="registerBtn">등록하기</button>
 											<button class="btn btn-danger">취소</button>
 										</div>
-
-
 									</form>
 								</div>
 							</div>
@@ -115,15 +102,30 @@
 				</div>
 			</div>
 		</div>
-
 		<%@include file="/WEB-INF/views/include/footer.jsp"%>
 	</div>
-
 	<%@include file="/WEB-INF/views/include/script.jsp"%>
-
-    
-    
-    
-     
 </body>
+
+<script>
+    $(document).ready(function () {
+        const form = $("#registerForm");
+
+        $("#registerBtn").on("click", function () {
+            let pr_id = $("input[name='pp_id']:checked")
+                .parent()
+                .siblings('td.pr')
+                .text();
+            console.log(pr_id);
+
+            function getAllList() {
+            	 $.ajax("data/"+pr_id, function (data) {
+                    console.log(data)
+                });
+            }
+        })
+
+    })
+</script>
+
 </html>

@@ -24,6 +24,13 @@ public class PartnerServiceImpl implements PartnerService{
 		return dao.list();
 	}
 
+
+	@Override
+	public PartnerDTO paOne(int pr_id) {
+		// TODO Auto-generated method stub
+		return dao.paOne(pr_id);
+	}
+
 	
 	
 
