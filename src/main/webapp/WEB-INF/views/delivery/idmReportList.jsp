@@ -55,6 +55,7 @@ prefix="c" %> <%@ page session="true" %>
                               <th>공급가</th>
                               <th>출고수량</th>
                               <th>가용재고량</th>
+                              <th>총액</th>
                               <th>출고일</th>
                               <th>상태</th>
                             </tr>
@@ -66,6 +67,7 @@ prefix="c" %> <%@ page session="true" %>
                               <th>공급가</th>
                               <th>출고수량</th>
                               <th>가용재고량</th>
+                              <th>총액</th>
                               <th>출고일</th>
                               <th>상태</th>
                             </tr>
@@ -74,10 +76,11 @@ prefix="c" %> <%@ page session="true" %>
                            <c:forEach var="idm" items="${idmReportList}"> 
                             <tr>
                               <td>${idm.in_id }</td>
-                              <td>${idm.pr_name}</td>
+                              <td><button onclick="openPopup('${idm.in_id}')"></button>${idm.pr_name}</td>
                               <td>${idm.co_supplyPrice}</td>
                               <td>${idm.idm_quantity }</td>
-                              <td>${idm.in_availableInventory }
+                              <td>${idm.in_availableInventory }</td>
+                              <td>${idm.co_supplyPrice* idm.idm_quantity }</td>
                               <td>${idm.idm_date }</td>
                               <td>${idm.idm_status }</td>
                             </tr>
@@ -106,6 +109,7 @@ prefix="c" %> <%@ page session="true" %>
         
           $("#basic-datatables").DataTable({
             pageLength: 5,
+            order: [[6, 'desc']],
             initComplete: function () {
               this.api()
                 .columns()
@@ -135,7 +139,14 @@ prefix="c" %> <%@ page session="true" %>
                 });
             },
           });
-  
+          function openPopup(in_id) {
+        	  // 팝업을 띄울 페이지 URL
+        	  var popupURL = "/selectIdm?in_id="+in_id;
+        	  // 팝업 창의 속성
+        	  var popupProperties = "width=850,height=530,scrollbars=yes";
+        	  // 팝업 열기
+        	  window.open(popupURL, "Popup", popupProperties);
+        }
           
         });
       </script>

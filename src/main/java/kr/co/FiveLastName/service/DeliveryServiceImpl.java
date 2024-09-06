@@ -24,9 +24,9 @@ public class DeliveryServiceImpl implements DeliveryService{
 	}
 
 	@Override
-	public DeliveryDTO inventorySelectList(int in_id) {
+	public DeliveryDTO inventorySelect(int in_id) {
 		// TODO Auto-generated method stub
-		return dao.inventorySelectList(in_id);
+		return dao.inventorySelect(in_id);
 	}
 
 	@Override

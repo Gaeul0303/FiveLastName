@@ -41,7 +41,7 @@ prefix="c" %> <%@ page session="true" %>
                       <h4 class="card-title">재고정보</h4>
                     </div>
                     <div class="card-body">
-                  		<form action="selectInventory" method="post">
+                  		<form action="selectIdm" method="post">
                   			<input type="hidden" id="in_id" name="in_id" value="${in_id}" /> <!-- 여기 in_id 값 받아와야 됨 -->
 		    				<input id="idm_quantity" name="idm_quantity" type="number" placeholder="출고 수량을 입력하세요."/>
 		   				    <input type="submit" value="확인">

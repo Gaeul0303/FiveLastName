@@ -8,7 +8,7 @@ public interface DeliveryService {
 	
 	List<DeliveryDTO> inventoryList();
 	
-	DeliveryDTO inventorySelectList(int in_id);
+	DeliveryDTO inventorySelect(int in_id);
 	
 	int inventoryUpdate(DeliveryDTO dto);
 	
