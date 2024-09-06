@@ -25,9 +25,8 @@
 
 	<!-- 조달 계획 전체 조회 -->
 	<select id="pp_selectAll"
-		resultType="kr.co.FiveLastName.domain.ProcurmentPlanDTO"
-		parameterType="int">
-		select * from procurmentPlan
+		resultType="kr.co.FiveLastName.domain.ProcurmentPlanDTO">
+		select * from procurmentPlan order by pp_id DESC
 	</select>
 
 	<!-- 조달 계획 상세 조회 -->
@@ -40,19 +39,19 @@
 	<!-- 조달 계획 수정 -->
 	<update id="pp_update"
 		parameterType="kr.co.FiveLastName.domain.ProcurmentPlanDTO">
-		UPDATE procurmentPlan
-		SET
-		ppr_id = #{ppr_id},
-		ppr_dueDate
-		= #{pp_dueDate},
-		ppr_quantity = #{pp_quantity}
-		WHERE ppr_id = #{pp_id};
+		procurmentPlan;UPDATE `ERP`.`procurmentPlan`
+		SET		
+		`pr_id` = #{pr_id },
+		`pp_materialRequiredProcessStage` = #{pp_materialRequiredProcessStage },
+		`pp_makeTime` = #{pp_makeTime },
+		`pp_spendAmount` = #{pp_spendAmount },		
+		`pp_deliveryDate` = #{pp_deliveryDate }
+		WHERE `pp_id` = #{pp_id};
 	</update>
-	
+
 	<!-- product list 불러오기 -->
 	<select id="productModal"
-	resultType="kr.co.FiveLastName.domain.ProductDTO"
-	parameterType="int">
+		resultType="kr.co.FiveLastName.domain.ProductDTO" parameterType="int">
 		select distinct * from product
 	</select>
 
