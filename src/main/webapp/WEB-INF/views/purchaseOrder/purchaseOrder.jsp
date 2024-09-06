@@ -4,177 +4,12 @@
 	pageEncoding="UTF-8"%>
 <HTML>
 <HEAD>
-
-<TITLE>발주서신청용</TITLE>
-
-<style type="text/css">
-p {
-	margin: 0px;
-}
-
-.f8 {
-	font-family: "굴림";
-	font-size: 8pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-}
-
-.f8b {
-	font-family: "굴림";
-	font-size: 8pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-	font-weight: bold;
-}
-
-.f9 {
-	font-family: "굴림";
-	font-size: 9pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-}
-
-.f9b {
-	font-family: "굴림";
-	font-size: 9pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-	font-weight: bold;
-}
-
-.f10 {
-	font-family: "굴림";
-	font-size: 10pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-}
-
-.f10b {
-	font-family: "굴림";
-	font-size: 10pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-	font-weight: bold;
-}
-
-.f11 {
-	font-family: "굴림";
-	font-size: 11pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-}
-
-.f11b {
-	font-family: "굴림";
-	font-size: 11pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-	font-weight: bold;
-}
-
-.f13 {
-	font-family: "굴림";
-	font-size: 13pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-}
-
-.f13b {
-	font-family: "굴림";
-	font-size: 13pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-	font-weight: bold;
-}
-
-.f14b {
-	font-family: "굴림";
-	font-size: 14pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-	font-weight: bold;
-}
-
-.f14 {
-	font-family: "굴림";
-	font-size: 14pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-}
-
-.f16b {
-	font-family: "굴림";
-	font-size: 16pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-	font-weight: bold;
-}
-
-.f18b {
-	font-family: "굴림";
-	font-size: 18pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-	font-weight: bold;
-}
-
-.f20b {
-	font-family: "굴림";
-	font-size: 20pt;
-	color: #000000;
-	text-decoration: none;
-	letter-spacing: 0px;
-	font-weight: bold;
-}
-
-.fieldside_bottom {
-	font-family: "굴림", "돋움", seoul;
-	font-size: 12px;
-	color: #ffffff;
-	text-decoration: none;
-	border-top-width: 1px;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	border-top-style: solid;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-top-color: #ffffff;
-	border-right-color: #ffffff;
-	border-bottom-color: #000000;
-	border-left-color: #ffffff;
-}
-
-</style>
-
-<style type="text/css" media="print">
-@page {
-    size: auto;  /* auto is the initial value */
-    margin: 0;  /* this affects the margin in the printer settings */
-}
-</style>
-
+	 <%@include file="../include/head.jsp" %>
 </HEAD>
 <BODY>
 
 	<div id="reportPrint">
 	
-	<div align="right" style=></div>
 	<table width="650" border="0" cellspacing="0" cellpadding="0"
 		bordercolor="#ffffff" style="border-collapse: collapse; table-layout:"
 		align="center">
@@ -205,7 +40,7 @@ p {
 						<td width="10%" align="center" bgcolor="#E2EFDA">관리번호</td>
 						<td width="2%" align="center" bgcolor="#E2EFDA">:</td>
 						<td width="38%" bgcolor="#E2EFDA"><div tms_edit id="docno"
-								style="padding: 3px;">관리번호쓰는곳입니다123~</div></td>
+								style="padding: 3px;">${po.po_id}</div></td>
 					</tr>
 					<tr>
 						<td height="25" align="center" bgcolor="#E2EFDA">Phone</td>
@@ -223,7 +58,7 @@ p {
 						<td align="center" bgcolor="#E2EFDA">작성일자</td>
 						<td align="center" bgcolor="#E2EFDA">:</td>
 						<td bgcolor="#E2EFDA"><div class="inputBox" id="w_date6"
-								style="padding: 2px;">계약서 등록일자 쓰는곳~</div></td>
+								style="padding: 2px;">${po.po_regDate}</div></td>
 					</tr>
 				</table>
 			</td>
@@ -242,15 +77,15 @@ p {
 		align="center" class="f10">
 		<tr>
 			<td width="162" height="25" align="center" style="font-weight: bold">공급업체명</td>
-			<td width="162" align="center" style="font-weight: bold">담당자</td>
+			<td width="162" align="center" style="font-weight: bold">업체 대표명</td>
 			<td width="163" align="center" style="font-weight: bold">Phone</td>
 			<td width="163" align="center" style="font-weight: bold">E-mail</td>
 		</tr>
 		<tr>
-			<td height="25" align="center"><div tms_edit id="cn1">공급업체쓰는곳</div></td>
-			<td align="center"><div tms_edit id="cn2">담당자쓰는곳</div></td>
-			<td align="center"><div tms_edit id="cn3">담당자연락처쓰는곳</div></td>
-			<td align="center"><div tms_edit id="cn4">E-mail쓰는곳</div></td>
+			<td height="25" align="center"><div tms_edit id="cn1">${po.pa_name}</div></td>
+			<td align="center"><div tms_edit id="cn2">${po.pa_manager}</div></td>
+			<td align="center"><div tms_edit id="cn3">${po.pa_tel}</div></td>
+			<td align="center"><div tms_edit id="cn4">${po.pa_email}</div></td>
 		</tr>
 	</table>
 	<table width="650" border="0" cellspacing="0" cellpadding="0"
@@ -494,7 +329,6 @@ p {
 	<p>&nbsp;</p>
 	</div>
 	
-	<div>
 	<button onclick="printWindow()">인쇄하기</button>
 	<button onClick="self.close();">새창 닫기</button>
 	   

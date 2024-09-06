@@ -26,6 +26,11 @@ public class ShippingStatusServiceImpl implements ShippingStatusService{
 	public ShippingStatusDTO selectShippingStatus(int ss_id) {
 		return dao.selectShippingStatus(ss_id);
 	}
+
+	@Override
+	public ShippingStatusDTO search(int po_id) {
+		return dao.search(po_id);
+	}
 	
 	
 

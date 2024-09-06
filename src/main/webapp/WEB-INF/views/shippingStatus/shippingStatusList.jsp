@@ -4,6 +4,16 @@ prefix="c" %> <%@ page session="true" %>
 <html lang="ko">
   <head>
     <%@include file="../include/head.jsp" %>
+    
+    <style type="text/css">
+    
+    .centerTD{
+    	text-align : center;
+    }
+    
+    </style>
+    
+    
   </head>
   <body>
     <div class="wrapper">
@@ -50,38 +60,50 @@ prefix="c" %> <%@ page session="true" %>
                         >
                           <thead>
                             <tr>
-                              <th>출하현황번호</th>	
+                              <th>출하현황상세조회</th>			
                               <th>품목명</th>			
                               <th>납기일정준수여부</th>			
                               <th>자재제작상태</th>			
                               <th>출하상태</th>			
                               <th>출하수량</th>		
                               <th>출하일</th>			
+                              <th>검수계획</th>	
                             </tr>
                           </thead>
                           
                           <tfoot>
                             <tr>
-                              <th>상세이동</th>
+                              <th></th>			
                               <th>품목명</th>			
                               <th>납기일정준수여부</th>			
                               <th>자재제작상태</th>			
                               <th>출하상태</th>			
                               <th></th>		
                               <th></th>			
+                              <th></th>
                             </tr>
                           </tfoot>
                           
                           <tbody>
-                          	<c:forEach var = "ss" items="${ssList}">
+                          	<c:forEach var = "ss" items="${ssList}" varStatus = "status">
                           		<tr>
-                          			<td><a href="shippingStatus?ss_id=${ss.ss_id}"><c:out value="${ss.ss_id}" /></a></td>
+                          			<td class ="centerTD"><a href="/shippingStatus/select?ss_id=${ss.ss_id}">${status.count}</a></td>
                           			<td>${ss.pr_name}</td>
-                          			<td>${ss.ss_deliverySchedule}</td>
-                          			<td>${ss.ss_status}</td>
-                          			<td>${ss.ss_shippingStatus}</td>
-                          			<td>${ss.ss_quantity}</td>
-                          			<td>${ss.ss_shippingDate}</td>
+                          			<td class ="centerTD">${ss.ss_deliverySchedule}</td>
+                          			<td class ="centerTD">${ss.ss_status}</td>
+                          			<td class ="centerTD">${ss.ss_shippingStatus}</td>
+                          			<td class ="centerTD">${ss.ss_quantity}</td>
+                          			<td class ="centerTD">${ss.ss_shippingDate}</td>
+                          			<td class ="centerTD">
+                          				<c:choose>   
+											<c:when test="${ss.ss_piStatus == '발행완료'}">
+												<a href = "/progressInspection/select">조회하기</a>
+											</c:when>
+											<c:otherwise>
+												<a href = "/progressInspection/insert">발행하기</a>
+											</c:otherwise>
+										</c:choose>
+                          			</td>
                           		</tr>
                           	</c:forEach>
                           

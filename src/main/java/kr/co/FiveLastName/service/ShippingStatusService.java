@@ -10,4 +10,6 @@ public interface ShippingStatusService {
 	
 	ShippingStatusDTO selectShippingStatus(int ss_id);
 	
+	ShippingStatusDTO search(int po_id);
+	
 }

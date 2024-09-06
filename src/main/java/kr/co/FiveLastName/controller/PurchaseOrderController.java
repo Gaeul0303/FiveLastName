@@ -17,7 +17,7 @@ import kr.co.FiveLastName.domain.StaffDTO;
 import kr.co.FiveLastName.service.PurchaseOrderService;
 import javax.servlet.http.HttpSession;
 
-
+@RequestMapping("/purchaseOrder/*")
 @Controller
 public class PurchaseOrderController {
 	
@@ -27,7 +27,7 @@ public class PurchaseOrderController {
 	@Inject
 	PurchaseOrderService service;
 	
-	@RequestMapping(value = "/purchaseOrderList", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView poAllSelect() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -41,7 +41,7 @@ public class PurchaseOrderController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/purchaseOrderSelect", method = RequestMethod.GET)
+	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	public ModelAndView poSelect(int po_id /* , HttpSession session */) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -57,7 +57,7 @@ public class PurchaseOrderController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "purchaseOrderPrint", method = RequestMethod.GET)
+	@RequestMapping(value = "/print", method = RequestMethod.GET)
 	public ModelAndView poPrint(int po_id /* , HttpSession session */) {
 		
 		ModelAndView mav = new ModelAndView();

@@ -27,5 +27,11 @@ public class ShippingStatusDAOImpl implements ShippingStatusDAO{
 	public ShippingStatusDTO selectShippingStatus(int ss_id) {
 		return sqlSession.selectOne(namespace+".selectShippingStatus", ss_id);
 	}
+
+
+	@Override
+	public ShippingStatusDTO search(int po_id) {
+		return sqlSession.selectOne(namespace+".search", po_id);
+	}
 	
 }
