@@ -15,4 +15,6 @@ public interface DeliveryDAO {
 	int idmInsert(DeliveryDTO dto);
 	
 	List<DeliveryDTO> idmReportList();
+	
+	List<DeliveryDTO> selectIdm();
 }

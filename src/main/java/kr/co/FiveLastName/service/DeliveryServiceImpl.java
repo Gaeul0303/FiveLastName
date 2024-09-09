@@ -47,6 +47,12 @@ public class DeliveryServiceImpl implements DeliveryService{
 		return dao.idmReportList();
 	}
 
+	@Override
+	public List<DeliveryDTO> selectIdm() {
+		// TODO Auto-generated method stub
+		return dao.selectIdm();
+	}
+
 
 
 }

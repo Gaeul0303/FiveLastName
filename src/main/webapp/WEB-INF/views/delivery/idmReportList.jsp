@@ -139,6 +139,8 @@ prefix="c" %> <%@ page session="true" %>
                 });
             },
           });
+        });
+        
           function openPopup(in_id) {
         	  // 팝업을 띄울 페이지 URL
         	  var popupURL = "/selectIdm?in_id="+in_id;
@@ -147,8 +149,6 @@ prefix="c" %> <%@ page session="true" %>
         	  // 팝업 열기
         	  window.open(popupURL, "Popup", popupProperties);
         }
-          
-        });
       </script>
   </body>
 </html>
