@@ -83,10 +83,17 @@ public class ProductController {
 	@RequestMapping(value = "/modify",method = RequestMethod.POST)
 	public String modifyPOST(ProductDTO dto,RedirectAttributes rttr, @RequestParam("file") MultipartFile file) throws IOException {
 		
+		String FileName = service.productOne(dto.getPr_id()).getPr_image();
 		 // 파일 업로드 처리
-	    String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
-	    dto.setPr_image(savedName);
-
+		 // 파일이 업로드된 경우, 새로운 파일을 저장하고 파일 경로를 업데이트합니다.
+	    if (file != null && !file.isEmpty()) {
+	        String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
+	        dto.setPr_image(savedName); // 새로운 파일 경로를 설정합니다.
+	    } else {
+	        // 파일이 업로드되지 않은 경우, 기존 파일 경로를 유지합니다.
+	        dto.setPr_image(FileName);
+	    }
+		
 		
 		service.modify(dto);
 		

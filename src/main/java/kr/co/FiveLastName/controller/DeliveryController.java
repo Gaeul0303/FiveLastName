@@ -60,7 +60,7 @@ public class DeliveryController {
 	    mav.setViewName("redirect:/selectInventory?in_id=" + dto.getIn_id()); 
 	    return mav;
 	}
-		   
+
     @GetMapping(value = "/idmReportList")
     public ModelAndView   idmReportList() {
 		      ModelAndView mav = new ModelAndView();
@@ -72,19 +72,19 @@ public class DeliveryController {
 		      mav.setViewName("/delivery/idmReportList");
 		      return mav;
 		   }
-    
+
     @GetMapping(value = "/selectIdm")
-	public ModelAndView selectIdm(@RequestParam("in_id") int in_id) {
-		
+	public ModelAndView selectIdm() {
+
 		      ModelAndView mav = new ModelAndView();
-		      
-		      DeliveryDTO inventorySelect = service.inventorySelect(in_id);
-		      
-		      mav.addObject("inv", inventorySelect);
+
+		      List<DeliveryDTO> selectIdm = service.selectIdm();
+
+		      mav.addObject("idm", selectIdm);
 		      mav.setViewName("/delivery/selectIdm");
-		      
+
 		      return mav;
-		      
+
 		   }
 	
 }

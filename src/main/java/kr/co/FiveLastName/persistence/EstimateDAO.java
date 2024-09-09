@@ -15,7 +15,9 @@ public interface EstimateDAO {
 	
 	void register(EstimateDTO dto);
 	
-	EstimateDTO esOne(int es_id);
+	List<EstimateDTO> esOne(int pp_id);
+	
+	EstimateDTO select(int es_id);
 	
 	void update(EstimateDTO dto);
 }

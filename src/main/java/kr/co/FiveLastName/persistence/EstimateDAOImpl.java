@@ -24,17 +24,22 @@ public class EstimateDAOImpl implements EstimateDAO{
 	@Override
 	public void register(EstimateDTO dto) {
 		// TODO Auto-generated method stub
-		
+		 sqlsession.insert(namespace+".es_insert",dto);
 	}
 	@Override
-	public EstimateDTO esOne(int es_id) {
+	public List<EstimateDTO> esOne(int pp_id) {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne(namespace+".es_selectOne",es_id);
+		return sqlsession.selectList(namespace+".es_selectOne",pp_id);
 	}
 	@Override
 	public void update(EstimateDTO dto) {
 		// TODO Auto-generated method stub
-		
+		sqlsession.update(namespace+".es_update", dto);
+	}
+	@Override
+	public EstimateDTO select(int es_id) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(namespace+".es_select",es_id);
 	}
 
 	

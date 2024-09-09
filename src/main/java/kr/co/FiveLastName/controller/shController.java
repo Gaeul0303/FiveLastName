@@ -13,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.FiveLastName.service.ShippingStatementService;
 
 @Controller
-public class shController {
-	private static final Logger logger = LoggerFactory.getLogger(shController.class);
+public class ShController {
+	private static final Logger logger = LoggerFactory.getLogger(ShController.class);
 	
 	@Inject
 	private ShippingStatementService service;

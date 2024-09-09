@@ -54,8 +54,8 @@
 								<div class="card-body">
 									<div class="table-responsive">
 										<form action="" method="get" role='form'>
-											<input type="hidden" name="pr_id"
-												value="${productDTO.pr_id }">
+											<input type="hidden" name="pp_id"
+												value="${productDTO.pp_id }">
 											<table id="basic-datatables"
 												class="display table table-striped table-hover">
 												<colgroup>
@@ -71,39 +71,42 @@
 														<th>발행일</th>
 														<th>공급가</th>
 														<th>소요일</th>
+														<th></th>
 													</tr>
 												</thead>
 
 												<tbody>
-
+												<c:forEach items="${list }" var="es" varStatus="status">
+												
 													<tr>
-														<td>${estimateDTO.es_id }</td>
-														<c:forEach items="${pa }" var="partner" varStatus="status">
-															<c:if test="${estimateDTO.pa_id == partner.pa_id }">
+														<td>${es.es_id }</td>
+														<c:forEach items="${pa }" var="partner">
+															<c:if test="${es.pa_id == partner.pa_id }">
 																<td>${partner.pa_name }</td>
 															</c:if>
 														</c:forEach>
-
-														<c:forEach items="${pr }" var="product" varStatus="status">
-															<c:if test="${estimateDTO.pr_id == product.pr_id }">
-																<td>${product.pr_name }</td>
+														<c:forEach items="${pp }" var="plan">
+															<c:if test="${es.pp_id == plan.pp_id }">
+																<td>${plan.pr_id }</td>
 															</c:if>
-
 														</c:forEach>
 														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-																value="${estimateDTO.es_publicationDate }" /></td>
-														<td>${estimateDTO.es_supplyPrice }</td>
-														<td>${estimateDTO.es_requiredDays }일</td>
+																value="${es.es_publicationDate }" /></td>
+														<td><fmt:formatNumber value="${es.es_supplyPrice }" pattern="#,###" /></td>
+														<td>${es.es_requiredDays }일</td>
+														<td><a href="/estimate/modify?es_id=${ es.es_id}">수정</a></td>
 													</tr>
-
-												</tbody>
+												
+													
+												</c:forEach>
+											</tbody>
 											</table>
 											<div class="card-action">
 											
 												
 												<button class="btn btn-success" id="printBtn"
 													data-bs-toggle="modal" data-bs-target="#exampleModal">인쇄하기</button>
-												<button type="submit" class="btn btn-success" id="modifyBtn">수정하기</button>
+											
 												<a href="/estimate/list" class="btn btn-danger">목록으로</a>
 											</div>
 										</form>
@@ -172,14 +175,7 @@
 
 		})
 	</script>
-	<script type="text/javascript">
-		$('.img').each(function() {
-			var img = $(this).attr('src');
 
-			let fileInfo = getFileInfo(img);
-			$(this).attr('src', fileInfo);
-		});
-	</script>
 
 	<script type="text/javascript">
 		let result = '${msg}';
