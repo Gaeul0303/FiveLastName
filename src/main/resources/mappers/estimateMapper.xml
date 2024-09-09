@@ -15,14 +15,16 @@
 		pp_id,
 		es_publicationDate,
 		es_supplyPrice,
-		es_requireDays)
+		es_requiredDays)
 		VALUES
 		(
 		#{pa_id},
 		#{pp_id},
-		now(),
+		NOW(),
 		#{es_supplyPrice},
-		#{es_requireDays});
+		#{es_requiredDays});
+		
+		
 	</insert>
 
 	<!-- 견적서 전체 조회 -->
@@ -35,9 +37,13 @@
 	<!-- 견적서 상세 조회 -->
 
 
-	<select id="es_selectOne"
+	<select id="es_select"
 		resultType="kr.co.FiveLastName.domain.EstimateDTO" parameterType="int">
 		select * from estimate where es_id = #{es_id}
+	</select>
+	<select id="es_selectOne"
+		resultType="kr.co.FiveLastName.domain.EstimateDTO" parameterType="int">
+		select * from estimate where pp_id = #{pp_id}
 	</select>
 
 	<!-- 견적서 수정 -->
@@ -46,11 +52,9 @@
 		parameterType="kr.co.FiveLastName.domain.EstimateDTO">
 		UPDATE estimate
 		SET
-		es_id = #{es_id},
-		es_publicationDate =
-		#{es_publicationDate},
+		pp_id = #{pp_id},
 		es_supplyPrice = #{es_supplyPrice},
-		es_requireDays = #{es_requireDays}
+		es_requiredDays = #{es_requiredDays}
 		WHERE es_id = #{es_id};
 	</update>
 

@@ -80,12 +80,12 @@
 														<label for="priceinput">공급가</label><input type="number"
 															class="form-control" id="priceinput"
 															name="es_supplyPrice" placeholder="공급가"
-															required="required" />
+															required="required" "/>
 													</div>
 													<div class="form-group">
 														<label for="requireinput">소요일</label><input
 															class="form-control" id="requireinput" placeholder="소요일"
-															name="es_requireDays" required="required" />
+															name="es_requiredDays" required="required" "/>
 													</div>
 												</div>
 											</div>
@@ -93,6 +93,7 @@
 										<div class="card-action">
 											<button class="btn btn-success" id="registerBtn">등록하기</button>
 											<button class="btn btn-danger">취소</button>
+											
 										</div>
 									</form>
 								</div>
@@ -105,27 +106,41 @@
 		<%@include file="/WEB-INF/views/include/footer.jsp"%>
 	</div>
 	<%@include file="/WEB-INF/views/include/script.jsp"%>
-</body>
+
 
 <script>
     $(document).ready(function () {
+    	
         const form = $("#registerForm");
 
-        $("#registerBtn").on("click", function () {
-            let pr_id = $("input[name='pp_id']:checked")
+        $("#registerBtn").on("click", function (e) {
+        	e.preventDefault();
+        	let pr_id = $("input[name='pp_id']:checked")
                 .parent()
                 .siblings('td.pr')
                 .text();
-            console.log(pr_id);
 
-            function getAllList() {
-            	 $.ajax("data/"+pr_id, function (data) {
-                    console.log(data)
-                });
-            }
+        	$.ajax({
+                url: 'data/'+pr_id,
+                type : 'GET',
+                contentType : 'application/x-www-form-urlencoded; charset=utf-8',
+                dataType: 'json',
+          
+                success : function(data){
+					console.log(data.pa_id);
+					form.append("<input type='hidden' name='pa_id' value='"+ data.pa_id +"'>");
+					form.submit();
+                },
+             
+
+
+            })
+            
+        
+          
         })
 
     })
 </script>
-
+</body>
 </html>

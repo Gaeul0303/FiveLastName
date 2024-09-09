@@ -22,21 +22,21 @@
 			<div class="container">
 				<div class="page-inner">
 					<div class="page-header">
-						<h3 class="fw-bold mb-3">견적</h3>
+						<h3 class="fw-bold mb-3">계약</h3>
 						<ul class="breadcrumbs mb-3">
 							<li class="nav-home"><a href="#"> <i class="icon-home"></i>
 							</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
-							<li class="nav-item"><a href="#">견적</a></li>
+							<li class="nav-item"><a href="#">계약</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
-							<li class="nav-item"><a href="#">견적리스트</a></li>
+							<li class="nav-item"><a href="#">계약리스트</a></li>
 						</ul>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title">견적</h4>
+									<h4 class="card-title">계약</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -53,36 +53,31 @@
 													<th></th>
 													<th></th>
 													<th></th>
-													<th></th>
+													
 												</tr>
 											</tfoot>
 											<thead>
 												<tr>
+													<th>계약ID</th>
 													<th>견적ID</th>
-													<th>협력회사</th>
-													<th>조달계획</th>
-													<th>발행일</th>
+													<th>계약일</th>
+													<th>거래조건</th>
+													<th>계약여부</th>
 													<th>공급가</th>
-													<th>소요일</th>
+													
 												</tr>
 											</thead>
 
 											<tbody>
-												<c:forEach items="${list }" var="es" varStatus="status">
+												<c:forEach items="${list }" var="list" varStatus="status">
 													<tr>
-														<td>${es.es_id }</td>
-														<c:forEach items="${pa }" var="partner">
-															<c:if test="${es.pa_id == partner.pa_id }">
-																<td>${partner.pa_name }</td>
-															</c:if>
-														</c:forEach>
-
-														<td>${es.pp_id }</td>
-														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-																value="${es.es_publicationDate }" /></td>
-														<td>${es.es_supplyPrice }</td>
-														<td>${es.es_requiredDays }일</td>
-														<td><a href="/estimate/read?pp_id=${ es.pp_id}">자세히보기</a></td>
+														<td>${list.co_id }</td>
+														<td>${list.es_id }</td>
+														<td>${list.co_contractDate }</td>
+														<td>${list.co_tradeTerms }</td>
+														<td>${list.co_contractStatus }</td>
+														<td>${list.co_supplyPrice }</td>
+														<td><a href="/contract/read?co_id=${ list.co_id}">자세히보기</a></td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -183,10 +178,6 @@
 		}
 	</script>
 
-	<script type="text/javascript">
-		$(document).ready(function() {
 
-		})
-	</script>
 </body>
 </html>

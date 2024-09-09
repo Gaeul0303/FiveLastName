@@ -11,8 +11,8 @@
 	<select id="pa_selectAll" resultType="kr.co.FiveLastName.domain.PartnerDTO">
 		select * from partner order by pa_id desc;
 	</select>
-	<select id="pa_selectone" parameterType="int">
-		select * from partner where pr_id ={pr_id};
+	<select id="pa_selectone" parameterType="int" resultType="kr.co.FiveLastName.domain.PartnerDTO">
+		select * from partner where pr_id =#{pr_id};
 	</select>
 
 	
