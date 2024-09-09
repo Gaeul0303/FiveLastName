@@ -379,9 +379,6 @@
 			  // 폼을 문서에 추가하고 제출
 			  document.body.appendChild(form);
 			  form.submit();
-
-			  
-			  
 			  
 		}
 	

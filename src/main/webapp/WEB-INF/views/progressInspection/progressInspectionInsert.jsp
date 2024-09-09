@@ -16,7 +16,7 @@ prefix="c" %> <%@ page session="true" %>
           <div class="container">
             <div class="page-inner">
               <div class="page-header">
-                <h3 class="fw-bold mb-3">출하현황</h3>
+                <h3 class="fw-bold mb-3">검수계획</h3>
                 <ul class="breadcrumbs mb-3">
                   <li class="nav-home">
                     <a href="#">
@@ -27,13 +27,13 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">출하현황</a>
+                    <a href="#">검수계획</a>
                   </li>
                   <li class="separator">
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">출하현황 생성하기</a>
+                    <a href="#">검수계획 등록하기</a>
                   </li>
                 </ul>
               </div>
@@ -41,12 +41,12 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <div class="card-title">출하현황 생성하기</div>
+                      <div class="card-title">검수계획 등록하기</div>
                     </div>
                     <div class="card-body">
                           <div class="form-group form-inline">
                             <div class="col-md-9 p-0">
-								<button class = "btn" onclick = "viewPO(this)" value = ${po.po_id}>구매발주서 확인하기.</button>
+								<button class = "btn" onclick = "viewPO(this)" value = ${po.po_id}>검수계획 수정하기(팝업창)</button>
                             </div>
                           </div>
                      <form id = "shippingStatusForm" action="/shippingStatus/insert" method = "post">
@@ -60,10 +60,10 @@ prefix="c" %> <%@ page session="true" %>
                             <label
                               for="inlineinput"
                               class="col-md-3 col-form-label"
-                              >자재 제작상태</label
+                              >검수차수</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="text" value="제작중" readonly>
+								<input type="text" value="1" readonly>
                             </div>
                           </div>
                           
@@ -71,10 +71,10 @@ prefix="c" %> <%@ page session="true" %>
                             <label
                               for="inlineinput"
                               class="col-md-3 col-form-label"
-                              >납기일정 준수여부</label
+                              >검수계획날짜</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="text" value="일정준수" readonly>
+								<input type="date">
                             </div>
                           </div>
                           
@@ -82,22 +82,38 @@ prefix="c" %> <%@ page session="true" %>
                             <label
                               for="inlineinput"
                               class="col-md-3 col-form-label"
-                              >출하 상태</label
+                              >검수 상태</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="text" value="출하진행중" readonly>
+								<input type="text" value="미검수" readonly>
                             </div>
-                     	 </div>
-                            
+                      	</div>
                           
-                          <div class="form-group form-inline">
+                          <div class="form-group">
+                            <label for="comment">보완내용</label>
+                            <textarea class="form-control" id="comment" rows="5">
+                            </textarea>
+                          </div>
+                          
+                         <div class="form-group form-inline">
                             <label
                               for="inlineinput"
                               class="col-md-3 col-form-label"
-                              >출하 수량</label
+                              >검수 완료 수량</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="number" id = "ss_quantity" name ="ss_quantity" min="0" max="${po.ppr_quantity}" onchange="check()" value = ${po.ppr_quantity }>
+								<input type="number" id = "ss_quantity" name ="pi_inspectedQuantity" value = 0 readonly>
+                            </div>
+                          </div>
+                          
+                         <div class="form-group form-inline">
+                            <label
+                              for="inlineinput"
+                              class="col-md-3 col-form-label"
+                              >미검수 수량</label
+                            >
+                            <div class="col-md-9 p-0">
+								<input type="number" id = "ss_quantity" name ="pi_uninspectedQuantity"  value = ${ss.ss_quantity} readonly>
                             </div>
                           </div>
                         
@@ -110,8 +126,8 @@ prefix="c" %> <%@ page session="true" %>
                         
                     </div>
                     <div class="card-action">
-                      <button class="btn btn-success" type = "button" onclick = "submit()">Submit</button>
-                      <button class="btn btn-danger"  type = "button" onclick = "cancel()">Cancel</button>
+                      <button class="btn btn-success" type = "button" onclick = "submit()">등록하기</button>
+                      <button class="btn btn-danger"  type = "button" onclick = "cancel()">취소하기</button>
                     </div>
                   </div>
                  </form>

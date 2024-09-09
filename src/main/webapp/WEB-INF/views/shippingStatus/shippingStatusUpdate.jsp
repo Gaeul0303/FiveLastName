@@ -33,7 +33,7 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">출하현황 생성하기</a>
+                    <a href="#">출하현황 수정하기</a>
                   </li>
                 </ul>
               </div>
@@ -41,54 +41,65 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <div class="card-title">출하현황 생성하기</div>
+                      <div class="card-title">출하현황 수정하기</div>
                     </div>
                     <div class="card-body">
                           <div class="form-group form-inline">
                             <div class="col-md-9 p-0">
-								<button class = "btn" onclick = "viewPO(this)" value = ${po.po_id}>구매발주서 확인하기.</button>
+								<button class = "btn" onclick = "viewPO(this)" value = "${po.po_id}">구매발주서 확인하기.</button>
                             </div>
                           </div>
-                     <form id = "shippingStatusForm" action="/shippingStatus/insert" method = "post">
+                     <form id = "shippingStatusForm" action="/shippingStatus/update" method = "post">
                       <div class="row">
                         <div class="col-md-6 col-lg-4">
-                        
-
                           
-                          
-                          <div class="form-group form-inline">
-                            <label
-                              for="inlineinput"
-                              class="col-md-3 col-form-label"
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
                               >자재 제작상태</label
                             >
-                            <div class="col-md-9 p-0">
-								<input type="text" value="제작중" readonly>
-                            </div>
-                          </div>
-                          
-                          <div class="form-group form-inline">
-                            <label
-                              for="inlineinput"
-                              class="col-md-3 col-form-label"
+                            <select
+                              class="form-select"
+                              id="exampleFormControlSelect1"
+                              name = "ss_status"
+                              value = "${ss.ss_status}"
+                            >
+                              <option value = '제작중'>제작중</option>
+                              <option value = '제작완료'>제작완료</option>
+                              <option value = '제작연기'>제작연기</option>
+                            </select>
+                          </div>      
+                                            
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
                               >납기일정 준수여부</label
                             >
-                            <div class="col-md-9 p-0">
-								<input type="text" value="일정준수" readonly>
-                            </div>
-                          </div>
-                          
-                          <div class="form-group form-inline">
-                            <label
-                              for="inlineinput"
-                              class="col-md-3 col-form-label"
-                              >출하 상태</label
+                            <select
+                              class="form-select"
+                              id="exampleFormControlSelect1"
+                              name = "ss_deliverySchedule"
+                              value = "${ss.ss_deliverySchedule}"
                             >
-                            <div class="col-md-9 p-0">
-								<input type="text" value="출하진행중" readonly>
-                            </div>
-                     	 </div>
-                            
+                              <option value = '일정준수'>일정준수</option>
+                              <option value = '일정연기'>일정연기</option>
+                            </select>
+                          </div>      
+                                            
+                          <div class="form-group">
+                            <label for="exampleFormControlSelect1"
+                              >출하상태</label
+                            >
+                            <select
+                              class="form-select"
+                              id="exampleFormControlSelect1"
+                              name = "ss_shippingStatus"
+                              value = "${ss.ss_shippingStatus}"
+                            >
+                              <option value = '출하준비중'>출하준비중</option>
+                              <option value = '출하진행중'>출하진행중</option>
+                              <option value = '출하완료'>출하완료</option>
+                            </select>
+                          </div>                        
+
                           
                           <div class="form-group form-inline">
                             <label
@@ -97,24 +108,39 @@ prefix="c" %> <%@ page session="true" %>
                               >출하 수량</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="number" id = "ss_quantity" name ="ss_quantity" min="0" max="${po.ppr_quantity}" onchange="check()" value = ${po.ppr_quantity }>
+								<input type="number" id="ss_quantity" name ="ss_quantity" min="0" max="${po.ppr_quantity}" onchange="check()" value = "${po.ppr_quantity }">
                             </div>
                           </div>
                         
                         <!-- po_id 외래키 hidden으로 보내기. -->
                           <div class="form-group form-inline">
                             <div class="col-md-9 p-0">
-								<input type="hidden" id = "po_id" name ="po_id" value = ${po.po_id }>
+								<input type="hidden" id = "po_id" name ="po_id" value = "${po.po_id }">
+                            </div>
+                          </div>
+                          
+                          <div class="form-group form-inline">
+                            <div class="col-md-9 p-0">
+								<input type="hidden" id = "ss_piStatus" name ="ss_piStatus" value = "${ss.ss_piStatus}">
+                            </div>
+                          </div>
+                          
+                          <div class="form-group form-inline">
+                            <div class="col-md-9 p-0">
+								<input type="hidden" id = "ss_id" name ="ss_id" value = "${ss.ss_id}">
                             </div>
                           </div>
                         
+                          
+                      
+                      </div>
                     </div>
                     <div class="card-action">
-                      <button class="btn btn-success" type = "button" onclick = "submit()">Submit</button>
-                      <button class="btn btn-danger"  type = "button" onclick = "cancel()">Cancel</button>
+                      <button class="btn btn-success" onclick = "submit()">Submit</button>
+                      <button class="btn btn-danger"  onclick = "cancel()">Cancel</button>
                     </div>
+                 	</form>
                   </div>
-                 </form>
                 </div>
               </div>
             </div>
@@ -127,15 +153,13 @@ prefix="c" %> <%@ page session="true" %>
 	<script type="text/javascript">
 	
 	  function cancel() {
-		  alert("출하현황 생성을 취소하셨습니다.");
+		  alert("출하현황 수정을 취소하셨습니다.");
 		  window.location.href = "/shippingStatus/list";
 	    };
 	    
 	  function submit() {
-		  
 		  document.getElementById('shippingStatusForm').submit();
-		  alert("출하현황이 생성되었습니다.");
-		  
+		  alert("출하현황이 수정되었습니다.");
 	  };
 	
 	  function check() {

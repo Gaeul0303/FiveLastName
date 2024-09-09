@@ -33,7 +33,7 @@ min-width : 1400;
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">출하현황 상세조회
-										<div class = "print" align="right"><button id = "ss_id" value = ${ss.ss_id} onclick="printPage(this)">인쇄</button></div>
+										<div align="right"><button class = "btn" id = "ss_id" value = "${ss.ss_id}" onclick="ssComplete(this)">출하완료</button></div>
 									</div>
 								</div>
 								<div class="card-body">
@@ -132,43 +132,40 @@ min-width : 1400;
 	<%@include file="../include/script.jsp"%>
 	<script>
 	
-		function printPage(button) {
+		function ssComplete(button) {
 			
-			var po_id = button.getAttribute("value");
+			var ss_id = button.getAttribute("value");
 			
-			console.log("po_id = " + po_id);
-			
-			  var popupURL = "purchaseOrderPrint?po_id="+po_id;
-			  // 팝업 창 매핑.
-			  var popupProperties = "width=800,height=1200,popup=yes,scrollbars=yes";
-			  // 팝업 열때 속성.
-			  
-			  // 새 폼 요소 생성
+			console.log("ss_id = " + ss_id);
+
 			  var form = document.createElement('form');
-			  form.method = 'GET';
-			  form.action = popupURL;
-			  form.target = '구매발주서인쇄하기'; // 새 창의 이름
-			    
-			  // 숨겨진 input 요소 생성
+			  
+			  form.method = 'POST';
+			  form.action = "/shippingStatus/complete";
+
 			  var input = document.createElement('input');
 			  input.type = 'hidden';
-			  input.name = 'po_id';
-			  input.value = po_id;
+			  input.name = 'ss_id';
+			  input.value = ss_id;
 
-			  // 폼에 input 추가
+
 			  form.appendChild(input);
-			    
-			  // 새 창 열기
-			  var popup = window.open(popupURL, '구매발주', popupProperties);
 
-			  // 폼을 문서에 추가하고 제출
 			  document.body.appendChild(form);
 			  form.submit();
+			  document.body.removeChild(form);
+		};
+		
+        var urlParams = new URLSearchParams(window.location.search);
+        var error = urlParams.get('error');
 
-			  
-			  
-			  
-		}
+        console.log("Error value: ", error);
+
+        window.onload = function() {
+            if (error == 1) {
+                alert("개체를 찾을 수 없습니다.");
+            }
+        };
 	
 	</script>
 </body>

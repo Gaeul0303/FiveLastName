@@ -12,4 +12,10 @@ public interface ShippingStatusDAO {
 	
 	ShippingStatusDTO search(int po_id);
 	
+	ShippingStatusDTO insert(ShippingStatusDTO ss);
+	
+	ShippingStatusDTO update(ShippingStatusDTO ss);
+	
+	ShippingStatusDTO complete(int ss_id);
+	
 }

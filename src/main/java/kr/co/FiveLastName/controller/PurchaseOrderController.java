@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import kr.co.FiveLastName.domain.PrintPODTO;
 import kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO;
-import kr.co.FiveLastName.domain.StaffDTO;
 import kr.co.FiveLastName.service.PurchaseOrderService;
 import javax.servlet.http.HttpSession;
 
@@ -95,7 +93,6 @@ public class PurchaseOrderController {
 		PrintPODTO po = service.poInsert(ppr_id);
 		
 		ProcurementPlanRegistrationDTO ppr = service.poComplete(ppr_id);
-		
 		
 		 return "redirect:/purchaseOrder/list";
 	}

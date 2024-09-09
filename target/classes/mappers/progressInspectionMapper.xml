@@ -65,9 +65,9 @@
 	</select>
 	
 	<insert id="piInsert">
-		insert into progressInspectio` (ss_id, st_id, pi_order, pi_date, pi_inspectedDate, pi_status, pi_content, pi_uninspectedQuantity, pi_inspectedQuantity)
+		insert into progressInspectio` (ss_id, st_id, pi_order, pi_date, pi_status, pi_content, pi_uninspectedQuantity, pi_inspectedQuantity)
 		VALUES
-		(#{ss_id},#{pi_order})
+		(#{ss_id},#{st_id},'1',#{pi_date},'미검수',#{pi_content},'0',#{pi_inspectedQuantity})
 	</insert>
 	
 	

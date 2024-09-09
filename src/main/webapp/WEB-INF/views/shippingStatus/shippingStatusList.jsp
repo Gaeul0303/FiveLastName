@@ -68,6 +68,7 @@ prefix="c" %> <%@ page session="true" %>
                               <th>출하수량</th>		
                               <th>출하일</th>			
                               <th>검수계획</th>	
+                              <th>출하현황 수정</th>	
                             </tr>
                           </thead>
                           
@@ -80,6 +81,7 @@ prefix="c" %> <%@ page session="true" %>
                               <th>출하상태</th>			
                               <th></th>		
                               <th></th>			
+                              <th></th>
                               <th></th>
                             </tr>
                           </tfoot>
@@ -97,12 +99,15 @@ prefix="c" %> <%@ page session="true" %>
                           			<td class ="centerTD">
                           				<c:choose>   
 											<c:when test="${ss.ss_piStatus == '발행완료'}">
-												<a href = "/progressInspection/select">조회하기</a>
+												<a href = "/progressInspection/search?ss_id=${ss.ss_id}">조회하기</a>
 											</c:when>
 											<c:otherwise>
-												<a href = "/progressInspection/insert">발행하기</a>
+												<a href = "/progressInspection/insert?ss_id=${ss.ss_id}">발행하기</a>
 											</c:otherwise>
 										</c:choose>
+                          			</td>
+                          			<td class ="centerTD">
+										<a href = "/shippingStatus/update?ss_id=${ss.ss_id}">수정하기</a>
                           			</td>
                           		</tr>
                           	</c:forEach>

@@ -30,6 +30,7 @@ prefix="c" %> <%@ page session="true" %>
                   </li>
                 </ul>
               </div>
+              
               <div class="row">
                 <div class="col-md-12">
                   <div class="card">
@@ -38,37 +39,34 @@ prefix="c" %> <%@ page session="true" %>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
-                        <table
-                          id="basic-datatables"
-                          class="display table table-striped table-hover"
-                        >
+                        <table id="basic-datatables" class="display table table-striped table-hover">
                           <thead>
                             <tr>
-                              <th>품목명</th>			<!-- po.ppr_id.co_id.es_id.pr_id.pr_name 발주서의 조달계획등록의 거래계약의 품목의 이름.-->
-                              <th>거래회사이름</th>		<!-- po.ppr_id.co_id.es_id.pa_id.pa_name -->
-                              <th>공급가</th>			<!-- po.ppr_id.co_id.co_supplyPrice -->
-                              <th>소요일</th>			<!-- po.ppr_id.co_id.es_id.es_requiredDays -->
-                              <th>거래조건</th>		<!-- po.ppr_id.co_id.co_tradeTerms -->
-                              <th>계약일</th>			<!-- po.ppr_id.co_id.co_contractDate -->
-                              <th>납기예정일</th>		<!-- po.ppr_id.ppr_dueDate -->
-                              <th>발행일</th>			<!-- po.po_regDate -->
-                              <th>구매발주서</th>	<!-- po_id -->
-                              <th>출하현황</th>			<!-- po.po_regDate -->
+                              <th>품목명</th>
+                              <th>거래회사이름</th>	
+                              <th>공급가</th>
+                              <th>소요일</th>
+                              <th>거래조건</th>
+                              <th>계약일</th>
+                              <th>납기예정일</th>
+                              <th>발행일</th>
+                              <th>구매발주서</th>
+                              <th>출하현황</th>
                             </tr>
                           </thead>
                           
                           <tfoot>
                             <tr>
-                              <th>품목명</th>			<!-- po.ppr_id.co_id.es_id.pr_id.pr_name 발주서의 조달계획등록의 거래계약의 품목의 이름.-->
-                              <th>거래회사이름</th>		<!-- po.ppr_id.co_id.es_id.pa_id.pa_name -->
-                              <th></th>			<!-- po.ppr_id.co_id.co_supplyPrice -->
-                              <th></th>			<!-- po.ppr_id.co_id.es_id.es_requiredDays -->
-                              <th></th>		<!-- po.ppr_id.co_id.co_tradeTerms -->
-                              <th></th>			<!-- po.ppr_id.co_id.co_contractStatus -->
-                              <th></th>		<!-- po.ppr_id.ppr_dueDate -->
-                              <th></th>			<!-- po.po_regDate -->
-                              <th></th>	<!-- po_id -->
-                              <th></th>			<!-- po.po_regDate -->
+                              <th>품목명</th>
+                              <th>거래회사이름</th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
                             </tr>
                           </tfoot>
                           
@@ -83,26 +81,23 @@ prefix="c" %> <%@ page session="true" %>
                           			<td>${po.co_contractDate}</td>
                           			<td>${po.ppr_dueDate}</td>
                           			<td>${po.po_regDate}</td>
-                          			<td><a href="/purchaseOrder/select?po_id=${po.po_id}">조회하기</a></td>
+                          			<td><button id = "po_id" value = "${po.po_id}" onclick="printPage(this)" class = "btn">조회하기</button></td>
                           			<c:choose>   
 									   <c:when test="${po.po_status == '발행완료'}">
-									      <td><a href = "/shippingStatus/search?po_id=${po.po_id}">조회하기</a></td>
+									      <td><a href="/shippingStatus/search?po_id=${po.po_id}">조회하기</a></td>
 									   </c:when>
 									   <c:otherwise>
-									      <td><a href = "/progressInspection/insert">발행하기</a></td>>
+									      <td><a href= "/shippingStatus/insert?po_id=${po.po_id}">발행하기</a></td>
 									   </c:otherwise>
 									 </c:choose>
                           		</tr>
-                          	</c:forEach>
-                          
+                          	</c:forEach>  
                           </tbody>
                         </table>
-                      </div>
+                       </div>
                     </div>
                   </div>
                 </div>
-  
-             
               </div>
             </div>
           </div>
@@ -121,7 +116,7 @@ prefix="c" %> <%@ page session="true" %>
 	        });
 	
 	        // 필터를 적용할 열 인덱스 배열
-	        var categoryColumns = [0, 1];
+	        var categoryColumns = [0,1];
 	
 	        // 필터를 적용할 열에 대해서만 처리
 	        categoryColumns.forEach(function (index) {
@@ -142,6 +137,42 @@ prefix="c" %> <%@ page session="true" %>
 	            });
 	        });
 	    });
+		
+		function printPage(button) {
+			
+			var po_id = button.getAttribute("value");
+			
+			console.log("po_id = " + po_id);
+			
+			  var popupURL = "/purchaseOrder/print?po_id="+po_id;
+			  // 팝업 창 매핑.
+			  var popupProperties = "width=800,height=1200,popup=yes,scrollbars=yes";
+			  // 팝업 열때 속성.
+			  
+			  // 새 폼 요소 생성
+			  var form = document.createElement('form');
+			  form.method = 'GET';
+			  form.action = popupURL;
+			  form.target = '구매발주서인쇄하기'; // 새 창의 이름
+			    
+			  // 숨겨진 input 요소 생성
+			  var input = document.createElement('input');
+			  input.type = 'hidden';
+			  input.name = 'po_id';
+			  input.value = po_id;
+
+			  // 폼에 input 추가
+			  form.appendChild(input);
+			    
+			  // 새 창 열기
+			  var popup = window.open(popupURL, '구매발주', popupProperties);
+
+			  // 폼을 문서에 추가하고 제출
+			  document.body.appendChild(form);
+			  form.submit();
+			  
+		}
+
       </script>
   </body>
 </html>

@@ -14,11 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.FiveLastName.domain.PrintPODTO;
 import kr.co.FiveLastName.domain.ProgressInspectionDTO;
 import kr.co.FiveLastName.domain.ProgressInspectionRecordDTO;
+import kr.co.FiveLastName.domain.ShippingStatusDTO;
 import kr.co.FiveLastName.service.ProgressInspectionService;
 import kr.co.FiveLastName.service.PurchaseOrderService;
 import kr.co.FiveLastName.service.ShippingStatusService;
@@ -30,6 +32,9 @@ public class ProgressInspectionController {
 	
 	@Inject
 	ProgressInspectionService service;
+	
+	@Inject
+	ShippingStatusService sService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView selectAllShippingStatus() {
@@ -106,11 +111,18 @@ public class ProgressInspectionController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public ModelAndView selectShippingStatus() {
+	public ModelAndView piInsert(@RequestParam int ss_id) {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		ShippingStatusDTO ss = sService.selectShippingStatus(ss_id);
 		
+		
+		
+		System.out.println("insert 페이지입니다.");
+		
+		mav.addObject("ss", ss);
+		mav.setViewName("/progressInspection/progressInspectionInsert");
 		
 		return mav;
 		

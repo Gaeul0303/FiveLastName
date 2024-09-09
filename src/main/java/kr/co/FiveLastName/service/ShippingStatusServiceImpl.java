@@ -31,6 +31,21 @@ public class ShippingStatusServiceImpl implements ShippingStatusService{
 	public ShippingStatusDTO search(int po_id) {
 		return dao.search(po_id);
 	}
+
+	@Override
+	public ShippingStatusDTO insert(ShippingStatusDTO ss) {
+		return dao.insert(ss);
+	}
+
+	@Override
+	public ShippingStatusDTO update(ShippingStatusDTO ss) {
+		return dao.update(ss);
+	}
+
+	@Override
+	public ShippingStatusDTO complete(int ss_id) {
+		return dao.complete(ss_id);
+	}
 	
 	
 

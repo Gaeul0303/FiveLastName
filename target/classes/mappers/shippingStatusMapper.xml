@@ -24,7 +24,7 @@
 		join estimate es on co.es_id = es.es_id
 		join partner pa on es.pa_id = pa.pa_id
 		join product pr on pa.pr_id = pr.pr_id
-		where ss_id = #{ss_id}
+		where ss.ss_id = #{ss_id}
 	</select>
 	
 	<select id="search" resultType = "kr.co.FiveLastName.domain.ShippingStatusDTO">
@@ -32,16 +32,16 @@
 		where po_id = #{po_id}
 	</select>
 	
-	<insert id="insertShippingStatus">
-		insert into shippingstatus(po_id,ss_quantity,ss_status,ss_deliverySchedule,ss_shippingDate,ss_shippingStatus)
+	<insert id="ssInsert">
+		insert into shippingstatus(po_id,ss_quantity,ss_status,ss_deliverySchedule,ss_shippingStatus,ss_piStatus)
 		values
-		(#{po_id},#{ss_quantity},#{ss_status},#{ss_deliverySchedule},#{ss_shippingDate},#{ss_shippingStatus})
+		(#{po_id},#{ss_quantity},'제작중','일정준수','출하준비중','미발행')
 	</insert>
 	
-	<update id="updateShippingStatus">
-		update shippingstatus(ss_quantity,ss_status,ss_deliverySchedule,ss_shippingDate,ss_shippingStatus)
+	<update id="ssUpdate">
+		update shippingstatus
 		set
-		ss_quantity = #{ss_quantitay},
+		ss_quantity = #{ss_quantity},
 		ss_status = #{ss_status},
 		ss_deliverySchedule = #{ss_deliverySchedule},
 		ss_shippingDate = #{ss_shippingDate},
@@ -49,5 +49,15 @@
 		where ss_id = #{ss_id}
 	</update>
 
+	<update id="ssComplete" parameterType="int"> 
+		update shippingstatus
+		set
+		ss_status = '제작완료',
+		ss_deliverySchedule = '일정준수',
+		ss_shippingDate = now(),
+		ss_shippingStatus = '출하완료'
+		where ss_id = #{ss_id}
+	</update>
+	
 	
 </mapper>

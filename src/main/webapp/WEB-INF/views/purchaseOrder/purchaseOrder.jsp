@@ -344,6 +344,6 @@
 			   window.print();
 			   self.close();
 			   }
-			</script>
+		</script>
 </BODY>
 </HTML>
