@@ -109,4 +109,39 @@ JOIN
     order by idm.idm_date desc;
 </select>
 
+<select id="selectIdm" parameterType="int" resultType="kr.co.FiveLastName.domain.DeliveryDTO">
+	SELECT
+	inv.in_id,
+    pr.pr_name,
+    co.co_supplyPrice,
+    idm.idm_quantity,
+    inv.in_availableInventory,
+    idm.idm_date,
+    idm.idm_status
+FROM
+    erp.inventorydeliverymanagement idm
+JOIN
+	erp.inventory inv ON idm.in_id = inv.in_id
+JOIN
+    erp.incomingDeadline id ON inv.id_code = id.id_code
+JOIN
+    erp.receivingInspection ri ON id.ri_id = ri.ri_id
+JOIN
+    erp.progressInspection pi ON ri.pi_id = pi.pi_id
+JOIN
+    erp.shippingStatus ss ON pi.ss_id = ss.ss_id
+JOIN
+    erp.purchaseOrder po ON ss.po_id = po.po_id
+JOIN
+    erp.procurementplanregistration ppr ON po.ppr_id = ppr.ppr_id
+JOIN
+    erp.contract co ON ppr.co_id = co.co_id
+JOIN
+    erp.estimate es ON co.es_id = es.es_id
+JOIN
+    erp.product pr ON pr.pr_id = es.pr_id
+where
+   	idm.in_id = #{in_id};
+</select>
+
 </mapper>
