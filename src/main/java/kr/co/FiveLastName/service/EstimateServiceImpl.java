@@ -33,16 +33,23 @@ public class EstimateServiceImpl implements EsimateService{
 
 
 	@Override
-	public EstimateDTO esOne(int es_id) {
+	public List<EstimateDTO> esOne(int pp_id) {
 		// TODO Auto-generated method stub
-		return dao.esOne(es_id);
+		return dao.esOne(pp_id);
 	}
 
 
 	@Override
 	public void modify(EstimateDTO dto) {
 		// TODO Auto-generated method stub
-		
+		dao.update(dto);
+	}
+
+
+	@Override
+	public EstimateDTO select(int es_id) {
+		// TODO Auto-generated method stub
+		return dao.select(es_id);
 	}
 
 	

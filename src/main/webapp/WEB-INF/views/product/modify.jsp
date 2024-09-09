@@ -159,7 +159,7 @@ ${productDTO.pr_quality }</textarea
                         <button class="btn btn-success" id="registerBtn">
                           등록하기
                         </button>
-                        <button class="btn btn-danger">취소</button>
+                        <button  class="btn btn-danger">취소</button>
                       </div>
                     </form>
                   </div>
@@ -192,6 +192,17 @@ ${productDTO.pr_quality }</textarea
 
     <script type="text/javascript">
       $(document).ready(function () {
+    	  let form = $("#modifyForm");
+    	  $("#registerBtn").on("click",function(e){
+    		  e.preventDefault();
+    	  	if(form != $("input[name='file']")){
+    	  		form.append("<input type='file' name='file' value='${productDTO.pr_image }' style='display:none' />");
+    	  		
+    	  		form.submit();
+    	  	}
+    	  	console.log($("input[name='file']").val()) 
+    	  })
+    	  
         var pr_image = "${productDTO.pr_image}";
 
         let fileInfo = getFileInfo(pr_image);

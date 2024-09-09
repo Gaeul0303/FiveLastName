@@ -49,26 +49,22 @@ public class ESController {
 		
 		model.addAttribute("pa", paService.list());
 		
-		model.addAttribute("pr", prService.list());
-		
+	
 		model.addAttribute("list",service.list());
 		
 		
 	}
 	
 	@RequestMapping(value = "/read",method = RequestMethod.GET)
-	public void read(@RequestParam("es_id") int es_id,Model model) {
+	public void read(@RequestParam("pp_id") int pp_id,Model model) {
 		model.addAttribute("pa", paService.list());
 		
 		model.addAttribute("pr", prService.list());
 		
+		model.addAttribute("pp", ppService.pp_selectAll());
 		
-		model.addAttribute(service.esOne(es_id));
-		
-		
-		
-		
-		
+		model.addAttribute("list",service.esOne(pp_id));
+
 	}
 	
 	@RequestMapping(value = "/register",method = RequestMethod.GET)
@@ -99,11 +95,31 @@ public class ESController {
 	public String registerPOST(@ModelAttribute EstimateDTO dto, RedirectAttributes rttr) throws IOException {
 
 		service.register(dto);
-	    
+	    System.out.println(dto);
 	    // 리다이렉트 속성 설정
 	    rttr.addFlashAttribute("msg", "success");
 	    
 	    return "redirect:/estimate/list";
 	}
 	
+	
+	@RequestMapping(value = "/modify",method = RequestMethod.GET)
+	public void modifyGET(@RequestParam("es_id") int es_id,Model model,RedirectAttributes rttr) {
+		model.addAttribute(service.select(es_id));
+		model.addAttribute("pp",ppService.pp_selectAll());
+
+		
+	}
+	
+	@RequestMapping(value = "/modify",method = RequestMethod.POST)
+	public String modifyPOST(EstimateDTO dto,RedirectAttributes rttr) throws IOException {
+		
+		
+		service.modify(dto);
+		
+		rttr.addFlashAttribute("msg", "success");
+		return "redirect:/estimate/list";
+		
+		
+	}
 }

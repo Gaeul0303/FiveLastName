@@ -89,7 +89,7 @@ prefix="c" %>
 	                                <td>${product.pr_category }</td>
 									                <td>${product.pr_id }</td>
 	                                <td>${product.pr_name }</td>
-	                                <td class="imgBox"><img src="${product.pr_image }" alt="${product.pr_name }" class="img"> </td>
+	                                <td class="imgBox"><img src="" alt="${product.pr_image }" class="img"></td>
 	                                <td>${product.pr_status }</td>
 	                                <td><a href="/product/read?pr_id=${ product.pr_id}">자세히보기</a></td>
 								</tr>
@@ -150,7 +150,7 @@ prefix="c" %>
     <script type="text/javascript">
   
     	$('.img').each(function(){
-        	var img = $(this).attr('src');
+        	var img = $(this).attr('alt');
         	
         	let fileInfo = getFileInfo(img);
         	$(this).attr('src',fileInfo);
