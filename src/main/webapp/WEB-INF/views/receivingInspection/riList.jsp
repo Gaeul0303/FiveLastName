@@ -1,7 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+receiveingInspectionList<%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %> <%@ page session="true" %>
 <html lang="ko">
+<style type="text/css">
+    
+    .centerTD{
+    	text-align : center;
+    }
+    
+    </style>
   <head>
     <%@include file="../include/head.jsp" %>
   </head>
@@ -26,13 +33,13 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">Tables</a>
+                    <a href="#">입고 현황</a>
                   </li>
                   <li class="separator">
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">Datatables</a>
+                    <a href="#">입고현황 전체보기</a>
                   </li>
                 </ul>
               </div>
@@ -51,7 +58,6 @@ prefix="c" %> <%@ page session="true" %>
                           <thead>
                             <tr>
                               <th>입고검수ID</th>	
-                              <th>거래회사명</th>	
                               <th>품목명</th>
                               <th>수량</th>
                               <th>입고여부</th>
@@ -61,36 +67,26 @@ prefix="c" %> <%@ page session="true" %>
                           </thead>
                           <tfoot>
                             <tr>
-                              <th>Name</th>
-                              <th>Position</th>
-                              <th>Office</th>
-                              <th>Age</th>
-                              <th>Start date</th>
-                              <th>Salary</th>
+                              <th></th>	
+                              <th></th>	
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
                             </tr>
                           </tfoot>
                           <tbody>
                             <c:forEach var="ri" items="${ri_list }">
                             	<tr>
-	                              <td><a href="/receivingInspection/select?ri_id=${ri.ri_id }">${ri.ri_id }</a></td>
-	                              <td>${ri.pa_name }</td>
+	                              <td class = "centerTD"><a href="/receivingInspection/insert?ri_id=${ri.ri_id }">${ri.ri_id }</a></td>
 	                              <td>${ri.pr_name }</td>
 	                              <td>${ri.pi_inspectedQuantity }</td>
 	                              <td>${ri.ri_date }</td>
 	                              <td>${ri.ri_availability }</td>
-	                              <c:choose>
-	                              	<c:when test="${ri.ri_availability eq '입고대기' }">
-	                            		<td>${ri.ri_date }</td>
-	                              	</c:when>
-	                              	<c:otherwise>
-	                              		<td></td>
-	                              	</c:otherwise>
-	                              </c:choose>
+	                              <td><a href=/receivingInspection/select?ri_id=${ri.ri_id }>상세</a></td>
                             	</tr>
                             </c:forEach>
-                            
-                            
-                         
                           </tbody>
                         </table>
                       </div>
@@ -110,42 +106,34 @@ prefix="c" %> <%@ page session="true" %>
     <%@include file="../include/script.jsp" %>
 
     <script>
-        $(document).ready(function () {
-        
-          $("#basic-datatables").DataTable({
+    $(document).ready(function () {
+        var table = $("#basic-datatables").DataTable({
             pageLength: 5,
-            initComplete: function () {
-              this.api()
-                .columns()
-                .every(function () {
-                  var column = this;
-                  var select = $(
-                    '<select class="form-select"><option value=""></option></select>'
-                  )
-                    .appendTo($(column.footer()).empty())
-                    .on("change", function () {
-                      var val = $.fn.dataTable.util.escapeRegex($(this).val());
-  
-                      column
+            aaSorting: []
+        });
+
+        // 필터를 적용할 열 인덱스 배열
+        var categoryColumns = [1, 4];
+
+        // 필터를 적용할 열에 대해서만 처리
+        categoryColumns.forEach(function (index) {
+            var column = table.column(index);
+            
+            var select = $('<select class="form-select"><option value="">카테고리선택</option></select>')
+                .appendTo($(column.footer()).empty())
+                .on('change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                    column
                         .search(val ? "^" + val + "$" : "", true, false)
                         .draw();
-                    });
-  
-                  column
-                    .data()
-                    .unique()
-                    .sort()
-                    .each(function (d, j) {
-                      select.append(
-                        '<option value="' + d + '">' + d + "</option>"
-                      );
-                    });
                 });
-            },
-          });
-  
-          
+
+            // 해당 열의 데이터로 select 박스 옵션 추가
+            column.data().unique().sort().each(function (d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>');
+            });
         });
+    });
       </script>
   </body>
 </html>
