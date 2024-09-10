@@ -85,9 +85,9 @@
 													<div class="form-group">
 														<label for="Dateinput">계약일</label><input
 															type="datetime-local" class="form-control" id="Dateinput"
-															name="display" placeholder="계약일"
-															required="required" />
-															<input type="hidden" id="formattedDateInput" name="co_contractDate" />
+															name="display" placeholder="계약일" required="required" />
+														<input type="hidden" id="formattedDateInput"
+															name="co_contractDate" />
 													</div>
 													<div class="form-group">
 														<label for="Termsinput">거래조건</label>
@@ -115,7 +115,7 @@
 										</div>
 										<div class="card-action">
 											<button class="btn btn-success" id="registerBtn">등록하기</button>
-											<button class="btn btn-danger">취소</button>
+											<button class="btn btn-danger" id="cancel">취소</button>
 
 										</div>
 									</form>
@@ -129,47 +129,52 @@
 		<%@include file="/WEB-INF/views/include/footer.jsp"%>
 	</div>
 	<%@include file="/WEB-INF/views/include/script.jsp"%>
-
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#cancel").on("click", function() {
+				location.href = "/contract/list"
+			})
+		})
+	</script>
 	<script>
-	    $(document).ready(function () {
-	    	
-	        const form = $("#registerForm");
-	
-	        $("#registerBtn").on("click", function (e) {
-	        	e.preventDefault();
-	        	 let dateInput = $('#Dateinput').val();
-	        	 
-	        	 if (dateInput) {
-	                 // dateTime 형식을 yyyy-MM-dd hh:mm:ss로 변환
-	                 let formattedDate = formatDateTime(dateInput);
-	                 console.log("Formatted Date: ", formattedDate);
+		$(document).ready(
+				function() {
 
-	                 // 변환된 값을 숨겨진 필드에 설정
-	                 $('#formattedDateInput').val(formattedDate);
+					const form = $("#registerForm");
 
-	                 
-	                 form.submit();
-	             }
+					$("#registerBtn").on("click", function(e) {
+						e.preventDefault();
+						let dateInput = $('#Dateinput').val();
 
-	        
-	          
-	        })
-	        
-	          function formatDateTime(dateTimeString) {
-	            let date = new Date(dateTimeString);
+						if (dateInput) {
+							// dateTime 형식을 yyyy-MM-dd hh:mm:ss로 변환
+							let formattedDate = formatDateTime(dateInput);
+							console.log("Formatted Date: ", formattedDate);
 
-	            let year = date.getFullYear();
-	            let month = ('0' + (date.getMonth() + 1)).slice(-2); // 월 2자리로 변환
-	            let day = ('0' + date.getDate()).slice(-2); // 일 2자리로 변환
-	            let hours = ('0' + date.getHours()).slice(-2); // 시간 2자리로 변환
-	            let minutes = ('0' + date.getMinutes()).slice(-2); // 분 2자리로 변환
-	            let seconds = ('0' + date.getSeconds()).slice(-2); // 초 2자리로 변환
+							// 변환된 값을 숨겨진 필드에 설정
+							$('#formattedDateInput').val(formattedDate);
 
-	            // 최종 포맷: yyyy-MM-dd hh:mm:ss
-	            return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
-	        }
-	
-	    })
+							form.submit();
+						}
+
+					})
+
+					function formatDateTime(dateTimeString) {
+						let date = new Date(dateTimeString);
+
+						let year = date.getFullYear();
+						let month = ('0' + (date.getMonth() + 1)).slice(-2); // 월 2자리로 변환
+						let day = ('0' + date.getDate()).slice(-2); // 일 2자리로 변환
+						let hours = ('0' + date.getHours()).slice(-2); // 시간 2자리로 변환
+						let minutes = ('0' + date.getMinutes()).slice(-2); // 분 2자리로 변환
+						let seconds = ('0' + date.getSeconds()).slice(-2); // 초 2자리로 변환
+
+						// 최종 포맷: yyyy-MM-dd hh:mm:ss
+						return year + '-' + month + '-' + day + ' ' + hours
+								+ ':' + minutes + ':' + seconds;
+					}
+
+				})
 	</script>
 </body>
 

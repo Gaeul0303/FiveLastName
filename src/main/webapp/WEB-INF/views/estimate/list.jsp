@@ -47,7 +47,7 @@
 											</colgroup>
 											<tfoot>
 												<tr>
-													<th></th>
+													<th>견적ID</th>
 													<th></th>
 													<th></th>
 													<th></th>
@@ -64,6 +64,7 @@
 													<th>발행일</th>
 													<th>공급가</th>
 													<th>소요일</th>
+													<th></th>
 												</tr>
 											</thead>
 
@@ -126,7 +127,7 @@
 
 													// 카테고리 필터용 select 박스 생성
 													var select = $(
-															'<select class="form-select"><option value="">번호</option></select>')
+															'<select class="form-select"><option value=""></option></select>')
 															.appendTo(
 																	$(
 																			table

@@ -93,7 +93,7 @@
 										</div>
 										<div class="card-action">
 											<button class="btn btn-success" id="registerBtn">수정하기</button>
-											<button class="btn btn-danger">취소</button>
+											<button class="btn btn-danger" id="cancel">취소</button>
 											
 										</div>
 									</form>
@@ -111,6 +111,12 @@
 
 <script>
     $(document).ready(function () {
+    	
+    	$("#cancel").on("click",function(e){
+    		e.preventDefault();
+			location.href="/contract/list";
+		})
+		
     	let chVal = ${estimateDTO.pp_id};
     	$("input[value='"+ chVal +"']").prop("checked",true);
         const form = $("#registerForm");
