@@ -23,7 +23,7 @@ prefix="c" %> <%@ page session="true" %>
           <div class="container">
             <div class="page-inner">
               <div class="page-header">
-                <h3 class="fw-bold mb-3">입고 대기</h3>
+                <h3 class="fw-bold mb-3">입고</h3>
                 <ul class="breadcrumbs mb-3">
                   <li class="nav-home">
                     <a href="#">
@@ -34,7 +34,7 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">입고 대기</a>
+                    <a href="#">입고 완료</a>
                   </li>
                   <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -48,7 +48,7 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">입고현황 전체보기</h4>
+                      <h4 class="card-title">입고 완료</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
@@ -65,7 +65,7 @@ prefix="c" %> <%@ page session="true" %>
                               <th class = "centerTD">금액</th>
                               <th class = "centerTD">입고여부</th>
                               <th class = "centerTD">입고일</th>
-                              <th class = "centerTD">입고검수</th>
+                              <th class = "centerTD">거래명세서</th>
                             </tr>
                           </thead>
                           <tfoot>
@@ -75,34 +75,24 @@ prefix="c" %> <%@ page session="true" %>
 	                          <th></th>	
 	                          <th></th>	
 	                          <th></th>	
-	                          <th></th>	
-	                          <th></th>	
                           </tfoot>
                           <tbody>
-                            <c:forEach var="ri" items="${ri_list }">
+                            <c:forEach var="id" items="${id_list }">
                             	<tr>
-	                              <td class = "centerTD">${ri.ri_id }</td>
-	                              <td>${ri.pr_name }</td>
+	                              <td class = "centerTD">${id.ri_id }</td>
+	                              <td>${id.pr_name }</td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value = "${ri.pi_inspectedQuantity }" pattern="#,###" />
+	                              	<fmt:formatNumber value = "${id.pi_inspectedQuantity }" pattern="#,###" />
 	                              </td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value="${ri.co_supplyPrice }" pattern="#,###" />
+	                              	<fmt:formatNumber value="${id.co_supplyPrice }" pattern="#,###" />
 	                              </td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value="${ri.ri_totalPrice }" pattern="#,###" />
+	                              	<fmt:formatNumber value="${id.ri_totalPrice }" pattern="#,###" />
 	                              </td>
-	                              <td class = "centerTD">${ri.ri_availability }</td>
-	                              <td class = "centerTD"><fmt:formatDate value="${ri.ri_date }" pattern="yyyy-MM-dd"/> </td>
-	                               <c:choose>
-	                              	<c:when test="${ri.ri_availability eq '입고대기'}">
-	                              		<td class = "centerTD"><a href="/receivingInspection/riUpdate?ri_id=${ri.ri_id }">검수작성</a></td>
-	                              	</c:when>
-	                              	<c:otherwise>
-	                              		<td></td>
-	                              	</c:otherwise>
-	                              </c:choose>
-	                              	
+                            	  <td class = "centerTD">${id.ri_availability }</td>
+	                              <td class = "centerTD"><fmt:formatDate value="${id.ri_date }"/></td>
+	                              <td class = "centerTD"><a href="/receivingInspection/riUpdate?ri_id=${id.id_code }">발행</a></td>
                             	</tr>
                             </c:forEach>
                           </tbody>
@@ -111,6 +101,8 @@ prefix="c" %> <%@ page session="true" %>
                     </div>
                   </div>
                 </div>
+  
+             
               </div>
             </div>
           </div>
