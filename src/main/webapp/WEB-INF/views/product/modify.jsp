@@ -159,7 +159,7 @@ ${productDTO.pr_quality }</textarea
                         <button class="btn btn-success" id="registerBtn">
                           등록하기
                         </button>
-                        <button  class="btn btn-danger">취소</button>
+                        <button  class="btn btn-danger" id="cancel">취소</button>
                       </div>
                     </form>
                   </div>
@@ -177,6 +177,12 @@ ${productDTO.pr_quality }</textarea
 
     <script type="text/javascript">
       $(document).ready(function () {
+    	  
+    	  $("#cancel").on("click",function(e){
+      		e.preventDefault();
+  			location.href="/contract/list";
+  		})
+    	  
         let category = `${productDTO.pr_category}`;
         let status = `${productDTO.pr_status}`;
 

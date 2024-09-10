@@ -40,20 +40,19 @@
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
-										<table id="basic-datatables"
-											class="display table table-striped table-hover">
+										<table id="basic-datatables" class="display table table-striped table-hover">
 											<colgroup>
 												<col width="10%">
 											</colgroup>
 											<tfoot>
 												<tr>
+													<th>계약ID</th>
 													<th></th>
 													<th></th>
 													<th></th>
 													<th></th>
 													<th></th>
 													<th></th>
-													
 												</tr>
 											</tfoot>
 											<thead>
@@ -64,7 +63,7 @@
 													<th>거래조건</th>
 													<th>계약여부</th>
 													<th>공급가</th>
-													
+													<th></th>
 												</tr>
 											</thead>
 
@@ -98,77 +97,40 @@
 	</div>
 
 	<%@include file="/WEB-INF/views/include/script.jsp"%>
-	<script type="text/javascript" src="/resources/assets/js/upload.js"></script>
-	<script>
-		$(document)
-				.ready(
-						function() {
 
-							$("#basic-datatables")
-									.DataTable(
-											{
-												pageLength : 5,
-												aaSorting : [],
-												initComplete : function() {
-													var table = this.api();
-													console
-															.log(table
-																	.column(
-																			categoryColumnIndex)
-																	.footer())
-													// 카테고리 열 인덱스
-													var categoryColumnIndex = 0;
+	 <script>
+        $(document).ready(function () {
+        
+          $("table#basic-datatables").DataTable({
+            pageLength: 5,
+            aaSorting : [],
+            initComplete: function () {
+                var table = this.api();
+                // 카테고리 열 인덱스
+                var categoryColumnIndex = 0;
+                console.log(table.column(categoryColumnIndex).footer())
 
-													// 카테고리 필터용 select 박스 생성
-													var select = $(
-															'<select class="form-select"><option value="">번호</option></select>')
-															.appendTo(
-																	$(
-																			table
-																					.column(
-																							categoryColumnIndex)
-																					.footer())
-																			.empty())
-															.on(
-																	'change',
-																	function() {
-																		var val = $.fn.dataTable.util
-																				.escapeRegex($(
-																						this)
-																						.val());
-																		table
-																				.column(
-																						categoryColumnIndex)
-																				.search(
-																						val ? "^"
-																								+ val
-																								+ "$"
-																								: "",
-																						true,
-																						false)
-																				.draw();
-																	});
+                // 카테고리 필터용 select 박스 생성
+                var select = $('<select class="form-select"><option value=""></option></select>')
+                    .appendTo($(table.column(categoryColumnIndex).footer()).empty())
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                        table
+                            .column(categoryColumnIndex)
+                            .search(val ? "^" + val + "$" : "", true, false)
+                            .draw();
+                    });
 
-													// 카테고리 열 데이터로 select 박스 옵션 추가
-													table
-															.column(
-																	categoryColumnIndex)
-															.data()
-															.unique()
-															.each(
-																	function(d,
-																			j) {
-																		select
-																				.append('<option value="' + d + '">'
-																						+ d
-																						+ '</option>');
-																	});
-												}
-											});
-
-						});
-	</script>
-
+                // 카테고리 열 데이터로 select 박스 옵션 추가
+                table.column(categoryColumnIndex).data().unique().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>');
+                });
+            }
+          });
+  
+          
+        });
+      </script>
 
 
 	<script type="text/javascript">

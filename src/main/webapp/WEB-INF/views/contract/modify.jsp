@@ -137,7 +137,8 @@
 	    	$("input[value='"+ chVal +"']").prop("checked",true);			
 			$("#statusinput").val(status).prop("selected", "true");
 			
-			$("#cancel").on("click",function(){
+			$("#cancel").on("click",function(e){
+				e.preventDefault();
 				location.href="/contract/list";
 			})
 		});

@@ -92,7 +92,7 @@
 										</div>
 										<div class="card-action">
 											<button class="btn btn-success" id="registerBtn">등록하기</button>
-											<button class="btn btn-danger">취소</button>
+											<button class="btn btn-danger" id="cancel">취소</button>
 											
 										</div>
 									</form>
@@ -107,7 +107,13 @@
 	</div>
 	<%@include file="/WEB-INF/views/include/script.jsp"%>
 
-
+  <script type="text/javascript">
+    	$(document).ready(function(){
+    		$("#cancel").on("click",function(){
+    			location.href="/estimate/list"
+    		})
+    	})
+    </script>
 <script>
     $(document).ready(function () {
     	
