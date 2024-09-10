@@ -14,7 +14,11 @@ prefix="c" %> <%@ page session="true" %>
           
           <div class="container">
             <div class="page-inner">
-              <h3 class="fw-bold mb-3">Chart.js</h3>
+              <h3 class="fw-bold mb-3">
+              <c:if test="${st_id !=null }">
+              	asdfasdfasdf
+              </c:if>
+              </h3>
               
               <div class="row">
                 <div class="col-md-6">

@@ -5,6 +5,13 @@
   
 <mapper namespace="kr.co.FiveLastName.staffMapper">
 
+	<!-- 담당자 로그인 -->
+	<select id="login" parameterType="java.util.Map" resultType="java.util.Map">
+	select st_id, st_pw
+	from staff
+	where st_id=#{st_id} and st_pw=#{st_pw}
+	</select>
+
 
 	<!-- 담당자 전체 조회 -->
 	<select id="st_selectAll" resultType="int"

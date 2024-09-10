@@ -43,7 +43,7 @@
 													<label for="co_id">거래계약ID</label> <select
 														class="form-select" id="co_id" name="co_id">
 														<option>거래선택</option>
-														<c:forEach items="${list}" var="contract">
+														<c:forEach items="${list}" var="contract" required="required">
 															<option value="${contract.co_id }">
 																${contract.co_id }</option>
 														</c:forEach>
@@ -57,16 +57,16 @@
 														<div class="form-group">
 															<label for="ppr_quantity">수량</label> <input type="number"
 																class="form-control" id="ppr_quantity"
-																name="ppr_quantity" placeholder="Enter Amount" />
+																name="ppr_quantity" required="required" placeholder="Enter Amount" />
 														</div>
 														<div class="form-group">
 															<label for="ppr_dueDate">납기일</label> <input type="date"
-																class="form-control" id="ppr_dueDate" name="ppr_dueDate"
+																class="form-control" id="ppr_dueDate" name="ppr_dueDate" required="required"
 																placeholder="납기일" />
 														</div>
 														<div class="form-group">
 															<label for="ppr_status">발주서 발행 여부</label> <input type="text"
-																class="form-control" id="ppr_status" name="ppr_status"
+																class="form-control" id="ppr_status" name="ppr_status" required="required"
 																placeholder="미발행" />
 														</div>													
 													</div>

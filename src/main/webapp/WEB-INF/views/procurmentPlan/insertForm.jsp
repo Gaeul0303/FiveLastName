@@ -34,21 +34,19 @@
 									<div class="card-title">조달 계획 수립</div>
 								</div>
 								<div class="card-body">
-									<form id="insertForm" enctype="procurmentPlan/insertForm"
+									<form id="insertForm" action="/procurmentPlan/insertForm"
 										method="post">
 
 										<div class="row">
 											<div class="col-md-6 col-lg-4">
 												
 												<div class="form-group">
-													<label for="exampleFormControlSelect1">품목 선택</label> <select
-														class="form-select" id="exampleFormControlSelect1">
+													<label for="pr_name">품목 선택</label> <select
+														class="form-select" id="pr_name">
 														<c:forEach items="${list}" var="product">
-															<tr>
-																<option><td>${product.pr_name }</td>
+															<option><td>${product.pr_name }</td>
 																</option>
-															</tr>
-														</c:forEach>
+															</c:forEach>
 													</select>
 													<div class="form-group">
 														<c:forEach items="${list}" var="product">
@@ -65,22 +63,18 @@
 													</div>
 													<div class="form-group">
 														<label for="deliveryDate">조달납기</label> <input
-															type="date" class="form-control" id="pp_deliveryDate" name="pp_deliveryDate" placeholder="Enter Date" />
+															type="datetime-local" class="form-control" id="pp_deliveryDate" placeholder="조달납기" required="required" />
+															<input type="hidden" id="formattedDateInput" name="pp_deliveryDate"/>
 													</div>													
 													<div class="form-group">
 														<label for="comment">자재 소요 공정</label>
 														<textarea class="form-control" id="comment" name="pp_materialRequiredProcessStage" rows="5" ></textarea>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" value=""
-															id="flexCheckDefault" /> <label class="form-check-label"
-															for="flexCheckDefault"> 상기 내용을 확인후 진행합니다. </label>
-													</div>
+													</div>											
 												</div>
 											</div>
 											<div class="card-action">
-												<button class="btn btn-success" id="insertBtn">등록</button>
-												<button class="btn btn-danger">취소</button>
+												<button class="btn btn-success" id="insertBtn" type="submit">등록</button>
+												<button class="btn btn-danger" id="cancel">취소</button>
 											</div>
 									</form>
 								</div>
@@ -95,5 +89,45 @@
 		<%@include file="/WEB-INF/views/include/footer.jsp"%>
 	</div>
 	<%@include file="/WEB-INF/views/include/script.jsp"%>
+	<script>
+		$(document).ready(
+				function() {
+
+					const form = $("#insertForm");
+
+					$("#insertBtn").on("click", function(e) {
+						e.preventDefault();
+						let dateInput = $('#pp_deliveryDate').val();
+
+						if (dateInput) {
+							// dateTime 형식을 yyyy-MM-dd hh:mm:ss로 변환
+							let formattedDate = formatDateTime(dateInput);
+							console.log("Formatted Date: ", formattedDate);
+
+							// 변환된 값을 숨겨진 필드에 설정
+							$('#formattedDateInput').val(formattedDate);
+
+							form.submit();
+						}
+
+					})
+
+					function formatDateTime(dateTimeString) {
+						let date = new Date(dateTimeString);
+
+						let year = date.getFullYear();
+						let month = ('0' + (date.getMonth() + 1)).slice(-2); // 월 2자리로 변환
+						let day = ('0' + date.getDate()).slice(-2); // 일 2자리로 변환
+						let hours = ('0' + date.getHours()).slice(-2); // 시간 2자리로 변환
+						let minutes = ('0' + date.getMinutes()).slice(-2); // 분 2자리로 변환
+						let seconds = ('0' + date.getSeconds()).slice(-2); // 초 2자리로 변환 */
+
+						// 최종 포맷: yyyy-MM-dd hh:mm:ss
+						return year + '-' + month + '-' + day + ' ' + hours
+								+ ':' + minutes + ':' + seconds;
+					}
+
+				})
+	</script>
 </body>
 </html>

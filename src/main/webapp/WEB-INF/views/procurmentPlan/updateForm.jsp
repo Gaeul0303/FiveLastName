@@ -47,15 +47,13 @@ prefix="c"%> <%@ page session="true"%>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="nameinput">품목명</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="nameinput"
-                              name="pr_name"
-                              placeholder="품목명"
-                              value="${productDTO.pr_name }"
-                            />
+                            <label for="pr_name">품목명</label><select                            
+							class="form-select" id="pr_name" name= "pr_name" required="required">
+							<c:forEach items="${list}" var="product">
+							<option><td>${product.pr_name }</td>
+							</option>
+							</c:forEach>
+							</select>                            
                           </div>
                           <div class="form-group">
                             <label for="makeTime">소요일정</label>
