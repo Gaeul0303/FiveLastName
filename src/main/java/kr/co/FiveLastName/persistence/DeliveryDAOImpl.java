@@ -49,9 +49,9 @@ public class DeliveryDAOImpl implements DeliveryDAO{
 	}
 
 	@Override
-	public List<DeliveryDTO> selectIdm() {
+	public List<DeliveryDTO> selectIdm(int in_id) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(nameSpace+".selectIdm");
+		return sqlSession.selectList(nameSpace+".selectIdm", in_id);
 	}
 	
 	

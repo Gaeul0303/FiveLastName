@@ -16,5 +16,5 @@ public interface DeliveryDAO {
 	
 	List<DeliveryDTO> idmReportList();
 	
-	List<DeliveryDTO> selectIdm();
+	List<DeliveryDTO> selectIdm(int in_id);
 }

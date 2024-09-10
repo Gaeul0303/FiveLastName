@@ -74,13 +74,14 @@ public class DeliveryController {
 		   }
 
     @GetMapping(value = "/selectIdm")
-	public ModelAndView selectIdm() {
+	public ModelAndView selectIdm(@RequestParam("in_id") int in_id) {
 
 		      ModelAndView mav = new ModelAndView();
 
-		      List<DeliveryDTO> selectIdm = service.selectIdm();
+		      List<DeliveryDTO> selectIdm = service.selectIdm(in_id);
 
-		      mav.addObject("idm", selectIdm);
+		      mav.addObject("selectIdm", selectIdm);
+		      mav.addObject("in_id", in_id);
 		      mav.setViewName("/delivery/selectIdm");
 
 		      return mav;
