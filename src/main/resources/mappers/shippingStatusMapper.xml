@@ -32,6 +32,11 @@
 		where po_id = #{po_id}
 	</select>
 	
+	<select id="count" resultType = "int">
+		select count(*) from shippingstatus
+		where po_id = #{po_id}
+	</select>
+	
 	<insert id="ssInsert">
 		insert into shippingstatus(po_id,ss_quantity,ss_status,ss_deliverySchedule,ss_shippingStatus,ss_piStatus)
 		values
@@ -57,6 +62,13 @@
 		ss_shippingDate = now(),
 		ss_shippingStatus = '출하완료'
 		where ss_id = #{ss_id}
+	</update>
+	
+	<update id="poComplete">
+		update purchaseOrder
+		set
+		po_status = '발행완료'
+		where po_id = #{po_id}
 	</update>
 	
 	

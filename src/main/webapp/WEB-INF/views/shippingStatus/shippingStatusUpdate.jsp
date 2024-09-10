@@ -92,11 +92,9 @@ prefix="c" %> <%@ page session="true" %>
                               class="form-select"
                               id="exampleFormControlSelect1"
                               name = "ss_shippingStatus"
-                              value = "${ss.ss_shippingStatus}"
                             >
                               <option value = '출하준비중'>출하준비중</option>
                               <option value = '출하진행중'>출하진행중</option>
-                              <option value = '출하완료'>출하완료</option>
                             </select>
                           </div>                        
 
@@ -214,6 +212,14 @@ prefix="c" %> <%@ page session="true" %>
 			  form.submit();
 			  
 		}
+		
+        var msg = '${msg}'; // 리다이렉션된 페이지에서 메시지를 JavaScript 변수로 받기
+
+        if (msg === 'success') {
+            alert('성공했습니다');
+        } else if (msg === 'fail') {
+            alert('실패하였습니다!');
+        }
 	  
 	</script>
 	

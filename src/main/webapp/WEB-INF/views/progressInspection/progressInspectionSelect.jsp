@@ -26,7 +26,7 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">검수계획 전체조회</a>
+                    <a href="#">검수계획 상세조회</a>
                   </li>
                 </ul>
               </div>
@@ -34,9 +34,10 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">검수계획 전체조회</h4>
+                      <h4 class="card-title">검수계획 상세조회</h4>
                     </div>
                     <div class="card-body">
+                    
                       <div class="table-responsive">
                         <table
                           id="basic-datatables"
@@ -116,6 +117,17 @@ prefix="c" %> <%@ page session="true" %>
     </div>
 
     <%@include file="../include/script.jsp" %>
+    <c:if test="${not empty msg}">
+	    <script type="text/javascript">
+	        var msg = '${msg}'; // 모델에서 전달된 메시지를 JavaScript 변수로 받기
+	
+	        if (msg === 'success') {
+	            alert('성공!');
+	        } else if (msg === 'fail') {
+	            alert('실패!');
+	        }
+	    </script>
+	</c:if>
 
     <script>
 	    $(document).ready(function () {

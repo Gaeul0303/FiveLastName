@@ -13,6 +13,10 @@
 .col-md-6{
 min-width : 1400; 
 }
+.ss{
+width : 900px;
+margin: 0 auto;
+}
 </style>
 
 </head>
@@ -32,13 +36,11 @@ min-width : 1400;
 						<div class="col-md-6">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">출하현황 상세조회
-										<div align="right"><button class = "btn" id = "ss_id" value = "${ss.ss_id}" onclick="ssComplete(this)">출하완료</button></div>
-									</div>
+									<div class="card-title">출하현황 상세조회</div>
 								</div>
 								<div class="card-body">
 									
-									
+									<div class = "ss">
 									<table width="900" border="0" cellspacing="0" cellpadding="0" bordercolor="#ffffff"
 										style="border-collapse: collapse; table-layout: fixed" align="center" class="f10">
 										<tr>
@@ -98,7 +100,7 @@ min-width : 1400;
 											<td align="center"><div id="fg1" style="padding: 3px;">
 												<c:choose>   
                                                 	<c:when test="${ss.ss_piStatus == '발행완료'}"><a href = "/progressInspection/search?ss_id=${ss.ss_id}">조회하기</a></c:when>
-                                                	<c:otherwise><a href = "/progressInspection/insert">발행하기</a></c:otherwise>
+                                                	<c:otherwise><a href = "/progressInspection/insert?ss_id=${ss.ss_id}">발행하기</a></c:otherwise>
                                                 </c:choose>
 											</div></td>
 										</tr>
@@ -112,6 +114,10 @@ min-width : 1400;
 											<td height="25" align="right">&nbsp;</td>
 										</tr>
 									</table>
+									<c:if test="${ss.ss_shippingStatus != '출하완료'}">    
+										<div align="right"><button class = "btn btn-success" id = "ss_id" value = "${ss.ss_id}" onclick="ssComplete(this)"><c:out value="출하하기" /></button></div>
+									</c:if>
+									</div>
 									<p>&nbsp;</p>
 								</div>
 							</div>
@@ -130,6 +136,18 @@ min-width : 1400;
 	</div>
 
 	<%@include file="../include/script.jsp"%>
+	
+	<c:if test="${not empty msg}">
+	    <script type="text/javascript">
+	        var msg = '${msg}'; // 모델에서 전달된 메시지를 JavaScript 변수로 받기
+	
+	        if (msg === 'success') {
+	            alert('성공!');
+	        } else if (msg === 'fail') {
+	            alert('실패!');
+	        }
+	    </script>
+	</c:if>
 	<script>
 	
 		function ssComplete(button) {
@@ -166,6 +184,8 @@ min-width : 1400;
                 alert("개체를 찾을 수 없습니다.");
             }
         };
+        
+
 	
 	</script>
 </body>

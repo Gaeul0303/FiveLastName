@@ -8,8 +8,8 @@ public class ProgressInspectionDTO {
 	private int ss_id; 
 	private String st_id; 
 	private int pi_order; 
-	private Timestamp pi_date; 
-	private Timestamp pi_inspectedDate;
+	private String pi_date; 
+	private String pi_inspectedDate;
 	private String pi_status;
 	private String pi_content; 
 	private int pi_uninspectedQuantity; 
@@ -25,12 +25,10 @@ public class ProgressInspectionDTO {
 		super();
 	}
 
-	
-
-	public ProgressInspectionDTO(int pi_id, int ss_id, String st_id, int pi_order, Timestamp pi_date,
-			Timestamp pi_inspectedDate, String pi_status, String pi_content, int pi_uninspectedQuantity,
-			int pi_inspectedQuantity, Timestamp pi_registrationDate, Timestamp pi_modificationDate, String pr_name,
-			int pr_id, int pa_id, String pa_name, String st_name, int ss_quantity) {
+	public ProgressInspectionDTO(int pi_id, int ss_id, String st_id, int pi_order, String pi_date,
+			String pi_inspectedDate, String pi_status, String pi_content, int pi_uninspectedQuantity,
+			int pi_inspectedQuantity, String pr_name, int pr_id, int pa_id, String pa_name, String st_name,
+			int ss_quantity) {
 		super();
 		this.pi_id = pi_id;
 		this.ss_id = ss_id;
@@ -49,8 +47,6 @@ public class ProgressInspectionDTO {
 		this.st_name = st_name;
 		this.ss_quantity = ss_quantity;
 	}
-
-
 
 	public int getPi_id() {
 		return pi_id;
@@ -84,19 +80,19 @@ public class ProgressInspectionDTO {
 		this.pi_order = pi_order;
 	}
 
-	public Timestamp getPi_date() {
+	public String getPi_date() {
 		return pi_date;
 	}
 
-	public void setPi_date(Timestamp pi_date) {
+	public void setPi_date(String pi_date) {
 		this.pi_date = pi_date;
 	}
 
-	public Timestamp getPi_inspectedDate() {
+	public String getPi_inspectedDate() {
 		return pi_inspectedDate;
 	}
 
-	public void setPi_inspectedDate(Timestamp pi_inspectedDate) {
+	public void setPi_inspectedDate(String pi_inspectedDate) {
 		this.pi_inspectedDate = pi_inspectedDate;
 	}
 
@@ -171,18 +167,14 @@ public class ProgressInspectionDTO {
 	public void setSt_name(String st_name) {
 		this.st_name = st_name;
 	}
-	
+
 	public int getSs_quantity() {
 		return ss_quantity;
 	}
 
-
-
 	public void setSs_quantity(int ss_quantity) {
 		this.ss_quantity = ss_quantity;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -194,8 +186,6 @@ public class ProgressInspectionDTO {
 				+ "]";
 	}
 
-
-	
 	
 	
 }

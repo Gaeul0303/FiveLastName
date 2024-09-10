@@ -6,10 +6,13 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import kr.co.FiveLastName.domain.PartnerDTO;
 import kr.co.FiveLastName.domain.PrintPODTO;
 import kr.co.FiveLastName.domain.ProgressInspectionDTO;
 import kr.co.FiveLastName.domain.ProgressInspectionRecordDTO;
 import kr.co.FiveLastName.domain.PurchaseOrderDTO;
+import kr.co.FiveLastName.domain.ShippingStatusDTO;
+import kr.co.FiveLastName.domain.StaffDTO;
 import kr.co.FiveLastName.persistence.ProgressInspectionDAO;
 import kr.co.FiveLastName.persistence.PurchaseOrderDAO;
 
@@ -49,6 +52,36 @@ public class ProgressInspectionServiceImpl implements ProgressInspectionService{
 	@Override
 	public ProgressInspectionRecordDTO piRecordOne(int ss_id) {
 		return dao.piRecordOne(ss_id);
+	}
+
+	@Override
+	public ProgressInspectionDTO piInsert(ProgressInspectionDTO pi) {
+		return dao.piInsert(pi);
+	}
+
+	@Override
+	public ProgressInspectionDTO piUpdate(ProgressInspectionDTO pi) {
+		return dao.piUpdate(pi);
+	}
+
+	@Override
+	public ProgressInspectionRecordDTO insertRecord(ProgressInspectionDTO pi) {
+		return dao.insertRecord(pi);
+	}
+
+	@Override
+	public ShippingStatusDTO ssComplete(int ss_id) {
+		return dao.ssComplete(ss_id);
+	}
+
+	@Override
+	public StaffDTO stSelect(int st_id) {
+		return dao.stSelect(st_id);
+	}
+
+	@Override
+	public PartnerDTO paSelect(int pa_id) {
+		return dao.paSelect(pa_id);
 	}
 
 

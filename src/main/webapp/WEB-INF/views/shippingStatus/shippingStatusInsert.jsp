@@ -63,7 +63,7 @@ prefix="c" %> <%@ page session="true" %>
                               >자재 제작상태</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="text" value="제작중" readonly>
+								<input type="text" id = "ss_status" name ="ss_status" value="제작중" readonly>
                             </div>
                           </div>
                           
@@ -74,7 +74,7 @@ prefix="c" %> <%@ page session="true" %>
                               >납기일정 준수여부</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="text" value="일정준수" readonly>
+								<input type="text" value="일정준수" id = "ss_deliverySchedule" name ="ss_deliverySchedule" readonly>
                             </div>
                           </div>
                           
@@ -85,7 +85,7 @@ prefix="c" %> <%@ page session="true" %>
                               >출하 상태</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="text" value="출하진행중" readonly>
+								<input type="text" value="미출하" id = "ss_shippingStatus" name ="ss_shippingStatus" readonly>
                             </div>
                      	 </div>
                             
@@ -123,6 +123,7 @@ prefix="c" %> <%@ page session="true" %>
 
       <%@include file="../include/footer.jsp" %>
     </div>
+    
 	
 	<script type="text/javascript">
 	

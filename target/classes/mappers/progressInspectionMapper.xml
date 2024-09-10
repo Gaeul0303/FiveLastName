@@ -65,21 +65,43 @@
 	</select>
 	
 	<insert id="piInsert">
-		insert into progressInspectio` (ss_id, st_id, pi_order, pi_date, pi_status, pi_content, pi_uninspectedQuantity, pi_inspectedQuantity)
+		insert into progressInspection (ss_id, st_id, pi_order, pi_date, pi_status, pi_content, pi_uninspectedQuantity, pi_inspectedQuantity)
 		VALUES
-		(#{ss_id},#{st_id},'1',#{pi_date},'미검수',#{pi_content},'0',#{pi_inspectedQuantity})
+		(#{ss_id},#{st_id},'1',#{pi_date},'미검수',#{pi_content},#{pi_uninspectedQuantity},'0')
 	</insert>
 	
-	
-	<update id="piComplete">
+	<update id="piUpdate">
 		update progressInspection 
 		set
-		pi_order = #{pi_order}+1,
-		pi_inspectedDate = now(), 
+		pi_order = #{pi_order},
+		pi_date = #{pi_date},
+		pi_status = #{pi_status},
 		pi_content = #{pi_content},
+		pi_inspectedDate = now(), 
 		pi_uninspectedQuantity = #{ss_quantity} - #{pi_inspectedQuantity},
 		pi_inspectedQuantity = #{pi_inspectedQuantity}
 		where pi_id = #{pi_id}
 	</update>
-
+	
+	<update id="ssComplete">
+		update shippingStatus
+		set
+		ss_piStatus = '발행완료'
+		where ss_id = #{ss_id}
+	</update>
+	
+	<select id="stSelect" resultType = "kr.co.FiveLastName.domain.StaffDTO">
+		select * from staff where st_id = #{st_id}
+	</select>
+	
+	<select id="paSelect" resultType = "kr.co.FiveLastName.domain.PartnerDTO">
+		select * from partner where pa_id = #{pa_id}
+	</select>
+	
+	<insert id="insertRecord">
+		insert into progressInspectionRecord(ss_id, st_id, pir_order, pir_date, pir_status, pir_content, pir_uninspectedQuantity, pir_inspectedQuantity)
+		VALUES
+		(#{ss_id},#{st_id},#{pi_order},#{pi_date},#{pi_status},#{pi_content},#{pi_uninspectedQuantity},#{pi_inspectedQuantity})
+	</insert>
+	
 </mapper>

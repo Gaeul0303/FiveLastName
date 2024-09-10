@@ -46,16 +46,14 @@ prefix="c" %> <%@ page session="true" %>
                     <div class="card-body">
                           <div class="form-group form-inline">
                             <div class="col-md-9 p-0">
-								<button class = "btn" onclick = "viewPO(this)" value = ${po.po_id}>검수계획 수정하기(팝업창)</button>
+								<button class = "btn" onclick = "viewPO(this)" value = ${ss.po_id}>검수계획 수정하기(팝업창)</button>
                             </div>
                           </div>
-                     <form id = "shippingStatusForm" action="/shippingStatus/insert" method = "post">
+                          
+                     <form id = "progressInspection" action="/progressInspection/insert" method = "post">
                       <div class="row">
                         <div class="col-md-6 col-lg-4">
                         
-
-                          
-                          
                           <div class="form-group form-inline">
                             <label
                               for="inlineinput"
@@ -63,7 +61,18 @@ prefix="c" %> <%@ page session="true" %>
                               >검수차수</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="text" value="1" readonly>
+								<input type="text" value="1" id = "pi_order" name ="pi_order" readonly>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group form-inline">
+                            <label
+                              for="inlineinput"
+                              class="col-md-3 col-form-label"
+                              >검수담당자</label
+                            >
+                            <div class="col-md-9 p-0">
+								<input type="text" value="${st_id}" id = "st_id" name ="st_id" readonly>
                             </div>
                           </div>
                           
@@ -74,7 +83,7 @@ prefix="c" %> <%@ page session="true" %>
                               >검수계획날짜</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="date">
+								<input type="date" id = "pi_date" name ="pi_date">
                             </div>
                           </div>
                           
@@ -85,13 +94,13 @@ prefix="c" %> <%@ page session="true" %>
                               >검수 상태</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="text" value="미검수" readonly>
+								<input type="text" value="미검수" id = "pi_status" name ="pi_status" readonly>
                             </div>
                       	</div>
                           
                           <div class="form-group">
                             <label for="comment">보완내용</label>
-                            <textarea class="form-control" id="comment" rows="5">
+                            <textarea class="form-control" id="comment" rows="5" id = "pi_content" name ="pi_content">
                             </textarea>
                           </div>
                           
@@ -102,7 +111,7 @@ prefix="c" %> <%@ page session="true" %>
                               >검수 완료 수량</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="number" id = "ss_quantity" name ="pi_inspectedQuantity" value = 0 readonly>
+								<input type="number" id = "pi_inspectedQuantity" name ="pi_inspectedQuantity" value = 0 readonly>
                             </div>
                           </div>
                           
@@ -113,14 +122,19 @@ prefix="c" %> <%@ page session="true" %>
                               >미검수 수량</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="number" id = "ss_quantity" name ="pi_uninspectedQuantity"  value = ${ss.ss_quantity} readonly>
+								<input type="number" id = "pi_uninspectedQuantity" name ="pi_uninspectedQuantity"  value = ${ss.ss_quantity} readonly>
                             </div>
                           </div>
                         
                         <!-- po_id 외래키 hidden으로 보내기. -->
                           <div class="form-group form-inline">
                             <div class="col-md-9 p-0">
-								<input type="hidden" id = "po_id" name ="po_id" value = ${po.po_id }>
+								<input type="hidden" id = "ss_id" name ="ss_id" value = ${ss.ss_id }>
+                            </div>
+                          </div>
+                          <div class="form-group form-inline">
+                            <div class="col-md-9 p-0">
+								<input type="hidden" id = "ss_quantity" name ="ss_quantity" value = ${ss.ss_quantity }>
                             </div>
                           </div>
                         
@@ -143,15 +157,19 @@ prefix="c" %> <%@ page session="true" %>
 	<script type="text/javascript">
 	
 	  function cancel() {
-		  alert("출하현황 생성을 취소하셨습니다.");
+		  alert("검수생성을 취소하셨습니다");
 		  window.location.href = "/shippingStatus/list";
 	    };
 	    
 	  function submit() {
 		  
-		  document.getElementById('shippingStatusForm').submit();
-		  alert("출하현황이 생성되었습니다.");
-		  
+		   if(!date.value){
+			      alert("날짜를 선택해주세요.")
+			      return false;
+			   }else{
+				   document.getElementById('progressInspection').submit();
+					  alert("출하현황이 생성되었습니다.");
+			   }
 	  };
 	
 	  function check() {

@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.FiveLastName.domain.PrintPODTO;
+import kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO;
 import kr.co.FiveLastName.domain.ShippingStatusDTO;
 
 @Repository
@@ -51,5 +53,17 @@ public class ShippingStatusDAOImpl implements ShippingStatusDAO{
 	public ShippingStatusDTO complete(int ss_id) {
 		return sqlSession.selectOne(namespace+".ssComplete", ss_id);
 	}
-	
+
+
+	@Override
+	public int count(int po_id) {
+		return sqlSession.selectOne(namespace+".count",po_id);
+	}
+
+
+	@Override
+	public PrintPODTO poComplete(int po_id) {
+		return sqlSession.selectOne(namespace+".poComplete",po_id);
+	}
+
 }

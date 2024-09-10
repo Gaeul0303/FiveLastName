@@ -102,12 +102,20 @@ prefix="c" %> <%@ page session="true" %>
 												<a href = "/progressInspection/search?ss_id=${ss.ss_id}">조회하기</a>
 											</c:when>
 											<c:otherwise>
-												<a href = "/progressInspection/insert?ss_id=${ss.ss_id}">발행하기</a>
+												<a href = "/progressInspection/insert?ss_id=${ss.ss_id}">생성하기</a>
 											</c:otherwise>
 										</c:choose>
                           			</td>
                           			<td class ="centerTD">
-										<a href = "/shippingStatus/update?ss_id=${ss.ss_id}">수정하기</a>
+                          				<c:choose>   
+											<c:when test="${ss.ss_shippingStatus == '출하완료'}">
+												<a>출하완료</a>
+											</c:when>
+											<c:otherwise>
+										  		<a href = "/shippingStatus/update?ss_id=${ss.ss_id}">수정하기</a>
+											</c:otherwise>
+										 </c:choose>
+										
                           			</td>
                           		</tr>
                           	</c:forEach>
@@ -129,7 +137,18 @@ prefix="c" %> <%@ page session="true" %>
     </div>
 
     <%@include file="../include/script.jsp" %>
-
+	
+	<c:if test="${not empty msg}">
+	    <script type="text/javascript">
+	        var msg = '${msg}'; // 모델에서 전달된 메시지를 JavaScript 변수로 받기
+	
+	        if (msg === 'success') {
+	            alert('성공!');
+	        } else if (msg === 'fail') {
+	            alert('실패!');
+	        }
+	    </script>
+	</c:if>
     <script>
 	    $(document).ready(function () {
 	        var table = $("#basic-datatables").DataTable({
@@ -159,6 +178,7 @@ prefix="c" %> <%@ page session="true" %>
 	            });
 	        });
 	    });
+	    
       </script>
   </body>
 </html>

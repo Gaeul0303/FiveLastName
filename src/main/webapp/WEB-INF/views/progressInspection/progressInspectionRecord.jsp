@@ -49,7 +49,8 @@ prefix="c" %> <%@ page session="true" %>
                               <th>검수상태</th>
                               <th>출하수량</th>
                               <th>담당자이름</th>
-                              <th>검수날짜</th>
+                              <th>검수계획날짜</th>
+                              <th>검수완료날짜</th>
                               <th>보완내용</th>
                               <th>미검수수량</th>
                               <th>검수완료수량</th>	
@@ -58,7 +59,8 @@ prefix="c" %> <%@ page session="true" %>
                           
                           <tfoot>
                             <tr>
-                              <th><th>	
+                              <th></th>	
+                              <th></th>	
                               <th></th>	
                               <th></th>	
                               <th></th>	
@@ -78,14 +80,8 @@ prefix="c" %> <%@ page session="true" %>
                           			<td>${pir.pir_status}</td>
                           			<td>${pir.ss_quantity}</td>
                           			<td>${pir.st_name}</td>
-                          			<c:choose>   
-										<c:when test="${pir.pir_status == '미검수'}">
-											<th>${pir.pir_date}</th>
-										</c:when>
-										<c:otherwise>
-											<th>${pir.pir_inspectedDate}</th>
-										</c:otherwise>
-								 	</c:choose>
+									<th>${pir.pir_date}</th>
+									<th>${pir.pir_inspectedDate}</th>
                           			<td>${pir.pir_content}</td>
                           			<td>${pir.pir_uninspectedQuantity}</td>
                           			<td>${pir.pir_inspectedQuantity}</td>
@@ -109,6 +105,17 @@ prefix="c" %> <%@ page session="true" %>
     </div>
 
     <%@include file="../include/script.jsp" %>
+    <c:if test="${not empty msg}">
+	    <script type="text/javascript">
+	        var msg = '${msg}'; // 모델에서 전달된 메시지를 JavaScript 변수로 받기
+	
+	        if (msg === 'success') {
+	            alert('성공!');
+	        } else if (msg === 'fail') {
+	            alert('실패!');
+	        }
+	    </script>
+	</c:if>
 
     <script>
 	    $(document).ready(function () {
