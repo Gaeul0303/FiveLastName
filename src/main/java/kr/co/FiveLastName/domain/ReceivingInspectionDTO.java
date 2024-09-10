@@ -13,6 +13,7 @@ public class ReceivingInspectionDTO {
 	private String pr_name;
 	private int pi_inspectedQuantity;
 	private String pi_status;
+	private int co_supplyPrice;
 	
 	public ReceivingInspectionDTO() {
 		super();
@@ -90,13 +91,21 @@ public class ReceivingInspectionDTO {
 		this.pi_status = pi_status;
 	}
 
+	public int getCo_supplyPrice() {
+		return co_supplyPrice;
+	}
+
+	public void setCo_supplyPrice(int co_supplyPrice) {
+		this.co_supplyPrice = co_supplyPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "ReceivingInspectionDTO [ri_id=" + ri_id + ", pi_id=" + pi_id + ", ri_date=" + ri_date
 				+ ", ri_availability=" + ri_availability + ", ri_totalPrice=" + ri_totalPrice + ", pa_name=" + pa_name
 				+ ", pr_name=" + pr_name + ", pi_inspectedQuantity=" + pi_inspectedQuantity + ", pi_status=" + pi_status
-				+ "]";
+				+ ", co_supplyPrice=" + co_supplyPrice + "]";
 	}
 
-		
+			
 }

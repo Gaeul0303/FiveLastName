@@ -7,8 +7,8 @@
 	<!-- 거래명세서 조회 -->
 	<!--  -->
 	<select id="ts_list" resultType="kr.co.FiveLastName.domain.TransactionStatementDTO">
-		SELECT
-		ri.ri_date, pr.pr_name, id.id_genuineNum, co_supplyPrice, id_totalPrice 
+		SELECT *
+		<!-- ri.ri_date, pr.pr_name, id.id_genuineNum, co_supplyPrice, id_totalPrice --> 
 		
 		FROM transactionStatement ts
 		
@@ -23,13 +23,15 @@
 		INNER JOIN estimate es ON co.es_id = es.es_id
 		INNER JOIN product pr ON es.pr_id = pr.pr_id
 		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		
+		WHERE ri.ri_availability = "입고완료";
 	</select>
 	
 	<!-- 거래명세서 상세조회 -->
 	<!--  -->
 	<select id="ts_selectOne" parameterType="String" resultType="kr.co.FiveLastName.domain.TransactionStatementDTO">
-		SELECT
-		ri.ri_date, pr.pr_name, id.id_genuineNum, co_supplyPrice, id_totalPrice
+		SELECT *
+		<!-- ri.ri_date, pr.pr_name, id.id_genuineNum, co_supplyPrice, id_totalPrice -->
 		
 		FROM transactionStatement ts
 		

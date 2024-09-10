@@ -21,7 +21,7 @@
 		INNER JOIN estimate es ON co.es_id = es.es_id
 		INNER JOIN product pr ON es.pr_id = pr.pr_id
 		
-		WHERE 		
+		
 		
 	</select>
 </mapper>

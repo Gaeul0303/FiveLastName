@@ -7,8 +7,8 @@
 	<!-- 반품 조회 -->
 	<!-- 반품신청일  품목명 불량수량 불량수량 반품상태 -->
 	<select id="tb_list" resultType="kr.co.FiveLastName.domain.TakeBackDTO">
-		SELECT
-		tb.tb_returnApplicationDate, pr.pr_name, tb.tb_errorNum, tb.tb_status
+		SELECT *
+		<!-- tb.tb_returnApplicationDate, pr.pr_name, tb.tb_errorNum, tb.tb_status -->
 		
 		FROM takeback tb
 		 
@@ -26,8 +26,8 @@
 	<!-- 반품 상세조회 -->
 	<!-- 반품신청일 품목명 불량수량 불량사유 반품상태 반품완료일-->
 	<select id="tb_selectOne" parameterType="String" resultType="kr.co.FiveLastName.domain.TakeBackDTO">
-		SELECT
-		tb.tb_returnApplicationDate, pr.pr_name, tb.tb_errorNum, tb.tb_notes, tb.tb_status, tb.tb_returnCompletionDate
+		SELECT *
+		<!-- tb.tb_returnApplicationDate, pr.pr_name, tb.tb_errorNum, tb.tb_notes, tb.tb_status, tb.tb_returnCompletionDate -->
 		
 		FROM takeback tb
 		 
