@@ -7,8 +7,7 @@
 	<!-- 입고 조회 -->
 	<!-- 입고일 품목명 수량 공급가액 합계 입고여부 -->
 	<select id="ri_list" resultType="kr.co.FiveLastName.domain.ReceivingInspectionDTO">
-		SELECT
-		*
+		SELECT *
 		<!-- ri.ri_date, pr.pr_name, pi.pi_inspectedQuantity, co.co_supplyPrice, ri.ri_totalPrice, ri.ri_availability -->
 		
 		FROM receivingInspection ri
@@ -22,14 +21,14 @@
 		INNER JOIN estimate es ON co.es_id = es.es_id
 		INNER JOIN product pr ON es.pr_id = pr.pr_id
 		
-		WHERE pi.pi_status = "검수완료";
+		WHERE pi.pi_status = "검수완료" <!-- and ri.ri_availability = "입고대기" -->;
 	</select>
 
 	<!-- 입고 상세 조회 -->
 	<!-- 입고일 품목명 수량 공급가액 합계 입고여부 담당자 -->
 	<select id="ri_selectOne" resultType="kr.co.FiveLastName.domain.ReceivingInspectionDTO"
 	parameterType="int">
-		SELECT
+		SELECT *
 		<!-- ri.ri_date, pr.pr_name, pi.pi_inspectedQuantity. co.co_supplyPrice, ri.ri_totalPrice, ri.ri_availability -->
 		
 		FROM receivingInspection ri

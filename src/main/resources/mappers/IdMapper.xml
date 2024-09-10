@@ -8,7 +8,8 @@
 	<!-- 입고일 품목명 정품수량 공급가액 합계 -->
 	<select id="id_list" resultType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
 		SELECT
-		ri.ri_date, pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice
+		*
+		<!-- ri.ri_date, pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice -->
 		
 		FROM incomingDeadline id
 		
@@ -28,7 +29,8 @@
 	<!-- 입고마감 상세 조회 -->
 	<select id="id_selectOne" parameterType="int" resultType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
 		SELECT
-		ri.ri_date, pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice
+		*
+		<!-- ri.ri_date, pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice -->
 		
 		FROM incomingDeadline id
 		
@@ -53,7 +55,7 @@
 	</insert>
 	
 	<!-- 입고마감 수정 -->
-	<update id="id-update">
+	<update id="id-update" parameterType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
 		UPDATE incomingDeadline
 		SET
 		id_genuineNum = #{id_genuineNum},

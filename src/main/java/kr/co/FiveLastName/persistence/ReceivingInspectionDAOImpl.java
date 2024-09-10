@@ -30,15 +30,15 @@ public class ReceivingInspectionDAOImpl implements ReceivingInspectionDAO {
 	}
 
 	@Override
-	public void ri_insert(ReceivingInspectionDTO riDTO) {
+	public ReceivingInspectionDTO ri_insert(ReceivingInspectionDTO riDTO) {
 		// 등록
-		sqlSession.selectOne(nameSpace+".ri_insert", riDTO);
+		return sqlSession.selectOne(nameSpace+".ri_insert", riDTO);
 	}
 
 	@Override
-	public void ri_update(ReceivingInspectionDTO riDTO) {
+	public ReceivingInspectionDTO ri_update(ReceivingInspectionDTO riDTO) {
 		// 수정
-		sqlSession.selectOne(nameSpace+".ri_update", riDTO);
+		return sqlSession.selectOne(nameSpace+".ri_update", riDTO);
 	}
 
 

@@ -13,8 +13,8 @@ public interface ReceivingInspectionService {
 	public ReceivingInspectionDTO ri_selectOne(int ri_id);
 	
 //	등록
-	public void ri_insert(ReceivingInspectionDTO riDTO);
+	public ReceivingInspectionDTO ri_insert(ReceivingInspectionDTO riDTO);
 	
 //	수정
-	public void ri_update(ReceivingInspectionDTO riDTO);
+	public ReceivingInspectionDTO ri_update(ReceivingInspectionDTO riDTO);
 }

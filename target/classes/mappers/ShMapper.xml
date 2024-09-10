@@ -7,8 +7,8 @@
 	<!-- 출하명세서 전체 조회 -->
 	<!-- 일자  품목명  수량  공급가액  거래처명 -->
 	<select id="sh_list" resultType="kr.co.FiveLastName.domain.ShippingStatementDTO">
-		SELECT 
-		ss.ss_shippingDate, pr.pr_name, ss.ss_quantity, co.co_supplyPrice, ss.ss_shippingDate, pa.pa_name
+		SELECT *
+		<!-- ss.ss_shippingDate, pr.pr_name, ss.ss_quantity, co.co_supplyPrice, ss.ss_shippingDate, pa.pa_name -->
 		
 		FROM shippingstatement sh
 		
@@ -25,8 +25,8 @@
 	
 	<!-- 출하명세서 상세조회 -->
 	<select id="sh_selectOne" parameterType="int" resultType="kr.co.FiveLastName.domain.ShippingStatementDTO">
-		SELECT 
-		ss.ss_shippingDate, pr.pr_name, ss.ss_quantity, ss.ss_status, ss.ss_shippingDate, co.co_supplyPrice, pa.pa_name
+		SELECT * 
+		<!-- ss.ss_shippingDate, pr.pr_name, ss.ss_quantity, ss.ss_status, ss.ss_shippingDate, co.co_supplyPrice, pa.pa_name -->
 		
 		FROM shippingstatement sh
 		

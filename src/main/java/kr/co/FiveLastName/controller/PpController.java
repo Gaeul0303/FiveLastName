@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.FiveLastName.domain.ProcurmentPlanDTO;
 import kr.co.FiveLastName.service.PpService;
 import kr.co.FiveLastName.service.ProductService;
+@RequestMapping("/procurmentPlan/*")
 
 @Controller
 public class PpController {
@@ -26,7 +27,7 @@ public class PpController {
 	private ProductService pService;
 	
 	//계획 둥록 화면 페이지
-	@GetMapping(value="procurmentPlan/insertForm")
+	@GetMapping(value="/insertForm")
 	public ModelAndView pp_insert(Model model) {
 		logger.info("insert get");
 		
@@ -36,12 +37,12 @@ public class PpController {
 		ModelAndView mav = new ModelAndView();
 		
 		model.addAttribute("list",pService.list());
-		mav.setViewName("procurmentPlan/insertForm");	
+		mav.setViewName("/insertForm");	
 		return mav;			
 	}
 	
 	//계획 등록
-	@PostMapping(value="procurmentPlan/insertForm")
+	@PostMapping(value="/insertForm")
 	public String insert(ProcurmentPlanDTO dto) {
 		logger.info("insert : " + dto);	
 		
@@ -63,7 +64,7 @@ public class PpController {
 	}
 
 	//등록된 계획 상세보기
-	@GetMapping(value="procurmentPlan/information")
+	@GetMapping(value="/information")
 	public ModelAndView pp_detail(Model model,@RequestParam("pp_id") int pp_id) {
 		logger.info("information get");
 		
@@ -77,7 +78,7 @@ public class PpController {
 	}
 	
 	//등록된 계획 수정하는 페이지
-	@GetMapping(value="procurmentPlan/updateForm")
+	@GetMapping(value="/updateForm")
 	public ModelAndView updateForm(@RequestParam("pp_id") int pp_id, Model Model) {
 		ModelAndView mav = new ModelAndView();
 		

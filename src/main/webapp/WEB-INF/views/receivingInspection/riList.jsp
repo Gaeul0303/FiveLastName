@@ -1,6 +1,7 @@
 receiveingInspectionList<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"	
 prefix="c" %> <%@ page session="true" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html lang="ko">
 <style type="text/css">
     
@@ -22,7 +23,7 @@ prefix="c" %> <%@ page session="true" %>
           <div class="container">
             <div class="page-inner">
               <div class="page-header">
-                <h3 class="fw-bold mb-3">입고</h3>
+                <h3 class="fw-bold mb-3">입고 대기</h3>
                 <ul class="breadcrumbs mb-3">
                   <li class="nav-home">
                     <a href="#">
@@ -33,13 +34,13 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">입고 현황</a>
+                    <a href="#">입고 대기</a>
                   </li>
                   <li class="separator">
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">입고현황 전체보기</a>
+                    <a href="#">입고 완료</a>
                   </li>
                 </ul>
               </div>
@@ -47,7 +48,7 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">입고 현황</h4>
+                      <h4 class="card-title">입고현황 전체보기</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
@@ -57,34 +58,51 @@ prefix="c" %> <%@ page session="true" %>
                         >
                           <thead>
                             <tr>
-                              <th>입고검수ID</th>	
-                              <th>품목명</th>
-                              <th>수량</th>
-                              <th>입고여부</th>
-                              <th>입고일</th>
-                              <th>상세</th>
+                              <th class = "centerTD">검수코드</th>	
+                              <th class = "centerTD">품목명</th>
+                              <th class = "centerTD">수량</th>
+                              <th class = "centerTD">단가</th>
+                              <th class = "centerTD">금액</th>
+                              <th class = "centerTD">입고여부</th>
+                              <th class = "centerTD">입고일</th>
+                              <th class = "centerTD">입고검수</th>
                             </tr>
                           </thead>
                           <tfoot>
-                            <tr>
-                              <th></th>	
-                              <th></th>	
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                            </tr>
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
                           </tfoot>
                           <tbody>
                             <c:forEach var="ri" items="${ri_list }">
                             	<tr>
-	                              <td class = "centerTD"><a href="/receivingInspection/insert?ri_id=${ri.ri_id }">${ri.ri_id }</a></td>
+	                              <td class = "centerTD">${ri.ri_id }</td>
 	                              <td>${ri.pr_name }</td>
-	                              <td>${ri.pi_inspectedQuantity }</td>
-	                              <td>${ri.ri_date }</td>
-	                              <td>${ri.ri_availability }</td>
-	                              <td><a href=/receivingInspection/select?ri_id=${ri.ri_id }>상세</a></td>
+	                              <td align="right">
+	                              	<fmt:formatNumber value = "${ri.pi_inspectedQuantity }" pattern="#,###" />
+	                              </td>
+	                              <td align="right">
+	                              	<fmt:formatNumber value="${ri.co_supplyPrice }" pattern="#,###" />
+	                              </td>
+	                              <td align="right">
+	                              	<fmt:formatNumber value="${ri.ri_totalPrice }" pattern="#,###" />
+	                              </td>
+	                              <td class = "centerTD">${ri.ri_availability }</td>
+	                              <td class = "centerTD"><fmt:formatDate value="${ri.ri_date }" pattern="yyyy-MM-dd"/> </td>
+	                               <c:choose>
+	                              	<c:when test="${ri.ri_availability eq '입고대기'}">
+	                              		<td class = "centerTD"><a href="/receivingInspection/riUpdate?ri_id=${ri.ri_id }">검수작성</a></td>
+	                              	</c:when>
+	                              	<c:otherwise>
+	                              		<td></td>
+	                              	</c:otherwise>
+	                              </c:choose>
+	                              	
                             	</tr>
                             </c:forEach>
                           </tbody>
@@ -93,8 +111,6 @@ prefix="c" %> <%@ page session="true" %>
                     </div>
                   </div>
                 </div>
-  
-             
               </div>
             </div>
           </div>
@@ -113,7 +129,7 @@ prefix="c" %> <%@ page session="true" %>
         });
 
         // 필터를 적용할 열 인덱스 배열
-        var categoryColumns = [1, 4];
+        var categoryColumns = [1, 5];
 
         // 필터를 적용할 열에 대해서만 처리
         categoryColumns.forEach(function (index) {

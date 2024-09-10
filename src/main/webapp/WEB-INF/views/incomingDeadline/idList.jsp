@@ -1,0 +1,147 @@
+receiveingInspectionList<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"	
+prefix="c" %> <%@ page session="true" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<html lang="ko">
+<style type="text/css">
+    
+    .centerTD{
+    	text-align : center;
+    }
+    
+    </style>
+  <head>
+    <%@include file="../include/head.jsp" %>
+  </head>
+  <body>
+    <div class="wrapper">
+      <%@include file="../include/sideBar.jsp" %>
+      
+      <div class="main-panel">
+          <%@include file="../include/header.jsp" %>
+
+          <div class="container">
+            <div class="page-inner">
+              <div class="page-header">
+                <h3 class="fw-bold mb-3">입고</h3>
+                <ul class="breadcrumbs mb-3">
+                  <li class="nav-home">
+                    <a href="#">
+                      <i class="icon-home"></i>
+                    </a>
+                  </li>
+                  <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#">입고 완료</a>
+                  </li>
+                  <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#">입고 완료</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title">입고 완료</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table
+                          id="basic-datatables"
+                          class="display table table-striped table-hover"
+                        >
+                          <thead>
+                            <tr>
+                              <th class = "centerTD">검수코드</th>	
+                              <th class = "centerTD">품목명</th>
+                              <th class = "centerTD">수량</th>
+                              <th class = "centerTD">단가</th>
+                              <th class = "centerTD">금액</th>
+                              <th class = "centerTD">입고여부</th>
+                              <th class = "centerTD">입고일</th>
+                              <th class = "centerTD">거래명세서</th>
+                            </tr>
+                          </thead>
+                          <tfoot>
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+                          </tfoot>
+                          <tbody>
+                            <c:forEach var="id" items="${id_list }">
+                            	<tr>
+	                              <td class = "centerTD">${id.ri_id }</td>
+	                              <td>${id.pr_name }</td>
+	                              <td align="right">
+	                              	<fmt:formatNumber value = "${id.pi_inspectedQuantity }" pattern="#,###" />
+	                              </td>
+	                              <td align="right">
+	                              	<fmt:formatNumber value="${id.co_supplyPrice }" pattern="#,###" />
+	                              </td>
+	                              <td align="right">
+	                              	<fmt:formatNumber value="${id.ri_totalPrice }" pattern="#,###" />
+	                              </td>
+                            	  <td class = "centerTD">${id.ri_availability }</td>
+	                              <td class = "centerTD"><fmt:formatDate value="${id.ri_date }"/></td>
+	                              <td class = "centerTD"><a href="/receivingInspection/riUpdate?ri_id=${id.id_code }">발행</a></td>
+                            	</tr>
+                            </c:forEach>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+             
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <%@include file="../include/footer.jsp" %>
+    </div>
+
+    <%@include file="../include/script.jsp" %>
+
+    <script>
+    $(document).ready(function () {
+        var table = $("#basic-datatables").DataTable({
+            pageLength: 5,
+            aaSorting: []
+        });
+
+        // 필터를 적용할 열 인덱스 배열
+        var categoryColumns = [1, 5];
+
+        // 필터를 적용할 열에 대해서만 처리
+        categoryColumns.forEach(function (index) {
+            var column = table.column(index);
+            
+            var select = $('<select class="form-select"><option value="">카테고리선택</option></select>')
+                .appendTo($(column.footer()).empty())
+                .on('change', function () {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                    column
+                        .search(val ? "^" + val + "$" : "", true, false)
+                        .draw();
+                });
+
+            // 해당 열의 데이터로 select 박스 옵션 추가
+            column.data().unique().sort().each(function (d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>');
+            });
+        });
+    });
+      </script>
+  </body>
+</html>

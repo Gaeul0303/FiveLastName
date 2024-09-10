@@ -64,7 +64,14 @@
                           </thead>
                           <tfoot>
                             <tr>
-                              <th>조달계획 ID</th>                                                                   
+                              <th>조달계획ID</th>        
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>                                                           
                             </tr>
                           </tfoot>
                           <tbody>
@@ -104,16 +111,17 @@
         $(document).ready(function () {
         
           $("#basic-datatables").DataTable({
-            pageLength: 5, 
+            pageLength: 5,
+            aaSorting : [],
             initComplete: function () {
               var table = this.api();
+              var categoryColumnIndex = 0;
               console.log(table.column(categoryColumnIndex).footer())
               //카테고리 열 인덱스  
-              var categoryColumnIndex = 0;
               
                 //카테고리 필터용 selelct박스
-                var select = $('<select class="form-select"><option value="">조달계획 ID 선택</option></select>')
-                   	.appendTo($(table.column(categoryColumIndex).footer()).empty())
+                var select = $('<select class="form-select"><option value="">조달계획ID</option></select>')
+                   	.appendTo($(table.column(categoryColumnIndex).footer()).empty())
                     .on("change", function () {
                       var val = $.fn.dataTable.util.escapeRegex($(this).val());
 						table  
