@@ -17,7 +17,7 @@
           <div class="container">
             <div class="page-inner">
               <div class="page-header">
-                <h3 class="fw-bold mb-3">조달 계획</h3>
+                <h3 class="fw-bold mb-3">조달 계획 등록</h3>
                 <ul class="breadcrumbs mb-3">
                   <li class="nav-home">
                     <a href="#">
@@ -50,44 +50,37 @@
                           id="basic-datatables"
                           class="display table table-striped table-hover"
                         >
-                          <thead>
+                         <tfoot>
                             <tr>
-                              <th>조달계획ID</th>
-                              <th>품목ID</th>                              
-                              <th>자재소요공정</th>
-                              <th>소요일</th>
-                              <th>소요량</th>
-                              <th>등록일</th>
-                              <th>조달납기</th> 
-                              <th>자세히보기</th>                            
-                            </tr>
-                          </thead>
-                          <tfoot>
-                            <tr>
-                              <th>조달계획ID</th>        
+                              <th>조달계획등록ID</th>        
                               <th></th>
                               <th></th>
                               <th></th>
                               <th></th>
-                              <th></th>
-                              <th></th>
-                              <th></th>                                                           
+                              <th></th>                                                                                                                                                                                                
                             </tr>
                           </tfoot>
-                          <tbody>
-                          	<c:forEach items="${list}" var="procurmentPlan">                           
+                          <thead>
                             <tr>
-                              <td>${procurmentPlan.pp_id}</td>
-                              <td>${procurmentPlan.pr_id }</td>                              
-                              <td>${procurmentPlan.pp_materialRequiredProcessStage }</td>
-                              <td>${procurmentPlan.pp_makeTime }</td>
-                              <td>${procurmentPlan.pp_spendAmount }</td>
-                              <td><fmt:formatDate pattern="yyyy-MM-dd"
-																value="${procurmentPlan.pp_regDate }" /></td>
-                              <td><fmt:formatDate pattern="yyyy-MM-dd"
-																value="${procurmentPlan.pp_deliveryDate }" /></td>                              
-                              <td><a href="/procurmentPlan/information?pp_id=${procurmentPlan.pp_id}">자세히보기</a></td>                              
+                              <th>조달계획등록ID</th>
+                              <th>거래계약ID</th>                              
+                              <th>납기일</th>
+                              <th>수량</th>
+                              <th>발주서발행여부</th>
+                              <th></th>                                                                                  
                             </tr>
+                          </thead>
+                         
+                          <tbody>
+                          	<c:forEach items="${list}" var="ppr">                           
+	                            <tr>
+	                              <td>${ppr.ppr_id}</td>
+	                              <td>${ppr.co_id }</td>                              
+	                              <td><fmt:formatDate pattern="yyyy-MM-dd" value="${ppr.ppr_dueDate }" /></td>
+	                              <td>${ppr.ppr_quantity }</td>
+	                              <td>${ppr.ppr_status}</td>                                                        
+	                              <td><a href="/procurementPlanRegistration/detail?ppr_id=${ppr.ppr_id}">자세히보기</a></td>                              
+	                            </tr>
                          	</c:forEach>
                           </tbody>
                         </table>
@@ -110,25 +103,25 @@
     <script>
         $(document).ready(function () {
         
-          $("#basic-datatables").DataTable({
+          $("table#basic-datatables").DataTable({
             pageLength: 5,
             aaSorting : [],
             initComplete: function () {
               var table = this.api();
               var categoryColumnIndex = 0;
-              console.log(table.column(categoryColumnIndex).footer())
+            
               //카테고리 열 인덱스  
               
                 //카테고리 필터용 selelct박스
-                var select = $('<select class="form-select"><option value="">조달계획ID</option></select>')
+                var select = $('<select class="form-select"><option value=""></option></select>')
                    	.appendTo($(table.column(categoryColumnIndex).footer()).empty())
-                    .on("change", function () {
+                    .on('change', function () {
                       var val = $.fn.dataTable.util.escapeRegex($(this).val());
 						table  
                       	.column(categoryColumIndex)
                         .search(val ? "^" + val + "$" : "", true, false)
                         .draw();
-                    });
+                    });              
   
                 table.column(categoryColumnIndex).data().unique().each(function (d, j){
                 	select.append('<option value="' + d + '">' + d + '</option>');
