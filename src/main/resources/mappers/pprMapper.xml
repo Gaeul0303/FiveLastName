@@ -7,31 +7,40 @@
 	<!-- 조달 계획 등록 -->
 	<insert id="ppr_insert"
 		parameterType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">
-		INSERT INTO procurementplanregistration
-		(ppr_id,
-		ppr_dueDate,
-		ppr_quantity)
+		INSERT INTO `ERP`.`ProcurementPlanRegistration`
+		(`co_id`,
+		`ppr_dueDate`,
+		`ppr_status`,
+		`ppr_quantity`)
 		VALUES
-		(#{ppr_id},
-		#{ppr_dueDate},
-		#{ppr_quantity});
+		(#{co_id},
+		 #{ppr_dueDate},
+		 #{ppr_status},
+		 #{ppr_quantity});
 	</insert>
+
+	<!-- 조달 계획 전체 조회 -->
+	<select id="ppr_selectAll" 
+		resultType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">
+		select * from ProcurementPlanRegistration order by ppr_id DESC
+	</select>
 	
-	<!-- 조달 계획 조회 -->
-	<select id="ppr_selectOne" resultType="int"
-		parameterType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">
-		select * from product where ppr_id = #{ppr_id}
+	<!-- 조달 계획 상세 조회 -->
+	<select id="ppr_selectOne"
+		resultType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO"
+		parameterType="int">
+		select * from procurementPlanRegistration where ppr_id = #{ppr_id}
 	</select>
 	
 	<!-- 조달 계획 수정 -->
-	<update id="ppr_update"
-		parameterType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">
-		UPDATE procurementplanregistration
-		SET
-		ppr_id = #{ppr_id},
-		ppr_dueDate = #{ppr_dueDate},
-		ppr_quantity = #{ppr_quantity}
-		WHERE ppr_id = #{ppr_id};
+	<update id="ppr_update" parameterType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">
+	UPDATE `erp`.`procurementplanregistration`
+	SET
+	`co_id` = #{co_id},
+	`ppr_dueDate` = #{ppr_dueDate},	
+	`ppr_status` = #{ppr_status},
+	`ppr_quantity` = #{ppr_quantity}
+	WHERE `ppr_id` = #{ppr_id};
 	</update>
 
 </mapper>
