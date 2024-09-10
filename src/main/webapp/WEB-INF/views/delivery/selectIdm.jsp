@@ -44,8 +44,6 @@
                                                     <th>출고일</th>
                                                     <th>상태</th>
                                                 </tr>
-                                                <tr>
-                                                	<th>
                                             </thead>
                                             <tbody>
                                                 <c:forEach var="idm" items="${selectIdm}">
