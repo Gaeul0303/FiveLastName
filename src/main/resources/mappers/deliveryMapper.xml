@@ -140,8 +140,8 @@ JOIN
     erp.estimate es ON co.es_id = es.es_id
 JOIN
     erp.product pr ON pr.pr_id = es.pr_id
-where
-   	idm.in_id = #{in_id};
+where 
+	idm.in_id= #{in_id};
 </select>
 
 </mapper>
