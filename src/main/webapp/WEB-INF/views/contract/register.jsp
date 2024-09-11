@@ -100,7 +100,7 @@
 															class="form-select" id="statusinput"
 															name="co_contractStatus">
 															<option value="미계약">미계약</option>
-															<option value="새품목">계약완료</option>
+															<option value="계약완료">계약완료</option>
 
 														</select>
 													</div>
