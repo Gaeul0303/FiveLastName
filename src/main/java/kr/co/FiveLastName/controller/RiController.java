@@ -44,10 +44,31 @@ public class RiController {
 		return mav;
 	}
 	
+	@GetMapping(value = "/updateForm")
+	public ModelAndView updateForm(@RequestParam("ri_id") int ri_id, Model model) { 
+		ModelAndView mav = new ModelAndView();
+		
+		model.addAttribute("updateform", riService.ri_selectOne(ri_id));
+		
+		mav.setViewName("/receivingInspection/riUpdateForm");
+		
+		return mav;
+	}
 	
-	
-	
-	
+	@PostMapping(value = "/update")
+	public ModelAndView ri_update(ReceivingInspectionDTO riDTO) {
+		int result = riService.ri_update(riDTO);
+		
+		ModelAndView mav = new ModelAndView();
+		if(result<0) {
+			mav.setViewName("error");
+			return mav;
+		}
+		
+		mav.setViewName("rediect:/receivingInspection/riList");
+		
+		return mav;
+	}
 	
 	
 }
