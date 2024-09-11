@@ -63,7 +63,7 @@ public class ProgressInspectionDAOImpl implements ProgressInspectionDAO{
 		return sqlSession.selectOne(namespace+".ssComplete", ss_id);
 	}
 	@Override
-	public StaffDTO stSelect(int st_id) {
+	public StaffDTO stSelect(String st_id) {
 		return sqlSession.selectOne(namespace+".stSelect", st_id);
 	}
 	@Override

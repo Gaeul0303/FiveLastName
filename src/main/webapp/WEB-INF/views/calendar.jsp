@@ -1,4 +1,3 @@
-
 <html lang="ko">
   <head>
     <%@include file="include/head.jsp" %>

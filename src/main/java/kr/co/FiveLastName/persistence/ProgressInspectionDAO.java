@@ -30,7 +30,7 @@ public interface ProgressInspectionDAO {
 	
 	ShippingStatusDTO ssComplete(int ss_id);
 	
-	StaffDTO stSelect(int st_id);
+	StaffDTO stSelect(String st_id);
 	
 	PartnerDTO paSelect(int pa_id);
 }

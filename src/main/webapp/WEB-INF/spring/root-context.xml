@@ -44,24 +44,26 @@
 			ref="sqlSessionFactory" />
 	</bean>
 	
-	<!-- naver mail설정 -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
-	 <property name="host" value="smtp.naver.com"/> <!-- 메이서버 호스트 -->
-	 <property name="port" value="465"/> <!-- 메이서버 포트번호 -->
-	 <property name="username" value="yungaeul@naver.com"/> <!-- 자신의 이메일 아이디 -->
-	 <property name="password" value="yun0519!"/> <!-- 자신의 비밀번호 -->
-	   <!-- 보안연결 SSL과 관련된 설정 -->
-	 <property name="javaMailProperties">
-	  <props>
-	  <prop key="mail.smtp.auth">true</prop>
-	  <prop key="mail.smtp.starttls.enable">true</prop>
-	  <prop key="mail.smtps.checkserveridentity">true</prop>
-	  <prop key="mail.smtps.ssl.trust">*</prop>
-	  <prop key="mail.debug">true</prop>
-	  <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
-	  </props>
-	 </property>
-	</bean>
+   <!-- mail smtp config -->
+   <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="smtp.naver.com"></property>
+      <property name="port" value="465"></property>
+      <property name="username" value="yungaeul@naver.com"></property> <!-- 아이디  --> 
+      <property name="password" value="yun0519!"></property><!-- 비밀번호  --> 
+      
+      <!-- 보안 관련 SSL 설정  -->
+      <property name="javaMailProperties">
+         <props>
+            <prop key="mail.smtp.auth"></prop>
+            <prop key="mail.smtp.starttls.enable"></prop>
+            <prop key="mail.smtps.checkserveridentity"></prop>
+            <prop key="mail.smtps.ssl.trust"></prop>
+            <prop key="mail.debug"></prop>
+            <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+         </props>
+      </property>
+      
+   </bean>
 		
 	
 	

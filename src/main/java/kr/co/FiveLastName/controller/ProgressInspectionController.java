@@ -173,7 +173,7 @@ public class ProgressInspectionController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView piUpdate(@ModelAttribute ProgressInspectionDTO pi) {
+	public ModelAndView piUpdate(@ModelAttribute ProgressInspectionDTO pi) throws Exception {
 		System.out.println("pi = " + pi);
 		ModelAndView mav = new ModelAndView();
 		
@@ -183,6 +183,8 @@ public class ProgressInspectionController {
 			System.out.println("업데이트성공!");
 			System.out.println("PI = " + PI);
 			service.insertRecord(PI);
+			sendMailStaff(PI.getSt_id(),PI.getPi_id());
+			sendMailPartner(PI.getPa_id(),PI.getPi_id());
 			mav.addObject("msg","success");
 			mav.addObject("pi",PI);
 			mav.addObject("pi_id",PI.getPi_id());
@@ -195,12 +197,60 @@ public class ProgressInspectionController {
 		return mav;
 	}
 	
-    public void sendMailStaff(int st_id) throws Exception{
+	@RequestMapping(value = "/mail", method = RequestMethod.GET)
+    public void sendMailTest() throws Exception{
+		
+		 String subject = "진척검수계획";
+	        String content = "안녕하세요 (주)오성입니다 /n"
+	        		+ "검수계획이 변경되어 메일드립니다. /n"
+	        		+ "현재 검수계획 날짜는 "+"이고,"
+	        				+ "보완내용은 " +"입니다. /n"
+	        				+ "확인부탁드립니다.";
+	        String from = "yungaeul@naver.com"; // 보내는사람
+	        String to = "pizzang111@gmail.com";	//	받는사람
+	        
+	        try {
+	            MimeMessage mail = mailSender.createMimeMessage();
+	            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
+	            // true는 멀티파트 메세지를 사용하겠다는 의미
+	            
+	            /*
+	             * 단순한 텍스트 메세지만 사용시엔 아래의 코드도 사용 가능 
+	             * MimeMessageHelper mailHelper = new MimeMessageHelper(mail,"UTF-8");
+	             */
+	            
+	            mailHelper.setFrom(from);
+	            // 빈에 아이디 설정한 것은 단순히 smtp 인증을 받기 위해 사용 따라서 보내는이(setFrom())반드시 필요
+	            // 보내는이와 메일주소를 수신하는이가 볼때 모두 표기 되게 원하신다면 아래의 코드를 사용하시면 됩니다.
+	            //mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
+	            mailHelper.setTo(to);
+	            mailHelper.setSubject(subject);
+	            mailHelper.setText(content);
+	            // true는 html을 사용하겠다는 의미입니다.
+	            
+	            /*
+	             * 단순한 텍스트만 사용하신다면 다음의 코드를 사용하셔도 됩니다. mailHelper.setText(content);
+	             */
+	            
+	            mailSender.send(mail);
+	            System.out.println("스태프에게 메일보냈습니다!");
+	        } catch(Exception e) {
+	            e.printStackTrace();
+	        }
+	        
+    }
+	
+    public String sendMailStaff(String st_id, int pi_id) throws Exception{
         
 		StaffDTO st = service.stSelect(st_id);
+		ProgressInspectionDTO pi = service.piSelect(pi_id);
 		
         String subject = "진척검수계획";
-        String content = "메일 테스트 내용";
+        String content = "안녕하세요 (주)오성입니다 \n"
+        		+ "검수계획이 변경되어 메일드립니다. \n"
+        		+ "현재 검수계획 날짜는 "+ pi.getPi_date()+"이고,"
+        				+ "보완내용은 " + pi.getPi_content() +"입니다. \n"
+        				+ "확인부탁드립니다.";
         String from = "yungaeul@naver.com"; // 보내는사람
         String to = st.getSt_email();	//	받는사람
         
@@ -228,18 +278,23 @@ public class ProgressInspectionController {
              */
             
             mailSender.send(mail);
-            
+            System.out.println("스태프에게 메일보냈습니다!");
         } catch(Exception e) {
             e.printStackTrace();
         }
-        
+        return "/";
     }
-    public void sendMailPartner(int pa_id) throws Exception{
+    public void sendMailPartner(int pa_id, int pi_id) throws Exception{
     	
     	PartnerDTO pa = service.paSelect(pa_id);
+    	ProgressInspectionDTO pi = service.piSelect(pi_id);
     	
     	String subject = "test 메일";
-    	String content = "메일 테스트 내용";
+        String content = "안녕하세요 (주)오성입니다 \n"
+        		+ "검수계획이 변경되어 메일드립니다. \n"
+        		+ "현재 검수계획 날짜는 "+ pi.getPi_date()+"이고,"
+        				+ "보완내용은 " + pi.getPi_content() +"입니다. \n"
+        				+ "확인부탁드립니다.";
     	String from = "yungaeul@naver.com"; // 보내는사람
     	String to = pa.getPa_email();	//	받는사람
     	
@@ -267,6 +322,7 @@ public class ProgressInspectionController {
     		 */
     		
     		mailSender.send(mail);
+    		 System.out.println("파트너에게 메일보냈습니다!");
     		
     	} catch(Exception e) {
     		e.printStackTrace();

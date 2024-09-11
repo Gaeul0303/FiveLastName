@@ -74,12 +74,15 @@
 		update progressInspection 
 		set
 		pi_order = #{pi_order},
-		pi_date = #{pi_date},
+		pi_date =  pi_date = <choose>
+                     <when test="pi_date == ''">NULL</when>
+                     <otherwise>#{pi_date}</otherwise>
+                  </choose>,
 		pi_status = #{pi_status},
 		pi_content = #{pi_content},
 		pi_inspectedDate = now(), 
-		pi_uninspectedQuantity = #{ss_quantity} - #{pi_inspectedQuantity},
-		pi_inspectedQuantity = #{pi_inspectedQuantity}
+		pi_uninspectedQuantity = pi_uninspectedQuantity - #{pi_inspectedQuantity},
+		pi_inspectedQuantity = pi_inspectedQuantity + #{pi_inspectedQuantity}
 		where pi_id = #{pi_id}
 	</update>
 	

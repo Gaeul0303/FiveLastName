@@ -75,7 +75,7 @@ public class ProgressInspectionServiceImpl implements ProgressInspectionService{
 	}
 
 	@Override
-	public StaffDTO stSelect(int st_id) {
+	public StaffDTO stSelect(String st_id) {
 		return dao.stSelect(st_id);
 	}
 
