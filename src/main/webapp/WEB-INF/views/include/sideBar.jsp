@@ -76,6 +76,56 @@
               </ul>
             </div>
           </li>
+          
+           <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#plan">
+              <i class="fas fa-shipping-fast"></i>
+              <p>조달계획</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="plan">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="/procurmentPlan/list">
+                    <span class="sub-item">계획조회</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/procurmentPlan/insertForm">
+                    <span class="sub-item">계획등록</span>
+                  </a>
+                </li>
+                 <li>
+                  <a href="/procurementPlanRegistration/list">
+                    <span class="sub-item">등록된 조달계획 조회</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+           <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#Regist">
+              <i class="fas fa-shipping-fast"></i>
+              <p>조달계획등록</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="Regist">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="//procurementPlanRegistration/list">
+                    <span class="sub-item">계획조회</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="//procurementPlanRegistration/insertForm">
+                    <span class="sub-item">계획등록</span>
+                  </a>
+                </li>
+               
+              </ul>
+            </div>
+          </li>
+          
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#tables">
               <i class="fas fa-calculator"></i>
@@ -176,6 +226,24 @@
                     <span class="sub-item">현황조회</span>
                   </a>
                 </li>
+                
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#idm">
+              <i class="fas fa-shipping-fast"></i>
+              <p>출하</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="idm">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="/inventoryList">
+                    <span class="sub-item">자재리스트</span>
+                  </a>
+                </li>
+                
                 
               </ul>
             </div>
