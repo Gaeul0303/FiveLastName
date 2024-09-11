@@ -121,7 +121,7 @@
                       	.column(categoryColumIndex)
                         .search(val ? "^" + val + "$" : "", true, false)
                         .draw();
-                    });              
+                    });
   
                 table.column(categoryColumnIndex).data().unique().each(function (d, j){
                 	select.append('<option value="' + d + '">' + d + '</option>');

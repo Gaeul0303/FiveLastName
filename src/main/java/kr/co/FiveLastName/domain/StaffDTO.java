@@ -1,15 +1,21 @@
 package kr.co.FiveLastName.domain;
 
 public class StaffDTO {
-	String st_id;
-	String st_pw;
-	String st_name;
-	String st_department;
-	String st_email;
+	private String st_id;
+	private String st_pw;
+	private String st_name;
+	private String st_department;
+	private String st_email;
 	public StaffDTO() {
 		super();
 	}
 	
+	public StaffDTO(String st_id, String st_pw) {
+		super();
+		this.st_id = st_id;
+		this.st_pw = st_pw;
+		
+	}
 	public StaffDTO(String st_id, String st_pw, String st_name, String st_department, String st_email) {
 		super();
 		this.st_id = st_id;
