@@ -55,8 +55,6 @@ public class ProgressInspectionController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("/progressInspection/progressInspectionList");
-		
 		List<ProgressInspectionDTO> pi = service.piAllSelect();
 		
 		mav.addObject("pi", pi);
@@ -144,12 +142,12 @@ public class ProgressInspectionController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public ModelAndView piInsert(@ModelAttribute ProgressInspectionDTO pi) {
+	public ModelAndView piInsert(@ModelAttribute ProgressInspectionDTO pi) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		System.out.println("insert 작업입니다.");
-		
+		System.out.println("pi_date = " + pi.getPi_date());
 		if(pi!=null) {
 			service.piInsert(pi);
 			int ss_id = pi.getSs_id();
@@ -161,6 +159,8 @@ public class ProgressInspectionController {
 			ss_id = PI.getSs_id();
 			service.ssComplete(ss_id);
 			service.insertRecord(PI);
+			sendMailStaff(PI.getSt_id(),PI.getPi_id());
+			sendMailPartner(PI.getPa_id(),PI.getPi_id());
 			mav.addObject("pi", PI);
 			mav.addObject("msg","success");
 			mav.addObject("pi_id",pI.getPi_id());
@@ -197,138 +197,101 @@ public class ProgressInspectionController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/mail", method = RequestMethod.GET)
-    public void sendMailTest() throws Exception{
-		
-		 String subject = "진척검수계획";
-	        String content = "안녕하세요 (주)오성입니다 /n"
-	        		+ "검수계획이 변경되어 메일드립니다. /n"
-	        		+ "현재 검수계획 날짜는 "+"이고,"
-	        				+ "보완내용은 " +"입니다. /n"
-	        				+ "확인부탁드립니다.";
-	        String from = "yungaeul@naver.com"; // 보내는사람
-	        String to = "pizzang111@gmail.com";	//	받는사람
+	public void sendMailStaff(String st_id, int pi_id) throws Exception {
+	    StaffDTO st = service.stSelect(st_id);
+	    ProgressInspectionDTO pi = service.piSelect(pi_id);
+	    
+	    String subject = "검수계획변경안내";
+	    String content = "<body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f4f4;\">"
+	            + "    <div style=\"width: 80%; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;\">"
+	            + "        <h1 style=\"color: #0056b3; font-size: 1.5em;\">안녕하세요 " + st.getSt_name() + " 님,</h1>"
+	            + "        <p>검수계획이 변경되어 메일드립니다.</p>"
+	            + "        <table style=\"width: 100%; border-collapse: collapse; margin-top: 20px;\">"
+	            + "            <tr>"
+	            + "                <th style=\"padding: 12px; text-align: left; border-bottom: 1px solid #ddd; background-color: #466879; color: white; font-weight: bold;\">검수계획 날짜</th>"
+	            + "                <td style=\"padding: 12px; text-align: left; border-bottom: 1px solid #ddd; background-color: #e0f7fa;\">" + pi.getPi_date() + "</td>"
+	            + "            </tr>"
+	            + "            <tr>"
+	            + "                <th style=\"padding: 12px; text-align: left; border-bottom: 1px solid #ddd; background-color: #466879; color: white; font-weight: bold;\">보완내용</th>"
+	            + "                <td style=\"padding: 12px; text-align: left; border-bottom: 1px solid #ddd; background-color: #e0f7fa;\">" + pi.getPi_content() + "</td>"
+	            + "            </tr>"
+	            + "        </table>"
+	            + "        <p>변경점 확인 부탁드립니다.</p>"
+	            + "        <div style=\"margin-top: 20px; font-size: 0.9em; color: #777;\">"
+	            + "            <p>감사합니다,</p>"
+	            + "            <p>(주)오성</p>"
+	            + "            <p><a href=\"mailto:yungaeul@naver.com\" style=\"color: #0056b3; text-decoration: none;\">yungaeul@naver.com</a></p>"
+	            + "        </div>"
+	            + "    </div>"
+	            + "</body>"
+	            + "</html>";
+	    
+	    String from = "yungaeul@naver.com"; // 보내는 사람
+	    String to = st.getSt_email(); // 받는 사람
+	    
+	    try {
+	        MimeMessage mail = mailSender.createMimeMessage();
+	        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
 	        
-	        try {
-	            MimeMessage mail = mailSender.createMimeMessage();
-	            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
-	            // true는 멀티파트 메세지를 사용하겠다는 의미
-	            
-	            /*
-	             * 단순한 텍스트 메세지만 사용시엔 아래의 코드도 사용 가능 
-	             * MimeMessageHelper mailHelper = new MimeMessageHelper(mail,"UTF-8");
-	             */
-	            
-	            mailHelper.setFrom(from);
-	            // 빈에 아이디 설정한 것은 단순히 smtp 인증을 받기 위해 사용 따라서 보내는이(setFrom())반드시 필요
-	            // 보내는이와 메일주소를 수신하는이가 볼때 모두 표기 되게 원하신다면 아래의 코드를 사용하시면 됩니다.
-	            //mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
-	            mailHelper.setTo(to);
-	            mailHelper.setSubject(subject);
-	            mailHelper.setText(content);
-	            // true는 html을 사용하겠다는 의미입니다.
-	            
-	            /*
-	             * 단순한 텍스트만 사용하신다면 다음의 코드를 사용하셔도 됩니다. mailHelper.setText(content);
-	             */
-	            
-	            mailSender.send(mail);
-	            System.out.println("스태프에게 메일보냈습니다!");
-	        } catch(Exception e) {
-	            e.printStackTrace();
-	        }
+	        mailHelper.setFrom(from);
+	        mailHelper.setTo(to);
+	        mailHelper.setSubject(subject);
+	        mailHelper.setText(content, true); // true는 HTML 형식을 의미
 	        
-    }
-	
-    public String sendMailStaff(String st_id, int pi_id) throws Exception{
-        
-		StaffDTO st = service.stSelect(st_id);
-		ProgressInspectionDTO pi = service.piSelect(pi_id);
-		
-        String subject = "진척검수계획";
-        String content = "안녕하세요 (주)오성입니다 \n"
-        		+ "검수계획이 변경되어 메일드립니다. \n"
-        		+ "현재 검수계획 날짜는 "+ pi.getPi_date()+"이고,"
-        				+ "보완내용은 " + pi.getPi_content() +"입니다. \n"
-        				+ "확인부탁드립니다.";
-        String from = "yungaeul@naver.com"; // 보내는사람
-        String to = st.getSt_email();	//	받는사람
-        
-        try {
-            MimeMessage mail = mailSender.createMimeMessage();
-            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
-            // true는 멀티파트 메세지를 사용하겠다는 의미
-            
-            /*
-             * 단순한 텍스트 메세지만 사용시엔 아래의 코드도 사용 가능 
-             * MimeMessageHelper mailHelper = new MimeMessageHelper(mail,"UTF-8");
-             */
-            
-            mailHelper.setFrom(from);
-            // 빈에 아이디 설정한 것은 단순히 smtp 인증을 받기 위해 사용 따라서 보내는이(setFrom())반드시 필요
-            // 보내는이와 메일주소를 수신하는이가 볼때 모두 표기 되게 원하신다면 아래의 코드를 사용하시면 됩니다.
-            //mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
-            mailHelper.setTo(to);
-            mailHelper.setSubject(subject);
-            mailHelper.setText(content, true);
-            // true는 html을 사용하겠다는 의미입니다.
-            
-            /*
-             * 단순한 텍스트만 사용하신다면 다음의 코드를 사용하셔도 됩니다. mailHelper.setText(content);
-             */
-            
-            mailSender.send(mail);
-            System.out.println("스태프에게 메일보냈습니다!");
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return "/";
-    }
-    public void sendMailPartner(int pa_id, int pi_id) throws Exception{
-    	
-    	PartnerDTO pa = service.paSelect(pa_id);
-    	ProgressInspectionDTO pi = service.piSelect(pi_id);
-    	
-    	String subject = "test 메일";
-        String content = "안녕하세요 (주)오성입니다 \n"
-        		+ "검수계획이 변경되어 메일드립니다. \n"
-        		+ "현재 검수계획 날짜는 "+ pi.getPi_date()+"이고,"
-        				+ "보완내용은 " + pi.getPi_content() +"입니다. \n"
-        				+ "확인부탁드립니다.";
-    	String from = "yungaeul@naver.com"; // 보내는사람
-    	String to = pa.getPa_email();	//	받는사람
-    	
-    	try {
-    		MimeMessage mail = mailSender.createMimeMessage();
-    		MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
-    		// true는 멀티파트 메세지를 사용하겠다는 의미
-    		
-    		/*
-    		 * 단순한 텍스트 메세지만 사용시엔 아래의 코드도 사용 가능 
-    		 * MimeMessageHelper mailHelper = new MimeMessageHelper(mail,"UTF-8");
-    		 */
-    		
-    		mailHelper.setFrom(from);
-    		// 빈에 아이디 설정한 것은 단순히 smtp 인증을 받기 위해 사용 따라서 보내는이(setFrom())반드시 필요
-    		// 보내는이와 메일주소를 수신하는이가 볼때 모두 표기 되게 원하신다면 아래의 코드를 사용하시면 됩니다.
-    		//mailHelper.setFrom("보내는이 이름 <보내는이 아이디@도메인주소>");
-    		mailHelper.setTo(to);
-    		mailHelper.setSubject(subject);
-    		mailHelper.setText(content, true);
-    		// true는 html을 사용하겠다는 의미입니다.
-    		
-    		/*
-    		 * 단순한 텍스트만 사용하신다면 다음의 코드를 사용하셔도 됩니다. mailHelper.setText(content);
-    		 */
-    		
-    		mailSender.send(mail);
-    		 System.out.println("파트너에게 메일보냈습니다!");
-    		
-    	} catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    	
-    }
+	        mailSender.send(mail);
+	        System.out.println("스태프에게 메일을 보냈습니다!");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+    
+	public void sendMailPartner(int pa_id, int pi_id) throws Exception {
+	    PartnerDTO pa = service.paSelect(pa_id);
+	    ProgressInspectionDTO pi = service.piSelect(pi_id);
+	    
+	    String subject = "검수계획변경안내";
+	    String content = "<body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f4f4;\">"
+	            + "    <div style=\"width: 80%; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #fff;\">"
+	            + "        <h1 style=\"color: #0056b3; font-size: 1.5em;\">안녕하세요 " + pa.getPa_name()+"의" + pa.getPa_manager() +" 님,</h1>"
+	            + "        <p>검수계획이 변경되어 메일드립니다.</p>"
+	            + "        <table style=\"width: 100%; border-collapse: collapse; margin-top: 20px;\">"
+	            + "            <tr>"
+	            + "                <th style=\"padding: 12px; text-align: left; border-bottom: 1px solid #ddd; background-color: #466879; color: white; font-weight: bold;\">검수계획 날짜</th>"
+	            + "                <td style=\"padding: 12px; text-align: left; border-bottom: 1px solid #ddd;\">" + pi.getPi_date() + "</td>"
+	            + "            </tr>"
+	            + "            <tr>"
+	            + "                <th style=\"padding: 12px; text-align: left; border-bottom: 1px solid #ddd; background-color: #466879; color: white; font-weight: bold;\">보완내용</th>"
+	            + "                <td style=\"padding: 12px; text-align: left; border-bottom: 1px solid #ddd;\">" + pi.getPi_content() + "</td>"
+	            + "            </tr>"
+	            + "        </table>"
+	            + "        <p>변경점 확인 부탁드립니다.</p>"
+	            + "        <div style=\"margin-top: 20px; font-size: 0.9em; color: #777;\">"
+	            + "            <p>감사합니다,</p>"
+	            + "            <p>(주)오성</p>"
+	            + "            <p><a href=\"mailto:yungaeul@naver.com\" style=\"color: #0056b3; text-decoration: none;\">yungaeul@naver.com</a></p>"
+	            + "        </div>"
+	            + "    </div>"
+	            + "</body>"
+	            + "</html>";
+	    
+	    String from = "yungaeul@naver.com"; // 보내는 사람
+	    String to = pa.getPa_email(); // 받는 사람
+	    
+	    try {
+	        MimeMessage mail = mailSender.createMimeMessage();
+	        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+	        
+	        mailHelper.setFrom(from);
+	        mailHelper.setTo(to);
+	        mailHelper.setSubject(subject);
+	        mailHelper.setText(content, true); // true는 HTML 형식을 의미
+	        
+	        mailSender.send(mail);
+	        System.out.println("파트너에게 메일을 보냈습니다!");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
     
 	
 }

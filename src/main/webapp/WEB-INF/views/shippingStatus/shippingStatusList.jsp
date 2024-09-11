@@ -146,6 +146,8 @@ prefix="c" %> <%@ page session="true" %>
 	            alert('성공!');
 	        } else if (msg === 'fail') {
 	            alert('실패!');
+	        } else if (msg == 'successInsert'){
+	        	alert('출하현황이 생성되었습니다!');
 	        }
 	    </script>
 	</c:if>

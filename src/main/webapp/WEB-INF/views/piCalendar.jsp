@@ -1,8 +1,20 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <html lang="ko">
   <head>
     <%@include file="include/head.jsp" %>
     <link rel="stylesheet" href="${path }/resources/assets/js/plugin/fullcalendar/main.min.css">
     <link rel="stylesheet" href="${path }/resources/assets/css/fullcalendar.css"> 
+    <style type="text/css">
+    
+    .fc-event-time{
+    display:none !important}
+    .fc-event-title{
+    color
+    :#000 !important}
+    </style>
   </head>
   <body>
     <div class="wrapper">
@@ -36,6 +48,7 @@
                     </ul>
                   </div>
             </div>
+            
 
           <div class="row">
             <div class="col-md-9">
@@ -54,7 +67,6 @@
         <!-- /.content-wrapper -->
         </div>
       </div>
-
       <%@include file="include/footer.jsp" %>
     </div>
 
@@ -68,10 +80,8 @@
         var eventsData = [
           <c:forEach var="pi" items="${pi}">
             {
-              title: '${pi.pa_name} ${pi.pi_order} ${msg}',
+              title: '${pi.pa_name} ${pi.pi_order}차검수일 ',
               start: '${pi.pi_date}',
-              'background-color': '#ff0000',
-              'border-color'    : '#ffff00',
               color: '#000',
               url: '/progressInspection/select?pi_id=${pi.pi_id}'
             }
@@ -135,7 +145,7 @@
               // Remove event from text input
               $('#new-event').val('')
             })
-            $('.fc-event').css('color','#000 !important')
+          
       });
     </script>
   </body>

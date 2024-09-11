@@ -43,6 +43,27 @@ public class PurchaseOrderDAOImpl implements PurchaseOrderDAO{
 	public PrintPODTO poSearch(int ppr_id) {
 		return SqlSession.selectOne(namespace+".poSearch",ppr_id);
 	}
+	@Override
+	public int pprCount() {
+		return SqlSession.selectOne(namespace+".pprCount");
+	}
+	@Override
+	public List<ProcurementPlanRegistrationDTO> pprList() {
+		return SqlSession.selectList(namespace+".pprSearch");
+	}
+	@Override
+	public ProcurementPlanRegistrationDTO pprOne() {
+		return SqlSession.selectOne(namespace+".pprSearch");
+	}
+
+	@Override
+	public PrintPODTO ppr() {
+		return SqlSession.selectOne(namespace+".pprAll");
+	}
+	@Override
+	public List<PrintPODTO> pprAll() {
+		return SqlSession.selectList(namespace+".pprAll");
+	}
 	
 	
 	

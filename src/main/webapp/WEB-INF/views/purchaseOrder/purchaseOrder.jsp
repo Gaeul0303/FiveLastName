@@ -5,6 +5,26 @@
 <HTML>
 <HEAD>
 	 <%@include file="../include/head.jsp" %>
+<style type="text/css">
+@media print {
+    html, body { -webkit-print-color-adjust:exact; width: 210mm; height: 297mm; }
+    table { page-break-inside:auto; }
+    tr    { page-break-inside:avoid; page-break-after:auto; }
+    thead { display:table-header-group; }
+    tfoot { display:table-footer-group; }
+},
+    @media print {
+        html, body { -webkit-print-color-adjust:exact; width: 210mm; height: 297mm; }
+  		table { page-break-inside:auto; }
+    	tr    { page-break-inside:avoid; page-break-after:auto; }
+    	thead { display:table-header-group; }
+    	tfoot { display:table-footer-group; }
+        @page {
+            size: portrait; /* 세로 인쇄 모드 설정 */
+            margin: 1cm; /* 페이지 여백 설정 */
+        }
+    }
+</style>
 </HEAD>
 <BODY>
 

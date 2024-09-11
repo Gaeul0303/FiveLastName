@@ -110,11 +110,15 @@ prefix="c" %> <%@ page session="true" %>
     <c:if test="${not empty msg}">
 	    <script type="text/javascript">
 	        var msg = '${msg}'; // 모델에서 전달된 메시지를 JavaScript 변수로 받기
-	
+			
+	        console.log(msg);
+	        
 	        if (msg === 'success') {
 	            alert('성공!');
 	        } else if (msg === 'fail') {
 	            alert('실패!');
+	        } else if(msg == 'insertFail'){
+	        	alert('구매발주서 발급이 안된 조달계획이 없습니다!');
 	        }
 	    </script>
 	</c:if>

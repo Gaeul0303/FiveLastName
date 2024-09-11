@@ -50,7 +50,7 @@ prefix="c" %> <%@ page session="true" %>
                             </div>
                           </div>
                           
-                     <form id = "progressInspection" action="/progressInspection/insert" method = "post">
+                     <form id = "progressInspection" action="/progressInspection/insert" method = "post" onsubmit="return checkForm()">
                       <div class="row">
                         <div class="col-md-6 col-lg-4">
                         
@@ -83,7 +83,7 @@ prefix="c" %> <%@ page session="true" %>
                               >검수계획날짜</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="date" id = "pi_date" name ="pi_date">
+								<input type="date" id = "pi_date" name ="pi_date" required>
                             </div>
                           </div>
                           
@@ -140,8 +140,8 @@ prefix="c" %> <%@ page session="true" %>
                         
                     </div>
                     <div class="card-action">
-                      <button class="btn btn-success" type = "button" onclick = "submit()">등록하기</button>
-                      <button class="btn btn-danger"  type = "button" onclick = "cancel()">취소하기</button>
+                      <button class="btn btn-success">등록하기</button>
+                      <button class="btn btn-danger"  type = "button" onclick = "cancle()">취소하기</button>
                     </div>
                   </div>
                  </form>
@@ -156,14 +156,14 @@ prefix="c" %> <%@ page session="true" %>
 	
 	<script type="text/javascript">
 	
-	  function cancel() {
+	  function cancle() {
 		  alert("검수생성을 취소하셨습니다");
 		  window.location.href = "/shippingStatus/list";
 	    };
 	    
-	  function submit() {
+	    function checkForm() {
 		  
-		   if(!date.value){
+		   if(!pi_date.value){
 			      alert("날짜를 선택해주세요.")
 			      return false;
 			   }else{

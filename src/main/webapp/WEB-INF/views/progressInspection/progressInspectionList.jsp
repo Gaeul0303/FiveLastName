@@ -149,7 +149,7 @@ prefix="c" %> <%@ page session="true" %>
 		          </div>
 		          
 		          <div class="form-group">
-		            <label for="pi_order">검수계획차수</label>
+		            <label for="pi_order">현재 검수계획차수</label>
 		            <select class="form-select" id="pi_order" name="pi_order">
 		              <option value="1">1</option>
 		              <option value="2">2</option>

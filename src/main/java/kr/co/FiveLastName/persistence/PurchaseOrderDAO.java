@@ -24,4 +24,14 @@ public interface PurchaseOrderDAO {
 	
 	PrintPODTO poSearch(int ppr_id);	//	조달계획등록 id로 구매발주서 찾기.
 	
+	int pprCount();
+	
+	List<ProcurementPlanRegistrationDTO> pprList();
+	
+	ProcurementPlanRegistrationDTO pprOne();
+	
+	PrintPODTO ppr();
+	
+	List<PrintPODTO> pprAll();
+	
 }

@@ -8,7 +8,7 @@
 	<select id="poAllSelect" resultType="kr.co.FiveLastName.domain.PrintPODTO">
 		select po.po_id, pr.pr_name, co.co_supplyPrice, es.es_requiredDays, co.co_tradeTerms,
 		pa.pa_name, ppr.ppr_dueDate, po.po_regDate, pa.pa_name, pr.pr_size, co_contractDate,
-		ppr.ppr_quantity, po.po_status,pa.pa_manager,pa.pa_tel,pa.pa_email
+		ppr.ppr_quantity, po.po_status,pa.pa_manager,pa.pa_tel,pa.pa_email,ppr.ppr_id
 		from purchaseorder po 
 		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
 		join contract co on ppr.co_id = co.co_id
@@ -20,7 +20,7 @@
 	<select id="poSelect" resultType = "kr.co.FiveLastName.domain.PrintPODTO">
 		select po.po_id, pr.pr_name, co.co_supplyPrice, es.es_requiredDays, co.co_tradeTerms,
 		pa.pa_name, ppr.ppr_dueDate, po.po_regDate, pa.pa_name, pr.pr_size, co_contractDate,
-		ppr.ppr_quantity, po.po_status, pa.pa_manager,pa.pa_tel,pa.pa_email
+		ppr.ppr_quantity, po.po_status, pa.pa_manager,pa.pa_tel,pa.pa_email,ppr.ppr_id
 		from purchaseorder po 
 		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
 		join contract co on ppr.co_id = co.co_id
@@ -67,5 +67,28 @@
 		join product pr on pa.pr_id = pr.pr_id
 		where ppr.ppr_id = ${ppr_id}
 	</select>
+	
+	<select id="pprAll" resultType="kr.co.FiveLastName.domain.PrintPODTO">
+		select pr.pr_name, co.co_supplyPrice, es.es_requiredDays, co.co_tradeTerms,
+		pa.pa_name, ppr.ppr_dueDate,pa.pa_name, pr.pr_size, co_contractDate,
+		ppr.ppr_quantity,pa.pa_manager,pa.pa_tel,pa.pa_email,ppr.ppr_id
+		from procurementPlanRegistration ppr
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id
+		where ppr_status = "미발행"
+	</select>
+	
+	<select id="pprSearch" resultType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">
+		select * from procurementPlanRegistration
+		where ppr_status = "미발행"	
+	</select>
+	
+	<select id="pprCount" resultType="int">
+		select count(*) from procurementPlanRegistration
+		where ppr_status = "미발행"	
+	</select>
+	
 	
 </mapper>
