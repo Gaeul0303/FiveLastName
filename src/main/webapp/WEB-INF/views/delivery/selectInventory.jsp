@@ -43,7 +43,7 @@ prefix="c" %> <%@ page session="true" %>
                     <div class="card-body">
                   		<form action="selectInventory" method="post" onsubmit="return confirmAndSubmit(this);">
                   			<input type="hidden" id="in_id" name="in_id" value="${in_id}" /> 
-		    				<input id="idm_quantity" name="idm_quantity" type="number" placeholder="출고 수량을 입력하세요."/>
+		    				<input id="idm_quantity" name="idm_quantity" type="number" placeholder="출고 수량을 입력하세요." min="1"/>
 		   				    <input type="submit" value="확인">
 				   		</form>
                       <div class="table-responsive">
