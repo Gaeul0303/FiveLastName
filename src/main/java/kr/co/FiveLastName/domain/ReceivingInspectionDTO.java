@@ -18,6 +18,21 @@ public class ReceivingInspectionDTO {
 	public ReceivingInspectionDTO() {
 		super();
 	}
+	
+	public ReceivingInspectionDTO(int ri_id, int pi_id, Timestamp ri_date, String ri_availability, int ri_totalPrice,
+			int pa_name, String pr_name, int pi_inspectedQuantity, String pi_status, int co_supplyPrice) {
+		super();
+		this.ri_id = ri_id;
+		this.pi_id = pi_id;
+		this.ri_date = ri_date;
+		this.ri_availability = ri_availability;
+		this.ri_totalPrice = ri_totalPrice;
+		this.pa_name = pa_name;
+		this.pr_name = pr_name;
+		this.pi_inspectedQuantity = pi_inspectedQuantity;
+		this.pi_status = pi_status;
+		this.co_supplyPrice = co_supplyPrice;
+	}
 
 	public int getRi_id() {
 		return ri_id;

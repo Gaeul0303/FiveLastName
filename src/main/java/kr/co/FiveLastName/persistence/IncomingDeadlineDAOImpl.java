@@ -23,21 +23,21 @@ public class IncomingDeadlineDAOImpl implements IncomingDeadlineDAO{
 	}
 
 	@Override
-	public IncomingDeadlineDTO id_selectOne(int id_code) {
+	public IncomingDeadlineDTO id_selectOne(String id_code) {
 		// 입고마감 상세 조회
 		return sqlSession.selectOne(namespace+".id_selectOne", id_code);
 	}
 
 	@Override
-	public int id_insert(IncomingDeadlineDTO idDTO) {
+	public IncomingDeadlineDTO id_insert(IncomingDeadlineDTO idDTO) {
 		// 입고마감 등록
-		return sqlSession.insert(namespace+".id_insert", idDTO);
+		return sqlSession.selectOne(namespace+".id_insert", idDTO);
 	}
 
 	@Override
-	public int id_update(IncomingDeadlineDTO idDTO) {
+	public IncomingDeadlineDTO id_update(IncomingDeadlineDTO idDTO) {
 		// 입고마감 수정
-		return sqlSession.update(namespace+".id_update", idDTO);
+		return sqlSession.selectOne(namespace+".id_update", idDTO);
 	}
 
 }

@@ -22,19 +22,19 @@ public class IncomingDeadlineServiceImpl implements IncomingDeadlineService{
 	}
 
 	@Override
-	public IncomingDeadlineDTO id_selectOne(int id_code) {
+	public IncomingDeadlineDTO id_selectOne(String id_code) {
 		// 입고마감 상세 조회
 		return idDAO.id_selectOne(id_code);
 	}
 
 	@Override
-	public int id_insert(IncomingDeadlineDTO idDTO) {
+	public IncomingDeadlineDTO id_insert(IncomingDeadlineDTO idDTO) {
 		// 입고마감 등록
 		return idDAO.id_insert(idDTO);
 	}
 
 	@Override
-	public int id_update(IncomingDeadlineDTO idDTO) {
+	public IncomingDeadlineDTO id_update(IncomingDeadlineDTO idDTO) {
 		// 입고마감 수정
 		return idDAO.id_update(idDTO);
 	}
