@@ -15,35 +15,35 @@ prefix="c"%> <%@ page session="true"%>
         <div class="container">
           <div class="page-inner">
             <div class="page-header">
-              <h3 class="fw-bold mb-3">Forms</h3>
+              <h3 class="fw-bold mb-3">입고 검수</h3>
               <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                   <a href="#"> <i class="icon-home"></i> </a>
                 </li>
                 <li class="separator"><i class="icon-arrow-right"></i></li>
-                <li class="nav-item"><a href="#">Forms</a></li>
+                <li class="nav-item"><a href="#">입고 검수</a></li>
                 <li class="separator"><i class="icon-arrow-right"></i></li>
-                <li class="nav-item"><a href="#">Basic Form</a></li>
+                <li class="nav-item"><a href="#">입고 검수 작성</a></li>
               </ul>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <div class="card-title">Form Elements</div>
+                    <div class="card-title">입고 검수 작성</div>
                   </div>
                   <div class="card-body">
                     <form
                       role="form"
                       method="post"
                       id="updateForm"
-                      enctype="multipart/form-data"
-                    >
+                      enctype="multipart/form-data">
+                    
                       <input
                         type="hidden"
-                        name="pr_id"
-                        value="${procurmentDTO.pr_id}"
-                      />
+                        name="ri_id"
+                        value="${ReceivingInspectionDTO.ri_id}"/>
+                        
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
@@ -54,63 +54,63 @@ prefix="c"%> <%@ page session="true"%>
                               id="nameinput"
                               name="pr_name"
                               placeholder="품목명"
-                              value="${productDTO.pr_name }"
-                            />
+                              value="${ReceivingInspectionDTO.pr_name }"/>
                           </div>
+                          
                           <div class="form-group">
-                            <label for="makeTime">소요일정</label>
+                            <label for="makeTime">정품 수량</label>
                             <input
                               type="number"
                               class="form-control"
                               id="pp_makeTime"
                               name="pp_makeTime"
-                              placeholder="소요일정"
+                              placeholder="정품 수량"
                               required="required"
-                              value="${procurmentPlanDTO.pp_makeTime }"
-                            />
+                              value="${procurmentPlanDTO.pp_makeTime }"/>
                           </div>
+                          
                           <div class="form-group">
-                            <label for="spendAmount">소요량</label>
+                            <label for="spendAmount">불량 수량</label>
                             <input
                               type="number"
                               class="form-control"
                               id="pp_spendAmount"
                               name="pp_spendAmount"
-                              placeholder="소요량"
+                              placeholder="불량 수량"
                               required="required"
-                              value="${procurmentPlanDTO.pp_spendAmount }"
-                            />
+                              value="${procurmentPlanDTO.pp_spendAmount }"/>
                           </div>
+                          
                           <div class="form-group">
-                            <label for="deliveryDate">조달납기</label>
+                            <label for="exampleFormControlSelect1">입고 검수 상태</label>
+                            <select
+                              class="form-select"
+                              id="exampleFormControlSelect1"
+                              name = "ri_availability"
+                              value = "${ss.ss_status}">
+                              <option value = '입고완료'>입고완료</option>
+                            </select>
+                          </div>      
+                          
+                          <div class="form-group">
+                            <label for="deliveryDate">입고 검수</label>
                             <input
                               type="date"
                               class="form-control"
                               id="pp_deliveryDate"
                               name="pp_deliveryDate"                           
-                              placeholder="조달납기"
+                              placeholder="입고 검수"
                               required="required"
                             ${procurmentPlanDTO.pp_deliveryDate }/>
                           </div>
-                          <div class="form-group imgUpload">
-                            <label for="comment">자재 소요 공정</label>
-							 <textarea
-                              class="form-control"
-                              id="comment"
-                              name="pp_materialRequiredProcessStage"
-                              rows="5"
-                              placeholder="자재 소요 공정"
-                              required="required"
-                            >${procurmentPlanDTO.pp_materialRequiredProcessStage }</textarea>
-                          
-                          </div>                         
+                                                   
                         </div>
                       </div>
                       <div class="card-action">
                         <button class="btn btn-success" id="updateBtn">
                           수정하기
                         </button>
-                        <button class="btn btn-danger">취소</button>
+                        <button class="btn btn-danger" onclick="history.back()">취소</button>
                       </div>
                     </form>
                   </div>
@@ -128,8 +128,8 @@ prefix="c"%> <%@ page session="true"%>
 
     <script type="text/javascript">
       $(document).ready(function () {
-        let category = `${procurmentPlanDTO.pp_id}`;
-        let status = `${productDTO.pr_status}`;
+    	  let category = `${ReceivingInspectionDTO.ri_id}`;
+          let status = `${ReceivingInspectionDTO.ri_availability}`;
 
         $("#cateinput").val(category).prop("selected", "true");
         $("#statusinput").val(status).prop("selected", "true");

@@ -40,7 +40,7 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">입고 완료</a>
+                    <a href="#">전체 보기</a>
                   </li>
                 </ul>
               </div>
@@ -48,7 +48,7 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">입고현황 전체보기</h4>
+                      <h4 class="card-title">입고대기</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
@@ -58,13 +58,12 @@ prefix="c" %> <%@ page session="true" %>
                         >
                           <thead>
                             <tr>
-                              <th class = "centerTD">검수코드</th>	
+                              <th class = "centerTD">입고일</th>	
                               <th class = "centerTD">품목명</th>
                               <th class = "centerTD">수량</th>
                               <th class = "centerTD">단가</th>
                               <th class = "centerTD">금액</th>
                               <th class = "centerTD">입고여부</th>
-                              <th class = "centerTD">입고일</th>
                               <th class = "centerTD">입고검수</th>
                             </tr>
                           </thead>
@@ -76,27 +75,25 @@ prefix="c" %> <%@ page session="true" %>
 	                          <th></th>	
 	                          <th></th>	
 	                          <th></th>	
-	                          <th></th>	
                           </tfoot>
                           <tbody>
                             <c:forEach var="ri" items="${ri_list }">
                             	<tr>
-	                              <td class = "centerTD">${ri.ri_id }</td>
+	                              <td class = "centerTD"><fmt:formatDate value="${ri.ri_date }" pattern="yyyy-MM-dd"/> </td>
 	                              <td>${ri.pr_name }</td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value = "${ri.pi_inspectedQuantity }" pattern="#,###" />
+	                              	<fmt:formatNumber value = "${ri.pi_inspectedQuantity }" pattern="#,###"/>
 	                              </td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value="${ri.co_supplyPrice }" pattern="#,###" />
+	                              	<fmt:formatNumber value="${ri.co_supplyPrice }" pattern="#,###"/>
 	                              </td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value="${ri.ri_totalPrice }" pattern="#,###" />
+	                              	<fmt:formatNumber value="${ri.ri_totalPrice }" pattern="#,###"/>
 	                              </td>
 	                              <td class = "centerTD">${ri.ri_availability }</td>
-	                              <td class = "centerTD"><fmt:formatDate value="${ri.ri_date }" pattern="yyyy-MM-dd"/> </td>
 	                               <c:choose>
 	                              	<c:when test="${ri.ri_availability eq '입고대기'}">
-	                              		<td class = "centerTD"><a href="/receivingInspection/riUpdate?ri_id=${ri.ri_id }">검수작성</a></td>
+	                              		<td class = "centerTD"><a href="/receiveingInspection/updateForm?ri_id=${ri.ri_id }">검수작성</a></td>
 	                              	</c:when>
 	                              	<c:otherwise>
 	                              		<td></td>

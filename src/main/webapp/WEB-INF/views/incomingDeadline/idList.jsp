@@ -23,7 +23,7 @@ prefix="c" %> <%@ page session="true" %>
           <div class="container">
             <div class="page-inner">
               <div class="page-header">
-                <h3 class="fw-bold mb-3">입고</h3>
+                <h3 class="fw-bold mb-3">입고 마감</h3>
                 <ul class="breadcrumbs mb-3">
                   <li class="nav-home">
                     <a href="#">
@@ -34,13 +34,13 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">입고 완료</a>
+                    <a href="#">입고 마감</a>
                   </li>
                   <li class="separator">
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">입고 완료</a>
+                    <a href="#">전체 보기</a>
                   </li>
                 </ul>
               </div>
@@ -48,7 +48,7 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">입고 완료</h4>
+                      <h4 class="card-title">입고 마감</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
