@@ -20,28 +20,30 @@
 }
 </style>
 </head>
-<body>
+<body onload="showAlert('${msg}')">
 	<div class="wrapper">
 		<div class="card">
 			<div class="card-body login-card-body">
-				<p class="login-box-msg">Sign in to start your session</p>
+				<p class="login-box-msg">로그인 페이지</p>
 
 				<form action="/login" method="post">
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="id" name="st_id"
-							required="required">
+						<input type="text" class="form-control" placeholder="id" id="id"
+							name="st_id" required="required">
 
 					</div>
 					<div class="input-group mb-3">
-						<input type="password" class="form-control" placeholder="Password" name="st_pw">
+						<input type="password" class="form-control" placeholder="Password"
+							id="pw" name="st_pw" required="required">
 
 					</div>
 					<div class="row">
 
 						<!-- /.col -->
 						<div class="col-12">
-							<button type="submit" class="btn btn-primary btn-block"
+							<button type="submit" class="btn btn-primary btn-block btnSubmit"
 								style="width: 100%">Sign In</button>
+							
 						</div>
 						<!-- /.col -->
 					</div>
@@ -53,7 +55,13 @@
 		</div>
 	</div>
 	</div>
-
 	<%@include file="/WEB-INF/views/include/script.jsp"%>
+	  <script type="text/javascript">
+        function showAlert(message) {
+            if (message) {
+                alert(message);
+            }
+        }
+    </script>
 </body>
 </html>
