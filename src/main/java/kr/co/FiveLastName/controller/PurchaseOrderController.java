@@ -7,12 +7,18 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.FiveLastName.domain.PrintPODTO;
 import kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO;
+import kr.co.FiveLastName.domain.StaffDTO;
+import kr.co.FiveLastName.service.PprService;
+import kr.co.FiveLastName.service.ProgressInspectionService;
 import kr.co.FiveLastName.service.PurchaseOrderService;
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +31,12 @@ public class PurchaseOrderController {
 	
 	@Inject
 	PurchaseOrderService service;
+	
+	@Inject
+	ProgressInspectionService piService;
+
+	@Inject
+	PprService pprService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView poAllSelect() {
@@ -41,13 +53,17 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public ModelAndView poSelect(int po_id /* , HttpSession session */) {
+	public ModelAndView poSelect(int po_id , HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		PrintPODTO po = service.poSelect(po_id);
 
-		//StaffDTO staff = (StaffDTO)session.getAttribute("staff");// staff를 세션값주는걸로변경 
+		String st_id = (String) session.getAttribute("st_id");// staff를 세션값주는걸로변경 
+		
+		StaffDTO st = piService.stSelect(st_id);
+		
+		mav.addObject("st",st);
 		
 		mav.setViewName("/purchaseOrder/purchaseOrderSelect");
 		
@@ -57,13 +73,17 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping(value = "/print", method = RequestMethod.GET)
-	public ModelAndView poPrint(int po_id /* , HttpSession session */) {
+	public ModelAndView poPrint(int po_id , HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		PrintPODTO po = service.poSelect(po_id);
 		
-		//StaffDTO staff = (StaffDTO)session.getAttribute("staff");// staff를 세션값주는걸로변경 세션을 ID 만 주면 st_id 로 갖고와서 select 해야함.
+		String st_id = (String) session.getAttribute("st_id");// staff를 세션값주는걸로변경 
+		
+		StaffDTO st = piService.stSelect(st_id);
+		
+		mav.addObject("st",st);
 		
 		mav.setViewName("/purchaseOrder/purchaseOrder");
 		
@@ -73,7 +93,7 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping(value = "/prev", method = RequestMethod.GET)
-	public ModelAndView poPrev(int ppr_id /* , HttpSession session */) {
+	public ModelAndView poPrev(int ppr_id , HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -85,12 +105,48 @@ public class PurchaseOrderController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public String poInsertMove(Model model,RedirectAttributes redirectAttributes) {
+	    
+	    System.out.println("insert 페이지입니다.");
+	    
+	    int count = service.pprCount();
+	    
+	    System.out.println("count = " + count);
+	    
+	    if(count > 1) {
+	        List<ProcurementPlanRegistrationDTO> ppr = service.pprList();
+	        List<PrintPODTO> po = service.pprAll();
+	        model.addAttribute("count", count);
+	        model.addAttribute("po", po);
+	        model.addAttribute("ppr", ppr);
+	        for(int i = 0; i<po.size(); i++) {
+	        	System.out.println("po " + i + " = " + po.get(i));
+	        }
+	        return "/purchaseOrder/purchaseOrderInsert";
+	    } else if(count == 1) {
+	        ProcurementPlanRegistrationDTO ppr = service.pprOne();
+	        PrintPODTO po = service.ppr();
+	        model.addAttribute("count", count);
+	        model.addAttribute("po", po);
+	        model.addAttribute("ppr", ppr);
+	        return "/purchaseOrder/purchaseOrderInsert";
+	    } else {
+	    	redirectAttributes.addFlashAttribute("msg", "insertFail");
+	        return "redirect:/purchaseOrder/list";
+	    }
+	}
+	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String poInsert(int ppr_id) {
 		
 		ModelAndView mav = new ModelAndView();
-	
+		
+		System.out.println("ppr_id = " + ppr_id);
+		
 		PrintPODTO po = service.poInsert(ppr_id);
+		
+		System.out.println("po = " + po);
 		
 		ProcurementPlanRegistrationDTO ppr = service.poComplete(ppr_id);
 		
@@ -98,16 +154,19 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView poSearch(int ppr_id /* , HttpSession session */) {
+	public ModelAndView poSearch(int ppr_id , HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		PrintPODTO po = service.poSearch(ppr_id);
 
-		//StaffDTO staff = (StaffDTO)session.getAttribute("staff");// staff를 세션값주는걸로변경 
+		String st_id = (String) session.getAttribute("st_id");// staff를 세션값주는걸로변경 
+		
+		StaffDTO st = piService.stSelect(st_id);
+		
+		mav.addObject("st",st);
 		
 		mav.setViewName("/purchaseOrder/purchaseOrderSelect");
-		
 		mav.addObject("po", po);
 		
 		return mav;

@@ -47,6 +47,31 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 		return dao.poSearch(ppr_id);
 	}
 
+	@Override
+	public int pprCount() {
+		return dao.pprCount();
+	}
+
+	@Override
+	public List<ProcurementPlanRegistrationDTO> pprList() {
+		return dao.pprList();
+	}
+
+	@Override
+	public ProcurementPlanRegistrationDTO pprOne() {
+		return dao.pprOne();
+	}
+
+	@Override
+	public PrintPODTO ppr() {
+		return dao.ppr();
+	}
+
+	@Override
+	public List<PrintPODTO> pprAll() {
+		return dao.pprAll();
+	}
+
 	
 
 }

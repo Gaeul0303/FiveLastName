@@ -32,8 +32,6 @@ public class CalendarController {
 		List<ProgressInspectionDTO>pi = service.piAllSelect();
 		
 		model.addAttribute("pi", pi);
-		model.addAttribute("msg", "차 \n검수예정");
-		
 		for(int i = 0; i<pi.size();i++) {
 		System.out.println(i+".pi = " + pi.get(i));
 		};

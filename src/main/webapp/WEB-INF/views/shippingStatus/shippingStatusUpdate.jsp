@@ -106,7 +106,7 @@ prefix="c" %> <%@ page session="true" %>
                               >출하 수량</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="number" id="ss_quantity" name ="ss_quantity" min="0" max="${po.ppr_quantity}" onchange="check()" value = "${po.ppr_quantity }">
+								<input type="number" id="ss_quantity" name ="ss_quantity" min="0" max="${po.ppr_quantity}" onchange="check()" value = "${po.ppr_quantity }" readonly="readonly">
                             </div>
                           </div>
                         

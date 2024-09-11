@@ -17,6 +17,19 @@
 		join product pr on pa.pr_id = pr.pr_id;
 	</select>
 	
+	<select id="piAll" resultType="kr.co.FiveLastName.domain.ProgressInspectionDTO">
+		select pi.*, pr.pr_name, pr.pr_id, pa.pa_id, pa.pa_name, st.st_name, ss.ss_quantity
+        from staff st
+		join progressInspection pi on pi.st_id = st.st_id
+		join shippingStatus ss on pi.ss_id = ss.ss_id
+		join purchaseorder po on po.po_id = ss.po_id
+		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
+		join contract co on ppr.co_id = co.co_id
+		join estimate es on co.es_id = es.es_id
+		join partner pa on es.pa_id = pa.pa_id
+		join product pr on pa.pr_id = pr.pr_id;
+	</select>
+	
 	<select id="piSelect" resultType="kr.co.FiveLastName.domain.ProgressInspectionDTO">
 		select pi.*, pr.pr_name, pr.pr_id, pa.pa_id, pa.pa_name, st.st_name, ss.ss_quantity
         from staff st
@@ -71,20 +84,24 @@
 	</insert>
 	
 	<update id="piUpdate">
-		update progressInspection 
-		set
-		pi_order = #{pi_order},
-		pi_date =  pi_date = <choose>
-                     <when test="pi_date == ''">NULL</when>
-                     <otherwise>#{pi_date}</otherwise>
-                  </choose>,
-		pi_status = #{pi_status},
-		pi_content = #{pi_content},
-		pi_inspectedDate = now(), 
-		pi_uninspectedQuantity = pi_uninspectedQuantity - #{pi_inspectedQuantity},
-		pi_inspectedQuantity = pi_inspectedQuantity + #{pi_inspectedQuantity}
-		where pi_id = #{pi_id}
-	</update>
+    update progressInspection
+    set
+        pi_order = #{pi_order},
+        pi_date = 
+            <if test="pi_date == ''">
+                NULL
+            </if>
+            <if test="pi_date != ''">
+               #{pi_date}
+            </if>
+            ,
+        pi_status = #{pi_status},
+        pi_content = #{pi_content},
+        pi_inspectedDate = now(),
+        pi_uninspectedQuantity = pi_uninspectedQuantity - #{pi_inspectedQuantity},
+        pi_inspectedQuantity = pi_inspectedQuantity + #{pi_inspectedQuantity}
+    where pi_id = #{pi_id}
+</update>
 	
 	<update id="ssComplete">
 		update shippingStatus

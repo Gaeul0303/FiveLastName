@@ -51,6 +51,8 @@ public class ProgressInspectionDAOImpl implements ProgressInspectionDAO{
 	}
 	@Override
 	public ProgressInspectionDTO piUpdate(ProgressInspectionDTO pi) {
+		System.out.println("pi 업데이트 입니다.");
+		System.out.println("pi = " + pi);
 		return sqlSession.selectOne(namespace+".piUpdate", pi);
 	}
 	@Override
