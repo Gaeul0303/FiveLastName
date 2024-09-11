@@ -35,15 +35,16 @@ prefix="c"%> <%@ page session="true"%>
                   <div class="card-body">
                     <form
                       role="form"
-                      action = "/receiveingInspection/update"
+                      action = "/incomingDeadline/insert"
                       method="post"
-                      id="updateform"
-                      enctype="multipart/form-data">
+                      id="insertform"
+                      enctype="multipart/form-data"
+                      onsubmit="return validateForm()">
                     
                       <input
                         type="hidden"
                         name="ri_id"
-                        value="${ReceivingInspectionDTO.ri_id}"/>
+                        value="${insertForm.ri_id}"/>
                         
                       <div class="row">
                         <div class="col-md-6">
@@ -54,8 +55,7 @@ prefix="c"%> <%@ page session="true"%>
                               class="form-control"
                               id="nameinput"
                               name="pr_name"
-                              placeholder="담당자"
-                              value="${updatefom.st_name }"/>
+                              placeholder="담당자"/>
                           </div>  
                         
                       <div class="row">
@@ -68,7 +68,7 @@ prefix="c"%> <%@ page session="true"%>
                               id="nameinput"
                               name="pr_name"
                               placeholder="품목명"
-                              value="${updateform.pr_name}"
+                              value="${insertForm.pr_name}"
                               readonly/>
                           </div>
                           
@@ -81,7 +81,7 @@ prefix="c"%> <%@ page session="true"%>
                               name="pp_makeTime"
                               placeholder="입고 수량"
                               required="required"
-                              value="${updateform.pi_inspectedQuantity }"
+                              value="${insertForm.pi_inspectedQuantity }"
                               readonly/>
                           </div>
                           
@@ -93,8 +93,7 @@ prefix="c"%> <%@ page session="true"%>
                               id="pp_makeTime"
                               name="pp_makeTime"
                               placeholder="정품 수량"
-                              required="required"
-                              value="${update.pp_makeTime }"/>
+                              required="required"/>
                           </div>
                           
                           <div class="form-group">
@@ -105,8 +104,7 @@ prefix="c"%> <%@ page session="true"%>
                               id="pp_spendAmount"
                               name="pp_spendAmount"
                               placeholder="불량 수량"
-                              required="required"
-                              value="${procurmentPlanDTO.pp_spendAmount }"/>
+                              required="required"/>
                           </div>
                           
                           <div class="form-group">
@@ -114,8 +112,7 @@ prefix="c"%> <%@ page session="true"%>
                             <select
                               class="form-select"
                               id="exampleFormControlSelect1"
-                              name = "ri_availability"
-                              value = "${ss.ss_status}">
+                              name = "ri_availability">
                               <option value = '입고완료'>입고완료</option>
                             </select>
                           </div>      
@@ -127,9 +124,9 @@ prefix="c"%> <%@ page session="true"%>
                               class="form-control"
                               id="pp_deliveryDate"
                               name="pp_deliveryDate"                           
-                              placeholder="입고 검수"
+                              placeholder="입고 검수일"
                               required="required"
-                            ${procurmentPlanDTO.pp_deliveryDate }/>
+                            />
                           </div>
                           
                           <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -149,7 +146,6 @@ prefix="c"%> <%@ page session="true"%>
                           		</div>
                           	</div>
                           </div>                         
-                          
                         </div>
                       </div>
                       <div class="card-action">
@@ -174,13 +170,31 @@ prefix="c"%> <%@ page session="true"%>
 
     <script type="text/javascript">
       $(document).ready(function () {
-    	  let category = `${ReceivingInspectionDTO.ri_id}`;
-          let status = `${ReceivingInspectionDTO.ri_availability}`;
+    	  let category = `${insertForm.ri_id}`;
+          let status = `${insertForm.ri_availability}`;
 
         $("#cateinput").val(category).prop("selected", "true");
         $("#statusinput").val(status).prop("selected", "true");
       });
     </script>
+    
+    <script>
+    	function validateForm(){
+    		 // 폼에서 필요한 값을 가져오기
+            const inspectedQuantity = parseFloat(document.getElementById('inspectedQuantity').value); // 입고 수량
+            const goodQuantity = parseFloat(document.getElementById('pp_makeTime').value); // 정품 수량
+            const badQuantity = parseFloat(document.getElementById('pp_spendAmount').value); // 불량 수량
+
+            // 정품 수량 + 불량 수량 = 입고 수량 확인
+            if (goodQuantity + badQuantity !== inspectedQuantity) {
+                alert('정품 수량과 불량 수량의 합계가 입고 수량과 일치하지 않습니다.');
+                return false; // 제출 중단
+            }
+
+            return true; // 제출 허용
+    	}
+    </script>
+    
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var result = '<c:out value="${result}"/>';
