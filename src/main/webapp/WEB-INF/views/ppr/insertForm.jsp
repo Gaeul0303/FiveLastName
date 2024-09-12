@@ -61,7 +61,7 @@
 														</div>
 														<div class="form-group">
 															<label for="ppr_dueDate">납기일</label> <input type="date"
-																class="form-control" id="ppr_dueDate" name="ppr_dueDate" required="required"
+																class="form-control" id="ppr_dueDate" required="required"
 																placeholder="납기일" />
 																<input type="hidden" id="formattedDateInput"
 															name="ppr_dueDate" />
@@ -69,7 +69,7 @@
 														<div class="form-group">
 															<label for="ppr_status">발주서 발행 여부</label> <input type="text"
 																class="form-control" id="ppr_status" name="ppr_status" required="required"
-																placeholder="미발행" />
+																value="미발행" readonly/>
 														</div>													
 													</div>
 												</div>

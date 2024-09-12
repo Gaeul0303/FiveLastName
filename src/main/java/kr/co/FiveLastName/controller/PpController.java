@@ -82,7 +82,8 @@ public class PpController {
 	public ModelAndView updateForm(@RequestParam("pp_id") int pp_id, Model Model) {
 		ModelAndView mav = new ModelAndView();
 
-		Model.addAttribute("emp", ppService.pp_selectOne(pp_id));
+		Model.addAttribute("list", pService.list());
+		Model.addAttribute("procurmentPlan", ppService.pp_selectOne(pp_id));
 		mav.setViewName("procurmentPlan/updateForm");
 
 		return mav;

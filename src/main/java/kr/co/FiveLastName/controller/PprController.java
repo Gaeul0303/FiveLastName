@@ -64,12 +64,14 @@ public class PprController {
 	
 	//계획 등록
 	@PostMapping(value="/insertForm")
-	public String insert(ProcurementPlanRegistrationDTO dto) {
+	public String insert(ProcurementPlanRegistrationDTO dto, RedirectAttributes rttr) {
 		logger.info("insert : " + dto);
 		
-		pprService.ppr_selectAll();
+		pprService.ppr_insert(dto);
+		rttr.addFlashAttribute("msg", "SUCCESS");
 		
-		return "redirect:/ppr/list";
+		
+		return "redirect:/procurementPlanRegistration/list";
 		
 	}
 	
