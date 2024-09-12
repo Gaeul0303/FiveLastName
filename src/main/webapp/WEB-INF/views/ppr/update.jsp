@@ -54,7 +54,7 @@ prefix="c"%> <%@ page session="true"%>
                               id="co_id"
                               name="co_id"
                               placeholder="거래계약ID"
-                              value="${ppr.co_id } readonly"
+                              value="${ppr.co_id }"readonly
                             />
                           </div>
                           <div class="form-group">

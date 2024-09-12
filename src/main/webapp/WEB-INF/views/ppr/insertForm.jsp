@@ -43,7 +43,7 @@
 													<label for="co_id">거래계약ID</label> <select
 														class="form-select" id="co_id" name="co_id">
 														<option>거래선택</option>
-														<c:forEach items="${list}" var="contract" required="required">
+														<c:forEach items="${list}" var="contract">
 															<option value="${contract.co_id }">
 																${contract.co_id }</option>
 														</c:forEach>
@@ -63,6 +63,8 @@
 															<label for="ppr_dueDate">납기일</label> <input type="date"
 																class="form-control" id="ppr_dueDate" name="ppr_dueDate" required="required"
 																placeholder="납기일" />
+																<input type="hidden" id="formattedDateInput"
+															name="ppr_dueDate" />
 														</div>
 														<div class="form-group">
 															<label for="ppr_status">발주서 발행 여부</label> <input type="text"
@@ -130,6 +132,47 @@
 											})
 
 						})
+	</script>
+	
+	<script>
+		$(document).ready(
+				function() {
+
+					const form = $("#insertForm");
+
+					$("#insertBtn").on("click", function(e) {
+						e.preventDefault();
+						let dateInput = $('#ppr_dueDate').val();
+
+						if (dateInput) {
+							// dateTime 형식을 yyyy-MM-dd hh:mm:ss로 변환
+							let formattedDate = formatDateTime(dateInput);
+							console.log("Formatted Date: ", formattedDate);
+
+							// 변환된 값을 숨겨진 필드에 설정
+							$('#formattedDateInput').val(formattedDate);
+
+							form.submit();
+						}
+
+					})
+
+					function formatDateTime(dateTimeString) {
+						let date = new Date(dateTimeString);
+
+						let year = date.getFullYear();
+						let month = ('0' + (date.getMonth() + 1)).slice(-2); // 월 2자리로 변환
+						let day = ('0' + date.getDate()).slice(-2); // 일 2자리로 변환
+						let hours = ('0' + date.getHours()).slice(-2); // 시간 2자리로 변환
+						let minutes = ('0' + date.getMinutes()).slice(-2); // 분 2자리로 변환
+						let seconds = ('0' + date.getSeconds()).slice(-2); // 초 2자리로 변환 
+
+						// 최종 포맷: yyyy-MM-dd hh:mm:ss
+						return year + '-' + month + '-' + day + ' '  + hours
+								+ ':' + minutes + ':' + seconds;
+					}
+
+				})
 	</script>
 </body>
 </html>

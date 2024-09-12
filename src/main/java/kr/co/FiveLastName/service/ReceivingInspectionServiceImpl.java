@@ -28,13 +28,13 @@ public class ReceivingInspectionServiceImpl implements ReceivingInspectionServic
 	}
 
 	@Override
-	public int ri_insert(ReceivingInspectionDTO riDTO) {
+	public ReceivingInspectionDTO ri_insert(ReceivingInspectionDTO riDTO) {
 		// 등록
 		return riDAO.ri_insert(riDTO);
 	}
 
 	@Override
-	public int ri_update(ReceivingInspectionDTO riDTO) {
+	public ReceivingInspectionDTO ri_update(ReceivingInspectionDTO riDTO) {
 		// 수정
 		return riDAO.ri_update(riDTO);
 	}

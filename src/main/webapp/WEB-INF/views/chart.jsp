@@ -51,7 +51,7 @@ prefix="c" %> <%@ page session="true" %>
             </div>
           </div>
       </div>
-	
+   
       <%@include file="include/footer.jsp" %>
     </div>
 
