@@ -126,7 +126,7 @@ prefix="c" %> <%@ page session="true" %>
         });
 
         // 필터를 적용할 열 인덱스 배열
-        var categoryColumns = [1, 5];
+        var categoryColumns = [1];
 
         // 필터를 적용할 열에 대해서만 처리
         categoryColumns.forEach(function (index) {

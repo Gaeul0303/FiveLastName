@@ -19,7 +19,9 @@
 		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
+		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id
 		
 		WHERE pi.pi_status = "검수완료" and ri.ri_availability = "입고대기";
 	</select>
@@ -40,7 +42,9 @@
 		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
+		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id
 		
 		WHERE ri_id = #{ri_id}
 	</select>
@@ -62,7 +66,12 @@
 		WHERE ri_id = #{ri_id};
 	</update>
 	
-	
+	<!-- 입고 삭제 -->
+	<delete id="ri_delete" parameterType="int">
+		update  receivingInspection
+		set ri_availability = '입고완료'
+		WHERE ri_id = #{ri_id};
+	</delete>
 	
 	
 </mapper>

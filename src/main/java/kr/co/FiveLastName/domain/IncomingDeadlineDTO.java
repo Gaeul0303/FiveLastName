@@ -8,7 +8,7 @@ public class IncomingDeadlineDTO {
 	private int ri_id;
 	private int id_genuineNum;
 	private int id_totalPirce;
-	private int pa_name;
+	private String pa_name;
 	private String pr_name;
 	private int pi_inspectedQuantity;
 	private String pi_status;
@@ -16,14 +16,15 @@ public class IncomingDeadlineDTO {
 	private String ri_availability;
 	private int ri_totalPrice;
 	private Timestamp ri_date;
+	private String st_name;
 	
 	public IncomingDeadlineDTO() {
 		super();
 	}
-	
-	public IncomingDeadlineDTO(String id_code, int ri_id, int id_genuineNum, int id_totalPirce, int pa_name,
+
+	public IncomingDeadlineDTO(String id_code, int ri_id, int id_genuineNum, int id_totalPirce, String pa_name,
 			String pr_name, int pi_inspectedQuantity, String pi_status, int co_supplyPrice, String ri_availability,
-			int ri_totalPrice, Timestamp ri_date) {
+			int ri_totalPrice, Timestamp ri_date, String st_name) {
 		super();
 		this.id_code = id_code;
 		this.ri_id = ri_id;
@@ -37,6 +38,7 @@ public class IncomingDeadlineDTO {
 		this.ri_availability = ri_availability;
 		this.ri_totalPrice = ri_totalPrice;
 		this.ri_date = ri_date;
+		this.st_name = st_name;
 	}
 
 	public String getId_code() {
@@ -71,11 +73,11 @@ public class IncomingDeadlineDTO {
 		this.id_totalPirce = id_totalPirce;
 	}
 
-	public int getPa_name() {
+	public String getPa_name() {
 		return pa_name;
 	}
 
-	public void setPa_name(int pa_name) {
+	public void setPa_name(String pa_name) {
 		this.pa_name = pa_name;
 	}
 
@@ -135,14 +137,23 @@ public class IncomingDeadlineDTO {
 		this.ri_date = ri_date;
 	}
 
+	public String getSt_name() {
+		return st_name;
+	}
+
+	public void setSt_name(String st_name) {
+		this.st_name = st_name;
+	}
+
 	@Override
 	public String toString() {
 		return "IncomingDeadlineDTO [id_code=" + id_code + ", ri_id=" + ri_id + ", id_genuineNum=" + id_genuineNum
 				+ ", id_totalPirce=" + id_totalPirce + ", pa_name=" + pa_name + ", pr_name=" + pr_name
 				+ ", pi_inspectedQuantity=" + pi_inspectedQuantity + ", pi_status=" + pi_status + ", co_supplyPrice="
 				+ co_supplyPrice + ", ri_availability=" + ri_availability + ", ri_totalPrice=" + ri_totalPrice
-				+ ", ri_date=" + ri_date + "]";
+				+ ", ri_date=" + ri_date + ", st_name=" + st_name + "]";
 	}
-
+	
+	
 		
 }

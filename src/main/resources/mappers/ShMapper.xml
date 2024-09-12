@@ -17,8 +17,9 @@
 		INNER JOIN procurementplanregistration ppr ON po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
 		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id
 		
 		WHERE ss.ss_status = "제작완료" and ss.ss_deliverySchedule = "일정준수";
 	</select>
@@ -35,8 +36,9 @@
 		INNER JOIN procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
 		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id
 		
 		WHERE sh.sh_id = #{sh.sh_ip};
 	</select>

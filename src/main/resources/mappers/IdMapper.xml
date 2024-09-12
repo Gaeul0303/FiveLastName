@@ -5,11 +5,11 @@
 <mapper namespace="kr.co.FiveLastName.IdMapper">
 
 	<!-- 입고 마감 조회 -->
-	<!-- 입고일 품목명 정품수량 공급가액 합계 -->
+	<!-- 입고일 품목명 정품수량 공급가액 합계 입고여부 입고일-->
 	<select id="id_list" resultType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
 		SELECT
-		*
-		<!-- ri.ri_date, pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice -->
+		id.id_code, ri.ri_id, id.id_genuineNum, id.id_totalPrice, pa.pa_name, pr.pr_name, pi.pi_inspectedQuantity, pi.pi_status, co.co_supplyPrice, ri.ri_availability, 
+		ri.ri_date, st.st_name
 		
 		FROM incomingDeadline id
 		
@@ -21,18 +21,19 @@
 		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
+		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id
 		
-		WHERE ri.ri_availability = "입고완료"
+		WHERE ri.ri_availability = "입고완료" and pi.pi_status = "검수완료";
 	</select>
 	
 	<!-- 입고마감 상세 조회 -->
-	<select id="id_selectOne" parameterType="int" resultType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
+	<select id="id_selectOne" parameterType="String" resultType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
 		SELECT
-		*
-		<!-- ri.ri_date, pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice -->
+		id.*, ri.ri_date, pr.pr_name, co.co_supplyPrice		
 		
-		FROM incomingDeadline id
+		FROM incomingDeadline id		
 		
 		INNER JOIN receivingInspection ri ON id.ri_id = ri.ri_id
 		INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id
@@ -42,26 +43,64 @@
 		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
+		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id
 		
-		WHERE id.id_code = #{id.id_code}
+		WHERE id.id_code = #{id_code}
 	</select>
 	
 	<!-- 입고마감 등록 -->
 	<insert id="id_insert" parameterType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
 		INSERT INTO incomingDeadline(id_code, ri_id, id_genuineNum, id_totalPrice)
-		VALUES
-		(#{id_code}, #{ri_id}, #{id_genuineNum}, #{id_totalPrice})
+   	 	SELECT
+        #{id_code},
+        ri.ri_id,
+        #{id_genuineNum},
+        (#{id_genuineNum}*co.co_supplyPrice)
+        
+    	FROM
+        receivingInspection ri
+        
+	    INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id
+	    INNER JOIN staff st ON pi.st_id = st.st_id
+	    INNER JOIN shippingStatus ss ON pi.ss_id = ss.ss_id
+	    INNER JOIN purchaseOrder po ON ss.po_id = po.po_id
+	    INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
+	    INNER JOIN contract co ON ppr.co_id = co.co_id
+	    INNER JOIN estimate es ON co.es_id = es.es_id
+	    INNER JOIN partner pa ON es.pa_id = pa.pa_id
+	    INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+	    INNER JOIN product pr ON pp.pr_id = pr.pr_id
+    	
+    	WHERE ri.ri_id = #{ri_id};
 	</insert>
+	
+	
+	
+	<!-- <insert id="id_insert" parameterType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
+	   INSERT INTO incomingDeadline(id_code, ri_id, id_genuineNum, id_totalPrice)
+	    VALUES(
+	    	#{id_code, jdbcType=VARCHAR},
+	        #{ri_id, jdbcType=INTEGER},
+	        #{id_genuineNum, jdbcType=INTEGER},
+	        #{id_genuineNum, jdbcType=INTEGER}
+	        )
+	</insert>-->
 	
 	<!-- 입고마감 수정 -->
 	<update id="id-update" parameterType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
 		UPDATE incomingDeadline
 		SET
 		id_genuineNum = #{id_genuineNum},
-		id_totalPrice = #{id_totalPrice}
+		id_totalPrice = #{id_totalPrice},
+		id_date = now()
 		WHERE
 		id_code = #{id_code};
 	</update>
-
+	
+	<!-- 입고마감 삭제 -->
+	<delete id="id_delete" parameterType="String">
+		DELETE FROM incomingDeadline WHERE id_code = {id_code}
+	</delete>
 </mapper>

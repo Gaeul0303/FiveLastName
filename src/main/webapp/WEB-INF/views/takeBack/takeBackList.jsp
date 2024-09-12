@@ -23,7 +23,7 @@ prefix="c" %> <%@ page session="true" %>
           <div class="container">
             <div class="page-inner">
               <div class="page-header">
-                <h3 class="fw-bold mb-3">입고 마감</h3>
+                <h3 class="fw-bold mb-3">반품</h3>
                 <ul class="breadcrumbs mb-3">
                   <li class="nav-home">
                     <a href="#">
@@ -34,13 +34,13 @@ prefix="c" %> <%@ page session="true" %>
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">입고 마감</a>
+                    <a href="#">반품 현황</a>
                   </li>
                   <li class="separator">
                     <i class="icon-arrow-right"></i>
                   </li>
                   <li class="nav-item">
-                    <a href="#">전체 보기</a>
+                    <a href="#">반품 현황 전체보기</a>
                   </li>
                 </ul>
               </div>
@@ -48,7 +48,7 @@ prefix="c" %> <%@ page session="true" %>
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">입고 마감</h4>
+                      <h4 class="card-title">반품 현황</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
@@ -58,16 +58,15 @@ prefix="c" %> <%@ page session="true" %>
                         >
                           <thead>
                             <tr>
-                              <th class = "centerTD">검수코드</th>	
+                              <th class = "centerTD">반품신청일</th>	
                               <th class = "centerTD">품목명</th>
-                              <th class = "centerTD">기존수량</th>
-                              <th class = "centerTD">정품수량</th>
+                              <th class = "centerTD">불량수량</th>
                               <th class = "centerTD">단가</th>
                               <th class = "centerTD">금액</th>
                               <th class = "centerTD">담당자</th>
-                              <th class = "centerTD">입고여부</th>
-                              <th class = "centerTD">입고일</th>
-                              <th class = "centerTD">거래명세서</th>
+                              <th class = "centerTD">반품상태</th>
+                              <th class = "centerTD">불량사유</th>
+                              <th class = "centerTD">반품완료일</th>
                             </tr>
                           </thead>
                           <tfoot>
@@ -77,28 +76,30 @@ prefix="c" %> <%@ page session="true" %>
 	                          <th></th>	
 	                          <th></th>	
 	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
+	                          <th></th>	
                           </tfoot>
                           <tbody>
-                            <c:forEach var="id" items="${id_list }">
+                            <c:forEach var="tb" items="${tb_list }">
                             	<tr>
-	                              <td class = "centerTD">${id.ri_id }</td>
-	                              <td>${id.pr_name }</td>
+	                              <td class = "centerTD"><fmt:formatDate value="${tb.tb_returnApplicationDate }" pattern="yyyy-MM-dd"/> </td>
+	                              <td>${tb.pr_name }</td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value = "${id.pi_inspectedQuantity }" pattern="#,###" />
+	                              	<fmt:formatNumber value = "${tb.tb_errorNum }" pattern="#,###" />
 	                              </td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value = "${id.id_genuineNum }" pattern="#,###" />
+	                              	<fmt:formatNumber value = "${tb.co_supplyPrice }" pattern="#,###" />
 	                              </td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value="${id.co_supplyPrice }" pattern="#,###" />
+	                              	<fmt:formatNumber value="${tb.ri_totalPrice }" pattern="#,###" />
 	                              </td>
+	                              <td class = "centerTD">${tb.st_name }</td>
+	                              <td class = "centerTD">${tb.tb_status }</td>
+	                              <td class = "centerTD">${tb.tb_notes }</td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value="${id.ri_totalPrice }" pattern="#,###" />
+	                              	<fmt:formatDate value="${tb.tb_returnCompletionDate }" pattern="yyyy-MM-dd"/>
 	                              </td>
-                            	  <td class = "centerTD">${id.st_name }</td>
-                            	  <td class = "centerTD">${id.ri_availability }</td>
-	                              <td class = "centerTD"><fmt:formatDate value="${id.ri_date }"/></td>
-	                              <td class = "centerTD"><a href="/receivingInspection/riUpdate?ri_id=${id.id_code }">발행</a></td>
                             	</tr>
                             </c:forEach>
                           </tbody>
@@ -127,7 +128,7 @@ prefix="c" %> <%@ page session="true" %>
         });
 
         // 필터를 적용할 열 인덱스 배열
-        var categoryColumns = [1, 5];
+        var categoryColumns = [1, 6];
 
         // 필터를 적용할 열에 대해서만 처리
         categoryColumns.forEach(function (index) {
