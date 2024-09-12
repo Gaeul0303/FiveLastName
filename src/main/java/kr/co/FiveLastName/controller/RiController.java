@@ -50,25 +50,59 @@ public class RiController {
 		
 		model.addAttribute("updateform", riService.ri_selectOne(ri_id));
 		
+		ReceivingInspectionDTO ri = riService.ri_selectOne(ri_id);
+		
+		if(ri==null) {
+			System.out.println("비었어요.");
+		}else {
+			System.out.println("ri.getPr_name = "+ri.getPr_name());
+			System.out.println("ri.getPi_inspectedQuantity = "+ri.getPi_inspectedQuantity());
+		}
+		
 		mav.setViewName("/receivingInspection/riUpdateForm");
 		
 		return mav;
 	}
 	
-	@PostMapping(value = "/update")
-	public ModelAndView ri_update(ReceivingInspectionDTO riDTO) {
-		int result = riService.ri_update(riDTO);
-		
-		ModelAndView mav = new ModelAndView();
-		if(result<0) {
-			mav.setViewName("error");
-			return mav;
-		}
-		
-		mav.setViewName("rediect:/receivingInspection/riList");
-		
-		return mav;
-	}
+//	@PostMapping(value = "/update")
+//	public ModelAndView ri_update(@ModelAttribute ReceivingInspectionDTO riDTO) {
+//		
+//		ModelAndView mav = new ModelAndView();
+//		
+//		if(riDTO!=null) {
+//			riService.ri_update(riDTO);
+//			System.out.println("수정완료. riDTO = " + riDTO);
+//			System.out.println("ri_id = " + riDTO.getRi_id());
+//			int ri_id = riDTO.getRi_id();
+//			ReceivingInspectionDTO ri = riService.ri_selectOne(ri_id);
+//			mav.addObject("msg", "success");
+//			mav.addObject("ri_id", ri.getRi_id());
+//			mav.setViewName("rediect:/receivingInspection/riList");
+//		}else {
+//			mav.addObject("msg", "fail");
+//			
+//		}
+//		
+//		return mav;
+//	}
 	
 	
+	
+	
+	
+	
+//	public ModelAndView ri_update(ReceivingInspectionDTO riDTO) {
+//		int result = riService.ri_update(riDTO);
+//		
+//		ModelAndView mav = new ModelAndView();
+//		
+//		if(result<0) {
+//			mav.setViewName("error");
+//			return mav;
+//		}
+//		
+//		mav.setViewName("rediect:/receivingInspection/riList");
+//		
+//		return mav;
+//	}
 }

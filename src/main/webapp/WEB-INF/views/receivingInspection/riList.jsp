@@ -93,7 +93,7 @@ prefix="c" %> <%@ page session="true" %>
 	                              <td class = "centerTD">${ri.ri_availability }</td>
 	                               <c:choose>
 	                              	<c:when test="${ri.ri_availability eq '입고대기'}">
-	                              		<td class = "centerTD"><a href="/receiveingInspection/updateForm?ri_id=${ri.ri_id }">검수작성</a></td>
+	                              		<td class = "centerTD"><a href="/incomingDeadline/insertForm?ri_id=${ri.ri_id }">검수작성</a></td>
 	                              	</c:when>
 	                              	<c:otherwise>
 	                              		<td></td>

@@ -20,6 +20,24 @@ public class IncomingDeadlineDTO {
 	public IncomingDeadlineDTO() {
 		super();
 	}
+	
+	public IncomingDeadlineDTO(String id_code, int ri_id, int id_genuineNum, int id_totalPirce, int pa_name,
+			String pr_name, int pi_inspectedQuantity, String pi_status, int co_supplyPrice, String ri_availability,
+			int ri_totalPrice, Timestamp ri_date) {
+		super();
+		this.id_code = id_code;
+		this.ri_id = ri_id;
+		this.id_genuineNum = id_genuineNum;
+		this.id_totalPirce = id_totalPirce;
+		this.pa_name = pa_name;
+		this.pr_name = pr_name;
+		this.pi_inspectedQuantity = pi_inspectedQuantity;
+		this.pi_status = pi_status;
+		this.co_supplyPrice = co_supplyPrice;
+		this.ri_availability = ri_availability;
+		this.ri_totalPrice = ri_totalPrice;
+		this.ri_date = ri_date;
+	}
 
 	public String getId_code() {
 		return id_code;
@@ -126,6 +144,5 @@ public class IncomingDeadlineDTO {
 				+ ", ri_date=" + ri_date + "]";
 	}
 
-	
-	
+		
 }
