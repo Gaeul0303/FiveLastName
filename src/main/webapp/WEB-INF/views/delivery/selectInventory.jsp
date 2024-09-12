@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %> <%@ page session="true" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="ko">
   <head>
     <%@include file="../include/head.jsp" %>
@@ -65,7 +66,7 @@ prefix="c" %> <%@ page session="true" %>
                               <td>${inv.in_safetyStock }</td>
                               <td>${inv.in_availableInventory}</td>
                               <td>${inv.in_physicalInventory}</td>
-                              <td>${inv.co_supplyPrice }
+                              <td><fmt:formatNumber value="${inv.co_supplyPrice }" type="number"/></td>
                             </tr>
                           </tbody>
                         </table>
@@ -105,6 +106,7 @@ prefix="c" %> <%@ page session="true" %>
                             window.close();
                         }	
                         alert("출고 처리 되었습니다.")
+                        self.close();
                     });
                 } else {
                     alert("폼 제출에 실패했습니다.");
