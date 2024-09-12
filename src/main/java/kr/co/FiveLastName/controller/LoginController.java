@@ -45,6 +45,8 @@ public class LoginController {
 		} else {// 로그인 성공 세션 부여
 			System.out.println("로그인 성공");
 			session.setAttribute("st_id", user.get("st_id"));
+			session.setAttribute("st_department", user.get("st_department"));
+			
 			return "redirect:/";
 		}
 	}
@@ -54,5 +56,6 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
-	}
+	}	
+	
 }
