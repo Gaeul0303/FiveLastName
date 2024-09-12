@@ -7,7 +7,7 @@
 
 	<!-- 담당자 로그인 -->
 	<select id="login" parameterType="java.util.Map" resultType="java.util.Map">
-	select st_id, st_pw
+	select st_id, st_pw,st_department
 	from staff
 	where st_id=#{st_id} and st_pw=#{st_pw}
 	</select>
