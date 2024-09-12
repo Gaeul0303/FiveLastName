@@ -37,20 +37,16 @@ prefix="c"%> <%@ page session="true"%>
                       role="form"
                       method="post"
                       id="updateForm"
-                      enctype="multipart/form-data"
+                  
                     >
-                      <input
-                        type="hidden"
-                        name="pr_id"
-                        value="${procurmentDTO.pr_id}"
-                      />
+                      
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
                             <label for="pr_name">품목명</label><select                            
-							class="form-select" id="pr_name" name= "pr_name" required="required">
+							class="form-select" id="pr_name" name= "pr_id" required="required">
 							<c:forEach items="${list}" var="product">
-							<option><td>${product.pr_name }</td>
+							<option value ="${product.pr_id}">${product.pr_name }
 							</option>
 							</c:forEach>
 							</select>                            
@@ -64,7 +60,7 @@ prefix="c"%> <%@ page session="true"%>
                               name="pp_makeTime"
                               placeholder="소요일정"
                               required="required"
-                              value="${procurmentPlanDTO.pp_makeTime }"
+                              value="${procurmentPlan.pp_makeTime }"
                             />
                           </div>
                           <div class="form-group">
@@ -76,19 +72,22 @@ prefix="c"%> <%@ page session="true"%>
                               name="pp_spendAmount"
                               placeholder="소요량"
                               required="required"
-                              value="${procurmentPlanDTO.pp_spendAmount }"
+                              value="${procurmentPlan.pp_spendAmount }"
                             />
                           </div>
                           <div class="form-group">
                             <label for="deliveryDate">조달납기</label>
                             <input
-                              type="date"
+                              type="datetime-local"
                               class="form-control"
-                              id="pp_deliveryDate"
-                              name="pp_deliveryDate"                           
+                              id="pp_deliveryDate"                                                         
                               placeholder="조달납기"
                               required="required"
-                            ${procurmentPlanDTO.pp_deliveryDate }/>
+                              value="${procurmentPlan.pp_deliveryDate }"/>
+                            <input
+                              type="hidden"
+                              id="formattedDateInput"
+                              name="pp_deliveryDate"/>
                           </div>
                           <div class="form-group imgUpload">
                             <label for="comment">자재 소요 공정</label>
@@ -99,7 +98,7 @@ prefix="c"%> <%@ page session="true"%>
                               rows="5"
                               placeholder="자재 소요 공정"
                               required="required"
-                            >${procurmentPlanDTO.pp_materialRequiredProcessStage }</textarea>
+                            >${procurmentPlan.pp_materialRequiredProcessStage }</textarea>
                           
                           </div>                         
                         </div>
@@ -126,11 +125,9 @@ prefix="c"%> <%@ page session="true"%>
 
     <script type="text/javascript">
       $(document).ready(function () {
-        let category = `${procurmentPlanDTO.pp_id}`;
-        let status = `${productDTO.pr_status}`;
-
-        $("#cateinput").val(category).prop("selected", "true");
-        $("#statusinput").val(status).prop("selected", "true");
+        let name = `${procurmentPlan.pr_id}`;
+     
+        $("#pr_name").val(name).prop("selected", "true");
       });
     </script>
 
@@ -139,5 +136,46 @@ prefix="c"%> <%@ page session="true"%>
       src="/resources/assets/js/upload.js"
     ></script>
 
+ <script>
+		$(document).ready(
+				
+				function() {
+
+					const form = $("#updateForm");
+
+					$("#updateBtn").on("click", function(e) {
+						e.preventDefault();
+						let dateInput = $('#pp_deliveryDate').val();
+
+						if (dateInput) {
+							// dateTime 형식을 yyyy-MM-dd hh:mm:ss로 변환
+							let formattedDate = formatDateTime(dateInput);
+							console.log("Formatted Date: ", formattedDate);
+
+							// 변환된 값을 숨겨진 필드에 설정
+							$('#formattedDateInput').val(formattedDate);
+
+							form.submit();
+						}
+
+					})
+
+					function formatDateTime(dateTimeString) {
+						let date = new Date(dateTimeString);
+
+						let year = date.getFullYear();
+						let month = ('0' + (date.getMonth() + 1)).slice(-2); // 월 2자리로 변환
+						let day = ('0' + date.getDate()).slice(-2); // 일 2자리로 변환
+						let hours = ('0' + date.getHours()).slice(-2); // 시간 2자리로 변환
+						let minutes = ('0' + date.getMinutes()).slice(-2); // 분 2자리로 변환
+						let seconds = ('0' + date.getSeconds()).slice(-2); // 초 2자리로 변환 */
+
+						// 최종 포맷: yyyy-MM-dd hh:mm:ss
+						return year + '-' + month + '-' + day + ' ' + hours
+								+ ':' + minutes + ':' + seconds;
+					}
+
+				})
+	</script>
   </body>
 </html>

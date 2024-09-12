@@ -108,33 +108,33 @@ public class DeliveryController {
 
 		   }
 	
-    @GetMapping("/barChart")
-    @ResponseBody
-    public List<Map<String, Object>> getItemWiseReport() {
-        // 전체 출고 데이터 가져오기
-        List<DeliveryDTO> deliveryList = service.idmReportList();
-
-        // 품목별 출고 수량 집계
-        Map<String, Integer> itemTotals = deliveryList.stream()
-            .filter(dto -> dto.getPr_name() != null) // 품목 이름이 null이 아닌 경우만 필터링
-            .collect(Collectors.groupingBy(
-                DeliveryDTO::getPr_name, // 품목 이름 기준으로 그룹화
-                Collectors.summingInt(DeliveryDTO::getIdm_quantity) // 출고 수량 합계 계산
-            ));
-
-        // 품목별 데이터를 정렬 및 변환
-        List<Map<String, Object>> result = itemTotals.entrySet().stream()
-            .sorted(Map.Entry.comparingByKey()) // 품목별 정렬
-            .map(entry -> {
-                Map<String, Object> map = new HashMap<>();
-                map.put("item", entry.getKey()); // 품목 이름
-                map.put("total_quantity", entry.getValue()); // 총 출고 수량
-                return map;
-            })
-            .collect(Collectors.toList());
-
-        return result;
-    }
+//    @GetMapping("/barChart")
+//    @ResponseBody
+//    public List<Map<String, Object>> getItemWiseReport() {
+//        // 전체 출고 데이터 가져오기
+//        List<DeliveryDTO> deliveryList = service.idmReportList();
+//
+//        // 품목별 출고 수량 집계
+//        Map<String, Integer> itemTotals = deliveryList.stream()
+//            .filter(dto -> dto.getPr_name() != null) // 품목 이름이 null이 아닌 경우만 필터링
+//            .collect(Collectors.groupingBy(
+//                DeliveryDTO::getPr_name, // 품목 이름 기준으로 그룹화
+//                Collectors.summingInt(DeliveryDTO::getIdm_quantity) // 출고 수량 합계 계산
+//            ));
+//
+//        // 품목별 데이터를 정렬 및 변환
+//        List<Map<String, Object>> result = itemTotals.entrySet().stream()
+//            .sorted(Map.Entry.comparingByKey()) // 품목별 정렬
+//            .map(entry -> {
+//                Map<String, Object> map = new HashMap<>();
+//                map.put("item", entry.getKey()); // 품목 이름
+//                map.put("total_quantity", entry.getValue()); // 총 출고 수량
+//                return map;
+//            })
+//            .collect(Collectors.toList());
+//
+//        return result;
+//    }
     
     @RequestMapping(value = "chartJang", method = RequestMethod.GET)
 	public String barChart(Locale locale, Model model) {

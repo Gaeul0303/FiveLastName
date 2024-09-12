@@ -39,7 +39,7 @@
 	<!-- 조달 계획 수정 -->
 	<update id="pp_update"
 		parameterType="kr.co.FiveLastName.domain.ProcurmentPlanDTO">
-		procurmentPlan;UPDATE `ERP`.`procurmentPlan`
+		UPDATE `ERP`.`procurmentPlan`
 		SET		
 		`pr_id` = #{pr_id },
 		`pp_materialRequiredProcessStage` = #{pp_materialRequiredProcessStage },
