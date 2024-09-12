@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c" %> <%@ page session="true" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="ko">
   <head>
     <%@include file="../include/head.jsp" %>
@@ -8,6 +9,13 @@ prefix="c" %> <%@ page session="true" %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.13.1/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
+    <style type="text/css">
+    	.imgBox img{
+    		display:block;
+    		height:70px;
+    		margin:0 auto
+    	}
+    </style>
   </head>
   <body>
     <div class="wrapper">
@@ -88,9 +96,9 @@ prefix="c" %> <%@ page session="true" %>
                               <td>${inv.pr_name }</td>
                               <td>${inv.pr_category }</td>
                               <td>${inv.in_physicalInventory}</td>
-                              <td>${inv.pr_image }</td>
+                              <td class="imgBox"><img src="" alt="${inv.pr_image }" class="img"></td>
                               <td>${inv.ri_date }</td>
-                              <td>${inv.co_supplyPrice*inv.in_physicalInventory}</td>
+                              <td><fmt:formatNumber value="${inv.co_supplyPrice*inv.in_physicalInventory}" type="number"/></td>
                             </tr>
                            </c:forEach>
                             
@@ -111,7 +119,7 @@ prefix="c" %> <%@ page session="true" %>
     </div>
 
     <%@include file="../include/script.jsp" %>
-
+<script type="text/javascript" src="/resources/assets/js/upload.js"></script>
     <script>
     
  // 팝업 창 열기
@@ -120,7 +128,6 @@ prefix="c" %> <%@ page session="true" %>
         var popupProperties = "width=850,height=530,scrollbars=yes";
         window.open(popupURL, "Popup", popupProperties);
     }
- 
  
     $(document).ready(function () {
         // DataTable 인스턴스를 변수에 저장
@@ -142,6 +149,7 @@ prefix="c" %> <%@ page session="true" %>
                 });
             }
         });
+        
         // 필터링 버튼 클릭 핸들러
         $("#filter-btn").click(function() {
             var startDate = $('#start-date').val();
@@ -173,5 +181,16 @@ prefix="c" %> <%@ page session="true" %>
         });
     });
       </script>
+      
+      <script type="text/javascript">
+  
+    	$('.img').each(function(){
+        	var img = $(this).attr('alt');
+        	
+        	let fileInfo = getFileInfo(img);
+        	$(this).attr('src',fileInfo);
+    	});
+
+		</script>
   </body>
 </html>
