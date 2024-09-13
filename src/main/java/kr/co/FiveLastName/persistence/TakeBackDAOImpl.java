@@ -12,7 +12,7 @@ import kr.co.FiveLastName.domain.TakeBackDTO;
 @Repository
 public class TakeBackDAOImpl implements TakeBackDAO {
 	
-	private static final String namespace = "kr.co.FiveLastName.shippingStatusMapper";
+	private static final String namespace = "kr.co.FiveLastName.TakeBackMapper";
 	
 	@Inject
 	SqlSession sqlSesseion;
@@ -39,6 +39,13 @@ public class TakeBackDAOImpl implements TakeBackDAO {
 	public int tb_update(TakeBackDTO tbDTO) {
 		// 반품 수정
 		return sqlSesseion.update(namespace+".tb_update", tbDTO);
+	}
+
+	@Override
+	public void tb_delete(int tb_code) throws Exception {
+		// 반품 삭제
+		sqlSesseion.delete(namespace+".tb_delete");
+		
 	}
 	
 	

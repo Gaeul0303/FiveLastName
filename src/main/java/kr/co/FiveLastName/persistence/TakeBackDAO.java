@@ -16,4 +16,7 @@ public interface TakeBackDAO {
 	
 //	반품 수정
 	public int tb_update(TakeBackDTO tbDTO);
+	
+//	반품 삭제
+	void tb_delete(int tb_code)throws Exception;
 }

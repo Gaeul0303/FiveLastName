@@ -38,4 +38,11 @@ public class TakeBackServiceImpl implements TakeBackService {
 		// 반품 수정
 		return tbDAO.tb_update(tbDTO);
 	}
+
+	@Override
+	public void tb_delete(int tb_code) throws Exception {
+		// 반품 삭제
+		tbDAO.tb_delete(tb_code);
+		
+	}
 }

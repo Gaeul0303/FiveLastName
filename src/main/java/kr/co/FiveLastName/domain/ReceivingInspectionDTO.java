@@ -9,18 +9,20 @@ public class ReceivingInspectionDTO {
 	private Timestamp ri_date; 
 	private String ri_availability;
 	private int ri_totalPrice;
-	private int pa_name;
+	private String pa_name;
 	private String pr_name;
 	private int pi_inspectedQuantity;
 	private String pi_status;
 	private int co_supplyPrice;
+	private String st_name;
 	
 	public ReceivingInspectionDTO() {
 		super();
 	}
-	
+
 	public ReceivingInspectionDTO(int ri_id, int pi_id, Timestamp ri_date, String ri_availability, int ri_totalPrice,
-			int pa_name, String pr_name, int pi_inspectedQuantity, String pi_status, int co_supplyPrice) {
+			String pa_name, String pr_name, int pi_inspectedQuantity, String pi_status, int co_supplyPrice,
+			String st_name) {
 		super();
 		this.ri_id = ri_id;
 		this.pi_id = pi_id;
@@ -32,6 +34,7 @@ public class ReceivingInspectionDTO {
 		this.pi_inspectedQuantity = pi_inspectedQuantity;
 		this.pi_status = pi_status;
 		this.co_supplyPrice = co_supplyPrice;
+		this.st_name = st_name;
 	}
 
 	public int getRi_id() {
@@ -74,11 +77,11 @@ public class ReceivingInspectionDTO {
 		this.ri_totalPrice = ri_totalPrice;
 	}
 
-	public int getPa_name() {
+	public String getPa_name() {
 		return pa_name;
 	}
 
-	public void setPa_name(int pa_name) {
+	public void setPa_name(String pa_name) {
 		this.pa_name = pa_name;
 	}
 
@@ -114,13 +117,21 @@ public class ReceivingInspectionDTO {
 		this.co_supplyPrice = co_supplyPrice;
 	}
 
+	public String getSt_name() {
+		return st_name;
+	}
+
+	public void setSt_name(String st_name) {
+		this.st_name = st_name;
+	}
+
 	@Override
 	public String toString() {
 		return "ReceivingInspectionDTO [ri_id=" + ri_id + ", pi_id=" + pi_id + ", ri_date=" + ri_date
 				+ ", ri_availability=" + ri_availability + ", ri_totalPrice=" + ri_totalPrice + ", pa_name=" + pa_name
 				+ ", pr_name=" + pr_name + ", pi_inspectedQuantity=" + pi_inspectedQuantity + ", pi_status=" + pi_status
-				+ ", co_supplyPrice=" + co_supplyPrice + "]";
+				+ ", co_supplyPrice=" + co_supplyPrice + ", st_name=" + st_name + "]";
 	}
-
-			
+	
+				
 }
