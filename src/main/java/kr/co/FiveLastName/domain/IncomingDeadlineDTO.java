@@ -14,7 +14,6 @@ public class IncomingDeadlineDTO {
 	private String pi_status;
 	private int co_supplyPrice;
 	private String ri_availability;
-	private int ri_totalPrice;
 	private Timestamp ri_date;
 	private String st_name;
 	
@@ -24,7 +23,7 @@ public class IncomingDeadlineDTO {
 
 	public IncomingDeadlineDTO(String id_code, int ri_id, int id_genuineNum, int id_totalPirce, String pa_name,
 			String pr_name, int pi_inspectedQuantity, String pi_status, int co_supplyPrice, String ri_availability,
-			int ri_totalPrice, Timestamp ri_date, String st_name) {
+			Timestamp ri_date, String st_name) {
 		super();
 		this.id_code = id_code;
 		this.ri_id = ri_id;
@@ -36,7 +35,6 @@ public class IncomingDeadlineDTO {
 		this.pi_status = pi_status;
 		this.co_supplyPrice = co_supplyPrice;
 		this.ri_availability = ri_availability;
-		this.ri_totalPrice = ri_totalPrice;
 		this.ri_date = ri_date;
 		this.st_name = st_name;
 	}
@@ -121,14 +119,6 @@ public class IncomingDeadlineDTO {
 		this.ri_availability = ri_availability;
 	}
 
-	public int getRi_totalPrice() {
-		return ri_totalPrice;
-	}
-
-	public void setRi_totalPrice(int ri_totalPrice) {
-		this.ri_totalPrice = ri_totalPrice;
-	}
-
 	public Timestamp getRi_date() {
 		return ri_date;
 	}
@@ -150,10 +140,9 @@ public class IncomingDeadlineDTO {
 		return "IncomingDeadlineDTO [id_code=" + id_code + ", ri_id=" + ri_id + ", id_genuineNum=" + id_genuineNum
 				+ ", id_totalPirce=" + id_totalPirce + ", pa_name=" + pa_name + ", pr_name=" + pr_name
 				+ ", pi_inspectedQuantity=" + pi_inspectedQuantity + ", pi_status=" + pi_status + ", co_supplyPrice="
-				+ co_supplyPrice + ", ri_availability=" + ri_availability + ", ri_totalPrice=" + ri_totalPrice
-				+ ", ri_date=" + ri_date + ", st_name=" + st_name + "]";
+				+ co_supplyPrice + ", ri_availability=" + ri_availability + ", ri_date=" + ri_date + ", st_name="
+				+ st_name + "]";
 	}
-	
-	
-		
+
+			
 }

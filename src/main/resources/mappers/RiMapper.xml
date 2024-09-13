@@ -7,9 +7,10 @@
 	<!-- 입고 조회 -->
 	<!-- 입고일 품목명 수량 공급가액 합계 입고여부 -->
 	<select id="ri_list" resultType="kr.co.FiveLastName.domain.ReceivingInspectionDTO">
-		SELECT *
-		<!-- ri.ri_date, pr.pr_name, pi.pi_inspectedQuantity, co.co_supplyPrice, ri.ri_totalPrice, ri.ri_availability -->
-		
+		SELECT
+		ri.ri_id, ri.ri_date, ri.ri_availability, ri.ri_totalPrice, pi.pi_status,
+		pi.pi_inspectedQuantity, st.st_name, co.co_supplyPrice, pr.pr_name, pa.pa_name
+				
 		FROM receivingInspection ri
 		
 		INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id

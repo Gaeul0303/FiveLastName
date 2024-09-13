@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.FiveLastName.domain.TakeBackDTO;
@@ -33,4 +34,11 @@ public class takeBackController {
 		
 		return mav;
 	}
+	
+	@GetMapping(valu = "/updateForm")
+	public ModelAndView updateForm(@RequestParam("ri_id") int ri_id) {
+		
+	}
+		
+	
 }

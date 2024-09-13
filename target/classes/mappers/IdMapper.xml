@@ -57,7 +57,7 @@
         #{id_code},
         ri.ri_id,
         #{id_genuineNum},
-        (#{id_genuineNum}*co.co_supplyPrice)
+        (#{id_genuineNum}*co.co_supplyPrice) AS id_totalPrice
         
     	FROM
         receivingInspection ri

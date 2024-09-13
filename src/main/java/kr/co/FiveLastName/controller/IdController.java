@@ -40,7 +40,7 @@ public class IdController {
 		
 		List<IncomingDeadlineDTO> id_list = idService.id_list();
 		
-//		System.out.println("list"+id_list);
+		System.out.println("list"+id_list);
 		mav.addObject("id_list", id_list);
 		mav.setViewName("/incomingDeadline/idList");
 		
@@ -62,27 +62,13 @@ public class IdController {
 	@Transactional
 	@PostMapping(value = "/insert")
 	public String id_insert(@ModelAttribute IncomingDeadlineDTO idDTO) throws Exception {
-	    System.out.println("1" + idDTO);
+	    System.out.println(idDTO);
 	    idService.id_insert(idDTO);
-	    
-	    System.out.println("2");
-	    String id_code = idDTO.getId_code();
-	    System.out.println("3");
+	    System.out.println("insert : "+idDTO);
 	    
 	    riService.ri_delete(idDTO.getRi_id());
-	    System.out.println("4");
 	    System.out.println("ri_id 삭제 완료: " + idDTO.getRi_id());
 	    
-//	    IncomingDeadlineDTO id = idService.id_selectOne(id_code);
-	    
-	    
-//	    if (id == null) {
-//	        return "errorpage"; // 에러 페이지로 이동
-//	    }
-//	    
-	    // 리다이렉트 URL에 파라미터를 추가하고 싶다면, URL에 쿼리 파라미터를 추가할 수 있습니다.
-	    // return "redirect:/receivingInspection/riList?id_code=" + id_code;
-
 	    return "redirect:/receivingInspection/list";
 	}
 	
