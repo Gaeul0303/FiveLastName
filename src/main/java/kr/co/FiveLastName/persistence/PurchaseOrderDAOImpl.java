@@ -32,12 +32,12 @@ public class PurchaseOrderDAOImpl implements PurchaseOrderDAO{
 		return SqlSession.selectOne(namespace+".poPrev", ppr_id);
 	}
 	@Override
-	public PrintPODTO poInsert(int ppr_id) {
-		return SqlSession.selectOne(namespace+".poInsert", ppr_id);
+	public void poInsert(int ppr_id) {
+		SqlSession.selectOne(namespace+".poInsert", ppr_id);
 	}
 	@Override
-	public ProcurementPlanRegistrationDTO poComplete(int ppr_id) {
-		return SqlSession.selectOne(namespace+".poComplete",ppr_id);
+	public void poComplete(int ppr_id) {
+		SqlSession.selectOne(namespace+".poComplete",ppr_id);
 	}
 	@Override
 	public PrintPODTO poSearch(int ppr_id) {

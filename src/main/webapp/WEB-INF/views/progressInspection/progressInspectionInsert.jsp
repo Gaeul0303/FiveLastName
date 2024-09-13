@@ -44,12 +44,6 @@ prefix="c" %> <%@ page session="true" %>
                       <div class="card-title">검수계획 등록하기</div>
                     </div>
                     <div class="card-body">
-                          <div class="form-group form-inline">
-                            <div class="col-md-9 p-0">
-								<button class = "btn" onclick = "viewPO(this)" value = ${ss.po_id}>검수계획 수정하기(팝업창)</button>
-                            </div>
-                          </div>
-                          
                      <form id = "progressInspection" action="/progressInspection/insert" method = "post" onsubmit="return checkForm()">
                       <div class="row">
                         <div class="col-md-6 col-lg-4">

@@ -100,14 +100,18 @@ prefix="c" %> <%@ page session="true" %>
 
                           
                           <div class="form-group form-inline">
-                            <label
-                              for="inlineinput"
-                              class="col-md-3 col-form-label"
-                              >출하 수량</label
-                            >
-                            <div class="col-md-9 p-0">
-								<input type="number" id="ss_quantity" name ="ss_quantity" min="0" max="${po.ppr_quantity}" onchange="check()" value = "${po.ppr_quantity }" readonly="readonly">
-                            </div>
+	                            <label
+	                              for="inlineinput"
+	                              class="col-md-3 col-form-label"
+	                              >출하 수량</label
+	                            >
+	                             <select
+	                              class="form-select"
+	                              id="exampleFormControlSelect1"
+	                              name = "ss_quantity"
+	                            >
+	                              <option value = "${po.ppr_quantity }">${po.ppr_quantity }</option>
+	                            </select>
                           </div>
                         
                         <!-- po_id 외래키 hidden으로 보내기. -->

@@ -33,13 +33,13 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService{
 	}
 
 	@Override
-	public PrintPODTO poInsert(int ppr_id) {
-		return dao.poInsert(ppr_id);
+	public void poInsert(int ppr_id) {
+		dao.poInsert(ppr_id);
 	}
 
 	@Override
-	public ProcurementPlanRegistrationDTO poComplete(int ppr_id) {
-		return dao.poComplete(ppr_id);
+	public void poComplete(int ppr_id) {
+		dao.poComplete(ppr_id);
 	}
 
 	@Override

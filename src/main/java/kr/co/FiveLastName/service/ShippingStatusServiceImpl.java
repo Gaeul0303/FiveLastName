@@ -35,18 +35,18 @@ public class ShippingStatusServiceImpl implements ShippingStatusService{
 	}
 
 	@Override
-	public ShippingStatusDTO insert(ShippingStatusDTO ss) {
-		return dao.insert(ss);
+	public void insert(ShippingStatusDTO ss) {
+		dao.insert(ss);
 	}
 
 	@Override
-	public ShippingStatusDTO update(ShippingStatusDTO ss) {
-		return dao.update(ss);
+	public void update(ShippingStatusDTO ss) {
+		dao.update(ss);
 	}
 
 	@Override
-	public ShippingStatusDTO complete(int ss_id) {
-		return dao.complete(ss_id);
+	public void complete(int ss_id) {
+		dao.complete(ss_id);
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class ShippingStatusServiceImpl implements ShippingStatusService{
 	}
 
 	@Override
-	public PrintPODTO poComplete(int po_id) {
-		return dao.poComplete(po_id);
+	public void poComplete(int po_id) {
+		dao.poComplete(po_id);
 	}
 	
 

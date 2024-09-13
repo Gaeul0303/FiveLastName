@@ -55,23 +55,23 @@ public class ProgressInspectionServiceImpl implements ProgressInspectionService{
 	}
 
 	@Override
-	public ProgressInspectionDTO piInsert(ProgressInspectionDTO pi) {
-		return dao.piInsert(pi);
+	public void piInsert(ProgressInspectionDTO pi) {
+		dao.piInsert(pi);
 	}
 
 	@Override
-	public ProgressInspectionDTO piUpdate(ProgressInspectionDTO pi) {
-		return dao.piUpdate(pi);
+	public void piUpdate(ProgressInspectionDTO pi) {
+		dao.piUpdate(pi);
 	}
 
 	@Override
-	public ProgressInspectionRecordDTO insertRecord(ProgressInspectionDTO pi) {
-		return dao.insertRecord(pi);
+	public void insertRecord(ProgressInspectionDTO pi) {
+		dao.insertRecord(pi);
 	}
 
 	@Override
-	public ShippingStatusDTO ssComplete(int ss_id) {
-		return dao.ssComplete(ss_id);
+	public void ssComplete(int ss_id) {
+		dao.ssComplete(ss_id);
 	}
 
 	@Override

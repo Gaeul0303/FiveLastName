@@ -38,20 +38,20 @@ public class ShippingStatusDAOImpl implements ShippingStatusDAO{
 
 
 	@Override
-	public ShippingStatusDTO insert(ShippingStatusDTO ss) {
-		return sqlSession.selectOne(namespace+".ssInsert", ss);
+	public void insert(ShippingStatusDTO ss) {
+		sqlSession.selectOne(namespace+".ssInsert", ss);
 	}
 
 
 	@Override
-	public ShippingStatusDTO update(ShippingStatusDTO ss) {
-		return sqlSession.selectOne(namespace+".ssUpdate", ss);
+	public void update(ShippingStatusDTO ss) {
+		sqlSession.selectOne(namespace+".ssUpdate", ss);
 	}
 
 
 	@Override
-	public ShippingStatusDTO complete(int ss_id) {
-		return sqlSession.selectOne(namespace+".ssComplete", ss_id);
+	public void complete(int ss_id) {
+		sqlSession.selectOne(namespace+".ssComplete", ss_id);
 	}
 
 
@@ -62,8 +62,8 @@ public class ShippingStatusDAOImpl implements ShippingStatusDAO{
 
 
 	@Override
-	public PrintPODTO poComplete(int po_id) {
-		return sqlSession.selectOne(namespace+".poComplete",po_id);
+	public void poComplete(int po_id) {
+		sqlSession.selectOne(namespace+".poComplete",po_id);
 	}
 
 }

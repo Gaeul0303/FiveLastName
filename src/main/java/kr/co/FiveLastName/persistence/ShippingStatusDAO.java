@@ -14,14 +14,14 @@ public interface ShippingStatusDAO {
 	
 	ShippingStatusDTO search(int po_id);
 	
-	ShippingStatusDTO insert(ShippingStatusDTO ss);
+	void insert(ShippingStatusDTO ss);
 	
-	ShippingStatusDTO update(ShippingStatusDTO ss);
+	void update(ShippingStatusDTO ss);
 	
-	ShippingStatusDTO complete(int ss_id);
+	void complete(int ss_id);
 	
 	int count(int po_id);
 	
-	PrintPODTO poComplete(int po_id);
+	void poComplete(int po_id);
 	
 }
