@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.FiveLastName.domain.PartnerDTO;
 import kr.co.FiveLastName.domain.PrintPODTO;
@@ -130,7 +131,9 @@ public class ProgressInspectionController {
 		
 		PrintPODTO po = pService.poSelect(ss.getPo_id());
 		
-		session.setAttribute("st_id", "ghldnjs234");
+		String st_id = (String) session.getAttribute("st_id");
+		
+		StaffDTO st = service.stSelect(st_id);
 		
 		System.out.println("insert 페이지입니다.");
 		mav.addObject("po", po);
@@ -164,7 +167,7 @@ public class ProgressInspectionController {
 			mav.addObject("pi", PI);
 			mav.addObject("msg","success");
 			mav.addObject("pi_id",pI.getPi_id());
-			mav.setViewName("/progressInspection/progressInspectionSelect");
+			mav.setViewName("/progressInspection/progressInspectionList");
 		}else {
 			mav.addObject("msg","fail");
 			mav.setViewName("/progressInspection/progressInspectionList");
@@ -173,28 +176,27 @@ public class ProgressInspectionController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView piUpdate(@ModelAttribute ProgressInspectionDTO pi) throws Exception {
-		System.out.println("pi = " + pi);
-		ModelAndView mav = new ModelAndView();
-		
-		if(pi!=null) {
-			service.piUpdate(pi);
-			ProgressInspectionDTO PI = service.piSelect(pi.getPi_id());
-			System.out.println("업데이트성공!");
-			System.out.println("PI = " + PI);
-			service.insertRecord(PI);
-			sendMailStaff(PI.getSt_id(),PI.getPi_id());
-			sendMailPartner(PI.getPa_id(),PI.getPi_id());
-			mav.addObject("msg","success");
-			mav.addObject("pi",PI);
-			mav.addObject("pi_id",PI.getPi_id());
-			mav.setViewName("progressInspection/progressInspectionSelect");
-		}else {
-			mav.addObject("msg","fail");
-			mav.setViewName("/progressInspection/progressInspectionList");
-		}
-		
-		return mav;
+	public String piUpdate(@ModelAttribute ProgressInspectionDTO pi, RedirectAttributes rttr, Model model) throws Exception {
+	    System.out.println("pi = " + pi);
+	    
+	    if (pi != null) {
+	        service.piUpdate(pi);
+	        ProgressInspectionDTO PI = service.piSelect(pi.getPi_id());
+	        System.out.println("업데이트성공!");
+	        System.out.println("PI = " + PI);
+	        service.insertRecord(PI);
+	        sendMailStaff(PI.getSt_id(), PI.getPi_id());
+	        sendMailPartner(PI.getPa_id(), PI.getPi_id());
+	        
+	        rttr.addFlashAttribute("msg", "updateSuccess");
+	        model.addAttribute("pi", PI);
+	        model.addAttribute("pi_id",PI.getPi_id());
+	        
+	        return "redirect:/progressInspection/list";
+	    } else {
+	        rttr.addFlashAttribute("msg", "updateFail");
+	        return "redirect:/progressInspection/list";
+	    }
 	}
 	
 	public void sendMailStaff(String st_id, int pi_id) throws Exception {

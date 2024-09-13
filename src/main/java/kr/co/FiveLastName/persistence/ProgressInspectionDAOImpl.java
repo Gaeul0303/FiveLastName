@@ -46,23 +46,23 @@ public class ProgressInspectionDAOImpl implements ProgressInspectionDAO{
 		return sqlSession.selectOne(namespace+".piRecord", ss_id);
 	}
 	@Override
-	public ProgressInspectionDTO piInsert(ProgressInspectionDTO pi) {
-		return sqlSession.selectOne(namespace+".piInsert", pi);
+	public void piInsert(ProgressInspectionDTO pi) {
+		sqlSession.selectOne(namespace+".piInsert", pi);
 	}
 	@Override
-	public ProgressInspectionDTO piUpdate(ProgressInspectionDTO pi) {
+	public void piUpdate(ProgressInspectionDTO pi) {
 		System.out.println("pi 업데이트 입니다.");
 		System.out.println("pi = " + pi);
-		return sqlSession.selectOne(namespace+".piUpdate", pi);
+		sqlSession.selectOne(namespace+".piUpdate", pi);
 	}
 	@Override
-	public ProgressInspectionRecordDTO insertRecord(ProgressInspectionDTO pi) {
+	public void insertRecord(ProgressInspectionDTO pi) {
 		System.out.println("insertRecord 입니다. pi = " + pi);
-		return sqlSession.selectOne(namespace+".insertRecord", pi);
+		sqlSession.selectOne(namespace+".insertRecord", pi);
 	}
 	@Override
-	public ShippingStatusDTO ssComplete(int ss_id) {
-		return sqlSession.selectOne(namespace+".ssComplete", ss_id);
+	public void ssComplete(int ss_id) {
+		sqlSession.selectOne(namespace+".ssComplete", ss_id);
 	}
 	@Override
 	public StaffDTO stSelect(String st_id) {

@@ -144,11 +144,9 @@ public class PurchaseOrderController {
 		
 		System.out.println("ppr_id = " + ppr_id);
 		
-		PrintPODTO po = service.poInsert(ppr_id);
+		service.poInsert(ppr_id);
 		
-		System.out.println("po = " + po);
-		
-		ProcurementPlanRegistrationDTO ppr = service.poComplete(ppr_id);
+		service.poComplete(ppr_id);
 		
 		 return "redirect:/purchaseOrder/list";
 	}

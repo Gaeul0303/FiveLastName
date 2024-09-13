@@ -62,13 +62,13 @@ prefix="c" %> <%@ page session="true" %>
                             <tr>
                               <th>출하현황상세조회</th>			
                               <th>품목명</th>			
+                              <th>출하현황</th>	
                               <th>납기일정준수여부</th>			
                               <th>자재제작상태</th>			
                               <th>출하상태</th>			
                               <th>출하수량</th>		
                               <th>출하일</th>			
                               <th>검수계획</th>	
-                              <th>출하현황 수정</th>	
                             </tr>
                           </thead>
                           
@@ -76,9 +76,9 @@ prefix="c" %> <%@ page session="true" %>
                             <tr>
                               <th></th>			
                               <th>품목명</th>			
+                              <th>출하현황</th>			
                               <th>납기일정준수여부</th>			
                               <th>자재제작상태</th>			
-                              <th>출하상태</th>			
                               <th></th>		
                               <th></th>			
                               <th></th>
@@ -91,6 +91,16 @@ prefix="c" %> <%@ page session="true" %>
                           		<tr>
                           			<td class ="centerTD"><a href="/shippingStatus/select?ss_id=${ss.ss_id}">${status.count}</a></td>
                           			<td>${ss.pr_name}</td>
+                          			<td class ="centerTD">
+                          				<c:choose>   
+											<c:when test="${ss.ss_shippingStatus == '출하완료'}">
+												<a>출하완료</a>
+											</c:when>
+											<c:otherwise>
+										  		<a href = "/shippingStatus/update?ss_id=${ss.ss_id}">수정하기</a>
+											</c:otherwise>
+										 </c:choose>
+                          			</td>
                           			<td class ="centerTD">${ss.ss_deliverySchedule}</td>
                           			<td class ="centerTD">${ss.ss_status}</td>
                           			<td class ="centerTD">${ss.ss_shippingStatus}</td>
@@ -105,17 +115,6 @@ prefix="c" %> <%@ page session="true" %>
 												<a href = "/progressInspection/insert?ss_id=${ss.ss_id}">생성하기</a>
 											</c:otherwise>
 										</c:choose>
-                          			</td>
-                          			<td class ="centerTD">
-                          				<c:choose>   
-											<c:when test="${ss.ss_shippingStatus == '출하완료'}">
-												<a>출하완료</a>
-											</c:when>
-											<c:otherwise>
-										  		<a href = "/shippingStatus/update?ss_id=${ss.ss_id}">수정하기</a>
-											</c:otherwise>
-										 </c:choose>
-										
                           			</td>
                           		</tr>
                           	</c:forEach>
@@ -146,8 +145,11 @@ prefix="c" %> <%@ page session="true" %>
 	            alert('성공!');
 	        } else if (msg === 'fail') {
 	            alert('실패!');
-	        } else if (msg == 'successInsert'){
-	        	alert('출하현황이 생성되었습니다!');
+	        } else if (msg == 'insertSuccess'){
+	        	alert('출하현황이 생성되었습니다');
+	        }
+	        } else if (msg == 'insertSuccess'){
+	        	alert('출하현황이 생성에 실패하였습니다');
 	        }
 	    </script>
 	</c:if>

@@ -51,11 +51,11 @@ public class ShippingStatusController {
             ss = service.selectShippingStatus(ss_id);
             System.out.println("search 완료! " + ss);
 
-            rttr.addFlashAttribute("msg", "success");
+            rttr.addFlashAttribute("msg", "searchSuccess");
             rttr.addFlashAttribute("ss", ss);
             return "redirect:/shippingStatus/select?ss_id=" + ss_id;
         } else {
-            rttr.addFlashAttribute("msg", "fail");
+            rttr.addFlashAttribute("msg", "searchFail");
             return "redirect:/shippingStatus/list";
         }
     }
@@ -93,10 +93,10 @@ public class ShippingStatusController {
             rttr.addFlashAttribute("ss_id", ss.getSs_id());
             rttr.addFlashAttribute("po", po);
             rttr.addFlashAttribute("ss", ss);
-            rttr.addFlashAttribute("msg", "successInsert");
+            rttr.addFlashAttribute("msg", "insertSuccess");
             return "redirect:/shippingStatus/list";
         } else {
-            rttr.addFlashAttribute("msg", "fail");
+            rttr.addFlashAttribute("msg", "insertFail");
             return "redirect:/shippingStatus/list";
         }
     }
