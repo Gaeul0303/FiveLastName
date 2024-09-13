@@ -41,5 +41,12 @@ public class ReceivingInspectionDAOImpl implements ReceivingInspectionDAO {
 		return sqlSession.selectOne(nameSpace+".ri_update", riDTO);
 	}
 
+	@Override
+	public void ri_delete(int ri_id) throws Exception {
+		// 삭제
+		sqlSession.selectOne(nameSpace+".ri_delete", ri_id);
+		
+	}
+
 
 }

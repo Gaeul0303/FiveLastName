@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"	
 prefix="c"%> <%@ page session="true"%>
 <html lang="ko">
   <head>
@@ -33,29 +33,24 @@ prefix="c"%> <%@ page session="true"%>
                     <div class="card-title">입고 검수 작성</div>
                   </div>
                   <div class="card-body">
-                    <form
-                      role="form"
-                      action = "/incomingDeadline/insert"
-                      method="post"
-                      id="insertform"
-                      enctype="multipart/form-data"
-                      onsubmit="return validateForm()">
-                    
-                      <input
-                        type="hidden"
-                        name="ri_id"
-                        value="${insertForm.ri_id}"/>
+                    <form role="form" action = "/incomingDeadline/insert" method="post" id="insertform" enctype="multipart/form-data" onsubmit="return validateForm()">
+                    	
+                      <input type="hidden" name="ri_id" value="${insertForm.ri_id}"/>                  
+                       
+        			   <input type="hidden" id="randomInput" name="id_code" readonly> 
                         
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="staffnameinput">담당자</label>
+                            <label for="nameinput">담당자</label>
                             <input
                               type="text"
                               class="form-control"
                               id="nameinput"
                               name="pr_name"
-                              placeholder="담당자"/>
+                              placeholder="담당자"
+                              value = "${insertForm.st_name }"
+                              readonly/>
                           </div>  
                         
                       <div class="row">
@@ -65,7 +60,7 @@ prefix="c"%> <%@ page session="true"%>
                             <input
                               type="text"
                               class="form-control"
-                              id="nameinput"
+                              id="prodectinput"
                               name="pr_name"
                               placeholder="품목명"
                               value="${insertForm.pr_name}"
@@ -77,8 +72,8 @@ prefix="c"%> <%@ page session="true"%>
                             <input
                               type="number"
                               class="form-control"
-                              id="_makeTime"
-                              name="pp_makeTime"
+                              id="pi_inspectedQuantity"
+                              name="pi_inspectedQuantity"
                               placeholder="입고 수량"
                               required="required"
                               value="${insertForm.pi_inspectedQuantity }"
@@ -90,34 +85,49 @@ prefix="c"%> <%@ page session="true"%>
                             <input
                               type="number"
                               class="form-control"
-                              id="pp_makeTime"
-                              name="pp_makeTime"
+                              id="id_genuineNum"
+                              name="id_genuineNum"
                               placeholder="정품 수량"
                               required="required"/>
                           </div>
                           
                           <div class="form-group">
+                            <label for="makeTime">단가</label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="formatInput"
+                              name="co_supplyPrice"
+                              value="${insertForm.co_supplyPrice }">
+                              
+                     <!-- </div>
+                          <fmt:formatNumber value="${id.ri_totalPrice }" pattern="#,###" />
+                          <div class="form-group">
+                            <label for="makeTime">합계</label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="formatInput"
+                              name="ri_totalPrice"
+                              placeholder="합계"
+                              value = "${ri_totalPrice }"
+                              />
+                          </div>-->   
+                          
+                     <!--<div class="form-group">
                             <label for="spendAmount">불량 수량</label>
                             <input
                               type="number"
                               class="form-control"
-                              id="pp_spendAmount"
-                              name="pp_spendAmount"
+                              id=""
+                              name=""
                               placeholder="불량 수량"
                               required="required"/>
-                          </div>
+                          </div> -->
                           
-                          <div class="form-group">
-                            <label for="exampleFormControlSelect1">입고 검수 상태</label>
-                            <select
-                              class="form-select"
-                              id="exampleFormControlSelect1"
-                              name = "ri_availability">
-                              <option value = '입고완료'>입고완료</option>
-                            </select>
-                          </div>      
+                         <!-- <input type = hidden id="ri_availability" name = "ri_availability" value="입고완료"> --> 
                           
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label for="deliveryDate">입고 검수일</label>
                             <input
                               type="date"
@@ -127,30 +137,12 @@ prefix="c"%> <%@ page session="true"%>
                               placeholder="입고 검수일"
                               required="required"
                             />
-                          </div>
+                          </div> -->
                           
-                          <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                          	aria-labelledby="muModalLabel" aria-hidden="true">
-                          	<div class="modal-dialog">
-                          		<div class="modal-content">
-                          			<div class="modal-header">
-                          				<button type="button" class="close" data-dismiss="modal"
-                          				  aria-hidden="true">$times;</button>
-                          				<h4 class="modal-title" id="myModalLabel">알림</h4>
-                          			</div>
-                          			<div class="modal-body">수정되었습니다.</div>
-                          			<div class="modal-footer">
-                          				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-                          				<button type="button" class="btn btn-primary">저장</button>
-                          			</div>
-                          		</div>
-                          	</div>
-                          </div>                         
-                        </div>
-                      </div>
+                          
                       <div class="card-action">
-                        <button class="btn btn-success" id="updateBtn" onclick="submit()">
-                          수정하기
+                        <button class="btn btn-success" id="updateBtn">
+                          확인
                         </button>
                         <button class="btn btn-danger" onclick="history.back()">취소</button>
                       </div>
@@ -179,40 +171,45 @@ prefix="c"%> <%@ page session="true"%>
     </script>
     
     <script>
-    	function validateForm(){
-    		 // 폼에서 필요한 값을 가져오기
-            const inspectedQuantity = parseFloat(document.getElementById('inspectedQuantity').value); // 입고 수량
-            const goodQuantity = parseFloat(document.getElementById('pp_makeTime').value); // 정품 수량
-            const badQuantity = parseFloat(document.getElementById('pp_spendAmount').value); // 불량 수량
-
-            // 정품 수량 + 불량 수량 = 입고 수량 확인
-            if (goodQuantity + badQuantity !== inspectedQuantity) {
-                alert('정품 수량과 불량 수량의 합계가 입고 수량과 일치하지 않습니다.');
-                return false; // 제출 중단
+        // 랜덤 문자열 생성 함수
+        function generateRandomString(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
             }
+            return result;
+        }
 
-            return true; // 제출 허용
-    	}
+        // 문서가 로드되면 랜덤 문자열을 input 필드에 설정
+        function setRandomStringToInput() {
+            const randomString = generateRandomString(16);
+            document.getElementById('randomInput').value = randomString;
+        }
+
+        // 페이지 로드 시 실행
+        window.onload = setRandomStringToInput;
     </script>
     
-	<script type="text/javascript">
-		$(document).ready(function(){
-			var result = '<c:out value="${result}"/>';
-			
-			checkModal(result);
-			
-			function checkModal(result){
-				if(result==''){
-					return;
-				}
-				
-				if(parseInt(result) > 0) {
-					$(".modal-body").html("게시글" + parseInt(result)+" 번이 등록되었습니다.");
-				}
-				$("#myModal").modal("show");
-			}
-		});
-	</script>
+    
+    <script>
+    	//function validateForm(){
+    		 // 폼에서 필요한 값을 가져오기
+            //const inspectedQuantity = parseFloat(document.getElementById('pi_inspectedQuantity').value); // 입고 수량
+           // const goodQuantity = parseFloat(document.getElementById('id_genuineNum').value); // 정품 수량
+            //const badQuantity = parseFloat(document.getElementById('pp_spendAmount').value); // 불량 수량
+
+            // 정품 수량 + 불량 수량 = 입고 수량 확인
+          //  if (goodQuantity + badQuantity !== inspectedQuantity) {
+               // alert('정품 수량과 불량 수량의 합계가 입고 수량과 일치하지 않습니다.');
+               // return false; // 제출 중단
+         //   }
+
+          //  return true; // 제출 허용
+    	//}
+    </script>
+    
+	
     <script
       type="text/javascript"
       src="/resources/assets/js/upload.js"

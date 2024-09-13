@@ -1,4 +1,4 @@
-receiveingInspectionList<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"	
 prefix="c" %> <%@ page session="true" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -60,9 +60,11 @@ prefix="c" %> <%@ page session="true" %>
                             <tr>
                               <th class = "centerTD">검수코드</th>	
                               <th class = "centerTD">품목명</th>
-                              <th class = "centerTD">수량</th>
+                              <th class = "centerTD">기존수량</th>
+                              <th class = "centerTD">정품수량</th>
                               <th class = "centerTD">단가</th>
                               <th class = "centerTD">금액</th>
+                              <th class = "centerTD">담당자</th>
                               <th class = "centerTD">입고여부</th>
                               <th class = "centerTD">입고일</th>
                               <th class = "centerTD">거래명세서</th>
@@ -85,11 +87,15 @@ prefix="c" %> <%@ page session="true" %>
 	                              	<fmt:formatNumber value = "${id.pi_inspectedQuantity }" pattern="#,###" />
 	                              </td>
 	                              <td align="right">
+	                              	<fmt:formatNumber value = "${id.id_genuineNum }" pattern="#,###" />
+	                              </td>
+	                              <td align="right">
 	                              	<fmt:formatNumber value="${id.co_supplyPrice }" pattern="#,###" />
 	                              </td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value="${id.ri_totalPrice }" pattern="#,###" />
+	                              	<fmt:formatNumber value="${id.id_totalPirce }" pattern="#,###" />
 	                              </td>
+                            	  <td class = "centerTD">${id.st_name }</td>
                             	  <td class = "centerTD">${id.ri_availability }</td>
 	                              <td class = "centerTD"><fmt:formatDate value="${id.ri_date }"/></td>
 	                              <td class = "centerTD"><a href="/receivingInspection/riUpdate?ri_id=${id.id_code }">발행</a></td>

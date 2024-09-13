@@ -5,13 +5,14 @@
 <mapper namespace="kr.co.FiveLastName.TakeBackMapper">
 
 	<!-- 반품 조회 -->
-	<!-- 반품신청일  품목명 불량수량 불량수량 반품상태 -->
+	<!-- 반품코드 입고검수ID 반품신청일 품목명 불량수량 단가 금액 담당자 반품상태 불량사유 반품완료일 -->
 	<select id="tb_list" resultType="kr.co.FiveLastName.domain.TakeBackDTO">
-		SELECT *
-		<!-- tb.tb_returnApplicationDate, pr.pr_name, tb.tb_errorNum, tb.tb_status -->
+		SELECT
+		tb.ri_id, tb.tb_returnApplicationDate, pr.pr_name, tb.tb_errorNum, co.co_supplyPrice,
+		ri.ri_totalPrice, st.st_name, tb.tb_status, tb.tb_notes, tb.tb_returnCompletionDate
 		
 		FROM takeback tb
-		 
+		
 		INNER JOIN receivingInspection ri ON tb.ri_id = ri.ri_id
 		INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id
 		INNER JOIN staff st ON pi.st_id = st.st_id
@@ -20,17 +21,20 @@
 		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
+		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id;
 	</select>
 	
 	<!-- 반품 상세조회 -->
-	<!-- 반품신청일 품목명 불량수량 불량사유 반품상태 반품완료일-->
+	<!-- 반품코드 입고검수ID 반품신청일 품목명 불량수량 단가 금액 담당자 반품상태 불량사유 반품완료일 -->
 	<select id="tb_selectOne" parameterType="String" resultType="kr.co.FiveLastName.domain.TakeBackDTO">
-		SELECT *
-		<!-- tb.tb_returnApplicationDate, pr.pr_name, tb.tb_errorNum, tb.tb_notes, tb.tb_status, tb.tb_returnCompletionDate -->
+		SELECT
+		tb.ri_id, tb.tb_returnApplicationDate, pr.pr_name, tb.tb_errorNum, co.co_supplyPrice,
+		ri.ri_totalPrice, st.st_name, tb.tb_status, tb.tb_notes, tb.tb_returnCompletionDate
 		
 		FROM takeback tb
-		 
+		
 		INNER JOIN receivingInspection ri ON tb.ri_id = ri.ri_id
 		INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id
 		INNER JOIN staff st ON pi.st_id = st.st_id
@@ -39,7 +43,9 @@
 		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
+		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id;
 		
 		WHERE tb.tb_code = #{tb.tb_code}
 	</select>
@@ -48,9 +54,10 @@
 	<insert id="tb_insert" parameterType="kr.co.FiveLastName.domain.TakeBackDTO">
 		INSERT INTO return(tb_code, ri_id, tb_returnApplicationDate, tb_status,
 		tb_returnCompletionDate, tb_errorNum, tb_notes)
-		VALUES
-		(#{tb_code}, #{ri_id}, #{tb_returnApplicationDate}, #{tb_status},
-		#{tb_returnCompletionDate},#{tb_errorNum}, #{tb_notes})
+		VALUES(
+		#{tb_code}, #{ri_id}, #{tb_returnApplicationDate}, #{tb_status},
+		#{tb_returnCompletionDate},#{tb_errorNum}, #{tb_notes}
+		)
 	</insert>
 
 	<!-- 반품 수정 -->

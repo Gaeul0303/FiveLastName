@@ -5,7 +5,7 @@
 <mapper namespace="kr.co.FiveLastName.TsMapper">
 
 	<!-- 거래명세서 조회 -->
-	<!--  -->
+	
 	<select id="ts_list" resultType="kr.co.FiveLastName.domain.TransactionStatementDTO">
 		SELECT *
 		<!-- ri.ri_date, pr.pr_name, id.id_genuineNum, co_supplyPrice, id_totalPrice --> 
@@ -21,8 +21,9 @@
 		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
 		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id
 		
 		WHERE ri.ri_availability = "입고완료";
 	</select>
@@ -44,8 +45,9 @@
 		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
 		INNER JOIN contract co ON ppr.co_id = co.co_id
 		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN product pr ON es.pr_id = pr.pr_id
 		INNER JOIN partner pa ON es.pa_id = pa.pa_id
+		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		INNER JOIN product pr ON pp.pr_id = pr.pr_id
 		
 		WHERE ts.ts_num = #{ts.ts_num};
 	</select>

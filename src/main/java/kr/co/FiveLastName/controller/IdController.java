@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import jdk.jfr.TransitionTo;
 import kr.co.FiveLastName.domain.IncomingDeadlineDTO;
 import kr.co.FiveLastName.domain.ReceivingInspectionDTO;
 import kr.co.FiveLastName.service.IncomingDeadlineService;
@@ -50,29 +52,23 @@ public class IdController {
 		
 		ReceivingInspectionDTO riDTO = riService.ri_selectOne(ri_id);
 		
-		model.addAttribute("insertForm", riService.ri_selectOne(ri_id));
+		model.addAttribute("insertForm", riDTO);
 		mav.setViewName("/incomingDeadline/idInsertForm");
 		
 		return mav;
 	}
 	
 	@PostMapping(value = "/insert")
-	public ModelAndView id_insert(@ModelAttribute IncomingDeadlineDTO idDTO) {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		idService.id_insert(idDTO);
-		int ri_id = idDTO.getRi_id();
-		String id_code = idDTO.getId_code();
-		IncomingDeadlineDTO id = idService.id_selectOne(id_code);
-		ri_id = id.getRi_id();
-		mav.addObject("idDTO", idDTO);
-		mav.addObject("id_code", id.getId_code());
-		
-		mav.setViewName("rediect:/receivingInspection/riList");
-		
-		return mav;
-		
+	public String id_insert(@ModelAttribute IncomingDeadlineDTO idDTO) throws Exception {
+	    System.out.println(idDTO);
+	    idService.id_insert(idDTO);
+	    
+	    System.out.println("insert : "+idDTO);
+	    
+	    riService.ri_delete(idDTO.getRi_id());
+	    System.out.println("ri_id 삭제 완료: " + idDTO.getRi_id());
+	    
+	    return "redirect:/receivingInspection/list";
 	}
 	
 	
