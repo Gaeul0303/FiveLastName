@@ -93,7 +93,7 @@ prefix="c" %> <%@ page session="true" %>
 	                              	<fmt:formatNumber value="${id.co_supplyPrice }" pattern="#,###" />
 	                              </td>
 	                              <td align="right">
-	                              	<fmt:formatNumber value="${id.id_totalPrice }" pattern="#,###" />
+	                              	<fmt:formatNumber value="${id.id_totalPirce }" pattern="#,###" />
 	                              </td>
                             	  <td class = "centerTD">${id.st_name }</td>
                             	  <td class = "centerTD">${id.ri_availability }</td>

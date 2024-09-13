@@ -19,16 +19,16 @@ public class TsController {
 	@Inject
 	private TransactionStatementService tsService;
 	
-	@GetMapping(value = "/print-page")
-	public ModelAndView  {
-		ModelAndView mav = new ModelAndView();
-		
-		List<TransactionStatementDTO> ts_list = tsService.ts_list();
-		
-		mav.addObject("ts_list", ts_list);
-		
-		return mav;
-	}
+//	@GetMapping(value = "/print-page")
+//	public ModelAndView madie {
+//		ModelAndView mav = new ModelAndView();
+//		
+//		List<TransactionStatementDTO> ts_list = tsService.ts_list();
+//		
+//		mav.addObject("ts_list", ts_list);
+//		
+//		return mav;
+//	}
 	
 	
 }

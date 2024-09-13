@@ -40,7 +40,6 @@ public class IdController {
 		
 		List<IncomingDeadlineDTO> id_list = idService.id_list();
 		
-		System.out.println("list"+id_list);
 		mav.addObject("id_list", id_list);
 		mav.setViewName("/incomingDeadline/idList");
 		
@@ -59,11 +58,11 @@ public class IdController {
 		return mav;
 	}
 	
-	@Transactional
 	@PostMapping(value = "/insert")
 	public String id_insert(@ModelAttribute IncomingDeadlineDTO idDTO) throws Exception {
 	    System.out.println(idDTO);
 	    idService.id_insert(idDTO);
+	    
 	    System.out.println("insert : "+idDTO);
 	    
 	    riService.ri_delete(idDTO.getRi_id());
