@@ -157,7 +157,7 @@ prefix="c"%> <%@ page session="true"%>
     </div>
 
     <%@include file="/WEB-INF/views/include/script.jsp"%>
-
+    
     <script type="text/javascript">
       $(document).ready(function () {
     	  let category = `${insertForm.ri_id}`;
@@ -201,10 +201,9 @@ prefix="c"%> <%@ page session="true"%>
             alert('정품 수량이 입고 수량보다 클 수 없습니다.');
             return false; // 제출 중단
         }
-
+        alert('작성되었습니다')
         return true; // 제출 허용
     }
-    
     
  		// 정품 수량과 단가를 곱하여 금액 계산
 	    function calculateTotalPrice() {
