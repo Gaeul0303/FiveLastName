@@ -5,10 +5,10 @@
 <mapper namespace="kr.co.FiveLastName.TsMapper">
 
 	<!-- 거래명세서 조회 -->
-	
+	<!-- 번호 품목 수량 규격 공급가액 금액 담당자 -->  
 	<select id="ts_list" resultType="kr.co.FiveLastName.domain.TransactionStatementDTO">
-		SELECT *
-		<!-- ri.ri_date, pr.pr_name, id.id_genuineNum, co_supplyPrice, id_totalPrice --> 
+		SELECT 
+		pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice, st.st_name 
 		
 		FROM transactionStatement ts
 		
@@ -25,14 +25,14 @@
 		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
 		INNER JOIN product pr ON pp.pr_id = pr.pr_id
 		
-		WHERE ri.ri_availability = "입고완료";
+		WHERE ri.ri_availability = "입고완료" and id.id_code = #{id_code} ;
 	</select>
 	
 	<!-- 거래명세서 상세조회 -->
 	<!--  -->
 	<select id="ts_selectOne" parameterType="String" resultType="kr.co.FiveLastName.domain.TransactionStatementDTO">
-		SELECT *
-		<!-- ri.ri_date, pr.pr_name, id.id_genuineNum, co_supplyPrice, id_totalPrice -->
+		SELECT 
+		pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice, st.st_name
 		
 		FROM transactionStatement ts
 		

@@ -35,10 +35,10 @@ public class takeBackController {
 		return mav;
 	}
 	
-//	@GetMapping(valu = "/updateForm")
-//	public ModelAndView updateForm(@RequestParam("ri_id") int ri_id) {
-//		
-//	}
+//	@GetMapping()
+	
+		
+	
 		
 	
 }
