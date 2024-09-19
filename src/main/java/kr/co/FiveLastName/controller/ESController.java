@@ -56,16 +56,16 @@ public class ESController {
 	}
 	
 	@RequestMapping(value = "/read",method = RequestMethod.GET)
-	public void read(@RequestParam("pp_id") int pp_id,Model model) {
-		model.addAttribute("pa", paService.list());
-		
-		model.addAttribute("pr", prService.list());
-		
-		model.addAttribute("pp", ppService.pp_selectAll());
-		
-		model.addAttribute("list",service.esOne(pp_id));
+	   public void read(@RequestParam("pp_id") int pp_id,Model model) {
+	      model.addAttribute("pa", paService.list());
+	      
+	      model.addAttribute("pr", prService.list());
+	      
+	      model.addAttribute("pp", ppService.pp_selectAll());
+	      
+	      model.addAttribute("list",service.esOne(pp_id));
 
-	}
+	   }
 	
 	@RequestMapping(value = "/register",method = RequestMethod.GET)
 	public void registerGET(Model model) {
