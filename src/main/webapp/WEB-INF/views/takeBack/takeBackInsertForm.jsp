@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"	
 prefix="c"%> <%@ page session="true"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html lang="ko">
   <head>
     <%@include file="/WEB-INF/views/include/head.jsp"%>
@@ -47,8 +46,8 @@ prefix="c"%> <%@ page session="true"%>
                             <input
                               type="text"
                               class="form-control"
-                              id="st_name"
-                              name="st_name"
+                              id="nameinput"
+                              name="pr_name"
                               placeholder="담당자"
                               value = "${insertForm.st_name }"
                               readonly/>
@@ -61,7 +60,7 @@ prefix="c"%> <%@ page session="true"%>
                             <input
                               type="text"
                               class="form-control"
-                              id="pr_name"
+                              id="prodectinput"
                               name="pr_name"
                               placeholder="품목명"
                               value="${insertForm.pr_name}"
@@ -97,22 +96,23 @@ prefix="c"%> <%@ page session="true"%>
                             <input
                               type="number"
                               class="form-control"
-                              id="co_supplyPrice"
+                              id="formatInput"
                               name="co_supplyPrice"
                               value="${insertForm.co_supplyPrice }">
                               
-                     	  </div>
+                     <!-- </div>
+                          <fmt:formatNumber value="${id.ri_totalPrice }" pattern="#,###" />
                           <div class="form-group">
-                            <label for="makeTime">금액</label>
+                            <label for="makeTime">합계</label>
                             <input
                               type="number"
                               class="form-control"
-                              id="id_totalPirce"
-                              name="id_totalPirce"
+                              id="formatInput"
+                              name="ri_totalPrice"
                               placeholder="합계"
-                              readonly/>
-                              
-                          </div>
+                              value = "${ri_totalPrice }"
+                              />
+                          </div>-->   
                           
                      <!--<div class="form-group">
                             <label for="spendAmount">불량 수량</label>
@@ -141,7 +141,9 @@ prefix="c"%> <%@ page session="true"%>
                           
                           
                       <div class="card-action">
-                        <button class="btn btn-success" id="updateBtn">확인</button>
+                        <button class="btn btn-success" id="updateBtn">
+                          확인
+                        </button>
                         <button class="btn btn-danger" onclick="history.back()">취소</button>
                       </div>
                     </form>
@@ -188,43 +190,6 @@ prefix="c"%> <%@ page session="true"%>
         // 페이지 로드 시 실행
         window.onload = setRandomStringToInput;
     </script>
-    
-    <script type="text/javascript">
-    // 폼 검증 함수
-    function validateForm() {
-        // 폼에서 필요한 값을 가져오기
-        const inspectedQuantity = parseFloat(document.getElementById('pi_inspectedQuantity').value); // 입고 수량
-        const goodQuantity = parseFloat(document.getElementById('id_genuineNum').value); // 정품 수량
-
-        // 정품 수량이 입고 수량보다 큰지 확인
-        if (goodQuantity > inspectedQuantity) {
-            alert('정품 수량이 입고 수량보다 클 수 없습니다.');
-            return false; // 제출 중단
-        }
-
-        return true; // 제출 허용
-    }
-    
-    
- 		// 정품 수량과 단가를 곱하여 금액 계산
-	    function calculateTotalPrice() {
-	      const genuineQuantity = parseFloat(document.getElementById('id_genuineNum').value) || 0; // 정품 수량
-	      const unitPrice = parseFloat(document.getElementById('co_supplyPrice').value) || 0; // 단가
-	
-	      // 금액 계산 (정품 수량 * 단가)
-	      const totalPrice = genuineQuantity * unitPrice;
-	
-	      // 금액 필드에 값 설정
-	      document.getElementById('id_totalPirce').value = totalPrice; // 정수로 표시
-	    }
-	
-	    // 정품 수량과 단가 입력 필드에 이벤트 추가
-	    document.getElementById('id_genuineNum').addEventListener('input', calculateTotalPrice);
-	    document.getElementById('co_supplyPrice').addEventListener('input', calculateTotalPrice);
-    
-    
-	</script>
-    
     
     
     <script>

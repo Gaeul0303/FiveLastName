@@ -13,17 +13,17 @@
 		
 		FROM incomingDeadline id
 		
-		INNER JOIN receivingInspection ri ON id.ri_id = ri.ri_id
-		INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id
-		INNER JOIN staff st ON pi.st_id = st.st_id
-		INNER JOIN shippingStatus ss ON pi.ss_id = ss.ss_id
-		INNER JOIN purchaseOrder po ON ss.po_id = po.po_id
-		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
-		INNER JOIN contract co ON ppr.co_id = co.co_id
-		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN partner pa ON es.pa_id = pa.pa_id
-		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
-		INNER JOIN product pr ON pp.pr_id = pr.pr_id
+		JOIN receivingInspection ri ON id.ri_id = ri.ri_id
+		JOIN progressInspection pi ON ri.pi_id = pi.pi_id
+		JOIN staff st ON pi.st_id = st.st_id
+		JOIN shippingStatus ss ON pi.ss_id = ss.ss_id
+		JOIN purchaseOrder po ON ss.po_id = po.po_id
+		JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
+		JOIN contract co ON ppr.co_id = co.co_id
+		JOIN estimate es ON co.es_id = es.es_id
+		JOIN partner pa ON es.pa_id = pa.pa_id
+		JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		JOIN product pr ON pp.pr_id = pr.pr_id
 		
 		WHERE ri.ri_availability = "입고완료" and pi.pi_status = "검수완료";
 	</select>
@@ -35,17 +35,17 @@
 		
 		FROM incomingDeadline id		
 		
-		INNER JOIN receivingInspection ri ON id.ri_id = ri.ri_id
-		INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id
-		INNER JOIN staff st ON pi.st_id = st.st_id
-		INNER JOIN shippingStatus ss ON pi.ss_id = ss.ss_id
-		INNER JOIN purchaseOrder po ON ss.po_id = po.po_id
-		INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
-		INNER JOIN contract co ON ppr.co_id = co.co_id
-		INNER JOIN estimate es ON co.es_id = es.es_id
-		INNER JOIN partner pa ON es.pa_id = pa.pa_id
-		INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
-		INNER JOIN product pr ON pp.pr_id = pr.pr_id
+		JOIN receivingInspection ri ON id.ri_id = ri.ri_id
+		JOIN progressInspection pi ON ri.pi_id = pi.pi_id
+		JOIN staff st ON pi.st_id = st.st_id
+		JOIN shippingStatus ss ON pi.ss_id = ss.ss_id
+		JOIN purchaseOrder po ON ss.po_id = po.po_id
+		JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
+		JOIN contract co ON ppr.co_id = co.co_id
+		JOIN estimate es ON co.es_id = es.es_id
+		JOIN partner pa ON es.pa_id = pa.pa_id
+		JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
+		JOIN product pr ON pp.pr_id = pr.pr_id
 		
 		WHERE id.id_code = #{id_code}
 	</select>
@@ -57,26 +57,20 @@
         #{id_code},
         ri.ri_id,
         #{id_genuineNum},
-        (#{id_genuineNum}*co.co_supplyPrice) AS id_totalPrice
+        #{id_genuineNum}*co.co_supplyPrice
         
     	FROM
         receivingInspection ri
         
-	    INNER JOIN progressInspection pi ON ri.pi_id = pi.pi_id
-	    INNER JOIN staff st ON pi.st_id = st.st_id
-	    INNER JOIN shippingStatus ss ON pi.ss_id = ss.ss_id
-	    INNER JOIN purchaseOrder po ON ss.po_id = po.po_id
-	    INNER JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
-	    INNER JOIN contract co ON ppr.co_id = co.co_id
-	    INNER JOIN estimate es ON co.es_id = es.es_id
-	    INNER JOIN partner pa ON es.pa_id = pa.pa_id
-	    INNER JOIN procurmentPlan pp ON es.pp_id = pp.pp_id
-	    INNER JOIN product pr ON pp.pr_id = pr.pr_id
+	    JOIN progressInspection pi ON ri.pi_id = pi.pi_id
+	    JOIN staff st ON pi.st_id = st.st_id
+	    JOIN shippingStatus ss ON pi.ss_id = ss.ss_id
+	    JOIN purchaseOrder po ON ss.po_id = po.po_id
+	    JOIN procurementPlanRegistration ppr ON po.ppr_id = ppr.ppr_id
+	    JOIN contract co ON ppr.co_id = co.co_id
     	
     	WHERE ri.ri_id = #{ri_id};
 	</insert>
-	
-	
 	
 	<!-- <insert id="id_insert" parameterType="kr.co.FiveLastName.domain.IncomingDeadlineDTO">
 	   INSERT INTO incomingDeadline(id_code, ri_id, id_genuineNum, id_totalPrice)
