@@ -9,7 +9,14 @@ public class ProductDTO {
 	private String pr_image;
 	private String pr_category;
 	private String pr_status;
+	private int pr_partner;
 	
+	public int getPr_partner() {
+		return pr_partner;
+	}
+	public void setPr_partner(int pr_partner) {
+		this.pr_partner = pr_partner;
+	}
 	public ProductDTO() {
 		super();
 	}

@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.FiveLastName.domain.ProductDTO;
+import kr.co.FiveLastName.service.PartnerService;
 import kr.co.FiveLastName.service.ProductService;
 
 @RequestMapping("/product/*")
@@ -32,6 +33,9 @@ public class ProductController {
 	
 	@Inject
 	private ProductService service;
+	
+	@Inject
+	private PartnerService paService;
 	
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public void listGET(Model model) {
@@ -47,8 +51,11 @@ public class ProductController {
 	
 	
 	@RequestMapping(value = "/register",method = RequestMethod.GET)
-	public void registerGET() {
+	public void registerGET(Model model) {
 		logger.info("register get");
+		model.addAttribute("pa", paService.list());
+
+	
 	}
 	@RequestMapping(value = "/register",method = RequestMethod.POST)
 	public String registerPOST(@ModelAttribute ProductDTO dto, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) throws IOException {
@@ -76,6 +83,7 @@ public class ProductController {
 	@RequestMapping(value = "/modify",method = RequestMethod.GET)
 	public void modifyGET(@RequestParam("pr_id") int pr_id,Model model,RedirectAttributes rttr) {
 		model.addAttribute(service.productOne(pr_id));
+		model.addAttribute("pa", paService.list());
 
 		
 	}
