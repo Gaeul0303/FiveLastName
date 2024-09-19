@@ -39,43 +39,43 @@
 
 										<div class="row">
 											<div class="col-md-6 col-lg-4">
-												
+
 												<div class="form-group">
 													<label for="pr_name">품목 선택</label> <select
-														class="form-select" id="pr_name">
+														class="form-select" name="pr_id">
 														<c:forEach items="${list}" var="product">
-															<option><td>${product.pr_name }</td>
-																</option>
-															</c:forEach>
+															<option value="${product.pr_id }">${product.pr_name }</option>
+														</c:forEach>
 													</select>
 													<div class="form-group">
-														<c:forEach items="${list}" var="product">
-														<% %><input type="hidden" id="pr_id" name="pr_id" value="${product.pr_id }" />
-														</c:forEach>
-													</div>
-													<div class="form-group">
-														<label for="makeTime">소요 일정</label> <input type="number" class="form-control" id="pp_makeTime" name="pp_makeTime"
+														<label for="makeTime">소요 일정</label> <input type="number"
+															class="form-control" id="pp_makeTime" name="pp_makeTime"
 															placeholder="Enter Time" />
 													</div>
 													<div class="form-group">
-														<label for="spendAmount">소요량</label> <input type="number"	class="form-control" id="spendAmount" name="pp_spendAmount"
-															placeholder="Enter Amount" />
+														<label for="spendAmount">소요량</label> <input type="number"
+															class="form-control" id="spendAmount"
+															name="pp_spendAmount" placeholder="Enter Amount" />
 													</div>
 													<div class="form-group">
 														<label for="deliveryDate">조달납기</label> <input
-															type="datetime-local" class="form-control" id="pp_deliveryDate" placeholder="조달납기" required="required" />
-															<input type="hidden" id="formattedDateInput" name="pp_deliveryDate"/>
-													</div>													
+															type="datetime-local" class="form-control"
+															id="pp_deliveryDate" placeholder="조달납기"
+															required="required" /> <input type="hidden"
+															id="formattedDateInput" name="pp_deliveryDate" />
+													</div>
 													<div class="form-group">
 														<label for="comment">자재 소요 공정</label>
-														<textarea class="form-control" id="comment" name="pp_materialRequiredProcessStage" rows="5" ></textarea>
-													</div>											
+														<textarea class="form-control" id="comment"
+															name="pp_materialRequiredProcessStage" rows="5"></textarea>
+													</div>
 												</div>
 											</div>
-											<div class="card-action">
-												<button class="btn btn-success" id="insertBtn" type="submit">등록</button>
-												<button class="btn btn-danger" id="cancel">취소</button>
-											</div>
+										</div>
+										<div class="card-action">
+											<button class="btn btn-success" id="insertBtn" type="submit">등록</button>
+											<button class="btn btn-danger" id="cancel">취소</button>
+										</div>
 									</form>
 								</div>
 
