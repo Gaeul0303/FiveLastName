@@ -75,11 +75,11 @@ public class ESController {
 	}
 	
 	@RequestMapping(value = "data/{pr_id}", method = RequestMethod.GET)
-	public ResponseEntity<PartnerDTO> list(@PathVariable("pr_id") int pr_id) {
-		ResponseEntity<PartnerDTO> entity = null;
+	public ResponseEntity<ProductDTO> list(@PathVariable("pr_id") int pr_id) {
+		ResponseEntity<ProductDTO> entity = null;
 
 		try {
-			entity = new ResponseEntity<>(paService.paOne(pr_id), HttpStatus.OK);
+			entity = new ResponseEntity<>(prService.productOne(pr_id), HttpStatus.OK);
 
 		} catch (Exception e) {
 			e.printStackTrace();

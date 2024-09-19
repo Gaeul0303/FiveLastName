@@ -134,7 +134,7 @@
           
                 success : function(data){
 					console.log(data.pa_id);
-					form.append("<input type='hidden' name='pa_id' value='"+ data.pa_id +"'>");
+					form.append("<input type='hidden' name='pa_id' value='"+ data.pr_partner +"'>");
 					form.submit();
                 },
              

@@ -4,91 +4,157 @@ import java.sql.Timestamp;
 
 public class TakeBackDTO {
 	
-	String re_code; 
-	int ri_id;
-	Timestamp re_returnApplicationDate; 
-	String re_status;
-	Timestamp re_returnCompletionDate; 
-	int re_errorNum; 
-	String re_notes;
+	private String tb_code; 
+	private int ri_id;
+	private Timestamp tb_returnApplicationDate; 
+	private String tb_status;
+	private Timestamp tb_returnCompletionDate; 
+	private int tb_errorNum; 
+	private String tb_notes;
+	private String pr_name;
+	private int co_supplyPrice;
+	private int ri_totalPrice;
+	private String st_name;
 	
 	public TakeBackDTO() {
 		super();
 	}
 
-	public TakeBackDTO(String re_code, int ri_id, Timestamp re_returnApplicationDate, String re_status,
-			Timestamp re_returnCompletionDate, int re_errorNum, String re_notes) {
+	public TakeBackDTO(String tb_code, int ri_id, Timestamp tb_returnApplicationDate, String tb_status,
+			Timestamp tb_returnCompletionDate, int tb_errorNum, String tb_notes, String pr_name, int co_supplyPrice,
+			int ri_totalPrice, String st_name) {
 		super();
-		this.re_code = re_code;
+		this.tb_code = tb_code;
 		this.ri_id = ri_id;
-		this.re_returnApplicationDate = re_returnApplicationDate;
-		this.re_status = re_status;
-		this.re_returnCompletionDate = re_returnCompletionDate;
-		this.re_errorNum = re_errorNum;
-		this.re_notes = re_notes;
+		this.tb_returnApplicationDate = tb_returnApplicationDate;
+		this.tb_status = tb_status;
+		this.tb_returnCompletionDate = tb_returnCompletionDate;
+		this.tb_errorNum = tb_errorNum;
+		this.tb_notes = tb_notes;
+		this.pr_name = pr_name;
+		this.co_supplyPrice = co_supplyPrice;
+		this.ri_totalPrice = ri_totalPrice;
+		this.st_name = st_name;
 	}
 
-	public String getRe_code() {
-		return re_code;
+
+	public String getTb_code() {
+		return tb_code;
 	}
 
-	public void setRe_code(String re_code) {
-		this.re_code = re_code;
+
+	public void setTb_code(String tb_code) {
+		this.tb_code = tb_code;
 	}
+
 
 	public int getRi_id() {
 		return ri_id;
 	}
 
+
 	public void setRi_id(int ri_id) {
 		this.ri_id = ri_id;
 	}
 
-	public Timestamp getRe_returnApplicationDate() {
-		return re_returnApplicationDate;
+
+	public Timestamp getTb_returnApplicationDate() {
+		return tb_returnApplicationDate;
 	}
 
-	public void setRe_returnApplicationDate(Timestamp re_returnApplicationDate) {
-		this.re_returnApplicationDate = re_returnApplicationDate;
+
+	public void setTb_returnApplicationDate(Timestamp tb_returnApplicationDate) {
+		this.tb_returnApplicationDate = tb_returnApplicationDate;
 	}
 
-	public String getRe_status() {
-		return re_status;
+
+	public String getTb_status() {
+		return tb_status;
 	}
 
-	public void setRe_status(String re_status) {
-		this.re_status = re_status;
+
+	public void setTb_status(String tb_status) {
+		this.tb_status = tb_status;
 	}
 
-	public Timestamp getRe_returnCompletionDate() {
-		return re_returnCompletionDate;
+
+	public Timestamp getTb_returnCompletionDate() {
+		return tb_returnCompletionDate;
 	}
 
-	public void setRe_returnCompletionDate(Timestamp re_returnCompletionDate) {
-		this.re_returnCompletionDate = re_returnCompletionDate;
+
+	public void setTb_returnCompletionDate(Timestamp tb_returnCompletionDate) {
+		this.tb_returnCompletionDate = tb_returnCompletionDate;
 	}
 
-	public int getRe_errorNum() {
-		return re_errorNum;
+
+	public int getTb_errorNum() {
+		return tb_errorNum;
 	}
 
-	public void setRe_errorNum(int re_errorNum) {
-		this.re_errorNum = re_errorNum;
+
+	public void setTb_errorNum(int tb_errorNum) {
+		this.tb_errorNum = tb_errorNum;
 	}
 
-	public String getRe_notes() {
-		return re_notes;
+
+	public String getTb_notes() {
+		return tb_notes;
 	}
 
-	public void setRe_notes(String re_notes) {
-		this.re_notes = re_notes;
+
+	public void setTb_notes(String tb_notes) {
+		this.tb_notes = tb_notes;
 	}
+
+
+	public String getPr_name() {
+		return pr_name;
+	}
+
+
+	public void setPr_name(String pr_name) {
+		this.pr_name = pr_name;
+	}
+
+
+	public int getCo_supplyPrice() {
+		return co_supplyPrice;
+	}
+
+
+	public void setCo_supplyPrice(int co_supplyPrice) {
+		this.co_supplyPrice = co_supplyPrice;
+	}
+
+
+	public int getRi_totalPrice() {
+		return ri_totalPrice;
+	}
+
+
+	public void setRi_totalPrice(int ri_totalPrice) {
+		this.ri_totalPrice = ri_totalPrice;
+	}
+
+
+	public String getSt_name() {
+		return st_name;
+	}
+
+
+	public void setSt_name(String st_name) {
+		this.st_name = st_name;
+	}
+
 
 	@Override
 	public String toString() {
-		return "ReturnDTO [re_code=" + re_code + ", ri_id=" + ri_id + ", re_returnApplicationDate="
-				+ re_returnApplicationDate + ", re_status=" + re_status + ", re_returnCompletionDate="
-				+ re_returnCompletionDate + ", re_errorNum=" + re_errorNum + ", re_notes=" + re_notes + "]";
+		return "TakeBackDTO [tb_code=" + tb_code + ", ri_id=" + ri_id + ", tb_returnApplicationDate="
+				+ tb_returnApplicationDate + ", tb_status=" + tb_status + ", tb_returnCompletionDate="
+				+ tb_returnCompletionDate + ", tb_errorNum=" + tb_errorNum + ", tb_notes=" + tb_notes + ", pr_name="
+				+ pr_name + ", co_supplyPrice=" + co_supplyPrice + ", ri_totalPrice=" + ri_totalPrice + ", st_name="
+				+ st_name + "]";
 	}
 	
 	

@@ -18,4 +18,6 @@ public interface ReceivingInspectionDAO {
 //	수정
 	public ReceivingInspectionDTO ri_update(ReceivingInspectionDTO riDTO);
 	
+//	삭제
+	void ri_delete(int ri_id) throws Exception; 
 }

@@ -116,6 +116,7 @@ margin: 0 auto;
 									</table>
 									<c:if test="${ss.ss_shippingStatus != '출하완료'}">    
 										<div align="right"><button class = "btn btn-success" id = "ss_id" value = "${ss.ss_id}" onclick="ssComplete(this)"><c:out value="출하하기" /></button></div>
+										<div align="right"><button class = "btn btn-success" id = "ss_id" value = "${ss.ss_id}" onclick="ssComplete(this)"><c:out value="수정하기" /></button></div>
 									</c:if>
 									</div>
 									<p>&nbsp;</p>

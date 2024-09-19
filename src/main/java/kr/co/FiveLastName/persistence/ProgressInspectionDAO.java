@@ -3,6 +3,8 @@ package kr.co.FiveLastName.persistence;
 import java.util.List;
 
 import kr.co.FiveLastName.domain.PartnerDTO;
+import kr.co.FiveLastName.domain.PrintPODTO;
+import kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO;
 import kr.co.FiveLastName.domain.ProgressInspectionDTO;
 import kr.co.FiveLastName.domain.ProgressInspectionRecordDTO;
 import kr.co.FiveLastName.domain.ShippingStatusDTO;
@@ -22,13 +24,13 @@ public interface ProgressInspectionDAO {
 	
 	ProgressInspectionRecordDTO piRecordOne(int ss_id);
 	
-	ProgressInspectionDTO piInsert(ProgressInspectionDTO pi);
+	void piInsert(ProgressInspectionDTO pi);
 	
-	ProgressInspectionDTO piUpdate(ProgressInspectionDTO pi);
+	void piUpdate(ProgressInspectionDTO pi);
 	
-	ProgressInspectionRecordDTO insertRecord(ProgressInspectionDTO pi);
+	void insertRecord(ProgressInspectionDTO pi);
 	
-	ShippingStatusDTO ssComplete(int ss_id);
+	void ssComplete(int ss_id);
 	
 	StaffDTO stSelect(String st_id);
 	

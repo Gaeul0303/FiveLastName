@@ -8,20 +8,20 @@ import kr.co.FiveLastName.domain.ShippingStatusDTO;
 
 public interface ShippingStatusService {
 
-	List<ShippingStatusDTO> selectAllShippingStatus();
+List<ShippingStatusDTO> selectAllShippingStatus();
 	
 	ShippingStatusDTO selectShippingStatus(int ss_id);
 	
 	ShippingStatusDTO search(int po_id);
 	
-	ShippingStatusDTO insert(ShippingStatusDTO ss);
+	void insert(ShippingStatusDTO ss);
 	
-	ShippingStatusDTO update(ShippingStatusDTO ss);
+	void update(ShippingStatusDTO ss);
 	
-	ShippingStatusDTO complete(int ss_id);
+	void complete(int ss_id);
 	
 	int count(int po_id);
 	
-	PrintPODTO poComplete(int po_id);
+	void poComplete(int po_id);
 
 }

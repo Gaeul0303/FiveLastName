@@ -38,6 +38,13 @@ public class ReceivingInspectionServiceImpl implements ReceivingInspectionServic
 		// 수정
 		return riDAO.ri_update(riDTO);
 	}
+
+	@Override
+	public void ri_delete(int ri_id) throws Exception {
+		// 삭제
+		riDAO.ri_delete(ri_id);
+		
+	}
 	
 	
 }

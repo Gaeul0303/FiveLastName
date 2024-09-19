@@ -16,8 +16,11 @@ public interface IncomingDeadlineService {
 	public IncomingDeadlineDTO id_selectOne(String id_code);
 	
 //	입고마감 등록
-	public IncomingDeadlineDTO id_insert(IncomingDeadlineDTO idDTO);
+	public int id_insert(IncomingDeadlineDTO idDTO);
 	
 //	입고마감 수정
 	public IncomingDeadlineDTO id_update(IncomingDeadlineDTO idDTO);
+	
+//	입고마감 삭제
+	public void id_delete(String id_code) throws Exception;
 }

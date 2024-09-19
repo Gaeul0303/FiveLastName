@@ -28,7 +28,7 @@ public class IncomingDeadlineServiceImpl implements IncomingDeadlineService{
 	}
 
 	@Override
-	public IncomingDeadlineDTO id_insert(IncomingDeadlineDTO idDTO) {
+	public int id_insert(IncomingDeadlineDTO idDTO) {
 		// 입고마감 등록
 		return idDAO.id_insert(idDTO);
 	}
@@ -37,6 +37,13 @@ public class IncomingDeadlineServiceImpl implements IncomingDeadlineService{
 	public IncomingDeadlineDTO id_update(IncomingDeadlineDTO idDTO) {
 		// 입고마감 수정
 		return idDAO.id_update(idDTO);
+	}
+
+	@Override
+	public void id_delete(String id_code) throws Exception {
+		// 입고마감 삭제
+		idDAO.id_delete(id_code);
+		
 	}
 
 }

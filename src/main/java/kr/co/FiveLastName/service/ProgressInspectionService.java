@@ -3,6 +3,8 @@ package kr.co.FiveLastName.service;
 import java.util.List;
 
 import kr.co.FiveLastName.domain.PartnerDTO;
+import kr.co.FiveLastName.domain.PrintPODTO;
+import kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO;
 import kr.co.FiveLastName.domain.ProgressInspectionDTO;
 import kr.co.FiveLastName.domain.ProgressInspectionRecordDTO;
 import kr.co.FiveLastName.domain.ShippingStatusDTO;
@@ -13,22 +15,22 @@ public interface ProgressInspectionService {
 	List<ProgressInspectionDTO> piAllSelect();
 	
 	ProgressInspectionDTO piSelect(int pi_id);
-
-	ProgressInspectionDTO piSearch(int ss_id);
 	
-	List<ProgressInspectionRecordDTO> piRecord(int ss_id);
+	ProgressInspectionDTO piSearch(int ss_id);
 	
 	int pirSearch(int ss_id);
 	
+	List<ProgressInspectionRecordDTO> piRecord(int ss_id);
+	
 	ProgressInspectionRecordDTO piRecordOne(int ss_id);
 	
-	ProgressInspectionDTO piInsert(ProgressInspectionDTO pi);
+	void piInsert(ProgressInspectionDTO pi);
 	
-	ProgressInspectionDTO piUpdate(ProgressInspectionDTO pi);
+	void piUpdate(ProgressInspectionDTO pi);
 	
-	ProgressInspectionRecordDTO insertRecord(ProgressInspectionDTO pi);
+	void insertRecord(ProgressInspectionDTO pi);
 	
-	ShippingStatusDTO ssComplete(int ss_id);
+	void ssComplete(int ss_id);
 	
 	StaffDTO stSelect(String st_id);
 	

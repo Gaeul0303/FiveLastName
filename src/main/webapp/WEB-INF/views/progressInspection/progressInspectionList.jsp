@@ -47,11 +47,11 @@ prefix="c" %> <%@ page session="true" %>
                               <th>검수하기</th>
                               <th>검수상태</th>
                               <th>검수진행도</th>
-                              <th>거래회사이름</th>	
-                              <th>담당자이름</th>
+                              <th>거래회사</th>	
+                              <th>담당자</th>
                               <th>검수차수</th>
                               <th>검수예정날짜</th>
-                              <th>검수완료날짜</th>
+                              <th>검수날짜</th>
                               <th>보완내용</th>
                               <th>출하수량</th>
                               <th>미검수수량</th>
@@ -65,8 +65,8 @@ prefix="c" %> <%@ page session="true" %>
                               <th>검수하기</th>	
                               <th>검수상태</th>	
                               <th>검수진행도</th>	
-                              <th>거래회사이름</th>	
-                              <th>담당자이름</th>	
+                              <th>거래회사</th>	
+                              <th>담당자</th>	
 							  <th></th>
 							  <th></th>
                               <th></th>
@@ -104,7 +104,7 @@ prefix="c" %> <%@ page session="true" %>
                           			<td>${(pi.pi_inspectedQuantity/pi.ss_quantity)*100}%</td>
                           			<td>${pi.pa_name}</td>
                           			<td>${pi.st_name}</td>
-                          			<td>${pi.pi_order}</td>
+                          			<td>${pi.pi_order}차</td>
 									<th>${pi.pi_date}</th>
 									<th>${pi.pi_inspectedDate}</th>
                           			<td>${pi.pi_content}</td>
@@ -203,6 +203,10 @@ prefix="c" %> <%@ page session="true" %>
 	            alert('성공했습니다!!');
 	        } else if (msg === 'fail') {
 	            alert('실패!');
+	        } else if(msg == 'updateSuccess'){
+	        	alert ('검수완료했습니다.')
+	        }else if(msg == 'updateFail'){
+	        	alert ('검수에 실패했습니다.')
 	        }
 	    </script>
 	</c:if>

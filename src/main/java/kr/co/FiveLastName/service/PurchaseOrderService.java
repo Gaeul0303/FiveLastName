@@ -19,9 +19,9 @@ public interface PurchaseOrderService {
 	
 	PrintPODTO poPrev(int ppr_id);	//	구매발주서 미리보기.
 	
-	PrintPODTO poInsert(int ppr_id);	//	구매발주서 생성하기.
+	void poInsert(int ppr_id);	//	구매발주서 생성하기.
 	
-	ProcurementPlanRegistrationDTO poComplete(int ppr_id); // 구매발주서 발행, ppr 구매발주서 발행현황 바꾸기.
+	void poComplete(int ppr_id); // 구매발주서 발행, ppr 구매발주서 발행현황 바꾸기.
 	
 	PrintPODTO poSearch(int ppr_id);	//	조달계획등록 id로 구매발주서 찾기.
 	

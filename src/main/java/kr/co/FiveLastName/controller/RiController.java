@@ -21,7 +21,7 @@ import kr.co.FiveLastName.domain.ReceivingInspectionDTO;
 import kr.co.FiveLastName.domain.ShippingStatusDTO;
 import kr.co.FiveLastName.service.ReceivingInspectionService;
 
-@RequestMapping("/receiveingInspection/*")
+@RequestMapping("/receivingInspection/*")
 @Controller
 public class RiController {
 	private static final Logger logger = LoggerFactory.getLogger(RiController.class);
@@ -31,11 +31,14 @@ public class RiController {
 	
 	@GetMapping(value = "/list")
 	public ModelAndView ri_list() {
-		logger.info("입고 조회");
 		
 		ModelAndView mav = new ModelAndView();
 		
 		List<ReceivingInspectionDTO> ri_list = riService.ri_list();
+		
+//		for(int i = 0 ; i<ri_list.size();i++) {
+//			System.out.println("list = " + ri_list.get(i));
+//		}
 		
 		
 		mav.addObject("ri_list", ri_list);
@@ -44,25 +47,25 @@ public class RiController {
 		return mav;
 	}
 	
-	@GetMapping(value = "/updateForm")
-	public ModelAndView updateForm(@RequestParam("ri_id") int ri_id, Model model) { 
-		ModelAndView mav = new ModelAndView();
-		
-		model.addAttribute("updateform", riService.ri_selectOne(ri_id));
-		
-		ReceivingInspectionDTO ri = riService.ri_selectOne(ri_id);
-		
-		if(ri==null) {
-			System.out.println("비었어요.");
-		}else {
-			System.out.println("ri.getPr_name = "+ri.getPr_name());
-			System.out.println("ri.getPi_inspectedQuantity = "+ri.getPi_inspectedQuantity());
-		}
-		
-		mav.setViewName("/receivingInspection/riUpdateForm");
-		
-		return mav;
-	}
+//	@GetMapping(value = "/updateForm")
+//	public ModelAndView updateForm(@RequestParam("ri_id") int ri_id, Model model) { 
+//		ModelAndView mav = new ModelAndView();
+//		
+//		model.addAttribute("updateform", riService.ri_selectOne(ri_id));
+//		
+//		ReceivingInspectionDTO ri = riService.ri_selectOne(ri_id);
+//		
+//		if(ri==null) {
+//			System.out.println("비었어요.");
+//		}else {
+//			System.out.println("ri.getPr_name = "+ri.getPr_name());
+//			System.out.println("ri.getPi_inspectedQuantity = "+ri.getPi_inspectedQuantity());
+//		}
+//		
+//		mav.setViewName("/receivingInspection/riUpdateForm");
+//		
+//		return mav;
+//	}
 	
 //	@PostMapping(value = "/update")
 //	public ModelAndView ri_update(@ModelAttribute ReceivingInspectionDTO riDTO) {

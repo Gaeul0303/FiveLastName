@@ -14,7 +14,9 @@
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
 		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join product pr on pa.pa_id = pr.pr_partner
+        order by
+        pi_status desc
 	</select>
 	
 	<select id="piAll" resultType="kr.co.FiveLastName.domain.ProgressInspectionDTO">
@@ -27,7 +29,7 @@
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
 		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id;
+		join product pr on pa.pa_id = pr.pr_partner;
 	</select>
 	
 	<select id="piSelect" resultType="kr.co.FiveLastName.domain.ProgressInspectionDTO">
@@ -40,7 +42,7 @@
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
 		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join product pr on pa.pr_id = pa.pr_partner
 		where pi.pi_id = #{pi_id}
 	</select>
 	
@@ -54,7 +56,7 @@
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
 		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join product pr on pa.pa_pa_partner = pr.pr_partner
 		where pi.ss_id = #{ss_id}
 	</select>
 	
@@ -69,7 +71,7 @@
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
 		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join product pr on pa.pa_id = pr.pr_partner
 		where pir.ss_id = #{ss_id};
 	</select>
 	
@@ -119,9 +121,9 @@
 	</select>
 	
 	<insert id="insertRecord">
-		insert into progressInspectionRecord(ss_id, st_id, pir_order, pir_date, pir_status, pir_content, pir_uninspectedQuantity, pir_inspectedQuantity)
+		insert into progressInspectionRecord(ss_id, st_id, pir_order, pir_date, pir_status, pir_content, pir_uninspectedQuantity, pir_inspectedQuantity, pir_inspectedDate)
 		VALUES
-		(#{ss_id},#{st_id},#{pi_order},#{pi_date},#{pi_status},#{pi_content},#{pi_uninspectedQuantity},#{pi_inspectedQuantity})
+		(#{ss_id},#{st_id},#{pi_order},#{pi_date},#{pi_status},#{pi_content},#{pi_uninspectedQuantity},#{pi_inspectedQuantity},#{pi_inspectedDate})
 	</insert>
 	
 </mapper>

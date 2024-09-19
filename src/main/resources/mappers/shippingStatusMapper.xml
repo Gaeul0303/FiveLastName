@@ -13,6 +13,8 @@
 		join estimate es on co.es_id = es.es_id
 		join partner pa on es.pa_id = pa.pa_id
 		join product pr on pa.pr_id = pr.pr_id
+		order by
+		ss.ss_shippingStatus desc
 	</select>
 	
 	<select id="selectShippingStatus" resultType="kr.co.FiveLastName.domain.ShippingStatusDTO">
