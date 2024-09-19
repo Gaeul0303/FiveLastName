@@ -46,6 +46,15 @@
 														placeholder="품목명" required="required" />
 												</div>
 												<div class="form-group">
+													<label for="partnerinput">협력사</label>
+													<select class="form-select" id="partnerinput" name="pr_partner">
+														<c:forEach items="${pa }" var="partner">
+															<option value="${partner.pa_id }">${partner.pa_name }</option>
+														</c:forEach>
+													</select>
+												</div>
+												
+												<div class="form-group">
 													<label for="sizeinput">규격</label> <input type="text"
 														class="form-control" id="sizeinput" name="pr_size"
 														placeholder="규격" required="required" />
@@ -94,7 +103,7 @@
 
 													</select>
 												</div>
-
+												
 
 											</div>
 

@@ -16,7 +16,8 @@
 		pr_quality,
 		pr_image,
 		pr_category,
-		pr_status)
+		pr_status,
+		pr_partner)
 		VALUES
 		(
 		#{pr_name},
@@ -25,7 +26,8 @@
 		#{pr_quality},
 		#{pr_image},
 		#{pr_category},
-		#{pr_status});
+		#{pr_status},
+		#{pr_partner});
 	</insert>
 
 	<!-- 제품 전체 조회 -->
@@ -40,6 +42,13 @@
 		where pr_id = #{pr_id}
 	</select>
 
+	<!-- 제품 상세 조회-협럭사 -->
+	<select id="pr_selectPa" resultType="kr.co.FiveLastName.domain.ProductDTO"
+		parameterType="int">
+		select pr_partner from product
+		where pr_id = #{pr_id}
+	</select>
+
 	<!-- 제품 수정 -->
 	<update id="pr_update" parameterType="kr.co.FiveLastName.domain.ProductDTO">
 		UPDATE product
@@ -49,7 +58,8 @@
 		pr_type = #{pr_type},
 		pr_quality = #{pr_quality},
 		pr_image = #{pr_image},
-		pr_category = #{pr_category}
+		pr_category = #{pr_category},
+		pr_partner = #{pr_partner}
 		
 		WHERE pr_id = #{pr_id};
 	</update>
