@@ -11,8 +11,9 @@
 		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
-		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join procurmentPlan pp on es.pp_id = pp.pp_id
+        join product pr on pp.pr_id = pr.pr_id
+		join partner pa on pr.pr_partner = pa.pa_id
 		order by
 		ss.ss_shippingStatus desc
 	</select>
@@ -24,8 +25,9 @@
 		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
-		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join procurmentPlan pp on es.pp_id = pp.pp_id
+        join product pr on pp.pr_id = pr.pr_id
+		join partner pa on pr.pr_partner = pa.pa_id
 		where ss.ss_id = #{ss_id}
 	</select>
 	

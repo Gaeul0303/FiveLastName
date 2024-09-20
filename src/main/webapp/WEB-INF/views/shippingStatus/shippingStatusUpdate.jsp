@@ -139,7 +139,7 @@ prefix="c" %> <%@ page session="true" %>
                     </div>
                     <div class="card-action">
                       <button class="btn btn-success" onclick = "submit()">Submit</button>
-                      <button class="btn btn-danger"  onclick = "cancel()">Cancel</button>
+                      <button class="btn btn-danger"  onclick = "cancel(); return false;">Cancel</button>
                     </div>
                  	</form>
                   </div>

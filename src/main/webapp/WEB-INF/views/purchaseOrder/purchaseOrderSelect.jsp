@@ -69,18 +69,19 @@
 														<td align="center" bgcolor="#E2EFDA">:</td>
 														<td bgcolor="#E2EFDA"><div id="is2"
 																style="padding: 3px;">031-253-5225</div></td>
-														<td align="center" bgcolor="#E2EFDA">담 당 자</td>
+														<td align="center" bgcolor="#E2EFDA">작성일자</td>
 														<td align="center" bgcolor="#E2EFDA">:</td>
-														<td bgcolor="#E2EFDA"><div id="user_info" style="padding: 3px;">세션 아이디값 받아오는곳~</div></td>
+														<td bgcolor="#E2EFDA"><div class="inputBox" id="w_date6" style="padding: 2px;">${po.po_regDate}</div></td>
 													</tr>
 													<tr>
 														<td height="25" align="center" bgcolor="#E2EFDA">E-mail</td>
 														<td align="center" bgcolor="#E2EFDA">:</td>
 														<td bgcolor="#E2EFDA"><div id="is3"
 																style="padding: 3px;">yungaeul@naver.com</div></td>
-														<td align="center" bgcolor="#E2EFDA">작성일자</td>
-														<td align="center" bgcolor="#E2EFDA">:</td>
-														<td bgcolor="#E2EFDA"><div class="inputBox" id="w_date6" style="padding: 2px;">${po.po_regDate}</div></td>
+														
+														<td align="center" bgcolor="#E2EFDA"></td>
+														<td align="center" bgcolor="#E2EFDA"></td>
+														<td bgcolor="#E2EFDA"><div id="user_info" style="padding: 3px;"></div></td>
 													</tr>
 												</table>
 											</td>
@@ -312,7 +313,7 @@
 										<tr>
 											<td height="30" colspan="9" align="left" style="font-weight: bold">
 												<div tms_edit id="gg31" style="padding: 3px; line-height: 25px">
-													1. 납품주소 : 인천 미추홀구 경인로 229 인천IT타워<br>
+													1. 납품주소 : 경기도 수원시 팔달구 덕영대로 899<br>
 													2. 납 기 일 : ${po.ppr_dueDate}<br>
 													3. 요청사항 : ${po.co_tradeTerms}<br>
 												</div></td>
