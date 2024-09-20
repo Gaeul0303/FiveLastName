@@ -22,7 +22,13 @@ public class TransactionStatementServiceImpl implements TransactionStatementServ
 	}
 
 	@Override
-	public TransactionStatementDTO ts_selectOne(int ts_num) {
+	public List<TransactionStatementDTO> ts_selectList(String id_code) {
+		// 거래명세서 코드로 조회
+		return tsDAO.ts_selectList(id_code);
+	}
+	
+	@Override
+	public TransactionStatementDTO ts_selectOne(String ts_num) {
 		// 거래명세서 상세 조회
 		return tsDAO.ts_selectOne(ts_num);
 	}
@@ -38,6 +44,8 @@ public class TransactionStatementServiceImpl implements TransactionStatementServ
 		// 거래명세서 수정
 		return tsDAO.ts_update(tsDTO);
 	}
+
+
 	
 	
 }

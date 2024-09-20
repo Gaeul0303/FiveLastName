@@ -4,15 +4,39 @@ public class TransactionStatementDTO {
 	private String ts_num;
 	private String id_code;
 	private String ts_checkIn;
+	
 	private String pr_name;
 	private int id_genuineNum;
 	private int co_supplyPrice;
 	private int id_totalPrice;
-	private String st_name;
 	private String pr_size;
+	private String st_name;
+	private String pa_name;
+	private String pa_manager;
+	private String pa_address;
+	private String pa_tel;
 	
 	public TransactionStatementDTO() {
 		super();
+	}
+
+	public TransactionStatementDTO(String ts_num, String id_code, String ts_checkIn, String pr_name, int id_genuineNum,
+			int co_supplyPrice, int id_totalPrice, String pr_size, String st_name, String pa_name, String pa_manager,
+			String pa_address, String pa_tel) {
+		super();
+		this.ts_num = ts_num;
+		this.id_code = id_code;
+		this.ts_checkIn = ts_checkIn;
+		this.pr_name = pr_name;
+		this.id_genuineNum = id_genuineNum;
+		this.co_supplyPrice = co_supplyPrice;
+		this.id_totalPrice = id_totalPrice;
+		this.pr_size = pr_size;
+		this.st_name = st_name;
+		this.pa_name = pa_name;
+		this.pa_manager = pa_manager;
+		this.pa_address = pa_address;
+		this.pa_tel = pa_tel;
 	}
 
 	public String getTs_num() {
@@ -71,14 +95,6 @@ public class TransactionStatementDTO {
 		this.id_totalPrice = id_totalPrice;
 	}
 
-	public String getSt_name() {
-		return st_name;
-	}
-
-	public void setSt_name(String st_name) {
-		this.st_name = st_name;
-	}
-
 	public String getPr_size() {
 		return pr_size;
 	}
@@ -87,12 +103,54 @@ public class TransactionStatementDTO {
 		this.pr_size = pr_size;
 	}
 
+	public String getSt_name() {
+		return st_name;
+	}
+
+	public void setSt_name(String st_name) {
+		this.st_name = st_name;
+	}
+
+	public String getPa_name() {
+		return pa_name;
+	}
+
+	public void setPa_name(String pa_name) {
+		this.pa_name = pa_name;
+	}
+
+	public String getPa_manager() {
+		return pa_manager;
+	}
+
+	public void setPa_manager(String pa_manager) {
+		this.pa_manager = pa_manager;
+	}
+
+	public String getPa_address() {
+		return pa_address;
+	}
+
+	public void setPa_address(String pa_address) {
+		this.pa_address = pa_address;
+	}
+
+	public String getPa_tel() {
+		return pa_tel;
+	}
+
+	public void setPa_tel(String pa_tel) {
+		this.pa_tel = pa_tel;
+	}
+
 	@Override
 	public String toString() {
 		return "TransactionStatementDTO [ts_num=" + ts_num + ", id_code=" + id_code + ", ts_checkIn=" + ts_checkIn
 				+ ", pr_name=" + pr_name + ", id_genuineNum=" + id_genuineNum + ", co_supplyPrice=" + co_supplyPrice
-				+ ", id_totalPrice=" + id_totalPrice + ", st_name=" + st_name + ", pr_size=" + pr_size + "]";
+				+ ", id_totalPrice=" + id_totalPrice + ", pr_size=" + pr_size + ", st_name=" + st_name + ", pa_name="
+				+ pa_name + ", pa_manager=" + pa_manager + ", pa_address=" + pa_address + ", pa_tel=" + pa_tel + "]";
 	}
 
+	
 	
 }

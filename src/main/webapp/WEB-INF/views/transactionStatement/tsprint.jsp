@@ -56,6 +56,7 @@
         }
         .center {
             text-align: center;
+            position: relative;
         }
         .button {
             background: #007BFF;
@@ -65,9 +66,39 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s;
+            font-size: 12px; 
         }
         .button:hover {
             background: #0056b3;
+        }
+        .close-button {
+            position: absolute; /* 추가: 절대 위치로 설정 */
+            right: 10px; /* 오른쪽 위치 조정 */
+            top: 10px; /* 위쪽 위치 조정 */
+            padding: 5px 10px; /* 크기 조정 */
+            font-size: 10px; /* 글자 크기 조정 */
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                font-size: 12px; /* 인쇄할 때 글자 크기 조정 */
+            }
+            .popup_order_list {
+                width: auto; /* 인쇄 시 가로 크기 조정 */
+                box-shadow: none; /* 그림자 제거 */
+                overflow: visible; /* 오버플로우 설정 */
+            }
+            .popup_title {
+                background: #007BFF; /* 배경색 유지 */
+                color: white; /* 글자색 유지 */
+                font-size: 18px; /* 인쇄 시 타이틀 크기 조정 */
+                padding: 15px; /* 여백 조정 */
+            }
+            .button {
+                display: none; /* 인쇄 시 버튼 숨김 */
+            }
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -93,11 +124,16 @@
             });
         });
 
-        document.getElementById('print-btn').addEventListener('click', function() {
-            window.print();
-        });
+    
     }
     </script>
+    <script>
+	window.onload = function() {
+	    document.getElementById('print-btn').addEventListener('click', function() {
+	        window.print(); // 버튼 클릭 시 인쇄 대화 상자 열기
+	    });
+	}
+</script>
 </head>
 <body>
 
@@ -120,32 +156,28 @@
                 <tr>
                     <th rowspan="4">공급자</th>
                     <td>등록번호</td>
-                    <td colspan="3"><strong>214-86-56681</strong>&nbsp;&nbsp;☎ 02-526-1800</td>
+                    <td colspan="3"><strong>214-86-56681</strong></td>
                     <th rowspan="4">공급받는자</th>
                     <td>등록번호</td>
-                    <td colspan="3"><strong>1101100013</strong>&nbsp;&nbsp;☎ 02-526-1800</td>
+                    <td colspan="3"><strong>1101100013</strong></td>
                 </tr>
                 <tr>
                     <td>상호</td>
                     <td colspan="3"><strong>오성</strong></td>
                     <td>상호</td>
-                    <td colspan="3"><strong>팜스넷약국</strong></td>
+                    <td colspan="3"><strong>${pa_name }</strong></td>
                 </tr>
                 <tr>
                     <td>주소</td>
                     <td colspan="3">서울특별시 서초구 바우뫼로37길 37 6층</td>
                     <td>주소</td>
-                    <td colspan="3">서울특별시 서초구 바우뫼로37길 37 산기협 6층 팜스넷</td>
+                    <td colspan="3">${pa_address }</td>
                 </tr>
                 <tr>
-                    <td>종목</td>
-                    <td>헬스케어</td>
-                    <td>업태</td>
-                    <td>도매</td>
-                    <td>종목</td>
-                    <td>한약</td>
-                    <td>업태</td>
-                    <td>소매</td>
+                    <td>전화번호</td>
+                    <td colspan="3">02-526-1800</td>
+                    <td>전화번호</td>
+                    <td colspan="3">${pa_tel }</td>
                 </tr>
             </tbody>
         </table>
@@ -179,31 +211,21 @@
 
         <table class="popup_print_tbl3 total-table">
             <tbody>
-                <c:forEach var="print1" items="${ts_list }">
-                	<tr>
+                <tr>
                     
-                    <td>공급가액</td>
-                    <td>0</td>
-                    <td>부가세</td>
-                    <td>0</td>
                     <td>담당자</td>
-                    <td style="text-align:left"></td>
-                    <td>인수자</td>
-                    <td style="text-align:left">&nbsp;</td>
+                    <td style="text-align:center; vertical-align: middle;">${st_name }</td>
                 </tr>
-                </c:forEach>
             </tbody>
         </table>
 
         <div class="center">
-            <button type="button" id="download-pdf" class="button">PDF 다운로드</button>
+            <!-- <button type="button" id="download-pdf" class="button">PDF 다운로드</button>  --> 
             <button type="button" id="print-btn" class="button">인쇄</button>
-            <button type="button" class="button popup_btn_close" onclick="history.back()">창닫기</button>
+            <button type="button" class="button close-button popup_btn_close" onclick="history.back()">닫기</button>
         </div>
     </div>
 </div>
 
 </body>
-
-
 </html>

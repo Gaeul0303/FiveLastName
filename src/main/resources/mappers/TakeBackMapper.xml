@@ -55,8 +55,13 @@
 		INSERT INTO return(tb_code, ri_id, tb_returnApplicationDate, tb_status,
 		tb_returnCompletionDate, tb_errorNum, tb_notes)
 		VALUES(
-		#{tb_code}, #{ri_id}, #{tb_returnApplicationDate}, #{tb_status},
-		#{tb_returnCompletionDate},#{tb_errorNum}, #{tb_notes}
+		#{tb_code},
+		#{ri_id},
+		#{tb_returnApplicationDate},
+		#{tb_status},
+		#{tb_returnCompletionDate},
+		#{tb_errorNum},
+		#{tb_notes}
 		)
 	</insert>
 

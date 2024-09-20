@@ -37,8 +37,9 @@ prefix="c"%> <%@ page session="true"%>
                     <form role="form" action = "/incomingDeadline/insert" method="post" id="insertform" enctype="multipart/form-data" onsubmit="return validateForm()">
                     	
                       <input type="hidden" name="ri_id" value="${insertForm.ri_id}"/>                  
-                       
-        			   <input type="hidden" id="randomInput" name="id_code" readonly> 
+        			  <input type="hidden" id="id_code" name="id_code" readonly>   <!-- 입고마감 코드 랜덤 생성 --> 
+        			  <input type="hidden" id="ts_num" name="ts_num" readonly>     <!-- 거래명세서 코드 랜덤 생성 -->
+        			  <input type="hidden" id="tb_code" name="tb_code" readonly>     <!-- 반품 코드 랜덤 생성 -->
                         
                       <div class="row">
                         <div class="col-md-6">
@@ -169,24 +170,36 @@ prefix="c"%> <%@ page session="true"%>
     </script>
     
     <script>
-        // 랜덤 문자열 생성 함수
-        function generateRandomString(length) {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            return result;
+ // 랜덤 문자열 생성 함수
+    function generateRandomString(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+
+    // 중복되지 않는 랜덤 문자열을 생성하여 input 필드에 설정
+    function setRandomStringsToInputs() {
+        const codes = new Set(); // 중복 확인을 위한 Set
+
+        // 랜덤 문자열 생성 및 중복 확인
+        while (codes.size < 3) {
+            codes.add(generateRandomString(16));
         }
 
-        // 문서가 로드되면 랜덤 문자열을 input 필드에 설정
-        function setRandomStringToInput() {
-            const randomString = generateRandomString(16);
-            document.getElementById('randomInput').value = randomString;
-        }
+        // Set에서 각 값을 배열로 변환
+        const [randomIdCode, randomTsNum, randomTbCode] = Array.from(codes);
 
-        // 페이지 로드 시 실행
-        window.onload = setRandomStringToInput;
+        // 랜덤 문자열을 각 input 필드에 설정
+        document.getElementById('id_code').value = randomIdCode; // id_code 설정
+        document.getElementsByName('ts_num')[0].value = randomTsNum; // ts_num 설정
+        document.getElementsByName('tb_code')[0].value = randomTbCode; // tb_code 설정
+    }
+
+    // 페이지 로드 시 실행
+    window.onload = setRandomStringsToInputs;
     </script>
     
     <script type="text/javascript">

@@ -24,7 +24,17 @@ public class TsController {
 	public ModelAndView print(String id_code) {
 		ModelAndView mav = new ModelAndView();
 		
-		List<TransactionStatementDTO> ts_list = tsService.ts_list();
+		
+		
+		List<TransactionStatementDTO> ts_list = tsService.ts_selectList(id_code);
+		
+		if(!ts_list.isEmpty()) {
+			TransactionStatementDTO tsDTO = ts_list.get(0);
+			mav.addObject("pa_name", tsDTO.getPa_name());
+			mav.addObject("pa_address", tsDTO.getPa_address());
+			mav.addObject("st_name", tsDTO.getSt_name());
+			mav.addObject("pa_tel", tsDTO.getPa_tel());
+		}
 		
 		mav.addObject("ts_list", ts_list);
 		mav.setViewName("transactionStatement/tsPrint");

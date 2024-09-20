@@ -8,6 +8,7 @@ public class IncomingDeadlineDTO {
 	private int ri_id;
 	private int id_genuineNum;
 	private int id_totalPrice;
+	
 	private String pa_name;
 	private String pr_name;
 	private int pi_inspectedQuantity;
@@ -163,6 +164,7 @@ public class IncomingDeadlineDTO {
 				+ co_supplyPrice + ", ri_availability=" + ri_availability + ", ri_date=" + ri_date + ", st_name="
 				+ st_name + ", pr_id=" + pr_id + ", id_totalPirce=" + id_totalPirce + "]";
 	}
-
+	
+	
 			
 }
