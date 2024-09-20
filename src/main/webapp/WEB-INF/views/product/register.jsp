@@ -133,7 +133,7 @@
     <script type="text/javascript">
     	$(document).ready(function(){
     		$("#cancel").on("click",function(){
-    			location.href="/product/list"
+    			location.href="/procurmentPlan/list"
     		})
     	})
     </script>

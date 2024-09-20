@@ -121,7 +121,7 @@ public class PprController {
 		
 		pprService.ppr_update(dto);
 		
-		rttr.addAttribute("msg", "success");		
+		rttr.addFlashAttribute("msg", "SUCCESS");		
 		return "redirect:/procurementPlanRegistration/list";
 		
 	}

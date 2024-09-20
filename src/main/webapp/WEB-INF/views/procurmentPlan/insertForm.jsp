@@ -90,6 +90,14 @@
 	</div>
 	<%@include file="/WEB-INF/views/include/script.jsp"%>
 	<script>
+	$(document).ready(function() {
+		$("#cancel").on("click",function(e){
+			e.preventDefault();
+			location.href="/procurmentPlan/list";
+		})
+	});
+	</script>
+	<script>
 		$(document).ready(
 				function() {
 

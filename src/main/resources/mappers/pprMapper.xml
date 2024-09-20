@@ -34,7 +34,7 @@
 	
 	<!-- 조달 계획 수정 -->
 	<update id="ppr_update" parameterType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">
-	UPDATE `erp`.`procurementplanregistration`
+	UPDATE `erp`.`procurementPlanregistration`
 	SET
 	`co_id` = #{co_id},
 	`ppr_dueDate` = #{ppr_dueDate},	
