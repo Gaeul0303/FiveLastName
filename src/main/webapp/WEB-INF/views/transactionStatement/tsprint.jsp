@@ -127,7 +127,7 @@
                 </tr>
                 <tr>
                     <td>상호</td>
-                    <td colspan="3"><strong>팜스넷</strong></td>
+                    <td colspan="3"><strong>오성</strong></td>
                     <td>상호</td>
                     <td colspan="3"><strong>팜스넷약국</strong></td>
                 </tr>
