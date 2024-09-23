@@ -2,8 +2,8 @@
 <%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<HTML>
-<HEAD>
+<html>
+<head>
 	 <%@include file="../include/head.jsp" %>
 <style type="text/css">
 @media print {
@@ -25,8 +25,8 @@
         }
     }
 </style>
-</HEAD>
-<BODY>
+</head>
+<body>
 
 	<div id="reportPrint">
 	
@@ -355,16 +355,16 @@
 	   
 		<script>
 		function printWindow() {
-			   var initBody = document.body.innerHTML;
+			   var initbody = document.body.innerhtml;
 			   window.onbeforeprint = function(){
-			       document.body.innerHTML = document.getElementById("reportPrint").innerHTML;
+			       document.body.innerhtml = document.getElementById("reportPrint").innerhtml;
 			   }
 			   window.onafterprint = function(){
-			       document.body.innerHTML = initBody;
+			       document.body.innerhtml = initbody;
 			   }
 			   window.print();
 			   self.close();
 			   }
 		</script>
-</BODY>
-</HTML>
+</body>
+</html>
