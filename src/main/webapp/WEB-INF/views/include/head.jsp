@@ -42,4 +42,3 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="${path }/resources/assets/css/demo.css" />
-    <link rel="stylesheet" href="${path }/resources/assets/css/print.css" />

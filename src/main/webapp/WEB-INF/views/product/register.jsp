@@ -17,21 +17,21 @@
 			<div class="container">
 				<div class="page-inner">
 					<div class="page-header">
-						<h3 class="fw-bold mb-3">Forms</h3>
+						<h3 class="fw-bold mb-3">품목등록</h3>
 						<ul class="breadcrumbs mb-3">
 							<li class="nav-home"><a href="#"> <i class="icon-home"></i>
 							</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
-							<li class="nav-item"><a href="#">Forms</a></li>
+							<li class="nav-item"><a href="#">품목</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
-							<li class="nav-item"><a href="#">Basic Form</a></li>
+							<li class="nav-item"><a href="#">품목등록</a></li>
 						</ul>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Form Elements</div>
+									<div class="card-title">품목등록</div>
 								</div>
 								<div class="card-body">
 									<form id="registerForm" enctype="multipart/form-data"
