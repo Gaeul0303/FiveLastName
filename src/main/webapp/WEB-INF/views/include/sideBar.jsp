@@ -155,6 +155,24 @@
 							</ul>
 						</div></li>
 				</c:when>
+				
+				<c:when test="${st_department eq '자재입고' }">
+					<li class="nav-item"><a data-bs-toggle="collapse" href="#receivingInspection">
+							<i class="fas fa-calendar-alt"></i>
+							<p>입고</p> <span class="caret"></span>
+					</a>
+						<div class="collapse" id="receivingInspection">
+							<ul class="nav nav-collapse">
+								<li><a href="/receivingInspection/list"> <span
+										class="sub-item">입고대기</span>
+								</a></li>
+								<li><a href="/incomingDeadline/list"> <span
+										class="sub-item">입고마감</span>
+								</a></li>
+							</ul>
+						</div></li>
+				</c:when>
+				
 				<c:when test="${st_department eq '자재출고'}">
 					<li class="nav-item"><a data-bs-toggle="collapse" href="#idm">
 							<i class="fas fa-truck-loading"></i>
@@ -171,7 +189,22 @@
 							</ul>
 	
 						</div></li>
-				</c:when>				
+				</c:when>
+				
+				<c:when test="${st_department eq '자재입고' }">
+					<li class="nav-item"><a data-bs-toggle="collapse" href="#takeBack">
+							<i class="fas fa-calendar-alt"></i>
+							<p>반품</p> <span class="caret"></span>
+					</a>
+						<div class="collapse" id="takeBack">
+							<ul class="nav nav-collapse">
+								<li><a href="/takeBack/list"> <span
+										class="sub-item">반품 현황</span>
+								</a></li>
+							</ul>
+						</div></li>
+				</c:when>
+								
 				<c:otherwise>
 
 					<li class="nav-item"><a data-bs-toggle="collapse" href="#forms">
@@ -285,6 +318,21 @@
 	
 							</ul>
 						</div></li>
+						
+					<li class="nav-item"><a data-bs-toggle="collapse" href="#receivingInspection">
+							<i class="fas fa-calendar-alt"></i>
+							<p>입고</p> <span class="caret"></span>
+					</a>
+						<div class="collapse" id="receivingInspection">
+							<ul class="nav nav-collapse">
+								<li><a href="/receivingInspection/list"> <span
+										class="sub-item">입고대기</span>
+								</a></li>
+								<li><a href="/incomingDeadline/list"> <span
+										class="sub-item">입고마감</span>
+								</a></li>
+							</ul>
+						</div></li>	
 
 					<li class="nav-item"><a data-bs-toggle="collapse" href="#idm">
 							<i class="fas fa-truck-loading"></i>
@@ -296,12 +344,20 @@
 								</a></li>
 								<li><a href="/idmReportList"> <span class="sub-item">출고관리리스트</span>
 								</a></li>
-	
-	
 							</ul>
-	
 						</div></li>
-	
+						
+						<li class="nav-item"><a data-bs-toggle="collapse" href="#takeBack">
+								<i class="fas fa-calendar-alt"></i>
+								<p>반품</p> <span class="caret"></span>
+						</a>
+							<div class="collapse" id="takeBack">
+								<ul class="nav nav-collapse">
+									<li><a href="/takeBack/list"> <span
+											class="sub-item">반품 현황</span>
+									</a></li>
+								</ul>
+							</div></li>
 				
 				</c:otherwise>
 				</c:choose>

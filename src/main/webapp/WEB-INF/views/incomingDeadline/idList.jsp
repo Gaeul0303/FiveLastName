@@ -92,13 +92,13 @@ prefix="c" %> <%@ page session="true" %>
 	                              <td align="right">
 	                              	<fmt:formatNumber value="${id.co_supplyPrice }" pattern="#,###" />
 	                              </td>
-	                              <td align="right">
-	                              	<fmt:formatNumber value="${id.id_totalPirce }" pattern="#,###" />
+	                              <td align = "right">
+	                              	<fmt:formatNumber value="${id.id_totalPrice }" pattern="#,###"/>
 	                              </td>
-                            	  <td class = "centerTD">${id.st_name }</td>
+	                              <td class = "centerTD">${id.st_name }</td>
                             	  <td class = "centerTD">${id.ri_availability }</td>
 	                              <td class = "centerTD"><fmt:formatDate value="${id.ri_date }"/></td>
-	                              <td class = "centerTD"><a href="/receivingInspection/riUpdate?ri_id=${id.id_code }">발행</a></td>
+	                              <td class = "centerTD"><a href="/TransactionStatement/print-page?id_code=${id.id_code }">발행</a></td>
                             	</tr>
                             </c:forEach>
                           </tbody>

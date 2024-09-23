@@ -44,11 +44,12 @@ public class PpController {
 
 	// 계획 등록
 	@PostMapping(value = "/insertForm")
-	public String insert(ProcurmentPlanDTO dto) {
+	public String insert(ProcurmentPlanDTO dto, RedirectAttributes rttr) {
 		logger.info("insert : " + dto);
 
 		ppService.pp_insert(dto);
 
+		rttr.addFlashAttribute("msg","succes");
 		return "redirect:/procurmentPlan/list";
 
 	}
