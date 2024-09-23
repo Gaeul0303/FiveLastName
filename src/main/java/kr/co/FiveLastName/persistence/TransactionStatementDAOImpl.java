@@ -21,8 +21,15 @@ public class TransactionStatementDAOImpl implements TransactionStatementDAO {
 		// 거래명세서 조회
 		return sqlSession.selectList(namespace+".ts_list");
 	}
+	
 	@Override
-	public TransactionStatementDTO ts_selectOne(int ts_num) {
+	public List<TransactionStatementDTO> ts_selectList(String id_code) {
+		// 거래명세서 코드로 조회
+		return sqlSession.selectList(namespace+".ts_list", id_code);
+	}
+	
+	@Override
+	public TransactionStatementDTO ts_selectOne(String ts_num) {
 		// 거래명세서 상세 조회
 		return sqlSession.selectOne(namespace+".ts_selectOne", ts_num);
 	}
@@ -36,6 +43,7 @@ public class TransactionStatementDAOImpl implements TransactionStatementDAO {
 		// 거래명세서 수정
 		return sqlSession.update(namespace+".ts_update", tsDTO);
 	}
+
 	
 	
 }

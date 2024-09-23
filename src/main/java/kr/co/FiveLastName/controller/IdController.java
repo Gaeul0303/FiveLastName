@@ -25,8 +25,10 @@ import org.springframework.web.servlet.ModelAndView;
 import jdk.jfr.TransitionTo;
 import kr.co.FiveLastName.domain.IncomingDeadlineDTO;
 import kr.co.FiveLastName.domain.ReceivingInspectionDTO;
+import kr.co.FiveLastName.domain.TransactionStatementDTO;
 import kr.co.FiveLastName.service.IncomingDeadlineService;
 import kr.co.FiveLastName.service.ReceivingInspectionService;
+import kr.co.FiveLastName.service.TransactionStatementService;
 
 @RequestMapping("/incomingDeadline/*")
 @Controller
@@ -39,6 +41,9 @@ public class IdController {
 	
 	@Inject
 	ReceivingInspectionService riService;
+	
+	@Inject
+	TransactionStatementService tsService;
 	
 	@GetMapping(value = "/list")
 	public ModelAndView id_list() {
@@ -66,13 +71,15 @@ public class IdController {
 	}
 	
 	@PostMapping(value = "/insert")
-	public String id_insert(@ModelAttribute IncomingDeadlineDTO idDTO) throws Exception {
+	public String id_insert(@ModelAttribute IncomingDeadlineDTO idDTO, @ModelAttribute TransactionStatementDTO tsDTO) throws Exception {
 	    System.out.println(idDTO);
+	    
 	    idService.id_insert(idDTO);
+	    tsService.ts_insert(tsDTO);
 	    
 	    System.out.println("insert : "+idDTO);
 	    
-	    riService.ri_delete(idDTO.getRi_id());
+	    riService.ri_delete(idDTO.getRi_id()); // receivingInspection 입고대기 → 입고완료로 변경
 	    System.out.println("ri_id 삭제 완료: " + idDTO.getRi_id());
 	    
 	    return "redirect:/receivingInspection/list";

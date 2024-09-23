@@ -8,8 +8,10 @@ public interface TransactionStatementDAO {
 // 거래명세서 조회
 	public List<TransactionStatementDTO> ts_list();
 	
+	public List<TransactionStatementDTO> ts_selectList(String id_code);
+	
 //	거래명세서 상세 조회
-	public TransactionStatementDTO ts_selectOne(int ts_num);
+	public TransactionStatementDTO ts_selectOne(String ts_num);
 	
 //	거래명세서 등록
 	public int ts_insert(TransactionStatementDTO tsDTO);

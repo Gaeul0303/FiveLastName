@@ -8,8 +8,8 @@
 	<!-- 번호 품목 수량 규격 공급가액 금액 담당자 -->  
 	<select id="ts_list" resultType="kr.co.FiveLastName.domain.TransactionStatementDTO">
 		SELECT 
-		pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice, st.st_name 
-		
+		pr.pr_name, id.id_genuineNum, co.co_supplyPrice, id.id_totalPrice, st.st_name, 
+		pa.pa_name, pa.pa_address, pa.pa_tel
 		FROM transactionStatement ts
 		
 		INNER JOIN incomingDeadline id ON ts.id_code = id.id_code
@@ -56,8 +56,11 @@
 	<insert id="ts_insert" parameterType="kr.co.FiveLastName.domain.TransactionStatementDTO">
 		INSERT INTO
 		transactionStatement(ts_num, id_code, ts_checkIn)
-		VALUES
-		(#{ts_num}, #{id_code}, #{ts_checkIn})
+		values(
+		#{ts_num},
+		#{id_code},
+		'입고완료'
+		)
 	</insert>
 	
 	<!-- 거래명세서 수정 -->
