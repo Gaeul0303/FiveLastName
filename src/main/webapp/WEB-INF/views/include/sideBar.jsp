@@ -301,9 +301,7 @@
 								<li><a href="/progressInspection/list"> <span
 										class="sub-item">검수조회</span>
 								</a></li>
-								<li><a href="/progressInspection/insert"> <span
-										class="sub-item">검수등록</span>
-								</a></li>
+							
 							</ul>
 						</div></li>
 					<li class="nav-item"><a data-bs-toggle="collapse"
@@ -343,6 +341,8 @@
 								<li><a href="/inventoryList"> <span class="sub-item">자재리스트</span>
 								</a></li>
 								<li><a href="/idmReportList"> <span class="sub-item">출고관리리스트</span>
+								</a></li>
+								<li><a href="/idmReport"> <span class="sub-item">현황관리리스트</span>
 								</a></li>
 							</ul>
 						</div></li>

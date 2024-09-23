@@ -34,7 +34,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Form Elements</div>
+									<div class="card-title">견적등록</div>
 								</div>
 								<div class="card-body">
 									<form id="registerForm" method="POST">

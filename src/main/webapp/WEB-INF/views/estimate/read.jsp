@@ -10,6 +10,7 @@
 <head>
 
 <%@include file="/WEB-INF/views/include/head.jsp"%>
+<link rel="stylesheet" href="${path }/resources/assets/css/print.css" />
 
 <style type="text/css">
 	.modal{
@@ -40,7 +41,7 @@
 							<li class="nav-home"><a href="#"> <i class="icon-home"></i>
 							</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
-							<li class="nav-item"><a href="#">품목정보리스트</a></li>
+							<li class="nav-item"><a href="#">견적정보리스트</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
 							<li class="nav-item"><a href="#">상세정보</a></li>
 						</ul>
@@ -49,7 +50,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title">품목정보</h4>
+									<h4 class="card-title">견적정보</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">

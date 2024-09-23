@@ -35,14 +35,14 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<div class="card-title">Form Elements</div>
+									<div class="card-title">계약등록</div>
 								</div>
 								<div class="card-body">
 									<form id="registerForm" method="POST">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
-													<label for="nameinput">계약등록</label>
+													<label for="nameinput">견적</label>
 													<div class="table-responsive scrollTable">
 														<table id="basic-datatables"
 															class="display table table-striped table-hover">

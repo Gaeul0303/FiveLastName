@@ -10,7 +10,7 @@
 <head>
 
 <%@include file="/WEB-INF/views/include/head.jsp"%>
-
+<link rel="stylesheet" href="${path }/resources/assets/css/print.css" />
 <style type="text/css">
 .modal { 
 	--bs-modal-width: 100%;
