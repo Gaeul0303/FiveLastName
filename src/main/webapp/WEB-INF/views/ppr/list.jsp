@@ -42,7 +42,7 @@
                 <div class="col-md-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title">조달 계획 리스트</h4>
+                      <h4 class="card-title">조달 계획 등록 리스트</h4>
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">

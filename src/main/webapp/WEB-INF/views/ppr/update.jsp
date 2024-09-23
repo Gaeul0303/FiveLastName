@@ -15,22 +15,22 @@ prefix="c"%> <%@ page session="true"%>
         <div class="container">
           <div class="page-inner">
             <div class="page-header">
-              <h3 class="fw-bold mb-3">Forms</h3>
+              <h3 class="fw-bold mb-3">조달 계획 등록안</h3>
               <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                   <a href="#"> <i class="icon-home"></i> </a>
                 </li>
                 <li class="separator"><i class="icon-arrow-right"></i></li>
-                <li class="nav-item"><a href="#">Forms</a></li>
+                <li class="nav-item"><a href="#">계획</a></li>
                 <li class="separator"><i class="icon-arrow-right"></i></li>
-                <li class="nav-item"><a href="#">Basic Form</a></li>
+                <li class="nav-item"><a href="#">수정</a></li>
               </ul>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                    <div class="card-title">Form Elements</div>
+                    <div class="card-title">조달 계획 등록안 수정</div>
                   </div>
                   <div class="card-body">
                     <form

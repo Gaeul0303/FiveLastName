@@ -22,9 +22,9 @@
 							<li class="nav-home"><a href="#"> <i class="icon-home"></i>
 							</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
-							<li class="nav-item"><a href="#">Forms</a></li>
+							<li class="nav-item"><a href="#">계획</a></li>
 							<li class="separator"><i class="icon-arrow-right"></i></li>
-							<li class="nav-item"><a href="#">Basic Form</a></li>
+							<li class="nav-item"><a href="#">등록</a></li>
 						</ul>
 					</div>
 					<div class="row">
