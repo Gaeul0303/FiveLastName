@@ -142,10 +142,10 @@ prefix="c" %> <%@ page session="true" %>
 		      </div>
 		      <div class="modal-body">
 		        <!-- 모달 콘텐츠 -->
-		        <form id="progressInspectionForm" action="/progressInspection/update" method="post">
+		        <form id="progressInspectionForm" action="/progressInspection/update" method="post" onsubmit="return checkForm()">
 		          <div class="form-group">
 		            <label for="pi_date">다음 검수계획날짜</label>
-		            <input type="date" class="form-control" id="pi_date" name="pi_date">
+		            <input type="datetime-local" class="form-control" id="pi_date" name="pi_date">
 		          </div>
 		          
 		          <div class="form-group">
@@ -169,7 +169,7 @@ prefix="c" %> <%@ page session="true" %>
 		          
 		          <div class="form-group">
 		            <label for="pi_inspectedQuantity">검수 완료 수량</label>
-		            <input type="number" class="form-control" id="pi_inspectedQuantity" name="pi_inspectedQuantity" min="0" onchange="check()">
+		            <input type="number" class="form-control" id="pi_inspectedQuantity" name="pi_inspectedQuantity" min="0" onchange="check()" required>
 		          </div>
 		          
 		          <div class="form-group">
@@ -195,6 +195,16 @@ prefix="c" %> <%@ page session="true" %>
     </div>
 
     <%@include file="../include/script.jsp" %>
+    
+    <script type="text/javascript">
+		$(function() {
+			var now_utc = Date.now()
+			var timeOff = new Date().getTimezoneOffset()*60000;
+			var today = new Date(now_utc-timeOff).toISOString().substring(0, 16);
+			document.getElementById("pi_date").setAttribute("min", today);
+		})
+	</script>
+	
     <c:if test="${not empty msg}">
 	    <script type="text/javascript">
 	        var msg = '${msg}'; // 모델에서 전달된 메시지를 JavaScript 변수로 받기
@@ -203,8 +213,6 @@ prefix="c" %> <%@ page session="true" %>
 	            alert('성공했습니다!!');
 	        } else if (msg === 'fail') {
 	            alert('실패!');
-	        } else if(msg == 'updateSuccess'){
-	        	alert ('검수완료했습니다.')
 	        }else if(msg == 'updateFail'){
 	        	alert ('검수에 실패했습니다.')
 	        }
@@ -216,6 +224,18 @@ prefix="c" %> <%@ page session="true" %>
 		  $('#progressInspectionModal').modal('hide');
 		  alert("취소하셨습니다.");
 	    };
+	    
+	    function checkForm() {
+	        var inspectedQuantity = document.getElementById('pi_inspectedQuantity').value;
+
+	        if (!inspectedQuantity) {
+	            alert("수량을 입력해주세요.");
+	            return false;
+	        } else {
+	            alert("검수가 완료되었습니다.");
+	            return true; // true를 반환하여 폼을 제출하도록 허용
+	        }
+	    }
 	    
 	  function updatePage(button) {
 		    var pi_id = button.getAttribute("data-pi-id");
@@ -234,7 +254,9 @@ prefix="c" %> <%@ page session="true" %>
 	    }
 
 	   function submitForm() {
-	        document.getElementById('progressInspectionForm').submit();
+		   if (checkForm()) {
+		        document.getElementById('progressInspectionForm').submit();
+		    }
 	    }
     
 	  function check() {
