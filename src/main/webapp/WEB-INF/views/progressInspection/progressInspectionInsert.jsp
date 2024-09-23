@@ -77,7 +77,7 @@ prefix="c" %> <%@ page session="true" %>
                               >검수계획날짜</label
                             >
                             <div class="col-md-9 p-0">
-								<input type="date" id = "pi_date" name ="pi_date" required>
+								<input type="datetime-local" id = "pi_date" name ="pi_date" required>
                             </div>
                           </div>
                           
@@ -147,6 +147,8 @@ prefix="c" %> <%@ page session="true" %>
 
       <%@include file="../include/footer.jsp" %>
     </div>
+    
+
 	
 	<script type="text/javascript">
 	
@@ -220,7 +222,18 @@ prefix="c" %> <%@ page session="true" %>
 		}
 	  
 	</script>
-	
+
     <%@include file="../include/script.jsp" %>
+    
+    	<script type="text/javascript">
+		$(function() {
+			var now_utc = Date.now()
+			var timeOff = new Date().getTimezoneOffset()*60000;
+			var today = new Date(now_utc-timeOff).toISOString().substring(0, 16);
+			document.getElementById("pi_date").setAttribute("min", today);
+
+
+		})
+	</script>
   </body>
 </html>

@@ -147,8 +147,7 @@ prefix="c" %> <%@ page session="true" %>
 	            alert('실패!');
 	        } else if (msg == 'insertSuccess'){
 	        	alert('출하현황이 생성되었습니다');
-	        }
-	        } else if (msg == 'insertSuccess'){
+	        } else if (msg == 'insertFail'){
 	        	alert('출하현황이 생성에 실패하였습니다');
 	        }
 	    </script>

@@ -119,6 +119,8 @@ prefix="c" %> <%@ page session="true" %>
 	            alert('실패!');
 	        } else if(msg == 'insertFail'){
 	        	alert('구매발주서 발급이 안된 조달계획이 없습니다!');
+	        } else if(msg == 'insertSucess'){
+	        	alert('구매발주서 발급을 완료하였습니다!');
 	        }
 	    </script>
 	</c:if>

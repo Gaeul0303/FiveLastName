@@ -15,7 +15,7 @@
         join product pr on pp.pr_id = pr.pr_id
 		join partner pa on pr.pr_partner = pa.pa_id
 		order by
-		ss.ss_shippingStatus desc
+		ss.ss_shippingStatus
 	</select>
 	
 	<select id="selectShippingStatus" resultType="kr.co.FiveLastName.domain.ShippingStatusDTO">

@@ -148,6 +148,12 @@ margin: 0 auto;
 	            alert('성공!');
 	        } else if (msg === 'fail') {
 	            alert('실패!');
+	        } else if (msg == 'ssSuccess'){
+	        	alert('출하완료하였습니다!')
+	        } else if (msg == 'updateSuccess'){
+	        	alert('수정에 성공하였습니다.')
+	        } else if (msg == 'updateFail'){
+	        	alsert('수정에 실패하였습니다.')
 	        }
 	    </script>
 	</c:if>

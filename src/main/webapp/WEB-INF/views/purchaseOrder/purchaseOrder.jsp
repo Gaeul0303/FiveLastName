@@ -363,6 +363,7 @@
 			       document.body.innerhtml = initbody;
 			   }
 			   window.print();
+			   alert('구매발주서를 인쇄하였습니다!');
 			   self.close();
 			   }
 		</script>
