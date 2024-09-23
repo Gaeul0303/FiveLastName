@@ -169,6 +169,24 @@
                     // 데이터 준비
                     console.log(data);
                     const items = data.map(item => item.item); // 품목 이름
+               		var dataItem = [];
+               		const customData = [];
+                    
+                	for (var i = 0; i < data.length; i++) {
+                		customData.push(data[i].item);
+                	}
+                	for (var i = 0; i < data.length; i++) {
+						
+                		if(data[i].item.length > 5){
+                			dataItem.push(data[i].item.substr(0,5) + "...")
+                		}else{
+                			dataItem.push(data[i].item)
+                		}
+					}
+                	console.log(customData)
+                	
+
+                    
                     const quantities = data.map(item => item.total_quantity); // 총 출고 수량
 
                     // 차트 그리기
@@ -176,7 +194,7 @@
                     new Chart(ctx, {
                         type: 'bar',
                         data: {
-                            labels: items, // X축 레이블
+                            labels: dataItem, // X축 레이블
                             datasets: [{
                                 label: '출고 수량',
                                 data: quantities, // Y축 데이터
@@ -192,7 +210,19 @@
                                 y: {
                                     beginAtZero: true
                                 }
-                            }
+                            },
+                          tooltips: {
+                        	  callbacks: {
+                        		  title: function(tooltipItems) {
+                                     
+                                      return customData[tooltipItems[0].index]; 
+                                  },
+                                  label: function(tooltipItem) {
+                                 		console.log(tooltipItem.yLabel)
+                                      return "출고 수량 : " + tooltipItem.yLabel; // Y 값 유지
+                                  }
+                              }
+                            },
                         }
                     });
                 },
