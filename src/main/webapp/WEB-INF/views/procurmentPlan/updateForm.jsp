@@ -107,7 +107,7 @@ prefix="c"%> <%@ page session="true"%>
                         <button class="btn btn-success" id="updateBtn">
                           수정하기
                         </button>
-                        <button class="btn btn-danger">취소</button>
+                        <button class="btn btn-danger" id="cancel">취소</button>
                       </div>
                     </form>
                   </div>
@@ -122,6 +122,14 @@ prefix="c"%> <%@ page session="true"%>
     </div>
 
     <%@include file="/WEB-INF/views/include/script.jsp"%>
+    <script>
+    $(document).ready(function() {
+		$("#cancel").on("click",function(e){
+			e.preventDefault();
+			location.href="/procurmentPlan/list";
+		})
+	});
+    </script>
 
     <script type="text/javascript">
       $(document).ready(function () {
@@ -176,6 +184,12 @@ prefix="c"%> <%@ page session="true"%>
 					}
 
 				})
+	</script>
+	<script type="text/javascript">
+		let result = '${msg}';
+		if (result == 'success') {
+			alert("수정이 완료되었습니다.");
+		}
 	</script>
   </body>
 </html>

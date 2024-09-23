@@ -1,5 +1,7 @@
 package kr.co.FiveLastName.controller;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -49,7 +51,7 @@ public class PpController {
 
 		ppService.pp_insert(dto);
 
-		rttr.addFlashAttribute("msg","succes");
+		rttr.addFlashAttribute("msg","success");
 		return "redirect:/procurmentPlan/list";
 
 	}
@@ -92,11 +94,11 @@ public class PpController {
 
 	// 조달 계획 등록 테이블 수정 업데이트
 	@PostMapping(value = "/updateForm")
-	public String updatePOST(ProcurmentPlanDTO dto, RedirectAttributes rttr) {
+	public String updatePOST(ProcurmentPlanDTO dto, RedirectAttributes rttr) throws IOException {
 
 		ppService.pp_update(dto);
 
-		rttr.addAttribute("msg", "success");
+		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/procurmentPlan/list";
 
 	}

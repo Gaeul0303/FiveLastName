@@ -34,15 +34,15 @@
 									<div class="card-title">조달 계획 수립</div>
 								</div>
 								<div class="card-body">
-									<form id="insertForm" enctype="procurmentPlan/insertForm"
-										method="post">
+									<form id="insertForm" method="post">
 
 										<div class="row">
 											<div class="col-md-6 col-lg-4">
 												<div class="form-group">
 													<label for="co_id">거래계약ID</label> <select
-														class="form-select" id="co_id" name="co_id">
-														<option>거래선택</option>
+														class="form-select" id="co_id" name="co_id"
+														required="required">
+														<option value="">거래선택</option>
 														<c:forEach items="${list}" var="contract">
 															<option value="${contract.co_id }">
 																${contract.co_id }</option>
@@ -57,27 +57,32 @@
 														<div class="form-group">
 															<label for="ppr_quantity">수량</label> <input type="number"
 																class="form-control" id="ppr_quantity"
-																name="ppr_quantity" required="required" placeholder="Enter Amount" />
+																name="ppr_quantity" required="required"
+																placeholder="Enter Amount" />
 														</div>
 														<div class="form-group">
 															<label for="ppr_dueDate">납기일</label> <input type="date"
-																class="form-control" id="ppr_dueDate" required="required"
-																placeholder="납기일" />
-																<input type="hidden" id="formattedDateInput"
-															name="ppr_dueDate" />
+																class="form-control" id="ppr_dueDate"
+																required="required" placeholder="납기일" /> <input
+																type="hidden" id="formattedDateInput" name="ppr_dueDate" />
 														</div>
 														<div class="form-group">
-															<label for="ppr_status">발주서 발행 여부</label> <input type="text"
-																class="form-control" id="ppr_status" name="ppr_status" required="required"
-																value="미발행" readonly/>
-														</div>													
+															<label for="ppr_status">발주서 발행 여부</label> <input
+																type="text" class="form-control" id="ppr_status"
+																name="ppr_status" required="required" value="미발행"
+																readonly />
+														</div>
 													</div>
 												</div>
 												<div class="card-action">
-													<button class="btn btn-success" id="insertBtn">등록</button>
-													<button class="btn btn-danger">취소</button>
+													<button class="btn btn-success" id="insertBtn"
+														type="submit">등록</button>
+													<button class="btn btn-danger" id="cancel">취소</button>
 												</div>
+											</div>
+										</div>
 									</form>
+
 								</div>
 
 
@@ -133,26 +138,32 @@
 
 						})
 	</script>
-	
+
 	<script>
-		$(document).ready(
-				function() {
+		$(document).ready(function() {
 
 					const form = $("#insertForm");
+					var selectElement = $("#co_id");
 
 					$("#insertBtn").on("click", function(e) {
 						e.preventDefault();
-						let dateInput = $('#ppr_dueDate').val();
 
-						if (dateInput) {
-							// dateTime 형식을 yyyy-MM-dd hh:mm:ss로 변환
-							let formattedDate = formatDateTime(dateInput);
-							console.log("Formatted Date: ", formattedDate);
+						if (selectElement.val() == "") {
+							alert("거래를 선택하세요.");
+							return false;
+						} else {
+							let dateInput = $('#ppr_dueDate').val();
 
-							// 변환된 값을 숨겨진 필드에 설정
-							$('#formattedDateInput').val(formattedDate);
+							if (dateInput) {
+								// dateTime 형식을 yyyy-MM-dd hh:mm:ss로 변환
+								let formattedDate = formatDateTime(dateInput);
+								console.log("Formatted Date: ", formattedDate);
 
-							form.submit();
+								// 변환된 값을 숨겨진 필드에 설정
+								$('#formattedDateInput').val(formattedDate);
+
+								form.submit();
+							}
 						}
 
 					})
@@ -168,11 +179,20 @@
 						let seconds = ('0' + date.getSeconds()).slice(-2); // 초 2자리로 변환 
 
 						// 최종 포맷: yyyy-MM-dd hh:mm:ss
-						return year + '-' + month + '-' + day + ' '  + hours
+						return year + '-' + month + '-' + day + ' ' + hours
 								+ ':' + minutes + ':' + seconds;
 					}
 
 				})
 	</script>
+	<script>
+	$(document).ready(function() {
+		$("#cancel").on("click",function(e){
+			e.preventDefault();
+			location.href="/procurementPlanRegistration/list";
+		})
+	});
+	</script>
+
 </body>
 </html>
