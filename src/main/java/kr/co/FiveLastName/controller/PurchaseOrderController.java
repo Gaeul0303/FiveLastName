@@ -138,7 +138,7 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String poInsert(int ppr_id) {
+	public String poInsert(int ppr_id, RedirectAttributes rttr) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -147,6 +147,8 @@ public class PurchaseOrderController {
 		service.poInsert(ppr_id);
 		
 		service.poComplete(ppr_id);
+		
+		rttr.addFlashAttribute("msg", "insertSucess");
 		
 		 return "redirect:/purchaseOrder/list";
 	}
