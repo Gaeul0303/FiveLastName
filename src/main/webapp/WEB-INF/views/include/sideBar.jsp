@@ -137,9 +137,6 @@
 								<li><a href="/progressInspection/list"> <span
 										class="sub-item">검수조회</span>
 								</a></li>
-								<li><a href="/progressInspection/insert"> <span
-										class="sub-item">검수등록</span>
-								</a></li>
 							</ul>
 						</div></li>
 					<li class="nav-item"><a data-bs-toggle="collapse"
