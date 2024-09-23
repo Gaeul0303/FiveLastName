@@ -115,8 +115,10 @@ margin: 0 auto;
 										</tr>
 									</table>
 									<c:if test="${ss.ss_shippingStatus != '출하완료'}">    
-										<div align="right"><button class = "btn btn-success" id = "ss_id" value = "${ss.ss_id}" onclick="ssComplete(this)"><c:out value="출하하기" /></button></div>
-										<div align="right"><button class = "btn btn-success" id = "ss_id" value = "${ss.ss_id}" onclick="ssComplete(this)"><c:out value="수정하기" /></button></div>
+										<div align="right">
+											<button class = "btn btn-success" id = "ss_id" value = "${ss.ss_id}" onclick="ssComplete(this)"><c:out value="출하하기" /></button>
+											<button class = "btn btn-success" id = "ss_id" value = "${ss.ss_id}" onclick="ssUpdate(this)"><c:out value="수정하기" /></button>
+										</div>
 									</c:if>
 									</div>
 									<p>&nbsp;</p>
@@ -174,6 +176,26 @@ margin: 0 auto;
 			  form.submit();
 			  document.body.removeChild(form);
 		};
+		
+		 function ssUpdate(button) {
+		        var ss_id = button.getAttribute("value");
+		        console.log("업데이트할 ss_id = " + ss_id);
+
+		        // 업데이트를 위한 폼 생성 및 제출
+		        var form = document.createElement('form');
+		        form.method = 'GET';
+		        form.action = "/shippingStatus/update"; // 업데이트 엔드포인트
+
+		        var input = document.createElement('input');
+		        input.type = 'hidden';
+		        input.name = 'ss_id';
+		        input.value = ss_id;
+
+		        form.appendChild(input);
+		        document.body.appendChild(form);
+		        form.submit();
+		        document.body.removeChild(form);
+		    };
 		
         var urlParams = new URLSearchParams(window.location.search);
         var error = urlParams.get('error');

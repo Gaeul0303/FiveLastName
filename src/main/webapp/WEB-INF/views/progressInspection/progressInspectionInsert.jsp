@@ -162,7 +162,7 @@ prefix="c" %> <%@ page session="true" %>
 			      return false;
 			   }else{
 				   document.getElementById('progressInspection').submit();
-					  alert("출하현황이 생성되었습니다.");
+					  alert("검수계획이 생성되었습니다.");
 			   }
 	  };
 	

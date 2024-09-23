@@ -106,7 +106,7 @@ public class PurchaseOrderController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String poInsertMove(Model model,RedirectAttributes redirectAttributes) {
+	public String poInsertMove(Model model,RedirectAttributes redirectAttributes, HttpSession session) {
 	    
 	    System.out.println("insert 페이지입니다.");
 	    

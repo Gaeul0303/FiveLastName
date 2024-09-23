@@ -13,8 +13,10 @@
 		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
-		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join procurmentPlan pp on es.pp_id = pp.pp_id
+		join product pr on pp.pr_id = pr.pr_id
+        join partner pa on pr.pr_partner = pa.pa_id
+        order by po.po_status
 	</select>
 	
 	<select id="poSelect" resultType = "kr.co.FiveLastName.domain.PrintPODTO">
@@ -25,8 +27,9 @@
 		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
-		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join procurmentPlan pp on es.pp_id = pp.pp_id
+		join product pr on pp.pr_id = pr.pr_id
+        join partner pa on pr.pr_partner = pa.pa_id
 		where po.po_id = #{po_id}
 	</select>
 	
@@ -37,8 +40,9 @@
 		from procurementplanregistration ppr 
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
-		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join procurmentPlan pp on es.pp_id = pp.pp_id
+		join product pr on pp.pr_id = pr.pr_id
+        join partner pa on pr.pr_partner = pa.pa_id
 		where ppr.ppr_id = #{ppr_id}
 	</select>
 	
@@ -63,21 +67,23 @@
 		join procurementplanregistration ppr on po.ppr_id = ppr.ppr_id
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
-		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
+		join procurmentPlan pp on es.pp_id = pp.pp_id
+		join product pr on pp.pr_id = pr.pr_id
+        join partner pa on pr.pr_partner = pa.pa_id
 		where ppr.ppr_id = ${ppr_id}
 	</select>
 	
 	<select id="pprAll" resultType="kr.co.FiveLastName.domain.PrintPODTO">
 		select pr.pr_name, co.co_supplyPrice, es.es_requiredDays, co.co_tradeTerms,
 		pa.pa_name, ppr.ppr_dueDate,pa.pa_name, pr.pr_size, co_contractDate,
-		ppr.ppr_quantity,pa.pa_manager,pa.pa_tel,pa.pa_email,ppr.ppr_id
+		ppr.ppr_quantity,pa.pa_manager,pa.pa_tel,pa.pa_email,ppr.ppr_id,ppr.ppr_status
 		from procurementPlanRegistration ppr
 		join contract co on ppr.co_id = co.co_id
 		join estimate es on co.es_id = es.es_id
-		join partner pa on es.pa_id = pa.pa_id
-		join product pr on pa.pr_id = pr.pr_id
-		where ppr_status = "미발행"
+		join procurmentPlan pp on es.pp_id = pp.pp_id
+		join product pr on pp.pr_id = pr.pr_id
+        join partner pa on pr.pr_partner = pa.pa_id
+		where ppr.ppr_status = "미발행";
 	</select>
 	
 	<select id="pprSearch" resultType="kr.co.FiveLastName.domain.ProcurementPlanRegistrationDTO">

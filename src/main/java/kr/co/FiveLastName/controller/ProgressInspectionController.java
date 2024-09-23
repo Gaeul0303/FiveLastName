@@ -145,9 +145,8 @@ public class ProgressInspectionController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public ModelAndView piInsert(@ModelAttribute ProgressInspectionDTO pi) throws Exception {
+	public String piInsert(@ModelAttribute ProgressInspectionDTO pi, RedirectAttributes rttr, Model model) throws Exception {
 		
-		ModelAndView mav = new ModelAndView();
 		
 		System.out.println("insert 작업입니다.");
 		System.out.println("pi_date = " + pi.getPi_date());
@@ -164,15 +163,14 @@ public class ProgressInspectionController {
 			service.insertRecord(PI);
 			sendMailStaff(PI.getSt_id(),PI.getPi_id());
 			sendMailPartner(PI.getPa_id(),PI.getPi_id());
-			mav.addObject("pi", PI);
-			mav.addObject("msg","success");
-			mav.addObject("pi_id",pI.getPi_id());
-			mav.setViewName("/progressInspection/progressInspectionList");
+			model.addAttribute("pi", PI);
+			model.addAttribute("msg","insertSuccess");
+			model.addAttribute("pi_id",pI.getPi_id());
+			return "redirect:/progressInspection/list";
 		}else {
-			mav.addObject("msg","fail");
-			mav.setViewName("/progressInspection/progressInspectionList");
+			rttr.addFlashAttribute("msg","insertFail");
+			return "redirect:/progressInspection/list";
 		}
-		return mav;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
