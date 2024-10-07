@@ -7,11 +7,11 @@ plt.rcParams['font.family'] ='Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] =False
 #클라이언트 오라클
 # oracledb.init_oracle_client(lib_dir=r"C:\visual\python\oracle\instantclient_11_2")
-connect = pymysql.connect(user='root', password='12345',charset='utf8', db='test')
+connect = pymysql.connect(user='root', password='12345',charset='utf8', db='erp')
 
 c=connect.cursor() #오라클 DB 쿼리문 c에 저장
 #######################
-c.execute("SELECT temp.DATE, temp.TEMP, temp.CH1_A,temp.CH1_B,temp.CH1_C,temp.CH1_D,temp.CH2_A,temp.CH2_B,temp.CH2_C,temp.CH2_D,temp.CH3_A,temp.CH3_B,temp.CH3_C,temp.CH3_D,temp.CH4_A,temp.CH4_B,temp.CH4_C,temp.CH4_D,temp.CH5_A,temp.CH5_B,temp.CH5_C,temp.CH5_D,temp.CH6_A,temp.CH6_B,temp.CH6_C,temp.CH6_D,temp.CH7_A,temp.CH7_B,temp.CH7_C,temp.CH7_D,temp.CH8_A,temp.CH8_B,temp.CH8_C,temp.CH8_D,temp.CH9_A,temp.CH9_B,temp.CH9_C,temp.CH9_D,temp.CH10_A,temp.CH10_B,temp.CH10_C,temp.CH10_D,temp.CH11_A,temp.CH11_B,temp.CH11_C,temp.CH11_D,temp.CH12_A,temp.CH12_B,temp.CH12_C,temp.CH12_D,temp.CH13_A,temp.CH13_B,temp.CH13_C,temp.CH13_D,temp.CH14_A,temp.CH14_B,temp.CH14_C,temp.CH14_D,temp.CH15_A,temp.CH15_B,temp.CH15_C,temp.CH15_D,temp.CH16_A,temp.CH16_B,temp.CH16_C,temp.CH16_D FROM test.temp")
+c.execute("SELECT `structure`.`DATE`,`structure`.`TEMP`,`structure`.`CH1_A`,`structure`.`CH1_B`,`structure`.`CH1_C`,`structure`.`CH1_D`,`structure`.`CH2_A`,`structure`.`CH2_B`,`structure`.`CH2_C`,`structure`.`CH2_D`,`structure`.`CH3_A`,`structure`.`CH3_B`,`structure`.`CH3_C`,`structure`.`CH3_D`,`structure`.`CH4_A`,`structure`.`CH4_B`,`structure`.`CH4_C`,`structure`.`CH4_D`,`structure`.`CH5_A`,`structure`.`CH5_B`,`structure`.`CH5_C`,`structure`.`CH5_D`,`structure`.`CH6_A`,`structure`.`CH6_B`,`structure`.`CH6_C`,`structure`.`CH6_D`,`structure`.`CH7_A`,`structure`.`CH7_B`,`structure`.`CH7_C`,`structure`.`CH7_D`,`structure`.`CH8_A`,`structure`.`CH8_B`,`structure`.`CH8_C`,`structure`.`CH8_D`,`structure`.`CH9_A`,`structure`.`CH9_B`,`structure`.`CH9_C`,`structure`.`CH9_D`,`structure`.`CH10_A`,`structure`.`CH10_B`,`structure`.`CH10_C`,`structure`.`CH10_D`,`structure`.`CH11_A`,`structure`.`CH11_B`,`structure`.`CH11_C`,`structure`.`CH11_D`,`structure`.`CH12_A`,`structure`.`CH12_B`,`structure`.`CH12_C`,`structure`.`CH12_D`,`structure`.`CH13_A`,`structure`.`CH13_B`,`structure`.`CH13_C`,`structure`.`CH13_D`,`structure`.`CH14_A`,`structure`.`CH14_B`,`structure`.`CH14_C`,`structure`.`CH14_D`,`structure`.`CH15_A`,`structure`.`CH15_B`,`structure`.`CH15_C`,`structure`.`CH15_D`,`structure`.`CH16_A`,`structure`.`CH16_B`,`structure`.`CH16_C`,`structure`.`CH16_D` FROM `erp`.`structure`")
 
 k=c.fetchall()
 DATE = []
@@ -61,14 +61,14 @@ for i in range(1, 17):  # 1부터 16까지의 채널
         channel_data = globals()[f'CH{i}_{["A", "B", "C", "D"][j]}']  # CH1_A, CH1_B 등을 가져옴
         rects = ax.plot(x, channel_data, label=f'CH{i} - {["A", "B", "C", "D"][j]}')
         channels_to_plot.append(rects)
-        
+
 
 # 축 및 제목 설정
-# ax.set_xlabel('날짜')
-# ax.set_ylabel('경사계')
-# ax.set_title('건전성 모니터링')
-# ax.set_xticks(x)  # x축 눈금 위치 설정
-# ax.set_xticklabels(DATE, rotation=45, ha='right')  # x축 눈금 레이블 설정 / rotation=45, ha='right' => 동 이름을 기울여서 출력
-# ax.legend()  # 범례 추가
+ax.set_xlabel('날짜')
+ax.set_ylabel('경사계')
+ax.set_title('건전성 모니터링')
+ax.set_xticks(x)  # x축 눈금 위치 설정
+ax.set_xticklabels(DATE, rotation=45, ha='right')  # x축 눈금 레이블 설정 / rotation=45, ha='right' => 동 이름을 기울여서 출력
+ax.legend()  # 범례 추가
 
-# plt.show()
+plt.show()
