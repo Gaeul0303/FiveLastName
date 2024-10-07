@@ -1,5 +1,8 @@
 package kr.co.FiveLastName.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.FiveLastName.domain.DeliveryDTO;
 import kr.co.FiveLastName.domain.ProgressInspectionDTO;
@@ -114,6 +118,32 @@ List<ProgressInspectionDTO>pi = service.piAllSelect();
 		
 		
 		return "calendar";
+	}
+	@RequestMapping(value = "shm", method = RequestMethod.GET)
+	public void shm(Locale locale,ModelAndView mav) throws Exception {
+		ProcessBuilder pb = new ProcessBuilder("python","http://localhost:8080/resources/assets/structure.py","");
+		Process p  = pb.start();
+		BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream(),"utf-8"));
+		
+		
+		
+		try {
+			String line = "";
+			while ((line = br.readLine()) !=null) {
+				System.out.println(line);
+			}
+		}finally {
+			try {
+				if(br != null) {
+					br.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+			
+		mav.setViewName("shm");
+		
 	}
 	
 }
