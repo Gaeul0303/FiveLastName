@@ -131,7 +131,12 @@ List<ProgressInspectionDTO>pi = service.piAllSelect();
 		mav.setViewName("shm");
 		
 	}
-	
+	@RequestMapping(value = "shm2", method = RequestMethod.GET)
+	public void shm2(Locale locale,ModelAndView mav) throws Exception {
+		
+		mav.setViewName("shm2");
+		
+	}
 	 
 	
 	
