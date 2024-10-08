@@ -80,10 +80,11 @@
 	        url: '/resources/assets/structure.json', // 수정된 컨트롤러 URL
 	        method: 'GET',
 	        dataType: 'json',
+	       
 	        success: function(data) {
 	            
 	            const date = data.map(item => item.DATE);
-	            console.log(date.length)
+	           
 	            // 64개의 채널 이름 생성
 	            const channels = [];
 	            for (let i = 1; i <= 16; i++) { // CH1부터 CH8까지
@@ -103,18 +104,16 @@
 
 	                colors.push("rgb("+r+", "+g+", "+b+")"); // RGB 색상
 	            }
-	                console.log(channels.length); // RGB 값 확인
-			
+	               
 	            // 데이터셋 생성
 	            const datasets = channels.map((channel, index) => ({
 	                label:channel, // 레이블
 	                data: data.map(item => item[channel] || 0), // 데이터가 없는 경우 0으로 처리
 	                backgroundColor: `rgba(0, 0, 0, 0)`, // 배경색 (투명)
 	                borderColor: colors[index], 
-	                borderWidth: 1
+	                borderWidth: 1,
+	                hidden: true 
 	            }));
-
-	        
 
 	            // 차트 그리기
 	            const ctx = document.getElementById('barChart').getContext('2d');
@@ -129,10 +128,10 @@
 	                    maintainAspectRatio: false,
 	                    scales: {
 	                    	 x: {
-	                             ticks: {
-	                                 maxTicksLimit: 90, // 최대 틱 수 조정
-	                                 autoSkip: true, // 자동으로 틱을 건너뛰도록 설정
-	                                 maxRotation: 0, // 틱 회전 각도 조정 (0으로 설정하면 회전하지 않음)
+	                    		 ticks: {
+	                                 autoSkip: false, // 라벨 자동 생략 비활성화
+	                                 maxRotation: 45, // 최대 회전 각도
+	                                 minRotation: 45  // 최소 회전 각도
 	                             },
 	                             grid: {
 	                                 display: true, // 그리드 표시 여부
