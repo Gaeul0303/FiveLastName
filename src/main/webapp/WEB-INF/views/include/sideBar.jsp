@@ -218,6 +218,18 @@
 							</ul>
 						</div></li>					
 				</c:when>
+				
+				<c:when test="${st_department eq '수요예측' }">
+					<li class="nav-item"><a data-bs-toggle="collapse"
+						href="#calendar"> <i class="fas fa-money-bill-wave-alt"></i>
+							<p>수요예측</p> <span class="caret"></span>
+					</a>
+						<div class="collapse" id="Calendar">
+							<ul class="nav nav-collapse">
+								<li><a href="${contextPath}/forecast/linear_regression" class="sub-item">직선회귀모형 수요예측</a></li>
+							</ul>
+						</div></li>					
+				</c:when>
 								
 				<c:otherwise>
 
