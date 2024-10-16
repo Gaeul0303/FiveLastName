@@ -57,6 +57,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 		if (userRole.equals("자재출고") && (requestURI.startsWith("/inventoryList"))) {
 			return true;
 		}
+		if(userRole.equals("건전성모니터링")&&(requestURI.startsWith("/shm") || requestURI.startsWith("/shm2"))) {
+			return true;
+		}
+
 
 		
 

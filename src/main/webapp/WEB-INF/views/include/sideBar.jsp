@@ -201,6 +201,23 @@
 							</ul>
 						</div></li>
 				</c:when>
+				
+				<c:when test="${st_department eq '건전성모니터링' }">
+					<li class="nav-item"><a data-bs-toggle="collapse"
+						href="#calendar"> <i class="fas fa-money-bill-wave-alt"></i>
+							<p>건전성모니터링</p> <span class="caret"></span>
+					</a>
+						<div class="collapse" id="Calendar">
+							<ul class="nav nav-collapse">
+								<li><a href="/shm"> <span
+										class="sub-item">건전성모니터링</span>
+								</a></li>
+								<li><a href="/shm2"> <span
+										class="sub-item">기울기계측</span>
+								</a></li>
+							</ul>
+						</div></li>					
+				</c:when>
 								
 				<c:otherwise>
 
