@@ -13,11 +13,33 @@
 	href="${path }/resources/assets/css/fullcalendar.css">
 <style type="text/css">
 .fc-event-time {
-	display: none !important
+	display: none !important;
 }
 
 .fc-event-title {
-	color: #000 !important
+	color: #000 !important;
+}
+
+.chart-container {
+	text-align: center; /* 가운데 정렬 */
+}
+
+@media print {
+    /* 인쇄 시 보여줄 부분 */
+    body * {
+        visibility: hidden; /* 모든 요소 숨기기 */
+    }
+    .chart-container, .chart-container * {
+        visibility: visible; /* 차트만 보이도록 설정 */
+    }
+    .chart-container {
+        position: absolute; /* 인쇄 시 차트 위치 조정 */
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto; /* 가운데 정렬 */
+    }
 }
 </style>
 </head>
@@ -28,19 +50,14 @@
 		<div class="main-panel">
 			<%@include file="include/header.jsp"%>
 
-
 			<div class="container">
 				<div class="page-inner" style="padding-bottom: 0">
 					<div class="">
 						<h3 class="fw-bold mb-3">MMS</h3>
-
 					</div>
 				</div>
 
-
 				<div class="row page-inner">
-
-
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header">
@@ -70,6 +87,7 @@
 									</select>
 									
 									<button id="calculate">Calculate Slope</button>
+									<button id="print">Print</button>
 								</div>
 								<div class="chart-container">
 									<canvas id="barChart" style="width:100%; height:800px"></canvas>
@@ -89,13 +107,9 @@
 	</div>
 
 	<%@include file="include/script.jsp"%>
-	<script
-		src="${path }/resources/assets/js/plugin/jquery-ui/jquery-ui.min.js"></script>
+	<script src="${path }/resources/assets/js/plugin/jquery-ui/jquery-ui.min.js"></script>
 	<script src="${path }/resources/assets/js/plugin/moment/moment.min.js"></script>
-
 	<script src="${path }/resources/assets/js/plugin/fullcalendar/main.js"></script>
-
-
 
 <script>
 $(document).ready(function() {
@@ -164,6 +178,11 @@ $(document).ready(function() {
                     }
                 });
             });
+            
+            $('#print').on('click', function() {
+                window.print();
+            });
+            
         },
         error: function(xhr, status, error) {
             console.error("AJAX 요청 오류:", status, error);

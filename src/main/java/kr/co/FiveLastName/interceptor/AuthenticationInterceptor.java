@@ -60,6 +60,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 		if(userRole.equals("건전성모니터링")&&(requestURI.startsWith("/shm") || requestURI.startsWith("/shm2"))) {
 			return true;
 		}
+		if(userRole.equals("수요예측")&&(requestURI.startsWith("/forecast"))) {
+			return true;
+		}
 
 
 		
