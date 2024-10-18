@@ -94,7 +94,7 @@
 	                type: 'scatter',
 	                data: {
 	                    datasets: [{
-	                        label: '요일과 수요 관계',
+	                        label: '요일별 수요 예측',
 	                        data: scatterData1,
 	                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
 	                        borderColor: 'rgba(75, 192, 192, 1)',
@@ -133,7 +133,7 @@
 	                type: 'scatter',
 	                data: {
 	                    datasets: [{
-	                        label: '월별 수요',
+	                        label: '월별 수요 예측',
 	                        data: scatterData2,
 	                        backgroundColor: 'rgba(153, 102, 255, 0.6)',
 	                        borderColor: 'rgba(153, 102, 255, 1)',
@@ -167,7 +167,7 @@
 	                type: 'scatter',
 	                data: {
 	                    datasets: [{
-	                        label: '분기별 수요',
+	                        label: '분기별 수요 예측',
 	                        data: scatterData3,
 	                        backgroundColor: 'rgba(255, 159, 64, 0.6)',
 	                        borderColor: 'rgba(255, 159, 64, 1)',

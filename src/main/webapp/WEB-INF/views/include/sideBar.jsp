@@ -228,6 +228,9 @@
 							<ul class="nav nav-collapse">
 								<li><a href="${contextPath}/forecast/linear_regression" class="sub-item">직선회귀모형 수요예측</a></li>
 							</ul>
+							<ul class="nav nav-collapse">
+								<li><a href="${contextPath}/forecast/MULTIPLE_LINEAR_REGRESSION" class="sub-item">다중선형회귀모형</a></li>
+							</ul>
 						</div></li>					
 				</c:when>
 								
